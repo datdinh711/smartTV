@@ -1,0 +1,11 @@
+# Support Android TV WebView (Chrome 90+ on Android 11)
+# This ensures ES2017 compatible output
+
+Android >= 90
+ChromeAndroid >= 90
+
+# Also support modern browsers for development
+Chrome >= 90
+Edge >= 90
+Firefox >= 90
+Safari >= 14

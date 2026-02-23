@@ -10,6 +10,7 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+pnpm-debug.log
 
 # IDEs and editors
 .idea/
@@ -40,3 +41,33 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Android (Capacitor)
+/android/.gradle
+/android/.idea
+/android/build
+/android/app/build
+/android/local.properties
+/android/capacitor-cordova-android-plugins/build
+*.apk
+*.aab
+*.keystore
+
+# iOS (if added later)
+/ios/App/Pods
+/ios/App/App.xcworkspace/xcuserdata
+/ios/App/DerivedData
+*.xcuserstate
+
+# Tizen
+*.wgt
+*.tpk
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
