@@ -1,15 +1,16 @@
 /**
  * Build script for Tizen Smart TV
  *
- * This script builds the Angular app and bundles it into a single JavaScript file
- * for Tizen WebView compatibility. Tizen WebView doesn't support ES modules with
- * file:// protocol, so we use esbuild to bundle everything into one IIFE file.
+ * Builds the Angular app and bundles into a single IIFE JavaScript file
+ * for Tizen WebView (file:// protocol, no ES modules support).
+ *
+ * Key fixes for file:// protocol:
+ * - IIFE format instead of ES modules
+ * - History.pushState/replaceState monkey-patch (origin 'null' on file://)
+ * - Capacitor mock for Ionic
  *
  * Usage: npm run build:tizen
  * Output: dist/tizen-build/
- *
- * After running, copy the contents of dist/tizen-build/ to your VS2022
- * Tizen .NET project's res/www/ folder.
  */
 
 const { execSync } = require("child_process");
@@ -19,27 +20,31 @@ const path = require("path");
 const distPath = path.join(__dirname, "..", "dist", "smart-tv", "browser");
 const tizenOutputPath = path.join(__dirname, "..", "dist", "tizen-build");
 
-console.log("🔨 Step 1: Building Angular for Tizen (no hash)...");
+// Step 1: Angular build
+console.log("🔨 Step 1: Building Angular for Tizen...");
 execSync("ng build --configuration=tizen --base-href=./", {
   stdio: "inherit",
   cwd: path.join(__dirname, ".."),
 });
 
-console.log("📦 Step 2: Bundling for Tizen (no ES modules)...");
+// Step 2: Prepare output directory
+console.log("📦 Step 2: Bundling for Tizen...");
 
-// Create output directory
 if (fs.existsSync(tizenOutputPath)) {
-  fs.rmSync(tizenOutputPath, { recursive: true });
+  try {
+    fs.rmSync(tizenOutputPath, { recursive: true, force: true });
+  } catch (e) {
+    // Directory may be locked (e.g. by http-server), just overwrite files
+  }
 }
 fs.mkdirSync(tizenOutputPath, { recursive: true });
 
-// Copy CSS and assets
+// Copy CSS, favicon, assets
 const cssFiles = fs.readdirSync(distPath).filter((f) => f.endsWith(".css"));
 cssFiles.forEach((f) => {
   fs.copyFileSync(path.join(distPath, f), path.join(tizenOutputPath, f));
 });
 
-// Copy favicon
 if (fs.existsSync(path.join(distPath, "favicon.ico"))) {
   fs.copyFileSync(
     path.join(distPath, "favicon.ico"),
@@ -47,7 +52,6 @@ if (fs.existsSync(path.join(distPath, "favicon.ico"))) {
   );
 }
 
-// Copy assets folder if exists
 const assetsPath = path.join(distPath, "assets");
 if (fs.existsSync(assetsPath)) {
   copyDir(assetsPath, path.join(tizenOutputPath, "assets"));
@@ -55,7 +59,7 @@ if (fs.existsSync(assetsPath)) {
 
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
-  fs.readdirSync(src).forEach((file) => {
+  for (const file of fs.readdirSync(src)) {
     const srcFile = path.join(src, file);
     const destFile = path.join(dest, file);
     if (fs.statSync(srcFile).isDirectory()) {
@@ -63,63 +67,34 @@ function copyDir(src, dest) {
     } else {
       fs.copyFileSync(srcFile, destFile);
     }
-  });
+  }
 }
 
-// Find main and polyfills files
+// Step 3: Bundle JS with esbuild
+// esbuild follows static imports from main.js automatically.
+// We only need polyfills + main as entry points.
 const jsFiles = fs.readdirSync(distPath).filter((f) => f.endsWith(".js"));
-const mainFile = jsFiles.find((f) => f.startsWith("main") && f.endsWith(".js"));
-const polyfillsFile = jsFiles.find(
-  (f) => f.startsWith("polyfills") && f.endsWith(".js"),
-);
+const mainFile = jsFiles.find((f) => f.startsWith("main"));
+const polyfillsFile = jsFiles.find((f) => f.startsWith("polyfills"));
 
-console.log("Main file:", mainFile);
-console.log("Polyfills file:", polyfillsFile);
-
-// Use esbuild to bundle everything into one IIFE file
-const entryContent = `
-import './${polyfillsFile}';
-import './${mainFile}';
-`;
-
-// Create temp entry file
+const entryContent = `import "./${polyfillsFile}";\nimport "./${mainFile}";\n`;
 const tempEntry = path.join(distPath, "_tizen_entry.js");
 fs.writeFileSync(tempEntry, entryContent);
 
 try {
-  // Bundle with esbuild - convert to IIFE (no ES modules)
   execSync(
-    `npx esbuild "${tempEntry}" --bundle --format=iife --platform=browser --target=es2020 --outfile="${path.join(tizenOutputPath, "bundle.js")}" --minify`,
-    {
-      stdio: "inherit",
-      cwd: path.join(__dirname, ".."),
-    },
+    `npx esbuild "${tempEntry}" --bundle --format=iife --platform=browser --target=es2020 --outfile="${path.join(tizenOutputPath, "bundle.js")}" --minify --log-level=info`,
+    { stdio: "inherit", cwd: path.join(__dirname, ".."), timeout: 120000 },
   );
   console.log("✅ Bundle created successfully!");
 } catch (e) {
   console.error("❌ esbuild failed:", e.message);
-  // Fallback: try without minify
-  try {
-    execSync(
-      `npx esbuild "${tempEntry}" --bundle --format=iife --platform=browser --target=es2020 --outfile="${path.join(tizenOutputPath, "bundle.js")}"`,
-      {
-        stdio: "inherit",
-        cwd: path.join(__dirname, ".."),
-      },
-    );
-    console.log("✅ Bundle created (without minify)");
-  } catch (e2) {
-    console.error("❌ esbuild failed completely:", e2.message);
-    process.exit(1);
-  }
+  process.exit(1);
 } finally {
-  // Clean up temp file
-  if (fs.existsSync(tempEntry)) {
-    fs.unlinkSync(tempEntry);
-  }
+  fs.unlinkSync(tempEntry);
 }
 
-// Create index.html for Tizen
+// Step 4: Generate index.html
 const cssLinks = cssFiles
   .map((f) => `    <link rel="stylesheet" href="${f}">`)
   .join("\n");
@@ -134,32 +109,24 @@ const indexHtml = `<!DOCTYPE html>
     <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob: file:;">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 ${cssLinks}
-    <style>
-        .tizen-loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-size: 24px;
-            font-family: sans-serif;
-            background: var(--ion-background-color, #1a1a2e);
-            color: var(--ion-text-color, white);
-        }
-        .tizen-error {
-            color: #ff6b6b;
-            padding: 20px;
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 14px;
-        }
-    </style>
 </head>
 <body>
-    <div id="tizen-status" class="tizen-loading">Loading SmartTV...</div>
     <app-root></app-root>
 
-    <!-- Mock Capacitor/Cordova for Ionic -->
     <script>
+        // Fix file:// protocol: History API throws SecurityError because origin is 'null'.
+        if (window.location.protocol === 'file:') {
+            var origPushState = History.prototype.pushState;
+            var origReplaceState = History.prototype.replaceState;
+            History.prototype.pushState = function(state, title, url) {
+                try { origPushState.call(this, state, title, url); } catch(e) {}
+            };
+            History.prototype.replaceState = function(state, title, url) {
+                try { origReplaceState.call(this, state, title, url); } catch(e) {}
+            };
+        }
+
+        // Mock Capacitor for Ionic
         window.Capacitor = {
             isNativePlatform: function() { return false; },
             isPluginAvailable: function() { return false; },
@@ -170,44 +137,22 @@ ${cssLinks}
         window.Ionic = window.Ionic || {};
         window.Ionic.mode = 'md';
 
-        // Fire deviceready event
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 document.dispatchEvent(new Event('deviceready'));
             }, 100);
         });
-
-        // Error handling
-        window.onerror = function(msg, url, line) {
-            var status = document.getElementById('tizen-status');
-            if (status) {
-                status.className = 'tizen-error';
-                status.innerHTML = 'Error: ' + msg + '\\nFile: ' + url + '\\nLine: ' + line;
-            }
-            return true;
-        };
-
-        // Hide loading when Angular renders
-        var observer = new MutationObserver(function() {
-            var appRoot = document.querySelector('app-root');
-            if (appRoot && appRoot.children.length > 0) {
-                var status = document.getElementById('tizen-status');
-                if (status) status.style.display = 'none';
-                observer.disconnect();
-            }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
     </script>
 
-    <!-- Single bundled file - NO ES modules -->
     <script src="bundle.js"></script>
 </body>
 </html>`;
 
 fs.writeFileSync(path.join(tizenOutputPath, "index.html"), indexHtml);
 
+// Summary
 console.log("✅ Tizen build ready at:", tizenOutputPath);
-console.log("📋 Files created:");
+console.log("📋 Files:");
 fs.readdirSync(tizenOutputPath).forEach((f) => {
   const stat = fs.statSync(path.join(tizenOutputPath, f));
   const size = stat.isDirectory()

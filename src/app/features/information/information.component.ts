@@ -4,15 +4,14 @@ import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-information',
   standalone: true,
   imports: [],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  templateUrl: './information.component.html',
+  styleUrl: './information.component.scss',
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class InformationComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
-
   constructor(
     private readonly _navigatorService: NavigatorService,
     private readonly _inactivityService: InactivityService,
@@ -22,11 +21,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._inactivityService.start();
     this._inactivityService.onInactive$
       .pipe(takeUntil(this._destroy$))
-      .subscribe(() => this._navigatorService.goToSlideShow());
+      .subscribe(() => {
+        this.onNavigateToDashboard();
+      });
   }
 
-  onNavigateInfoPage() {
-    this._navigatorService.goToInfo();
+  onNavigateToDashboard() {
+    this._navigatorService.goToDashboard();
   }
 
   ngOnDestroy(): void {
