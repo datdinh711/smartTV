@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -16,6 +17,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2017",
+    "paths": {
+      "@core/*": ["app/core/*"],
+      "@shared/*": ["app/shared/*"],
+      "@features/*": ["app/features/*"]
+    },
     "module": "ES2020",
     "useDefineForClassFields": false,
     "lib": ["ES2020", "dom"]

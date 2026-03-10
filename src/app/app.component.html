@@ -1,39 +1,5 @@
-<div class="slideshow-container">
-  <div class="slides-wrapper">
-    @for (slide of slides; track slide.src; let i = $index) {
-      <div
-        class="slide"
-        [class.active]="i === currentIndex"
-        [class.slide-in-right]="i === currentIndex && direction === 'next'"
-        [class.slide-in-left]="i === currentIndex && direction === 'back'"
-        [class.slide-out-left]="i === previousIndex && direction === 'next'"
-        [class.slide-out-right]="i === previousIndex && direction === 'back'"
-      >
-        @if (slide.type === "image") {
-          <img [src]="slide.src" alt="Slide {{ i + 1 }}" />
-        } @else {
-          <iframe
-            [id]="'video-iframe-' + i"
-            [src]="slide.safeSrc"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-          ></iframe>
-        }
-      </div>
-    }
-  </div>
-
-  <button class="btn btn-back" (click)="back()">&#10094;</button>
-  <button class="btn btn-next" (click)="next()">&#10095;</button>
-
-  <div class="dots">
-    @for (slide of slides; track slide.src; let i = $index) {
-      <span
-        class="dot"
-        [class.active]="i === currentIndex"
-        (click)="goTo(i)"
-      ></span>
-    }
+<div class="h-fullp">
+  <div class="w-full h-full">
+    <router-outlet></router-outlet>
   </div>
 </div>
