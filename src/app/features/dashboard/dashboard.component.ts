@@ -29,6 +29,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._navigatorService.goToInfo();
   }
 
+  onNavigateSlideShow() {
+    this._navigatorService.goToSlideShow();
+  }
+
   ngOnDestroy(): void {
     this._inactivityService.stop();
     this._destroy$.next();
