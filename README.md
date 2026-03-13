@@ -10,6 +10,7 @@ Angular application for Smart TV, supporting Web, Android TV, and Samsung Tizen 
 - [Running on Web](#running-on-web)
 - [Running on Android TV](#running-on-android-tv)
 - [Running on Samsung Tizen TV](#running-on-samsung-tizen-tv)
+- [Running on Desktop (Electron)](#running-on-desktop-electron)
 - [Commands Reference](#commands-reference)
 
 ---
@@ -25,6 +26,11 @@ smartTV/
 ├── dist/
 │   ├── smart-tv/browser/       # Angular production build
 │   └── tizen-build/            # Tizen bundle output
+├── electron/                   # Electron desktop app
+│   ├── main.js                 # Main process entry point
+│   └── preload.js              # Preload script (context bridge)
+├── release/                    # Electron build output
+│   └── win-unpacked/           # Unpacked build output
 ├── scripts/
 │   └── build-tizen-bundle.js   # Build script for Tizen
 ├── src/
@@ -43,14 +49,16 @@ smartTV/
 
 ## Technologies Used
 
-| Technology   | Version | Description                        |
-| ------------ | ------- | ---------------------------------- |
-| Angular      | 17.3.0  | Main framework                     |
-| Ionic        | 8.7.17  | UI Components                      |
-| Capacitor    | 8.1.0   | Native bridge for Android          |
-| esbuild      | 0.27.3  | Bundler for Tizen                  |
-| TypeScript   | 5.4.2   | Programming language               |
-| Browserslist | -       | Controls JS output for TV WebViews |
+| Technology       | Version | Description                        |
+| ---------------- | ------- | ---------------------------------- |
+| Angular          | 17.3.0  | Main framework                     |
+| Ionic            | 8.7.17  | UI Components                      |
+| Capacitor        | 8.1.0   | Native bridge for Android          |
+| Electron         | 41.0.0  | Desktop app framework              |
+| electron-builder | 26.8.1  | Packaging & distribution           |
+| esbuild          | 0.27.3  | Bundler for Tizen                  |
+| TypeScript       | 5.4.2   | Programming language               |
+| Browserslist     | -       | Controls JS output for TV WebViews |
 
 ### Browser Compatibility
 
@@ -337,6 +345,59 @@ After building in VS2022, the `.tpk` file is located at:
 
 ---
 
+## Running on Desktop (Electron)
+
+Electron allows running the Angular application as a native desktop app on Windows.
+
+### Requirements
+
+- Node.js >= 18.x
+- npm >= 9.x
+- Dependencies installed via `npm install`
+
+### Preview Production Build
+
+```bash
+# Build Angular and run Electron from static files (no hot reload)
+npm run electron:start
+```
+
+### Build for Distribution
+
+```bash
+# Build to directory (unpacked, for quick testing)
+npm run electron:build
+# Output: release/win-unpacked/
+
+# Build NSIS installer (.exe)
+npm run electron:build:exe
+# Output: release/SmartTV Setup 0.0.0.exe
+
+# Build portable executable (no installation required)
+npm run electron:build:portable
+# Output: release/SmartTV-portable.exe
+```
+
+### Build Output
+
+| Command                   | Output                            | Description                                 |
+| ------------------------- | --------------------------------- | ------------------------------------------- |
+| `electron:build`          | `release/win-unpacked/`           | Unpacked directory, run directly            |
+| `electron:build:exe`      | `release/SmartTV Setup 0.0.0.exe` | NSIS installer                              |
+| `electron:build:portable` | `release/SmartTV-portable.exe`    | Portable executable, no installation needed |
+
+### Electron Configuration
+
+Packaging configuration is in the `"build"` section of `package.json`:
+
+- **appId**: `com.example.smarttv`
+- **productName**: `SmartTV`
+- **Output directory**: `release/`
+- **Windows target**: NSIS installer (x64)
+- **Icon**: `src/assets/images/icon.ico`
+
+---
+
 ## Commands Reference
 
 ### Web Development
@@ -363,6 +424,16 @@ After building in VS2022, the `.tpk` file is located at:
 | `npm run launch:app`        | Launch app on device                   |
 | `npm run test:apk`          | Build, install and launch (all-in-one) |
 
+### Desktop (Electron)
+
+| Command                           | Description                                      |
+| --------------------------------- | ------------------------------------------------ |
+| `npm run electron:dev`            | Run dev mode (hot reload + DevTools)             |
+| `npm run electron:start`          | Build Angular and run Electron from static files |
+| `npm run electron:build`          | Build to unpacked directory                      |
+| `npm run electron:build:exe`      | Build NSIS installer (.exe)                      |
+| `npm run electron:build:portable` | Build portable executable (.exe)                 |
+
 ### Samsung Tizen TV
 
 | Command               | Description                |
@@ -384,6 +455,12 @@ Output of `build:tizen` is the `dist/tizen-build/` folder containing:
 
 - Requires Java 17, do not use Java 20+ due to Gradle compatibility issues
 - Disable Instant Run in Android Studio to avoid build errors
+
+### Desktop (Electron)
+
+- The `--configuration electron` flag in `angular.json` is used when building for Electron
+- Dev mode (`electron:dev`) uses `concurrently` and `wait-on` to synchronize Angular dev server with Electron
+- `electron/main.js` distinguishes dev mode from production mode via the `--dev-server` flag
 
 ### Tizen TV
 
