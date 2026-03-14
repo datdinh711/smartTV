@@ -146,6 +146,16 @@ export class SlideshowComponent implements OnInit, OnDestroy {
     }
   }
 
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    console.log('keydown', event.key, event.code);
+    if (event.key === 'ArrowRight') {
+      this.nextSlide();
+    } else if (event.key === 'ArrowLeft') {
+      this.previousSlide();
+    }
+  }
+
   onTouchStart(event: TouchEvent): void {
     if (this.isAnimating) return;
     
@@ -204,7 +214,6 @@ export class SlideshowComponent implements OnInit, OnDestroy {
   /**
    * Xử lý mouse swipe (cho PC/kiosk)
    */
-  @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent): void {
     if (this.isAnimating) return;
     
@@ -220,9 +229,8 @@ export class SlideshowComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
-    if (!this.isDragging || this.isAnimating) return;
+    if (!this.isDragging || this.isAnimating || event.buttons !== 1) return;
     
     this.touchCurrentX = event.clientX;
     this.dragOffset = this.touchCurrentX - this.touchStartX;
@@ -234,7 +242,6 @@ export class SlideshowComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent): void {
     if (!this.isDragging) return;
     
@@ -257,7 +264,6 @@ export class SlideshowComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('mouseleave', ['$event'])
   onMouseLeave(event: MouseEvent): void {
     if (this.isDragging) {
       this.isDragging = false;
