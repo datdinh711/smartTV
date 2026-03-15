@@ -1,9 +1,10 @@
+
 import { Routes } from '@angular/router';
-import { SlideshowComponent } from './slideshow.component';
+import { StrategyComponent } from './strategy.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: SlideshowComponent,
+    component: StrategyComponent,
   },
 ];

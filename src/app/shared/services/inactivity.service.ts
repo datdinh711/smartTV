@@ -29,6 +29,8 @@ export class InactivityService implements OnDestroy {
   ];
 
   readonly onInactive$: Observable<void> = this._inactiveSubject.asObservable();
+  private readonly _activeSubject = new Subject<void>();
+  readonly onActive$: Observable<void> = this._activeSubject.asObservable();
   private _timeoutMs = 60000;
 
   constructor(private readonly _ngZone: NgZone) {}
@@ -68,6 +70,7 @@ export class InactivityService implements OnDestroy {
   }
 
   private _onActivity = (): void => {
+    this._ngZone.run(() => this._activeSubject.next());
     this._resetTimer();
   };
 

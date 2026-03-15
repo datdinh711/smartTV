@@ -8,12 +8,24 @@ import { APP_ROUTE } from '@core/constants';
 export class NavigatorService {
   constructor(private readonly _router: Router) {}
 
-  goToInfo() {
-    this._router.navigate([`/${APP_ROUTE.INFO}`]);
+  goToWelcome() {
+    this._router.navigate([`/${APP_ROUTE.WELCOME}`]);
   }
 
   goToDashboard() {
     this._router.navigate([`/${APP_ROUTE.DASHBOARD}`]);
+  }
+  
+  goToIntroduction() {
+    this._router.navigate([`./${APP_ROUTE.INTRODUCTION}`]);
+  }
+
+  goToStrategy() {
+    this._router.navigate([`./${APP_ROUTE.STRATEGY}`]);
+  }
+
+  goToBussiness() {
+    this._router.navigate([`./${APP_ROUTE.BUSSINESS}`]);
   }
 
   goToSlideShow() {
