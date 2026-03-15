@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigatorService } from '@core/services';
-import { InactivityService } from '@shared/services';
-import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,28 +8,22 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  private _destroy$ = new Subject<void>();
+export class DashboardComponent {
+  constructor(private readonly _navigatorService: NavigatorService) {}
 
-  constructor(
-    private readonly _navigatorService: NavigatorService,
-    private readonly _inactivityService: InactivityService,
-  ) {}
-
-  ngOnInit(): void {
-    this._inactivityService.start();
-    this._inactivityService.onInactive$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(() => this._navigatorService.goToSlideShow());
+  onNavigateIntroduction() {
+    this._navigatorService.goToIntroduction();
   }
 
-  onNavigateInfoPage() {
-    this._navigatorService.goToInfo();
+  onNavigateStrategy() {
+    this._navigatorService.goToStrategy();
   }
 
-  ngOnDestroy(): void {
-    this._inactivityService.stop();
-    this._destroy$.next();
-    this._destroy$.complete();
+  onNavigateBussiness() {
+    this._navigatorService.goToBussiness();
   }
+
+  // onNavigateSlideShow() {
+  //   this._navigatorService.goToSlideShow();
+  // }
 }

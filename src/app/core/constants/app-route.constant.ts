@@ -1,5 +1,8 @@
 export const APP_ROUTE = {
   DASHBOARD: 'dashboard',
-  INFO: 'info',
+  WELCOME: '',
   SLIDESHOW: 'slideshow',
+  INTRODUCTION: 'introduction',
+  STRATEGY: 'strategy',
+  BUSSINESS: 'business',
 };

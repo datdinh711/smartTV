@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { APP_ROUTE } from '@core/constants';
 import { DashboardComponent } from '@features/dashboard/dashboard.component';
-import { SlideshowComponent } from '@features/slideshow/slideshow.component';
 import { AppComponent } from './app.component';
+import { WelcomeComponent } from '@features/welcome/welcome.component';
 
 export const routes: Routes = [
   {
@@ -10,8 +10,8 @@ export const routes: Routes = [
     component: AppComponent,
     children: [
       {
-        path: '',
-        redirectTo: APP_ROUTE.DASHBOARD,
+        path: APP_ROUTE.WELCOME,
+        loadComponent: () => WelcomeComponent,
         pathMatch: 'full',
       },
       {
@@ -19,15 +19,25 @@ export const routes: Routes = [
         loadComponent: () => DashboardComponent,
       },
       {
-        path: APP_ROUTE.INFO,
+        path: APP_ROUTE.INTRODUCTION,
         loadChildren: () =>
-          import('./features/information/information.routes').then(
+          import('./features/introduction/introduction.routes').then(
             (r) => r.routes,
           ),
       },
       {
-        path: APP_ROUTE.SLIDESHOW,
-        loadComponent: () => SlideshowComponent,
+        path: APP_ROUTE.STRATEGY,
+        loadChildren: () =>
+          import('./features/strategy/strategy.routes').then(
+            (r) => r.routes,
+          ),
+      },
+      {
+        path: APP_ROUTE.BUSSINESS,
+        loadChildren: () =>
+          import('./features/business/business.routes').then(
+            (r) => r.routes,
+          ),
       },
     ],
   },
