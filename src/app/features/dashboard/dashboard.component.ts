@@ -19,11 +19,7 @@ export class DashboardComponent {
     this._navigatorService.goToStrategy();
   }
 
-  onNavigateBussiness() {
-    this._navigatorService.goToBussiness();
+  onNavigateBusiness() {
+    this._navigatorService.goToBusiness();
   }
-
-  // onNavigateSlideShow() {
-  //   this._navigatorService.goToSlideShow();
-  // }
 }

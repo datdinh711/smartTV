@@ -1,14 +1,22 @@
 <div class="feature-wrapper">
-  <button class="home-button" (click)="onNavigateDashboard()">Home</button>
+  <button class="button__primary home-button" (click)="onNavigateDashboard()">
+    Home
+  </button>
 
   <div class="feature-content">
     <p>C.P Vietnam Introduction</p>
-    
-    <button (click)="nextSlide()">Next Slide</button>
-    <button (click)="previousSlide()">Previous Slide</button>
-    <a href="https://www.cpvietnam.com.vn/" target="_blank">Click here to visit C.P Vietnam</a>
+
+    <div style="display: flex; gap: 32px">
+      <button class="button__primary" (click)="nextSlide()">Next Slide</button>
+      <button class="button__primary" (click)="previousSlide()">
+        Previous Slide
+      </button>
+      <a
+        class="button__secondary"
+        href="https://www.cpvietnam.com.vn/"
+        target="_blank"
+        >Click here to visit C.P Vietnam</a
+      >
+    </div>
   </div>
 </div>
-
-
-

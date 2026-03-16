@@ -1,42 +1,22 @@
 :host {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  display: block;
-  min-height: 100vh;
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
+  > div {
+    min-height: 100vh;
+    background:
+      linear-gradient(rgba(0, 34, 78, 0.2), rgba(0, 34, 78, 0.2)),
+      url("../../../assets/images/background.png") center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
 
-:host > div {
-  min-height: 100vh;
-  background: linear-gradient(rgba(0, 34, 78, 0.2), rgba(0, 34, 78, 0.2)),
-    url("../../../assets/images/background.png") center / cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
+  .button-container {
+    display: flex;
+    gap: 56px;
 
-button.button {
-  margin: 0.35rem;
-  width: 280px;
-  min-height: 56px;
-  font-size: 1.05rem;
-  color: #072a66;
-  background: #ffd600;
-  border: 2px solid #ffdc39;
-  border-radius: 999px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-button.button:hover {
-  background: #fff176;
-  transform: translateY(-2px);
-}
-
-button.button:active {
-  transform: translateY(0);
+    .button__primary {
+      width: 280px;
+      min-height: 56px;
+    }
+  }
 }
