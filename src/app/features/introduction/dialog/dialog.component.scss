@@ -1,0 +1,55 @@
+// dialog.component.scss
+
+// 1. Định nghĩa style cho chính thẻ <app-dialog>
+:host {
+  position: fixed; /* Giữ vị trí cố định trên màn hình */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Chiều rộng toàn màn hình */
+  height: 100vh; /* Chiều cao toàn màn hình */
+  background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt 50% để làm nền mờ */
+  z-index: 1000; /* Đảm bảo dialog nằm trên các component khác */
+  display: flex; /* Sử dụng flexbox để căn giữa nội dung bên trong */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+}
+
+// 2. Định vị lớp nền mờ bên trong (giữ nguyên hoặc xóa đi cũng được vì :host đã làm mờ)
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // background-color: rgba(0, 0, 0, 0.5); // Bạn có thể xóa dòng này vì background đã đặt ở :host
+  z-index: 1; /* Nằm dưới nội dung dialog */
+}
+
+// 3. Định vị vùng nội dung Dialog ở giữa (sửa lại z-index)
+.dialog-content {
+  position: relative; /* Sử dụng relative để z-index có tác dụng */
+  z-index: 2; /* Nằm trên lớp nền mờ .dialog-overlay */
+  background-color: white; /* Màu nền nội dung */
+  padding: 20px;
+  border-radius: 8px; /* Bo góc */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+  max-width: 80%; /* Chiều rộng tối đa 80% màn hình */
+}
+
+.dialog-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end; /* Căn nút "Đóng" về phía bên phải */
+}
+
+.dialog-actions button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.dialog-actions button:hover {
+  background-color: #f0f0f0;
+}
