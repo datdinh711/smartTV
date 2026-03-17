@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { APP_ROUTE } from '@core/constants';
 import { DashboardComponent } from '@features/dashboard/dashboard.component';
-import { AppComponent } from './app.component';
 import { WelcomeComponent } from '@features/welcome/welcome.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
@@ -28,16 +28,12 @@ export const routes: Routes = [
       {
         path: APP_ROUTE.STRATEGY,
         loadChildren: () =>
-          import('./features/strategy/strategy.routes').then(
-            (r) => r.routes,
-          ),
+          import('./features/strategy/strategy.routes').then((r) => r.routes),
       },
       {
-        path: APP_ROUTE.BUSSINESS,
+        path: APP_ROUTE.BUSINESS,
         loadChildren: () =>
-          import('./features/business/business.routes').then(
-            (r) => r.routes,
-          ),
+          import('./features/business/business.routes').then((r) => r.routes),
       },
     ],
   },
