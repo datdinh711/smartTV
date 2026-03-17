@@ -4,12 +4,14 @@ import { NavigatorService } from '@core/services';
 import { InactivityService } from '@shared/services';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
-import { DialogComponent } from './dialog/dialog.component'; // Import Dialog Component vào đây
+import { FeedDialogComponent } from './dialog/feedDialog/feed.dialog.component';
+import { FarmDialogComponent } from './dialog/farmDialog/farm.dialog.component';
+import { FoodDialogComponent } from './dialog/foodDialog/food.dialog.component';
 
 @Component({
   selector: 'app-introduction',
   standalone: true,
-    imports: [CommonModule,DialogComponent],
+    imports: [CommonModule,FeedDialogComponent,FarmDialogComponent,FoodDialogComponent],
     templateUrl: './introduction.component.html',
     styleUrl: './introduction.component.scss',
 })
@@ -18,6 +20,10 @@ export class IntroductionComponent implements OnInit, OnDestroy {
 
   private _destroy$ = new Subject<void>();
   private _baseHref = '/';
+  isDialogFeedOpen = false;
+  isDialogFoodOpen = false;
+  isDialogFarmOpen = false;
+
   constructor(
     private readonly _navigatorService: NavigatorService,
     private readonly _inactivityService: InactivityService,
@@ -30,9 +36,6 @@ export class IntroductionComponent implements OnInit, OnDestroy {
       this._baseHref += '/';
     }
   }
-isDialogFeedOpen = false;
-isDialogFoodOpen = false;
-isDialogFarmOpen = false;
 
   ngOnInit(): void {
     this._inactivityService.start();
@@ -55,11 +58,11 @@ isDialogFarmOpen = false;
   }
 
   nextSlide() {
-    
+    this._navigatorService.goToIntroductionVideo();
   }
 
   previousSlide() {
-    
+    this._navigatorService.goToDashboard();
   }
 
   closeDialogFood() {
@@ -75,18 +78,15 @@ isDialogFarmOpen = false;
   }
 
   openDialogFeed() {
-    console.log('Đang mở Feed dialog...')
     this.isDialogFeedOpen = true;
   }
 
   openDialogFood() {
-    console.log('Đang mở Food dialog...')
     this.isDialogFoodOpen =
      true;
   }
 
   openDialogFarm() {
-    console.log('Đang mở Farm dialog...')
     this.isDialogFarmOpen = true;
   }
 
@@ -95,11 +95,6 @@ isDialogFarmOpen = false;
   }
 
   onWatchVideo(): void {
-    const videoUrl = this.asset('videos/intro.mp4');
-    try {
-      window.open(videoUrl, '_blank');
-    } catch (e) {
-      console.warn('Unable to open video URL', videoUrl, e);
-    }
+    this._navigatorService.goToIntroductionVideo();
   }
 }

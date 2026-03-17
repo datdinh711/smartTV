@@ -20,7 +20,7 @@
           <img [src]="asset('images/feed.png')" alt="Feed" class="card-image" />
         <div class="card-sub">Giải pháp thức ăn chăn nuôi</div>
       </button>
-      <app-dialog *ngIf="isDialogFeedOpen" (closeEvent)="closeDialogFeed()"></app-dialog>
+      <app-feed-dialog *ngIf="isDialogFeedOpen" (closeEvent)="closeDialogFeed()"></app-feed-dialog>
       
       <div class="card-sep" aria-hidden="true">
         <img [src]="asset('images/ic_next_green.png')" alt="" />
@@ -36,7 +36,7 @@
           <img [src]="asset('images/farm.jpg')" alt="Farm" class="card-image" />
         <div class="card-sub">Nông trại và quản lý chuỗi cung ứng</div>
       </button>
-      <app-dialog *ngIf="isDialogFarmOpen" (closeEvent)="closeDialogFarm()"></app-dialog>
+      <app-farm-dialog *ngIf="isDialogFarmOpen" (closeEvent)="closeDialogFarm()"></app-farm-dialog>
 
       <div class="card-sep" aria-hidden="true">
         <img [src]="asset('images/ic_next_green.png')" alt="" />
@@ -52,7 +52,7 @@
           <img [src]="asset('images/food.jpg')" alt="Food" class="card-image" />
         <div class="card-sub">Sản phẩm thực phẩm an toàn</div>
       </button>
-      <app-dialog *ngIf="isDialogFoodOpen" (closeEvent)="closeDialogFood()"></app-dialog>
+      <app-food-dialog *ngIf="isDialogFoodOpen" (closeEvent)="closeDialogFood()"></app-food-dialog>
 
       </div>
     </div>

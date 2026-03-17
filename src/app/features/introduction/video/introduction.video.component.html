@@ -1,0 +1,41 @@
+<div class="feature-wrapper">
+  <!-- Nếu chưa có videoPath -->
+  <ng-container *ngIf="!videoPath; else videoPlayer">
+    <button class="button__primary choose-button" (click)="fileInput.click()">
+      Choose File
+    </button>
+    <input
+      #fileInput
+      type="file"
+      accept="video/mp4"
+      style="display: none"
+      (change)="onFileSelected($event)"
+    />
+
+    <!-- Next / Previous ở 2 bên -->
+    <button class="button__primary nav-button left" (click)="previousSlide()">
+      Previous
+    </button>
+    <button class="button__primary nav-button right" (click)="nextSlide()">
+      Next
+    </button>
+  </ng-container>
+
+  <!-- Nếu đã có videoPath -->
+  <ng-template #videoPlayer>
+    <video
+      #player
+      class="video-full"
+      [src]="videoPath"
+      controls
+    ></video>
+
+    <!-- Next / Previous ở 2 bên -->
+    <button class="button__primary nav-button left" (click)="previousSlide()">
+      Previous
+    </button>
+    <button class="button__primary nav-button right" (click)="nextSlide()">
+      Next
+    </button>
+  </ng-template>
+</div>
