@@ -1,0 +1,7 @@
+<button class="button__primary" (click)="onNavigate()">
+  @if (isNext) {
+    <img [src]="'assets/images/ic_next.png'" alt="Next" [title]="'Next'" />
+  } @else {
+    <img [src]="'assets/images/ic_back.png'" alt="Back" [title]="'Back'" />
+  }
+</button>

@@ -31,4 +31,8 @@ export class NavigatorService {
   goToSlideShow() {
     this._router.navigate([`./${APP_ROUTE.SLIDESHOW}`]);
   }
+
+  goToPath(path: string) {
+    this._router.navigate([`./${path}`]);
+  }
 }
