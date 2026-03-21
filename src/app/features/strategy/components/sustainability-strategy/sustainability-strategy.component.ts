@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { APP_ROUTE } from '@core/constants';
+import { APP_ROUTES } from '@core/constants';
 import { NavigatorService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants';
 import { HomeButtonComponent, NavigationButtonComponent } from '@shared/components';
@@ -14,7 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './sustainability-strategy.component.scss',
 })
 export class SustainabilityStrategyComponent {
-  APP_ROUTE = APP_ROUTE;
+  APP_ROUTE = APP_ROUTES;
   STRATEGY_ROUTE = STRATEGY_ROUTES;
   
   private _destroy$ = new Subject<void>();

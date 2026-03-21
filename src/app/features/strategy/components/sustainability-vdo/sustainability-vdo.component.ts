@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { APP_ROUTE } from '@core/constants';
+import { APP_ROUTES } from '@core/constants';
 import { NavigationHistoryService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants/strategy-route.constant';
 import {
@@ -16,29 +16,29 @@ import {
   styleUrl: './sustainability-vdo.component.scss',
 })
 export class SustainabilityVdoComponent implements OnInit {
-  farmingPillarsPath = `${APP_ROUTE.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
+  farmingPillarsPath = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
   videoSrc = 'assets/videos/720p.mp4';
 
-  APP_ROUTE = APP_ROUTE;
+  APP_ROUTE = APP_ROUTES;
   STRATEGY_ROUTE = STRATEGY_ROUTES;
 
-  backPath: string = APP_ROUTE.STRATEGY;
+  backPath: string = APP_ROUTES.STRATEGY;
   nextPath: string =
-    `${APP_ROUTE.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
+    `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
 
   constructor(
     private readonly _navigationHistoryService: NavigationHistoryService,
   ) {}
 
   ngOnInit(): void {
-    const strategyPath = APP_ROUTE.STRATEGY;
+    const strategyPath = APP_ROUTES.STRATEGY;
     const recognitionPath =
-      `${APP_ROUTE.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
+      `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
     const previousPath = this._navigationHistoryService.getPreviousPath();
 
     if (previousPath === recognitionPath) {
       this.backPath = recognitionPath;
-      this.nextPath = APP_ROUTE.DASHBOARD;
+      this.nextPath = APP_ROUTES.DASHBOARD;
       return;
     }
 
