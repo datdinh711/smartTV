@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { APP_ROUTE } from '@core/constants';
+import { APP_ROUTES } from '@core/constants';
 import { DashboardComponent } from '@features/dashboard/dashboard.component';
 import { WelcomeComponent } from '@features/welcome/welcome.component';
 import { AppComponent } from './app.component';
@@ -10,28 +10,28 @@ export const routes: Routes = [
     component: AppComponent,
     children: [
       {
-        path: APP_ROUTE.WELCOME,
+        path: APP_ROUTES.WELCOME,
         loadComponent: () => WelcomeComponent,
         pathMatch: 'full',
       },
       {
-        path: APP_ROUTE.DASHBOARD,
+        path: APP_ROUTES.DASHBOARD,
         loadComponent: () => DashboardComponent,
       },
       {
-        path: APP_ROUTE.INTRODUCTION,
+        path: APP_ROUTES.INTRODUCTION,
         loadChildren: () =>
           import('./features/introduction/introduction.routes').then(
             (r) => r.routes,
           ),
       },
       {
-        path: APP_ROUTE.STRATEGY,
+        path: APP_ROUTES.STRATEGY,
         loadChildren: () =>
           import('./features/strategy/strategy.routes').then((r) => r.routes),
       },
       {
-        path: APP_ROUTE.BUSINESS,
+        path: APP_ROUTES.BUSINESS,
         loadChildren: () =>
           import('./features/business/business.routes').then((r) => r.routes),
       },

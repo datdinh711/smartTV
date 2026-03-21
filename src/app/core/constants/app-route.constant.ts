@@ -1,4 +1,4 @@
-export const APP_ROUTE = {
+export const APP_ROUTES = {
   DASHBOARD: 'dashboard',
   WELCOME: '',
   SLIDESHOW: 'slideshow',
