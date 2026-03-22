@@ -20,14 +20,13 @@
 
 .button__primary {
   @include button;
-  background: #ffd600;
-  color: #002056;
-  border: 2px solid #ffe54e;
+  background: $primary-color;
+  color: white;
 }
 
 .button__primary:hover {
   @include button-hover();
-  background: #fff176;
+  background: $primary-color-hover;
 }
 
 .button__primary:active {
@@ -36,14 +35,13 @@
 
 .button__secondary {
   @include button;
-  border: 2px solid rgba(0, 83, 166, 0.3);
-  color: #0053a6;
-  background: rgba(0, 83, 166, 0.12);
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  background: white;
 }
 
 .button__secondary:hover {
   @include button-hover();
-  background: rgba(0, 83, 166, 0.2);
 }
 
 .button__secondary:active {

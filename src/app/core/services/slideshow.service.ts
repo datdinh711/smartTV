@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { APP_ROUTE } from '@core/constants';
+import { APP_ROUTES } from '@core/constants';
 
 interface SlideRoute {
   path: string;
@@ -13,8 +13,8 @@ export class SlideshowService implements OnDestroy {
   private _currentIndex = 0;
 
   private _routeSequence: SlideRoute[] = [
-    { path: `/${APP_ROUTE.WELCOME}`, durationMs: 5000 },
-    { path: `/${APP_ROUTE.DASHBOARD}`, durationMs: 5000 },
+    { path: `/${APP_ROUTES.WELCOME}`, durationMs: 5000 },
+    { path: `/${APP_ROUTES.DASHBOARD}`, durationMs: 5000 },
   ];
 
   private _running = false;
@@ -57,11 +57,17 @@ export class SlideshowService implements OnDestroy {
     this._router
       .navigate([this.currentSlide.path])
       .then(() => {
-        this._timer = setTimeout(() => this.next(), this.currentSlide.durationMs);
+        this._timer = setTimeout(
+          () => this.next(),
+          this.currentSlide.durationMs,
+        );
       })
       .catch(() => {
         // nếu route không tồn tại hoặc lỗi, vẫn cố gắng next
-        this._timer = setTimeout(() => this.next(), this.currentSlide.durationMs);
+        this._timer = setTimeout(
+          () => this.next(),
+          this.currentSlide.durationMs,
+        );
       });
   }
 

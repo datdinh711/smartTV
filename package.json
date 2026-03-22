@@ -22,7 +22,7 @@
     "electron:build": "ng build --configuration electron && electron-builder --dir",
     "electron:build:exe": "ng build --configuration electron && electron-builder --win",
     "electron:build:portable": "ng build --configuration electron && electron-builder --win portable",
-    "electron:start": "ng build && electron ."
+    "electron:start": "ng build --configuration development --base-href ./ && electron ."
   },
   "private": true,
   "dependencies": {
