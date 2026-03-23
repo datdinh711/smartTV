@@ -35,4 +35,12 @@ export class NavigatorService {
   goToPath(path: string) {
     this._router.navigate([`./${path}`]);
   }
+
+  goToIntroductionVideo() {
+    this._router.navigate([`/${APP_ROUTES.INTRODUCTION}/video`]);
+  }
+
+  goToKeyMilestones() {
+    this._router.navigate([`/${APP_ROUTES.INTRODUCTION}/key-milestones`]);
+  }
 }

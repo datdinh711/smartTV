@@ -1,22 +1,109 @@
-<div class="feature-wrapper">
-  <button class="button__primary home-button" (click)="onNavigateDashboard()">
-    Home
+<div class="intro-wrapper">
+  <button class="home-button" (click)="onNavigateDashboard()">Home</button>
+
+  <button
+    type="button"
+    class="nav nav-prev"
+    (click)="previousSlide()"
+    aria-label="Previous"
+  >
+    <img [src]="asset('images/ic_back.png')" alt="Back" />
   </button>
 
-  <div class="feature-content">
-    <p>C.P Vietnam Introduction</p>
+  <div class="intro-inner">
+    <h1 class="main-title">C.P. Vietnam Introduction</h1>
+    <h2 class="subtitle">Mô hình Feed – Farm – Food</h2>
+    <div class="cards-wrapper">
+      <div class="cards">
+        <button
+          (click)="openDialogFeed()"
+          type="button"
+          class="card"
+          aria-label="Feed"
+        >
+          <div class="card-header">
+            <div class="card-title">Feed</div>
+            <div class="card-icon" aria-hidden="true">
+              <img [src]="asset('images/ic_feeding.png')" alt="" />
+            </div>
+          </div>
+          <img [src]="asset('images/feed.png')" alt="Feed" class="card-image" />
+          <div class="card-sub">Giải pháp thức ăn chăn nuôi</div>
+        </button>
+        <app-feed-dialog
+          *ngIf="isDialogFeedOpen"
+          (closeEvent)="closeDialogFeed()"
+        ></app-feed-dialog>
 
-    <div style="display: flex; gap: 32px">
-      <button class="button__primary" (click)="nextSlide()">Next Slide</button>
-      <button class="button__primary" (click)="previousSlide()">
-        Previous Slide
-      </button>
-      <a
-        class="button__secondary"
-        href="https://www.cpvietnam.com.vn/"
-        target="_blank"
-        >Click here to visit C.P Vietnam</a
-      >
+        <div class="card-sep" aria-hidden="true">
+          <img [src]="asset('images/ic_next_green.png')" alt="" />
+        </div>
+
+        <button
+          (click)="openDialogFarm()"
+          type="button"
+          class="card"
+          aria-label="Farm"
+        >
+          <div class="card-header">
+            <div class="card-title">Farm</div>
+            <div class="card-icon" aria-hidden="true">
+              <img [src]="asset('images/ic_farm.png')" alt="" />
+            </div>
+          </div>
+          <img [src]="asset('images/farm.jpg')" alt="Farm" class="card-image" />
+          <div class="card-sub">Nông trại và quản lý chuỗi cung ứng</div>
+        </button>
+        <app-farm-dialog
+          *ngIf="isDialogFarmOpen"
+          (closeEvent)="closeDialogFarm()"
+        ></app-farm-dialog>
+
+        <div class="card-sep" aria-hidden="true">
+          <img [src]="asset('images/ic_next_green.png')" alt="" />
+        </div>
+
+        <button
+          (click)="openDialogFood()"
+          type="button"
+          class="card"
+          aria-label="Food"
+        >
+          <div class="card-header">
+            <div class="card-title">Food</div>
+            <div class="card-icon" aria-hidden="true">
+              <img [src]="asset('images/ic_food.png')" alt="" />
+            </div>
+          </div>
+          <img [src]="asset('images/food.jpg')" alt="Food" class="card-image" />
+          <div class="card-sub">Sản phẩm thực phẩm an toàn</div>
+        </button>
+        <app-food-dialog
+          *ngIf="isDialogFoodOpen"
+          (closeEvent)="closeDialogFood()"
+        ></app-food-dialog>
+      </div>
     </div>
+
+    <div class="cta">
+      <button type="button" class="watch-btn" (click)="onWatchVideo()">
+        <img
+          [src]="asset('images/ic_video.png')"
+          alt=""
+          class="btn-icon"
+          aria-hidden="true"
+        />
+        Hãy click xem VDO tại đây
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="nav nav-next"
+      (click)="nextSlide()"
+      aria-label="Next"
+    >
+      <img [src]="asset('images/ic_next.png')" alt="Next" />
+    </button>
   </div>
 </div>
