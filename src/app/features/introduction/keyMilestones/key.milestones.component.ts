@@ -1,0 +1,48 @@
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { NavigatorService } from '@core/services';
+import { InactivityService } from '@shared/services';
+import { Subject, takeUntil } from 'rxjs';
+
+@Component({
+  selector: 'app-strategy',
+  standalone: true,
+    imports: [],
+    templateUrl: './key.milestones.component.html',
+    styleUrl: './key.milestones.component.scss',
+})
+
+export class KeyMilestonesComponent implements OnInit, OnDestroy {
+
+  private _destroy$ = new Subject<void>();
+  constructor(
+    private readonly _navigatorService: NavigatorService,
+    private readonly _inactivityService: InactivityService,
+  ) {}
+
+  ngOnInit(): void {
+    this._inactivityService.start();
+    this._inactivityService.onInactive$
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(() => {
+        
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._inactivityService.stop();
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  onNavigateDashboard(): void {
+    this._navigatorService.goToDashboard();
+  }
+
+  nextSlide() {
+    // Logic to go to the next slide
+  }
+
+  previousSlide() {
+    this._navigatorService.goToDashboard();
+  }
+}
