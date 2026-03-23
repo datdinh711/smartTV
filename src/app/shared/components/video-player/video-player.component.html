@@ -1,0 +1,18 @@
+<div class="video-player-shell">
+  <video
+    #videoElement
+    class="video-player"
+    [src]="src"
+    [poster]="poster || null"
+    [attr.autoplay]="''"
+    [attr.muted]="muted ? '' : null"
+    [attr.loop]="loop ? '' : null"
+    [attr.playsinline]="''"
+    [attr.disablepictureinpicture]="''"
+    [attr.disableremoteplayback]="''"
+    [controls]="false"
+    preload="auto"
+    tabindex="-1"
+    (canplay)="onCanPlay()"
+  ></video>
+</div>

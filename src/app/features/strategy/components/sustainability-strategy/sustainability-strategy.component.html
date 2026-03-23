@@ -1,0 +1,21 @@
+<div class="strategy-wrapper">
+  <app-navigation-button
+    [isNext]="false"
+    [destPath]="APP_ROUTE.DASHBOARD"
+  ></app-navigation-button>
+
+  <app-navigation-button
+    [destPath]="APP_ROUTE.STRATEGY + '/' + STRATEGY_ROUTE.SUSTAINABILITY_REGCONIGTION"
+  ></app-navigation-button>
+  <app-home-button></app-home-button>
+
+  <div class="strategy-content">
+    <button
+      class="button__secondary strategy-vdo-link"
+      type="button"
+      (click)="onNavigateVdo()"
+    >
+      Click here to watch VDO
+    </button>
+  </div>
+</div>
