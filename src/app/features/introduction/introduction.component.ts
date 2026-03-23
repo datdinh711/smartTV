@@ -23,7 +23,6 @@ export class IntroductionComponent implements OnInit, OnDestroy {
   isDialogFeedOpen = false;
   isDialogFoodOpen = false;
   isDialogFarmOpen = false;
-
   constructor(
     private readonly _navigatorService: NavigatorService,
     private readonly _inactivityService: InactivityService,
