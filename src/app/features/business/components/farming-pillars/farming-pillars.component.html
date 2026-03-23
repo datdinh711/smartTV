@@ -1,1 +1,98 @@
-<p>farming-pillars works!</p>
+<div class="page">
+  <div class="menu-container">
+    @for (btn of menuBar; track btn.id) {
+      <button
+        [ngClass]="
+          btn.id === businessId || btn.subId === businessId
+            ? 'button__primary'
+            : 'button__secondary'
+        "
+        (click)="onSelectMenuBar(btn.id)"
+      >
+        {{ btn.name }}
+      </button>
+    }
+  </div>
+  @switch (businessId) {
+    @case (BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE) {
+      <ng-container
+        *ngTemplateOutlet="
+          content;
+          context: {
+            image: 'url(assets/images/biosecurity-animal-welfare.jpg)',
+          }
+        "
+      ></ng-container>
+    }
+    @case (BUSINESS_PATH.CIRCULAR) {
+      <ng-container
+        *ngTemplateOutlet="
+          content;
+          context: {
+            image: 'url(assets/images/circular-economy-management.png)',
+          }
+        "
+      ></ng-container>
+    }
+    @case (BUSINESS_PATH.GREEN_FARMING) {
+      <ng-container
+        *ngTemplateOutlet="
+          content;
+          context: {
+            image: 'url(assets/images/circular-economy-sub.png)',
+          }
+        "
+      ></ng-container>
+    }
+    @case (BUSINESS_PATH.SMART_FARM_TECHNOLOGY) {
+      <ng-container
+        *ngTemplateOutlet="
+          content;
+          context: {
+            image: 'url(assets/images/smart-farm.jpg)',
+          }
+        "
+      ></ng-container>
+    }
+    @case (BUSINESS_PATH.TRACEABILITY) {
+      <ng-container
+        *ngTemplateOutlet="
+          content;
+          context: {
+            image: 'url(assets/images/traceability.png)',
+          }
+        "
+      ></ng-container>
+    }
+    @case (BUSINESS_PATH.CERTIFICATION) {
+      <ng-container
+        *ngTemplateOutlet="
+          content;
+          context: {
+            image: 'url(assets/images/certificates.jpg)',
+          }
+        "
+      ></ng-container>
+    }
+  }
+</div>
+
+<ng-template #content let-image="image">
+  <div
+    class="content-container"
+    [ngStyle]="{
+      'background-image': image,
+    }"
+  >
+    <app-navigation-button
+      [isNext]="false"
+      [destPath]="APP_ROUTES.BUSINESS"
+    ></app-navigation-button>
+    @if (
+      BUSINESS_PATH.CIRCULAR === businessId ||
+      BUSINESS_PATH.TRACEABILITY === businessId
+    ) {
+      <app-navigation-button [destPath]="subDestPath"></app-navigation-button>
+    }
+  </div>
+</ng-template>

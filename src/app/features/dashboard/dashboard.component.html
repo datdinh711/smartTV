@@ -1,4 +1,9 @@
-<div class="button-container">
+<div
+  class="button-container"
+  [ngStyle]="{
+    'background-image': 'url(assets/images/background.png)',
+  }"
+>
   <button class="button__primary" (click)="onNavigateIntroduction()">
     C.P Vietnam Introduction
   </button>
