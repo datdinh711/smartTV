@@ -1,1 +1,1 @@
-export * from './business-route.constant';
+export * from './business-path.constant';

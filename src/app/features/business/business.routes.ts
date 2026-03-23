@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { BusinessComponent } from './business.component';
 import { FarmingPillarsComponent } from './components/farming-pillars/farming-pillars.component';
 import { SustainovationBusinessComponent } from './components/sustainovation-business/sustainovation-business.component';
-import { BUSINESS_ROUTES } from './constants';
 
 export const routes: Routes = [
   {
@@ -15,7 +14,7 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: BUSINESS_ROUTES.FARMING_PILLARS,
+        path: ':businessId',
         component: FarmingPillarsComponent,
       },
     ],
