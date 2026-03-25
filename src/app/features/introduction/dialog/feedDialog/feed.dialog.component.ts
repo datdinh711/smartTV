@@ -1,15 +1,18 @@
 
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, HostBinding, Output, EventEmitter } from '@angular/core';
+import { feedDialogAnimation } from '@shared/animations';
 
 @Component({
   selector: 'app-feed-dialog',
   standalone: true,
   imports: [],
   templateUrl: './feed.dialog.component.html',
-  styleUrl: './feed.dialog.component.scss'
+  styleUrl: './feed.dialog.component.scss',
+  animations: [feedDialogAnimation],
 })
 export class FeedDialogComponent {
-  // @Output tạo ra một EventEmitter để phát sự kiện ra bên ngoài component
+  @HostBinding('@feedDialog') animationState = true;
+
   @Output() closeEvent = new EventEmitter<void>();
 
   closeDialog() {

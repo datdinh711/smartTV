@@ -20,8 +20,8 @@
   position: relative;
   z-index: 2;
   background: #fff;
-  padding: 20px;
-  border-radius: 8px;
+  padding: calc(20px * var(--ui-scale));
+  border-radius: calc(8px * var(--ui-scale));
   max-width: 80%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
@@ -31,15 +31,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: calc(20px * var(--ui-scale));
 
     img {
-      width: 70px; height: 70px;
-      margin-bottom: 8px;
+      width: calc(70px * var(--ui-scale));
+      height: calc(70px * var(--ui-scale));
+      margin-bottom: calc(8px * var(--ui-scale));
     }
 
     h2 {
-      font-size: 26px;
+      font-size: calc(26px * var(--ui-scale));
       font-weight: bold;
       color: #2c3e50;
       text-align: center;
@@ -49,15 +50,16 @@
   .dialog-subheader {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: calc(20px * var(--ui-scale));
 
     img {
-      width: 45px; height: 45px;
-      margin-right: 12px;
+      width: calc(45px * var(--ui-scale));
+      height: calc(45px * var(--ui-scale));
+      margin-right: calc(12px * var(--ui-scale));
     }
 
     h2 {
-      font-size: 24px;
+      font-size: calc(24px * var(--ui-scale));
       font-weight: bold;
       color: #2c3e50;
     }
@@ -66,7 +68,7 @@
   .dialog-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: calc(20px * var(--ui-scale));
     text-align: center;
   }
 
@@ -74,24 +76,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 16px;
-    border-radius: 8px;
+    padding: calc(16px * var(--ui-scale));
+    border-radius: calc(8px * var(--ui-scale));
 
     img {
-      width: 70px; height: 70px;
-      margin-bottom: 12px;
+      width: calc(70px * var(--ui-scale));
+      height: calc(70px * var(--ui-scale));
+      margin-bottom: calc(12px * var(--ui-scale));
     }
 
     .section-content {
       h3 {
-        font-size: 18px;
+        font-size: calc(18px * var(--ui-scale));
         font-weight: 600;
-        margin: 0 0 6px;
+        margin: 0 0 calc(6px * var(--ui-scale));
         color: #34495e;
       }
 
       p {
-        font-size: 14px;
+        font-size: calc(14px * var(--ui-scale));
         line-height: 1.5;
         color: #555;
         margin: 0;
@@ -99,30 +102,22 @@
     }
   }
 
-  /* Background màu nhạt cho từng grid */
-  .green-bg {
-    background-color: rgba(144, 238, 144, 0.4); /* xanh lá nhạt */
-  }
-
-  .pink-bg {
-    background-color: rgba(255, 182, 193, 0.4); /* hồng nhạt */
-  }
-
-  .yellow-bg {
-    background-color: rgba(255, 255, 153, 0.4); /* vàng nhạt */
-  }
+  .green-bg  { background-color: rgba(144, 238, 144, 0.4); }
+  .pink-bg   { background-color: rgba(255, 182, 193, 0.4); }
+  .yellow-bg { background-color: rgba(255, 255, 153, 0.4); }
 }
 
 .dialog-actions {
-  margin-top: 20px;
+  margin-top: calc(20px * var(--ui-scale));
   display: flex;
   justify-content: flex-end;
 
   button {
-    padding: 8px 16px;
+    padding: calc(8px * var(--ui-scale)) calc(16px * var(--ui-scale));
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: calc(4px * var(--ui-scale));
     background: #fff;
+    font-size: calc(14px * var(--ui-scale));
     cursor: pointer;
 
     &:hover {

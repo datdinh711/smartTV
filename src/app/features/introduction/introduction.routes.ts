@@ -7,13 +7,16 @@ export const routes: Routes = [
   {
     path: '',
     component: IntroductionComponent,
-  },
-  {
-    path: 'key-milestones',
-    component: KeyMilestonesComponent,
+    data: { animation: 'introduction' },
   },
   {
     path: 'video',
     component: IntroductionVideoComponent,
+    data: { animation: 'video' },
+  },
+  {
+    path: 'key-milestones',
+    component: KeyMilestonesComponent,
+    data: { animation: 'keyMilestones' },
   },
 ];
