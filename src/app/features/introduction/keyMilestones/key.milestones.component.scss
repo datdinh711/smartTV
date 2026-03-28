@@ -1,31 +1,261 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Responsive tokens — all sizing is driven by these CSS custom properties so
+// every element scales proportionally from small screens up to 50" (≈1920px).
+// clamp(min, preferred-vw/vh, max-at-50-inch)
+// ─────────────────────────────────────────────────────────────────────────────
 :host {
-  .feature-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  // Sun — reduced
+  --sun-size:      clamp(28px,  3vw,    56px);
 
-    .home-button {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.55rem 1rem;
-    }
+  // Large cloud body — reduced
+  --cld-lg-w:      clamp(90px,  8.5vw,  164px);
+  --cld-lg-h:      clamp(26px,  3.2vh,  46px);
 
-    .button__secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+  // Small cloud body — reduced
+  --cld-sm-w:      clamp(60px,  5.5vw,  106px);
+  --cld-sm-h:      clamp(18px,  2.2vh,  32px);
 
-    p {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #002b5c;
-      text-align: center;
-      margin-bottom: 1.25rem;
-    }
+  // Minimum top spacing so clouds never crowd the very top
+  --cld-top-min:   clamp(28px,  3.8vh,  56px);
+
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  overflow: hidden;
+}
+
+// ── Sky scene — top two-thirds ────────────────────────────────────────────────
+.sky {
+  position: absolute;
+  inset: 0 0 33.33% 0; // occupies top 66.67 %
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// ── Sun glow — radial gradient from top-center, covers entire sky area ────────
+.sky__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 120% at 50% -6%,
+    rgba(255, 238, 50, 0.58)  0%,
+    rgba(255, 215, 15, 0.34) 28%,
+    rgba(255, 175,  0, 0.14) 56%,
+    transparent              76%
+  );
+  z-index: 1;
+  animation: glow-pulse 3.4s ease-in-out infinite;
+}
+
+// ── Sun wrapper ───────────────────────────────────────────────────────────────
+.sky__sun {
+  position: absolute;
+  top: clamp(10px, 1.6vh, 22px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--sun-size);
+  height: var(--sun-size);
+  z-index: 3;
+}
+
+// 8-ray sunburst — rotates slowly
+.sky__sun-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--sun-size) * 2.8);
+  height: calc(var(--sun-size) * 2.8);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    rgba(255, 215, 0, 0.52)  0deg 12deg,
+    transparent             12deg 45deg
+  );
+  animation: sun-rotate 13s linear infinite;
+}
+
+// Bright disc
+.sky__sun-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffde4 0%, #ffe234 44%, #ffaa00 100%);
+  box-shadow:
+    0 0 calc(var(--sun-size) * 0.17)  calc(var(--sun-size) * 0.08) rgba(255, 232, 50, 1.0),
+    0 0 calc(var(--sun-size) * 0.45)  calc(var(--sun-size) * 0.18) rgba(255, 188,  0, 0.70),
+    0 0 calc(var(--sun-size) * 0.94)  calc(var(--sun-size) * 0.39) rgba(255, 148,  0, 0.34);
+  animation: core-pulse 3.4s ease-in-out infinite;
+  z-index: 1;
+}
+
+// ── Cloud base ────────────────────────────────────────────────────────────────
+// z-index 4 → above the sun (z-index 3) so clouds physically block it.
+// Pure white so they read as solid cloud when overlapping the sun disc.
+.cloud {
+  position: absolute;
+  border-radius: 100px;
+  background: #ffffff;
+  box-shadow: 0 calc(var(--_w) * 0.03) calc(var(--_w) * 0.10) rgba(200, 210, 220, 0.22);
+  z-index: 4;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
   }
+
+  // Left large bump
+  &::before {
+    width:  calc(var(--_w) * 0.50);
+    height: calc(var(--_w) * 0.50);
+    top:    calc(var(--_w) * -0.245);
+    left:   calc(var(--_w) * 0.120);
+  }
+
+  // Right smaller bump
+  &::after {
+    width:  calc(var(--_w) * 0.37);
+    height: calc(var(--_w) * 0.37);
+    top:    calc(var(--_w) * -0.195);
+    left:   calc(var(--_w) * 0.450);
+  }
+}
+
+// Large variant
+.cloud--lg {
+  --_w: var(--cld-lg-w);
+  width:  var(--cld-lg-w);
+  height: var(--cld-lg-h);
+}
+
+// Small variant
+.cloud--sm {
+  --_w: var(--cld-sm-w);
+  width:  var(--cld-sm-w);
+  height: var(--cld-sm-h);
+}
+
+// ── Static clouds — fixed positions, no motion ────────────────────────────────
+// Large — left side
+.cloud--s1 {
+  top:  calc(var(--cld-top-min) + clamp(8px, 1.2vh, 18px));
+  left: 4vw;
+  opacity: 0.82;
+}
+
+// Large — right side, slightly lower
+.cloud--s2 {
+  top:   calc(var(--cld-top-min) + clamp(30px, 5vh, 72px));
+  right: 5vw;
+  opacity: 0.78;
+}
+
+// Small — center, lowest of the three statics
+.cloud--s3 {
+  top:  calc(var(--cld-top-min) + clamp(60px, 9vh, 130px));
+  left: 30vw;
+  opacity: 0.70;
+}
+
+// ── Moving clouds — animate horizontally with alternate direction ─────────────
+// Large — starts left, drifts right
+.cloud--m1 {
+  top: calc(var(--cld-top-min) + clamp(14px, 2.5vh, 36px));
+  opacity: 0.86;
+  animation: cloud-lr 36s ease-in-out infinite alternate;
+}
+
+// Large — starts right, drifts left, offset so not in sync with m1
+.cloud--m2 {
+  top: calc(var(--cld-top-min) + clamp(50px, 8vh, 115px));
+  opacity: 0.80;
+  animation: cloud-rl 46s ease-in-out infinite alternate;
+  animation-delay: -20s;
+}
+
+// Small — faster, mid-height
+.cloud--m3 {
+  top: calc(var(--cld-top-min) + clamp(80px, 12vh, 170px));
+  opacity: 0.70;
+  animation: cloud-lr 28s ease-in-out infinite alternate;
+  animation-delay: -12s;
+}
+
+// ── Road SVG — pinned to bottom of sky section ───────────────────────────────
+.road-svg {
+  position: absolute;
+  bottom: clamp(10px, 2vh, 32px);
+  left:  calc(48px * var(--ui-scale, 1));
+  right: calc(48px * var(--ui-scale, 1));
+  width: auto;
+  height: auto;
+  z-index: 2; // above glow(1), below sun(3) and clouds(4)
+}
+
+// ── Image — original bottom position ────────────────────────────────────────
+.milestone-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: clamp(24px, 4vh, 48px);
+  padding-left:   clamp(24px, 2.5vw, 48px);
+  padding-right:  clamp(24px, 2.5vw, 48px);
+  z-index: 3;
+}
+
+.milestone-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+// Using vw units → travel distance scales with viewport width automatically.
+@keyframes cloud-lr {
+  from { transform: translateX(-20vw); }
+  to   { transform: translateX(120vw); }
+}
+
+@keyframes cloud-rl {
+  from { transform: translateX(120vw); }
+  to   { transform: translateX(-20vw); }
+}
+
+@keyframes sun-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes core-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 calc(var(--sun-size) * 0.17)  calc(var(--sun-size) * 0.08) rgba(255, 232, 50, 1.0),
+      0 0 calc(var(--sun-size) * 0.45)  calc(var(--sun-size) * 0.18) rgba(255, 188,  0, 0.70),
+      0 0 calc(var(--sun-size) * 0.94)  calc(var(--sun-size) * 0.39) rgba(255, 148,  0, 0.34);
+  }
+  50% {
+    box-shadow:
+      0 0 calc(var(--sun-size) * 0.11)  calc(var(--sun-size) * 0.05) rgba(255, 232, 50, 0.62),
+      0 0 calc(var(--sun-size) * 0.29)  calc(var(--sun-size) * 0.11) rgba(255, 188,  0, 0.40),
+      0 0 calc(var(--sun-size) * 0.60)  calc(var(--sun-size) * 0.25) rgba(255, 148,  0, 0.16);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.58; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }

@@ -7,11 +7,13 @@ import { Subject, takeUntil } from 'rxjs';
 import { FeedDialogComponent } from './dialog/feedDialog/feed.dialog.component';
 import { FarmDialogComponent } from './dialog/farmDialog/farm.dialog.component';
 import { FoodDialogComponent } from './dialog/foodDialog/food.dialog.component';
+import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
+import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
 
 @Component({
   selector: 'app-introduction',
   standalone: true,
-    imports: [CommonModule,FeedDialogComponent,FarmDialogComponent,FoodDialogComponent],
+    imports: [CommonModule, FeedDialogComponent, FarmDialogComponent, FoodDialogComponent, NavigationButtonComponent, HomeButtonComponent],
     templateUrl: './introduction.component.html',
     styleUrl: './introduction.component.scss',
 })
@@ -23,7 +25,6 @@ export class IntroductionComponent implements OnInit, OnDestroy {
   isDialogFeedOpen = false;
   isDialogFoodOpen = false;
   isDialogFarmOpen = false;
-
   constructor(
     private readonly _navigatorService: NavigatorService,
     private readonly _inactivityService: InactivityService,

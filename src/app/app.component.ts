@@ -11,6 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
   imports: [CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'smartTV';
@@ -49,4 +50,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
   }
+
+
 }

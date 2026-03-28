@@ -1,296 +1,455 @@
-.intro-wrapper {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: calc(1.25rem * var(--ui-scale));
-  padding-inline: calc(1rem * var(--ui-scale));
-  width: 100%;
-}
+/*
+ * Responsive strategy — WIDTH + HEIGHT
+ * ─────────────────────────────────────────────────────────────
+ * Width breakpoints
+ *   mobile  (      < 480 px) : 1 column, clouds hidden
+ *   tablet  (480 – 919 px)   : 2 columns
+ *   desktop (920 – 1599 px)  : 3 columns
+ *   tv      (    ≥ 1600 px)  : 3 columns + --ui-scale
+ *
+ * Height breakpoints
+ *   short   (max-height: 700px) : compact spacing, smaller glass,
+ *                                 fixed CTA bar
+ *   very-short (max-height: 500px): further reduction
+ *
+ * Cards use height + max-height (not fixed height) so they
+ * shrink automatically as the viewport gets shorter.
+ *
+ * Scroll model
+ *   .intro-wrapper  → height: 100vh; overflow-y: auto
+ *     This is the ONE scroll container.  Clouds clip horizontally
+ *     inside it.  The host just provides the background.
+ *
+ * CTA accessibility
+ *   Normal height : in-flow, sticky bottom inside wrapper
+ *   Short screens : position: fixed bottom bar so it is always
+ *     reachable without scrolling; .intro-inner gets padding-bottom
+ *     to prevent content hiding behind the bar.
+ * ─────────────────────────────────────────────────────────────
+ */
 
+/* ─── Custom property: UI scale for TV enlargement ─────────── */
 :host {
   --ui-scale: 1;
-  --card-image-height: calc(160px * var(--ui-scale));
+}
+@media (min-width: 1600px) { :host { --ui-scale: 1.3;  } }
+@media (min-width: 1920px) { :host { --ui-scale: 1.45; } }
+@media (min-width: 2560px) { :host { --ui-scale: 1.9;  } }
+@media (min-width: 3840px) { :host { --ui-scale: 2.4;  } }
+
+/* ─── Host: background canvas, never clips ──────────────────── */
+:host {
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0faf1 0%, #c8e6c9 35%, #b2dfdb 70%, #80cbc4 100%);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ─── Scroll container ──────────────────────────────────────── */
+/*
+ * Giving the wrapper a fixed viewport height + overflow-y:auto
+ * makes it the single, predictable scroll container.
+ * overflow-x:hidden clips clouds horizontally without affecting
+ * vertical scroll (the two axes are independent here because the
+ * wrapper already establishes a block-formatting context).
+ */
+.intro-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: #eef5fd;
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  padding: calc(2rem * var(--ui-scale));
+  /* smooth momentum scroll on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
-.home-button {
+/* ─── Cloud animations ──────────────────────────────────────── */
+@keyframes driftLeft {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(-32px); }
+}
+@keyframes driftRight {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(32px); }
+}
+
+.cloud {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 0.9rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #002056;
-  background: #ffcc00;
-  border: 1px solid #f2b800;
-  border-radius: 999px;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+  z-index: 0;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+  }
+
+  &::before { width: 50%; height: 180%; top: -62%; left: 12%; }
+  &::after  { width: 36%; height: 130%; top: -42%; left: 52%; }
 }
 
+.cloud--tl1 {
+  width:  clamp(50px, 6vw, calc(90px * var(--ui-scale)));
+  height: clamp(16px, 2vw, calc(28px * var(--ui-scale)));
+  top: 6%; left: 3%;
+  animation: driftLeft 9s ease-in-out infinite;
+}
+
+.cloud--tl2 {
+  width:  clamp(36px, 4vw, calc(62px * var(--ui-scale)));
+  height: clamp(12px, 1.4vw, calc(20px * var(--ui-scale)));
+  top: 15%; left: 8%;
+  opacity: 0.82;
+  animation: driftLeft 13s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.cloud--tr1 {
+  width:  clamp(44px, 5vw, calc(78px * var(--ui-scale)));
+  height: clamp(14px, 1.7vw, calc(24px * var(--ui-scale)));
+  top: 7%; right: 11%;
+  animation: driftRight 11s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+/* ─── Content container ─────────────────────────────────────── */
 .intro-inner {
-  max-width: 1100px;
+  position: relative;
+  z-index: 1;
+  max-width: calc(1100px * var(--ui-scale));
   width: 100%;
   text-align: center;
   margin: 0 auto;
+  /* vertical rhythm: padding compresses on short viewports */
+  padding: clamp(1.25rem, 3vh, calc(2rem * var(--ui-scale)))
+           clamp(0.75rem, 2vw, calc(1rem  * var(--ui-scale)));
+  box-sizing: border-box;
 }
 
+/* ─── Typography ────────────────────────────────────────────── */
 .main-title {
-  font-size: calc(2rem * var(--ui-scale));
+  font-size: clamp(1.25rem, 3vw + 0.5rem, calc(2rem * var(--ui-scale)));
   font-weight: 800;
-  color: #002b5c;
+  color: #1a3d2b;
   margin: 0;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
+  /* on very short viewports, let the title compress */
+  line-height: 1.15;
 }
 
 .subtitle {
-  font-size: calc(1.1rem * var(--ui-scale));
+  font-size: clamp(0.875rem, 1.5vw + 0.3rem, calc(1.1rem * var(--ui-scale)));
   font-weight: 700;
-  color: #004b8d;
-  margin: calc(0.5rem * var(--ui-scale)) 0 calc(1.5rem * var(--ui-scale)) 0;
+  color: #2e5d3f;
+  /* margins shrink with viewport height via vh unit */
+  margin: clamp(0.2rem, 0.8vh,  calc(0.5rem  * var(--ui-scale)))
+          0
+          clamp(1.5rem, 4vh,    calc(3rem    * var(--ui-scale)))
+          0;
 }
 
+/* ─── Cards ─────────────────────────────────────────────────── */
 .cards {
-  --card-gap: calc(1rem * var(--ui-scale));
   display: flex;
-  gap: var(--card-gap);
+  gap: clamp(0.75rem, 1.5vw, calc(1.25rem * var(--ui-scale)));
   justify-content: center;
-  flex-wrap: nowrap; /* keep cards on one row on wide screens */
   align-items: stretch;
-}
-
-.card-sep {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(48px * var(--ui-scale));
-  flex: 0 0 calc(48px * var(--ui-scale));
-  margin: 0 calc(0.5rem * var(--ui-scale));
-  pointer-events: none;
-}
-
-.card-sep img {
-  width: calc(28px * var(--ui-scale));
-  height: calc(28px * var(--ui-scale));
-  object-fit: contain;
-  display: block;
-}
-
-/* Nav buttons: static siblings of intro-inner so they sit left/center/right */
-.nav {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  border-radius: 999px;
-  cursor: pointer;
-  padding: 0 12px;
-  height: 56px; /* increased */
-  min-width: 56px;
-  transition: transform 0.14s ease, box-shadow 0.14s ease;
-  z-index: 20;
-  color: #0053a6;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.2px;
-  text-transform: lowercase;
-  position: absolute;
-  top: 50%;
-  // transform: translateY(-50%);
-}
-
-.nav img {
-  display: block;
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
-.nav:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
-}
-
-.nav.nav-prev {
-  left: 16px;
-}
-
-.nav.nav-next {
-  right: 16px;
+  flex-wrap: nowrap;
 }
 
 .card {
-  flex: 0 0 calc((100% - (var(--card-gap) * 2)) / 3);
-  max-width: calc((100% - (var(--card-gap) * 2)) / 3);
-  background: #ffffff;
-  border: 1px solid rgba(0,83,166,0.16);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  padding: calc(1rem * var(--ui-scale));
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: left;
+  flex: 1;
+  min-width: 0;
+
+  /*
+   * KEY CHANGE: use height + max-height instead of a fixed height.
+   * height: 38vh  → preferred size relative to viewport height
+   * max-height    → hard cap driven by the TV scale factor
+   * min-height    → never collapse below a usable size
+   *
+   * On a 1080px TV  : 38vh = 410px  → capped at 400 × 1.45 = 580px → 410px
+   * On a 700px screen : 38vh = 266px  → cap 400px              → 266px ✓
+   * On a 500px screen : 38vh = 190px  → cap 400px              → 190px ✓
+   */
+  height: 38vh;
+  max-height: calc(400px * var(--ui-scale));
+  min-height: 140px;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(12px, 1.5vw, calc(20px * var(--ui-scale)));
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    0 2px 8px  rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
-  border-radius: calc(8px * var(--ui-scale));
+  background: transparent;
+  transition: border-color 0.1s ease, box-shadow 0.1s ease;
 }
 
-.card:focus,
-.card:focus-visible,
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.10); /* hover shadow đen */
+.card:hover,
+.card:focus-visible {
+  border-color: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.6),
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   outline: none;
 }
 
-/* Selected / active state */
-.card.selected,
-.card[aria-pressed='true'],
 .card:active {
-  border-color: #0053a6; /* border luôn xanh đậm khi selected */
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18); /* shadow màu đen */
-  background-color: transparent; /* không đổi nền xanh */
+  border-color: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.75),
+    0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
+.card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 30, 10, 0.25) 50%,
+    rgba(0, 30, 10, 0.72) 100%
+  );
+  z-index: 1;
+}
+
+.card-glass {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: clamp(0.6rem, 1.5vh, calc(1.25rem * var(--ui-scale)))
+           clamp(0.75rem, 2vw,  calc(1.5rem  * var(--ui-scale)));
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+  text-align: left;
+}
+
+.card-icon img {
+  display: block;
+  width:  clamp(16px, 2.5vw, calc(28px * var(--ui-scale)));
+  height: clamp(16px, 2.5vw, calc(28px * var(--ui-scale)));
+  object-fit: contain;
+  margin-bottom: clamp(0.2rem, 0.5vh, calc(0.5rem * var(--ui-scale)));
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.45));
 }
 
 .card-title {
-  font-size: calc(1.05rem * var(--ui-scale));
+  font-size: clamp(0.875rem, 1.5vw + 0.3rem, calc(1.35rem * var(--ui-scale)));
   font-weight: 800;
-  color: #0b2b4a;
-}
-
-.card-icon img,
-.card-icon svg {
-  display: block;
-  width: calc(22px * var(--ui-scale));
-  height: calc(22px * var(--ui-scale));
-  object-fit: contain;
-}
-
-.card-image {
-  width: 100%;
-  height: calc(160px * var(--ui-scale));
-  object-fit: cover;
-  border-radius: calc(4px * var(--ui-scale));
-  display: block;
-  margin-bottom: calc(0.65rem * var(--ui-scale));
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: clamp(0.1rem, 0.4vh, calc(0.3rem * var(--ui-scale)));
 }
 
 .card-sub {
-  font-size: calc(0.95rem * var(--ui-scale));
-  color: #375a74;
-  margin-top: calc(0.25rem * var(--ui-scale));
+  font-size: clamp(0.75rem, 1vw + 0.2rem, calc(0.88rem * var(--ui-scale)));
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1.4;
 }
 
-@media (max-width: 920px) {
-  .cards {
-    gap: calc(0.8rem * var(--ui-scale));
-    flex-wrap: wrap; /* allow wrapping on medium/smaller screens */
-  }
-  .card {
-    flex: 0 0 calc(45% - (var(--card-gap) / 2));
-    max-width: calc(45% - (var(--card-gap) / 2));
-  }
-
-  .card-sep {
-    display: none; /* hide separators on smaller screens */
-  }
-}
-
-@media (max-width: 520px) {
-  .card {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
-
-/* Scale up on large screens / TV */
-@media (min-width: 1600px) {
-  .card-image {
-    width: 100%;
-    height: var(--card-image-height);
-    object-fit: cover;
-    border-radius: calc(4px * var(--ui-scale));
-    display: block;
-    margin-bottom: calc(0.65rem * var(--ui-scale));
-  }
-  :host {
-    --ui-scale: 1.3;
-  }
-}
-
-@media (min-width: 2200px) {
-  :host {
-    --ui-scale: 1.5;
-  }
-}
-
+/* ─── CTA ───────────────────────────────────────────────────── */
 .cta {
-  margin-top: calc(3rem * var(--ui-scale));
+  margin-top: clamp(1.5rem, 4vh, calc(3.5rem * var(--ui-scale)));
   display: flex;
   justify-content: center;
+  /* sticky: keeps the button at the bottom of the scroll area
+     without ever leaving the visible viewport */
+  position: sticky;
+  bottom: clamp(0.75rem, 2vh, 1.5rem);
+  z-index: 10;
 }
 
 .watch-btn {
-  --btn-padding-y: calc(0.9rem * var(--ui-scale));
-  --btn-padding-x: calc(2.2rem * var(--ui-scale));
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: calc(0.6rem * var(--ui-scale));
-  padding: var(--btn-padding-y) var(--btn-padding-x);
-  font-size: calc(1.05rem * var(--ui-scale));
+  gap: clamp(0.4rem, 0.8vw, calc(0.6rem * var(--ui-scale)));
+  padding:
+    clamp(0.6rem, 1.2vh,  calc(0.9rem * var(--ui-scale)))
+    clamp(1.25rem, 3vw,   calc(2.2rem * var(--ui-scale)));
+  font-size: clamp(0.875rem, 1.2vw + 0.3rem, calc(1.05rem * var(--ui-scale)));
   font-weight: 800;
   color: #ffffff;
-  background: linear-gradient(90deg, #0078d4 0%, #0053a6 100%);
+  background: linear-gradient(90deg, #2e7d32 0%, #1b5e20 100%);
   border: none;
-  border-radius: calc(999px * var(--ui-scale));
+  border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.12s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition:
+    transform  0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
 }
 
-.watch-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 44px rgba(0,0,0,0.22);
-}
-
-.watch-btn:active {
-  transform: translateY(-1px);
-}
+.watch-btn:hover  { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.26); }
+.watch-btn:active { transform: translateY(-1px);  transition-duration: 0.06s; }
 
 .watch-btn .btn-icon {
-  width: calc(26px * var(--ui-scale));
-  height: calc(26px * var(--ui-scale));
+  width:  clamp(16px, 2vw, calc(26px * var(--ui-scale)));
+  height: clamp(16px, 2vw, calc(26px * var(--ui-scale)));
   object-fit: contain;
   display: inline-block;
-  margin-right: calc(0.6rem * var(--ui-scale));
 }
 
-@media (max-width: 520px) {
-  .watch-btn {
+/* ═══════════════════════════════════════════════════════════════
+   WIDTH BREAKPOINTS
+═══════════════════════════════════════════════════════════════ */
+
+/* Tablet — 2 columns */
+@media (min-width: 480px) and (max-width: 919px) {
+  .cards {
+    flex-wrap: wrap;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .card {
+    flex: 0 0 calc(50% - clamp(0.375rem, 1vw, 0.625rem));
+    /* two rows: each card at 28vh keeps both rows on screen */
+    height: 28vh;
+    max-height: 280px;
+    min-height: 150px;
+  }
+}
+
+/* Mobile — 1 column */
+@media (max-width: 479px) {
+  .intro-wrapper {
+    justify-content: flex-start;
+  }
+
+  .cloud { display: none; }
+
+  .cards {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0.625rem;
+  }
+
+  .card {
+    flex: 0 0 auto;
     width: 100%;
-    padding-left: calc(1rem * var(--ui-scale));
-    padding-right: calc(1rem * var(--ui-scale));
-    font-size: calc(0.98rem * var(--ui-scale));
+    height: 20vh;
+    max-height: 160px;
+    min-height: 110px;
+    border-radius: 12px;
+  }
+
+  .card-glass { padding: 0.5rem 0.75rem; }
+
+  .card-icon img { width: 16px; height: 16px; margin-bottom: 0.15rem; }
+
+  .watch-btn { width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HEIGHT BREAKPOINTS  — these fire independently of width,
+   so they combine with the width rules above when needed
+═══════════════════════════════════════════════════════════════ */
+
+/*
+ * Short viewports ≤ 700px tall
+ * Compress vertical spacing; cards already shrink via 38vh.
+ * Switch the CTA to position:fixed so it is always reachable
+ * at the bottom of the screen without scrolling.
+ */
+@media (max-height: 700px) {
+  .intro-inner {
+    /* extra bottom room so content is not hidden behind fixed CTA */
+    padding-bottom: 72px;
+  }
+
+  .subtitle {
+    /* tighten the gap below subtitle to save vertical space */
+    margin-bottom: clamp(0.4rem, 1vh, 0.75rem);
+  }
+
+  .card-glass { padding: 0.5rem 0.75rem; }
+
+  .card-icon img { margin-bottom: 0.15rem; }
+
+  /* CTA becomes a fixed bar, always visible at the bottom */
+  .cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    padding: 0.6rem 1rem;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 100;
+  }
+
+  .watch-btn {
+    /* slightly more compact on short screens */
+    padding-block: 0.5rem;
+    font-size: clamp(0.8rem, 1vw + 0.2rem, 1rem);
+  }
+}
+
+/*
+ * Very short viewports ≤ 500px tall
+ * Further reduce card heights and typography so all three cards
+ * remain visible above the fixed CTA bar.
+ */
+@media (max-height: 500px) {
+  .main-title {
+    font-size: clamp(1rem, 2.5vw + 0.3rem, 1.5rem);
+  }
+
+  .subtitle {
+    font-size: clamp(0.75rem, 1.2vw + 0.2rem, 0.95rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .card {
+    /* 3 cards at 16vh = 48vh, plus header ~12vh → fits in ~60vh */
+    height: 16vh;
+    min-height: 90px;
+  }
+
+  .card-glass {
+    padding: 0.35rem 0.6rem;
+  }
+
+  .card-sub {
+    /* hide subtitle text in card on very short screens */
+    display: none;
+  }
+
+  .intro-inner {
+    padding-bottom: 64px;
   }
 }
