@@ -1,5 +1,5 @@
 <div class="vdo-wrapper">
-  <app-video-player [src]="videoSrc"></app-video-player>
+  <app-video-player [src]="videoSrc" [loop]="false" (videoEnded)="onVideoEnded()"></app-video-player>
   <app-navigation-button
     [isNext]="false"
     [destPath]="backPath"
