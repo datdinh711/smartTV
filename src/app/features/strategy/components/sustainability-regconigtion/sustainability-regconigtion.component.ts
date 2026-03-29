@@ -6,7 +6,7 @@ import { HomeButtonComponent, NavigationButtonComponent } from '@shared/componen
 
 
 @Component({
-  selector: 'app-farming-pillars',
+  selector: 'app-sustainability-regconigtion',
   standalone: true,
   imports: [NavigationButtonComponent, HomeButtonComponent],
   templateUrl: './sustainability-regconigtion.component.html',

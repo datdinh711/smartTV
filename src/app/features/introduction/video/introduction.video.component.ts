@@ -31,7 +31,7 @@ export class IntroductionVideoComponent implements OnInit, OnDestroy {
     if (!this._baseHref.endsWith('/')) {
       this._baseHref += '/';
     }
-    this.videoPath = this.asset('videos/720p.mp4');
+    this.videoPath = this.asset('videos/Cp-vdo.mp4');
   }
 
   ngOnInit(): void {
