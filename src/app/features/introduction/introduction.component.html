@@ -5,7 +5,6 @@
   <div class="cloud cloud--tr1" aria-hidden="true"></div>
 
   <app-home-button></app-home-button>
-
   <app-navigation-button [isNext]="false" destPath="dashboard"></app-navigation-button>
 
   <div class="intro-inner">
@@ -13,47 +12,92 @@
     <h2 class="subtitle">Mô hình Feed – Farm – Food</h2>
 
     <div class="cards">
+
+      <!-- ── Card: Feed ── -->
       <button (click)="openDialogFeed()" type="button" class="card" aria-label="Feed">
-        <img [src]="asset('images/feed.png')" alt="Feed" class="card-bg" />
+        <span class="card-img-wrap"><img [src]="asset('images/feed.png')" alt="Feed" class="card-bg" /></span>
         <div class="card-glass">
-          <div class="card-icon" aria-hidden="true">
-            <img [src]="asset('images/ic_feeding.png')" alt="" />
+          <!-- SVG icon badge -->
+          <span class="card-icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 stroke="#00dd66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Wheat / grain: stalk + grains -->
+              <line x1="12" y1="22" x2="12" y2="8"/>
+              <path d="M12 8 C12 8, 7 6, 7 2 C7 2, 12 3, 12 8"/>
+              <path d="M12 8 C12 8, 17 6, 17 2 C17 2, 12 3, 12 8"/>
+              <path d="M12 13 C12 13, 7 11, 7 7 C7 7, 12 8, 12 13"/>
+              <path d="M12 13 C12 13, 17 11, 17 7 C17 7, 12 8, 12 13"/>
+              <path d="M12 18 C12 18, 8 16, 8 12 C8 12, 12 13, 12 18"/>
+              <path d="M12 18 C12 18, 16 16, 16 12 C16 12, 12 13, 12 18"/>
+            </svg>
+          </span>
+          <div class="card-body">
+            <div class="card-title">Feed</div>
+            <div class="card-sub">Giải pháp thức ăn chăn nuôi</div>
           </div>
-          <div class="card-title">Feed</div>
-          <div class="card-sub">Giải pháp thức ăn chăn nuôi</div>
         </div>
+        <!-- hover glow strip -->
+        <div class="card-glow" aria-hidden="true"></div>
       </button>
       <app-feed-dialog *ngIf="isDialogFeedOpen" (closeEvent)="closeDialogFeed()"></app-feed-dialog>
 
+      <!-- ── Card: Farm ── -->
       <button (click)="openDialogFarm()" type="button" class="card" aria-label="Farm">
-        <img [src]="asset('images/farm.jpg')" alt="Farm" class="card-bg" />
+        <span class="card-img-wrap"><img [src]="asset('images/farm.jpg')" alt="Farm" class="card-bg" /></span>
         <div class="card-glass">
-          <div class="card-icon" aria-hidden="true">
-            <img [src]="asset('images/ic_farm.png')" alt="" />
+          <span class="card-icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 stroke="#00dd66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Farm: barn roof + door + field rows -->
+              <polygon points="2,10 12,3 22,10"/>
+              <rect x="4" y="10" width="16" height="12" rx="1"/>
+              <rect x="9" y="15" width="6" height="7" rx="1"/>
+              <line x1="2" y1="22" x2="22" y2="22"/>
+              <line x1="7" y1="13" x2="7" y2="16"/>
+              <line x1="17" y1="13" x2="17" y2="16"/>
+            </svg>
+          </span>
+          <div class="card-body">
+            <div class="card-title">Farm</div>
+            <div class="card-sub">Nông trại và quản lý chuỗi cung ứng</div>
           </div>
-          <div class="card-title">Farm</div>
-          <div class="card-sub">Nông trại và quản lý chuỗi cung ứng</div>
         </div>
+        <div class="card-glow" aria-hidden="true"></div>
       </button>
       <app-farm-dialog *ngIf="isDialogFarmOpen" (closeEvent)="closeDialogFarm()"></app-farm-dialog>
 
+      <!-- ── Card: Food ── -->
       <button (click)="openDialogFood()" type="button" class="card" aria-label="Food">
-        <img [src]="asset('images/food.jpg')" alt="Food" class="card-bg" />
+        <span class="card-img-wrap"><img [src]="asset('images/food.jpg')" alt="Food" class="card-bg" /></span>
         <div class="card-glass">
-          <div class="card-icon" aria-hidden="true">
-            <img [src]="asset('images/ic_food.png')" alt="" />
+          <span class="card-icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 stroke="#00dd66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Food: cloche / plate cover -->
+              <path d="M3 13 Q3 7 12 7 Q21 7 21 13"/>
+              <line x1="2" y1="13" x2="22" y2="13"/>
+              <line x1="12" y1="7" x2="12" y2="4"/>
+              <circle cx="12" cy="3" r="1" fill="#00dd66" stroke="none"/>
+              <rect x="5" y="13" width="14" height="3" rx="1"/>
+              <line x1="7" y1="16" x2="7" y2="19"/>
+              <line x1="12" y1="16" x2="12" y2="20"/>
+              <line x1="17" y1="16" x2="17" y2="19"/>
+            </svg>
+          </span>
+          <div class="card-body">
+            <div class="card-title">Food</div>
+            <div class="card-sub">Sản phẩm thực phẩm an toàn</div>
           </div>
-          <div class="card-title">Food</div>
-          <div class="card-sub">Sản phẩm thực phẩm an toàn</div>
         </div>
+        <div class="card-glow" aria-hidden="true"></div>
       </button>
       <app-food-dialog *ngIf="isDialogFoodOpen" (closeEvent)="closeDialogFood()"></app-food-dialog>
-    </div>
+
+    </div><!-- /.cards -->
 
     <div class="cta">
-      <button type="button" class="watch-btn" (click)="onWatchVideo()">
-        <img [src]="asset('images/ic_video.png')" alt="" class="btn-icon" aria-hidden="true" />
-        Hãy click xem VDO tại đây
+      <button type="button" class="button__secondary glow-pulse watch-btn" (click)="onWatchVideo()">
+        Click here to watch VDO
       </button>
     </div>
   </div>

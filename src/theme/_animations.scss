@@ -1,0 +1,205 @@
+/*
+ * Global animations — reusable utility classes
+ * ─────────────────────────────────────────────────────────────
+ * .glow-pulse  works on ANY HTML element:
+ *   buttons, divs, cards, images, icons, text, inputs …
+ *
+ * Quick start
+ * ───────────
+ *   <!-- button -->
+ *   <button class="glow-pulse">Click me</button>
+ *
+ *   <!-- card div -->
+ *   <div class="glass-card glow-pulse glow-pulse--teal">…</div>
+ *
+ *   <!-- icon badge -->
+ *   <span class="card-icon-badge glow-pulse glow-pulse--yellow">…</span>
+ *
+ *   <!-- inline image -->
+ *   <img class="logo glow-pulse glow-pulse--white" src="…" />
+ *
+ * Colour variants  (add alongside .glow-pulse)
+ * ─────────────────────────────────────────────
+ *   .glow-pulse--green    #00ff88  (default)
+ *   .glow-pulse--yellow   #ffd200
+ *   .glow-pulse--teal     #00f2fe
+ *   .glow-pulse--orange   #f7971e
+ *   .glow-pulse--white    #ffffff
+ *   .glow-pulse--red      #ff4444
+ *
+ * Speed variants  (add alongside .glow-pulse)
+ * ────────────────────────────────────────────
+ *   .glow-pulse--slow   3 s
+ *   .glow-pulse--fast   1.2 s
+ *
+ * Inline token override  (any element)
+ * ──────────────────────────────────────
+ *   <div class="glow-pulse"
+ *        style="--glow-color: #a855f7;
+ *               --glow-blur:  18px;
+ *               --glow-spread: 8px;">…</div>
+ * ─────────────────────────────────────────────────────────────
+ */
+
+/* ══════════════════════════════════════════════════════════════
+   KEYFRAMES
+   Two passes of box-shadow animate simultaneously:
+     inner  — tight bright rim  → conveys the "source" of the glow
+     outer  — wide soft halo    → conveys the "reach" of the glow
+   A slight scale(1.05) at the midpoint adds physical emphasis
+   without distorting surrounding layout (transform doesn't
+   affect document flow).
+══════════════════════════════════════════════════════════════ */
+@keyframes glow-pulse-frames {
+  /*  ── rest ── */
+  0% {
+    box-shadow:
+      0 0 0  0   rgba(0, 0, 0, 0),
+      0 0 0  0   rgba(0, 0, 0, 0);
+    transform: scale(1.00);
+    opacity: 1;
+  }
+
+  /*  ── build-up ── */
+  40% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+
+  /*  ── peak glow ── */
+  50% {
+    box-shadow:
+      /* inner bright rim */
+      0 0 var(--glow-blur)
+          var(--glow-spread)
+          var(--_glow-peak),
+      /* outer soft halo */
+      0 0 calc(var(--glow-blur) * 2.2)
+          calc(var(--glow-spread) * 2.8)
+          var(--_glow-halo);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  /*  ── fade-out ── */
+  80% {
+    transform: scale(1.01);
+    opacity: 1;
+  }
+
+  /*  ── rest ── */
+  100% {
+    box-shadow:
+      0 0 0  0   rgba(0, 0, 0, 0),
+      0 0 0  0   rgba(0, 0, 0, 0);
+    transform: scale(1.00);
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE CLASS
+══════════════════════════════════════════════════════════════ */
+.glow-pulse {
+  /* ── Design tokens — customisable per element ───────────── */
+  --glow-color:  #00ff88;   /* glow colour (hex, rgb, hsl — any valid value) */
+  --glow-blur:   14px;      /* blur radius of the inner ring                 */
+  --glow-spread: 6px;       /* spread radius of the inner ring               */
+
+  /*
+   * Internal derived tokens.
+   * color-mix() creates opacity variants without requiring
+   * the author to write separate rgba() values.
+   * Fallbacks use rgba() for browsers without color-mix support.
+   */
+  --_glow-peak: color-mix(in srgb, var(--glow-color) 88%, transparent);
+  --_glow-halo: color-mix(in srgb, var(--glow-color) 26%, transparent);
+
+  /* ── Animation — spec: 2 s, infinite, smooth loop ────────── */
+  animation-name:            glow-pulse-frames;
+  animation-duration:        2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode:       both;
+
+  /*
+   * GPU promotion:
+   * Declaring will-change upfront tells the browser to create a
+   * compositing layer before the first frame, preventing a
+   * mid-animation reflow / repaint flash.
+   */
+  will-change: transform, box-shadow;
+
+  /*
+   * Inline elements (span, a, em …) do not respond to transform
+   * or box-shadow.  display:inline-block is the minimal fix that
+   * makes the animation visible without changing block behaviour.
+   * Block / flex / grid elements are unaffected.
+   */
+  display: inline-block;
+}
+
+/* ── Pause on focus/hover — UX: don't distract while interacting */
+.glow-pulse:hover,
+.glow-pulse:focus-visible {
+  animation-play-state: paused;
+}
+
+/* ── Accessibility — respect the OS reduced-motion setting ───── */
+@media (prefers-reduced-motion: reduce) {
+  .glow-pulse {
+    animation: none;
+    will-change: auto;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COLOUR VARIANTS
+   Composing:  class="glow-pulse glow-pulse--teal"
+══════════════════════════════════════════════════════════════ */
+
+/* Neon green — default, explicit alias */
+.glow-pulse--green  { --glow-color: #00ff88; }
+
+/* Neon yellow */
+.glow-pulse--yellow { --glow-color: #ffd200; }
+
+/* Turquoise / teal */
+.glow-pulse--teal   { --glow-color: #00f2fe; }
+
+/* Warm orange */
+.glow-pulse--orange { --glow-color: #f7971e; }
+
+/* Neutral white  (useful on dark glass panels) */
+.glow-pulse--white  { --glow-color: rgba(255, 255, 255, 0.92); }
+
+/* Alert red */
+.glow-pulse--red    { --glow-color: #ff4444; }
+
+/* ══════════════════════════════════════════════════════════════
+   SPEED VARIANTS
+   Composing:  class="glow-pulse glow-pulse--slow"
+══════════════════════════════════════════════════════════════ */
+
+/* Calm breath */
+.glow-pulse--slow { animation-duration: 3s; }
+
+/* Urgent attention */
+.glow-pulse--fast { animation-duration: 1.2s; }
+
+/* ══════════════════════════════════════════════════════════════
+   INTENSITY VARIANTS
+   Composing:  class="glow-pulse glow-pulse--strong"
+══════════════════════════════════════════════════════════════ */
+
+/* Subtle — good for icon badges / decorative elements */
+.glow-pulse--subtle {
+  --glow-blur:   8px;
+  --glow-spread: 3px;
+}
+
+/* Strong — good for hero CTAs / high-priority alerts */
+.glow-pulse--strong {
+  --glow-blur:   22px;
+  --glow-spread: 10px;
+}
