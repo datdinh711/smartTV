@@ -51,6 +51,10 @@ export class FarmingPillarsComponent implements OnInit {
     // Get url when initial loading
     const initialUrl = this._router.url;
     this.businessId = initialUrl.split('/').pop() ?? '';
+    this.subDestPath =
+      this.businessId === BUSINESS_PATH.CIRCULAR
+        ? `${APP_ROUTES.BUSINESS}/${BUSINESS_PATH.GREEN_FARMING}`
+        : `${APP_ROUTES.BUSINESS}/${BUSINESS_PATH.CERTIFICATION}`;
 
     this._handleNavigationEnd();
   }
