@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APP_ROUTES } from '@core/constants';
-import { NavigationHistoryService } from '@core/services';
+import { NavigationHistoryService, NavigatorService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants/strategy-route.constant';
 import {
   HomeButtonComponent,
@@ -17,7 +17,7 @@ import {
 })
 export class SustainabilityVdoComponent implements OnInit {
   farmingPillarsPath = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
-  videoSrc = 'assets/videos/720p.mp4';
+  videoSrc = 'assets/videos/Cp-vdo.mp4';
 
   APP_ROUTE = APP_ROUTES;
   STRATEGY_ROUTE = STRATEGY_ROUTES;
@@ -28,6 +28,7 @@ export class SustainabilityVdoComponent implements OnInit {
 
   constructor(
     private readonly _navigationHistoryService: NavigationHistoryService,
+    private readonly _navigatorService: NavigatorService,
   ) {}
 
   ngOnInit(): void {
@@ -37,12 +38,14 @@ export class SustainabilityVdoComponent implements OnInit {
     const previousPath = this._navigationHistoryService.getPreviousPath();
 
     if (previousPath === recognitionPath) {
-      this.backPath = recognitionPath;
       this.nextPath = APP_ROUTES.DASHBOARD;
       return;
     }
 
-    this.backPath = strategyPath;
     this.nextPath = recognitionPath;
+  }
+
+  onVideoEnded(): void {
+    this._navigatorService.goToPath(this.nextPath);
   }
 }

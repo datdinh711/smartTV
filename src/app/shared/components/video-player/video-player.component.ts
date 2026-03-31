@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -21,6 +23,7 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
   @Input() poster: string = '';
   @Input() loop: boolean = true;
   @Input() muted: boolean = true;
+  @Output() videoEnded = new EventEmitter<void>();
 
   @ViewChild('videoElement')
   private readonly _videoElement?: ElementRef<HTMLVideoElement>;
@@ -42,6 +45,10 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
 
   onCanPlay(): void {
     this._syncAndPlay();
+  }
+
+  onEnded(): void {
+    this.videoEnded.emit();
   }
 
   private _syncAndPlay(): void {
