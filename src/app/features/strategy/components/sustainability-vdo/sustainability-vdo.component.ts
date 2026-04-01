@@ -38,7 +38,7 @@ export class SustainabilityVdoComponent implements OnInit {
     const previousPath = this._navigationHistoryService.getPreviousPath();
 
     if (previousPath === recognitionPath) {
-      this.nextPath = APP_ROUTES.DASHBOARD;
+      this.nextPath = APP_ROUTES.BUSINESS;
       return;
     }
 

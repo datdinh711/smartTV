@@ -30,7 +30,7 @@ export class SustainabilityRegconigtionComponent implements OnInit {
     const previousPath = this._navigationHistoryService.getPreviousPath();
 
     if (previousPath === vdoPath) {
-      this.nextPath = APP_ROUTES.DASHBOARD;
+      this.nextPath = APP_ROUTES.BUSINESS;
       return;
     }
 
