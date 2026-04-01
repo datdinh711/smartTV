@@ -102,5 +102,20 @@
     </div>
   </div>
 
-  <app-navigation-button [isNext]="true" destPath="introduction/video"></app-navigation-button>
+  <app-navigation-button [isNext]="true" (click)="nextSlide()"></app-navigation-button>
+</div>
+
+<!--
+  Stage 1 overlay — rendered only when isCircleActive becomes true.
+  Angular sees void → 'active' and fires the circlePullUp transition (1 000 ms).
+  (@circlePullUp.done) fires once the circle covers the full viewport;
+  onCircleDone() then calls the navigator which triggers route change.
+  pointer-events: none keeps the underlying buttons clickable during the animation.
+-->
+<div
+  *ngIf="isCircleActive"
+  class="circle-overlay"
+  [@circlePullUp]="'active'"
+  (@circlePullUp.done)="onCircleDone()"
+  aria-hidden="true">
 </div>

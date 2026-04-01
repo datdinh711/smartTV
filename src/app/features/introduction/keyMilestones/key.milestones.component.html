@@ -109,4 +109,6 @@
 
 <app-home-button></app-home-button>
 <app-navigation-button [isNext]="false" destPath="introduction/video"></app-navigation-button>
-<app-navigation-button [isNext]="true" destPath="dashboard"></app-navigation-button>
+<!-- No destPath: NavigationButtonComponent.onNavigate() is a no-op.
+     The click event bubbles to nextSlide() which routes conditionally. -->
+<app-navigation-button [isNext]="true" (click)="nextSlide()"></app-navigation-button>

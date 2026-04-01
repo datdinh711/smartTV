@@ -1,21 +1,23 @@
-import { Component, OnDestroy, OnInit, Inject, ViewChild, TemplateRef } from "@angular/core";
-import { DOCUMENT } from '@angular/common';
+import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
+import { DOCUMENT, CommonModule } from '@angular/common';
 import { NavigatorService } from '@core/services';
 import { InactivityService } from '@shared/services';
-import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { FeedDialogComponent } from './dialog/feedDialog/feed.dialog.component';
 import { FarmDialogComponent } from './dialog/farmDialog/farm.dialog.component';
 import { FoodDialogComponent } from './dialog/foodDialog/food.dialog.component';
 import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
 import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
+import { circlePullUpAnimation } from '@shared/animations';
+import { NavigationSource } from '@core/enums';
 
 @Component({
   selector: 'app-introduction',
   standalone: true,
-    imports: [CommonModule, FeedDialogComponent, FarmDialogComponent, FoodDialogComponent, NavigationButtonComponent, HomeButtonComponent],
-    templateUrl: './introduction.component.html',
-    styleUrl: './introduction.component.scss',
+  imports: [CommonModule, FeedDialogComponent, FarmDialogComponent, FoodDialogComponent, NavigationButtonComponent, HomeButtonComponent],
+  templateUrl: './introduction.component.html',
+  styleUrl: './introduction.component.scss',
+  animations: [circlePullUpAnimation],
 })
 
 export class IntroductionComponent implements OnInit, OnDestroy {
@@ -25,6 +27,10 @@ export class IntroductionComponent implements OnInit, OnDestroy {
   isDialogFeedOpen = false;
   isDialogFoodOpen = false;
   isDialogFarmOpen = false;
+
+  // Stage 1: set to true when Watch Video is clicked.
+  // The *ngIf overlay enters the DOM and the void → 'active' transition fires.
+  isCircleActive = false;
   constructor(
     private readonly _navigatorService: NavigatorService,
     private readonly _inactivityService: InactivityService,
@@ -59,7 +65,7 @@ export class IntroductionComponent implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    this._navigatorService.goToIntroductionVideo();
+    this._navigatorService.goToKeyMilestonesFrom(NavigationSource.introduction);
   }
 
   previousSlide() {
@@ -95,7 +101,13 @@ export class IntroductionComponent implements OnInit, OnDestroy {
     return `${this._baseHref}assets/${path}`.replace(/([^:]?)\/\/+/, '$1/');
   }
 
+  // Stage 1: show the circle overlay; navigation happens in onCircleDone().
   onWatchVideo(): void {
-    this._navigatorService.goToIntroductionVideo();
+    this.isCircleActive = true;
+  }
+
+  // Called by (@circlePullUp.done) when the circle has fully covered the screen.
+  onCircleDone(): void {
+    this._navigatorService.goToIntroductionVideoFrom(NavigationSource.introduction);
   }
 }

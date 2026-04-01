@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { APP_ROUTES } from '@core/constants';
+import { NavigationSource } from '@core/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,25 @@ export class NavigatorService {
 
   goToKeyMilestones() {
     this._router.navigate([`/${APP_ROUTES.INTRODUCTION}/key-milestones`]);
+  }
+
+  // ── Source-aware navigation ─────────────────────────────────────────────────
+  // Pass the calling component as state so the destination can adjust its
+  // own "next" action without query-param pollution in the URL.
+  // State must be read via Router.getCurrentNavigation() in the constructor
+  // of the destination component — it is unavailable after navigation ends.
+
+  goToIntroductionVideoFrom(source: NavigationSource): void {
+    this._router.navigate(
+      [`/${APP_ROUTES.INTRODUCTION}/video`],
+      { state: { rootNavigateComponent: source } },
+    );
+  }
+
+  goToKeyMilestonesFrom(source: NavigationSource): void {
+    this._router.navigate(
+      [`/${APP_ROUTES.INTRODUCTION}/key-milestones`],
+      { state: { rootNavigateComponent: source } },
+    );
   }
 }

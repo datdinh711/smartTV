@@ -1,5 +1,41 @@
+<!--
+  Stage 2 layout:
+
+  ┌─────────────────────────────────────────┐
+  │  app-video-player (z 0, always present) │  ← preloads while doors are closed
+  ├─────────────────────────────────────────┤
+  │  .doors-shell (z 2000, *ngIf)           │  ← removed once doors finish opening
+  │    ├─ .door-left   [@doorLeft]          │
+  │    └─ .door-right  [@doorRight]         │
+  └─────────────────────────────────────────┘
+
+  The doors start in state 'closed' (covering the full screen, matching the
+  dark circle that arrived from IntroductionComponent).
+  ngAfterViewInit advances animPhase to 'open'; both doors slide away
+  simultaneously over 800 ms, revealing the video underneath.
+  When (@doorLeft.done) fires with toState 'open', showDoors becomes false
+  and the .doors-shell is removed from the DOM entirely.
+-->
+
+<!-- Video: always rendered so it can buffer behind the closed doors -->
 <app-video-player [src]="videoPath" [muted]="false" [loop]="false"></app-video-player>
 
+<!-- Stage 2 door panels — removed once the opening animation finishes -->
+<div class="doors-shell" *ngIf="showDoors" aria-hidden="true">
+  <div
+    class="door door-left"
+    [@doorLeft]="animPhase"
+    (@doorLeft.done)="onDoorDone($event)">
+  </div>
+  <div
+    class="door door-right"
+    [@doorRight]="animPhase">
+  </div>
+</div>
+
+<!-- Navigation: always accessible (position fixed, above the doors shell) -->
 <app-home-button></app-home-button>
 <app-navigation-button [isNext]="false" destPath="introduction"></app-navigation-button>
-<app-navigation-button [isNext]="true" destPath="introduction/key-milestones"></app-navigation-button>
+<!-- No destPath: NavigationButtonComponent.onNavigate() is a no-op.
+     The click event bubbles to nextSlide() which routes with source state. -->
+<app-navigation-button [isNext]="true" (click)="nextSlide()"></app-navigation-button>
