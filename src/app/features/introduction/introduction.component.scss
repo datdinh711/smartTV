@@ -593,3 +593,22 @@
 
   .intro-inner { padding-bottom: 64px; }
 }
+
+// ─── Stage 1: circle pull-up overlay ────────────────────────────────────────
+//
+// Fixed full-screen element rendered via *ngIf when Watch Video is clicked.
+// Angular's @circlePullUp trigger animates clip-path + translateY on it.
+// The dark background matches the door panels on IntroductionVideoComponent so
+// the handoff between stage 1 and stage 2 looks like one continuous curtain.
+//
+// will-change: clip-path, transform   — keeps both properties on the GPU.
+// pointer-events: none                — underlying buttons stay clickable.
+// ─────────────────────────────────────────────────────────────────────────────
+.circle-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  will-change: clip-path, transform;
+  background: linear-gradient(180deg, #f0faf1 0%, #c8e6c9 40%, #b2dfdb 60%, #f0faf1 100%);
+}
