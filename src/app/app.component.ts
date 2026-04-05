@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { InactivityService } from '@shared/services';
 import { NavigatorService, SlideshowService } from '@core/services';
+import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -11,7 +11,6 @@ import { Subject, takeUntil } from 'rxjs';
   imports: [CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'smartTV';
@@ -50,6 +49,4 @@ export class AppComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
   }
-
-
 }

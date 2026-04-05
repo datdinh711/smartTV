@@ -2,10 +2,11 @@
   <div class="menu-container">
     @for (btn of menuBar; track btn.id) {
       <button
+        class="menu-button"
         [ngClass]="
           btn.id === businessId || btn.subId === businessId
-            ? 'button__primary'
-            : 'button__secondary'
+            ? 'menu-button__active'
+            : 'menu-button__inactive'
         "
         (click)="onSelectMenuBar(btn.id)"
       >
