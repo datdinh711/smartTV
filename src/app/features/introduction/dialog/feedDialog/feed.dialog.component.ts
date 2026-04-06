@@ -1,6 +1,5 @@
 
 import { Component, HostBinding, Output, EventEmitter } from '@angular/core';
-import { feedDialogAnimation } from '@shared/animations';
 
 @Component({
   selector: 'app-feed-dialog',
@@ -8,14 +7,19 @@ import { feedDialogAnimation } from '@shared/animations';
   imports: [],
   templateUrl: './feed.dialog.component.html',
   styleUrl: './feed.dialog.component.scss',
-  animations: [feedDialogAnimation],
 })
 export class FeedDialogComponent {
-  @HostBinding('@feedDialog') animationState = true;
+  @HostBinding('class.is-closing') isClosing = false;
 
   @Output() closeEvent = new EventEmitter<void>();
 
-  closeDialog() {
-    this.closeEvent.emit();
+  closeDialog(): void {
+    this.isClosing = true;
+  }
+
+  onContentAnimationEnd(event: AnimationEvent): void {
+    if (this.isClosing && event.target === event.currentTarget && event.animationName.includes('Leave')) {
+      this.closeEvent.emit();
+    }
   }
 }

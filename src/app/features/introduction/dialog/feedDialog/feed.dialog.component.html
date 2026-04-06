@@ -1,6 +1,6 @@
 <div class="dialog-overlay" (click)="closeDialog()"></div>
 
-<div class="dialog-content">
+<div class="dialog-content" (animationend)="onContentAnimationEnd($event)">
   <div class="feed-dialog">
     <!-- Header chính ở giữa -->
     <div class="dialog-header">

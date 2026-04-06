@@ -203,3 +203,154 @@
   --glow-blur:   22px;
   --glow-spread: 10px;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   DIALOG ENTER / LEAVE KEYFRAMES
+   Named keyframes only — applied via each dialog component's
+   own SCSS file using :host / :host.is-closing selectors.
+
+   Enter:  fires automatically when the component enters the DOM.
+   Leave:  :host.is-closing is added by closeDialog(); the
+           component listens to (animationend) on .dialog-content
+           and emits closeEvent once the leave animation ends.
+
+   Usage in a dialog component SCSS
+   ──────────────────────────────────
+   :host {
+     .dialog-content { animation: feedContentEnter 400ms cubic-bezier(0.34,1.56,0.64,1) forwards; }
+     .dialog-section { animation: dialogSectionUp  300ms cubic-bezier(0.34,1.56,0.64,1) both; }
+     .dialog-section:nth-child(1) { animation-delay: 400ms; }
+     .dialog-section:nth-child(2) { animation-delay: 490ms; }
+     .dialog-section:nth-child(3) { animation-delay: 580ms; }
+   }
+   :host.is-closing .dialog-content { animation: feedContentLeave 180ms ease-in forwards; }
+
+   Usage in a dialog component TS
+   ──────────────────────────────────
+   @HostBinding('class.is-closing') isClosing = false;
+   closeDialog() { this.isClosing = true; }
+   onContentAnimationEnd(e: AnimationEvent) {
+     if (this.isClosing && e.target === e.currentTarget && e.animationName.includes('Leave'))
+       this.closeEvent.emit();
+   }
+══════════════════════════════════════════════════════════════ */
+
+/* Feed — slides in from the left */
+@keyframes feedContentEnter {
+  from { opacity: 0; transform: translateX(-80px) scale(0.94); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes feedContentLeave {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to   { opacity: 0; transform: translateX(-56px) scale(0.94); }
+}
+
+/* Farm — blooms from the center with a spring overshoot */
+@keyframes farmContentEnter {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-4deg); }
+  65%  { opacity: 1; transform: scale(1.06) rotate(1.5deg); }
+  82%  { opacity: 1; transform: scale(0.98) rotate(-0.5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes farmContentLeave {
+  from { opacity: 1; transform: scale(1) rotate(0deg); }
+  to   { opacity: 0; transform: scale(0.8) rotate(3deg); }
+}
+
+/* Food — drops from above and bounces into place */
+@keyframes foodContentEnter {
+  0%   { opacity: 0; transform: translateY(-100px) scale(0.88); }
+  62%  { opacity: 1; transform: translateY(14px) scale(1.03); }
+  80%  { opacity: 1; transform: translateY(-5px) scale(1.01); }
+  92%  { opacity: 1; transform: translateY(2px) scale(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes foodContentLeave {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-60px) scale(0.9); }
+}
+
+/* Section stagger — Feed: rise from below */
+@keyframes dialogSectionUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Section stagger — Farm: scale in */
+@keyframes dialogSectionScale {
+  from { opacity: 0; transform: scale(0.75) translateY(24px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Section stagger — Food: drop in from above */
+@keyframes dialogSectionDown {
+  from { opacity: 0; transform: translateY(-22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DOOR SLIDE ANIMATIONS  (IntroductionVideoComponent)
+   Two panels cover the screen on mount and slide away to reveal
+   the video underneath — continuing the curtain from Stage 1.
+
+   Usage
+   ─────
+   <div class="door door-left"  (animationend)="onDoorDone()"></div>
+   <div class="door door-right"></div>
+
+   onDoorDone() { this.showDoors = false; }
+══════════════════════════════════════════════════════════════ */
+@keyframes doorSlideLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+@keyframes doorSlideRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CIRCLE PULL-UP OVERLAY
+   Full-screen overlay that rises from the bottom with an
+   expanding circular clip-path — used as a page-transition
+   curtain before navigating to another route.
+
+   Usage
+   ─────
+   Add the element to any component template:
+
+     <div *ngIf="isActive"
+          class="circle-overlay"
+          (animationend)="onDone()"
+          aria-hidden="true">
+     </div>
+
+   Customise the background per component via the CSS variable:
+
+     .circle-overlay { --circle-overlay-bg: #1a1a2e; }
+
+   The (animationend) event fires once (forwards fill-mode)
+   so you can navigate / clean up exactly when the curtain
+   has fully covered the screen.
+══════════════════════════════════════════════════════════════ */
+@keyframes circlePullUp {
+  from {
+    transform: translateY(100%);
+    clip-path: circle(0% at 50% 100%);
+  }
+  to {
+    transform: translateY(0);
+    clip-path: circle(150% at 50% 50%);
+  }
+}
+
+.circle-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  will-change: clip-path, transform;
+  background: var(--circle-overlay-bg, #1a1a2e);
+  animation: circlePullUp 1000ms ease-out forwards;
+}

@@ -11,7 +11,7 @@
  * ─────────────────────────────────────────────────────────────
  */
 
-/* ── Backdrop ──────────────────────────────────────────────── */
+/* ── Backdrop + enter animation ────────────────────────────── */
 :host {
   position: fixed;
   inset: 0;
@@ -24,6 +24,29 @@
   justify-content: center;
   padding: clamp(0.75rem, 3vw, 2rem);
   box-sizing: border-box;
+
+  .dialog-content {
+    animation: foodContentEnter 460ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  // Sections stagger down — delay starts after content finishes (460 ms)
+  .dialog-section {
+    animation: dialogSectionDown 310ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    &:nth-child(1) { animation-delay: 460ms; }
+    &:nth-child(2) { animation-delay: 560ms; }
+    &:nth-child(3) { animation-delay: 660ms; }
+  }
+}
+
+/* ── Leave animation (triggered by .is-closing on host) ─────── */
+:host.is-closing .dialog-content {
+  animation: foodContentLeave 190ms ease-in forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host .dialog-content,
+  :host .dialog-section,
+  :host.is-closing .dialog-content { animation: none; }
 }
 
 .dialog-overlay {

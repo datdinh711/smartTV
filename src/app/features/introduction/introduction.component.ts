@@ -8,7 +8,6 @@ import { FarmDialogComponent } from './dialog/farmDialog/farm.dialog.component';
 import { FoodDialogComponent } from './dialog/foodDialog/food.dialog.component';
 import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
 import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
-import { circlePullUpAnimation } from '@shared/animations';
 import { NavigationSource } from '@core/enums';
 
 @Component({
@@ -17,7 +16,6 @@ import { NavigationSource } from '@core/enums';
   imports: [CommonModule, FeedDialogComponent, FarmDialogComponent, FoodDialogComponent, NavigationButtonComponent, HomeButtonComponent],
   templateUrl: './introduction.component.html',
   styleUrl: './introduction.component.scss',
-  animations: [circlePullUpAnimation],
 })
 
 export class IntroductionComponent implements OnInit, OnDestroy {
