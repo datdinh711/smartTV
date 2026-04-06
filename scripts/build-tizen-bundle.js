@@ -45,10 +45,10 @@ cssFiles.forEach((f) => {
   fs.copyFileSync(path.join(distPath, f), path.join(tizenOutputPath, f));
 });
 
-if (fs.existsSync(path.join(distPath, "favicon.ico"))) {
+if (fs.existsSync(path.join(distPath, "assets", "images", "app_icon.png"))) {
   fs.copyFileSync(
-    path.join(distPath, "favicon.ico"),
-    path.join(tizenOutputPath, "favicon.ico"),
+    path.join(distPath, "assets", "images", "app_icon.png"),
+    path.join(tizenOutputPath, "app_icon.png")
   );
 }
 
@@ -83,8 +83,11 @@ fs.writeFileSync(tempEntry, entryContent);
 
 try {
   execSync(
-    `npx esbuild "${tempEntry}" --bundle --format=iife --platform=browser --target=es2020 --outfile="${path.join(tizenOutputPath, "bundle.js")}" --minify --log-level=info`,
-    { stdio: "inherit", cwd: path.join(__dirname, ".."), timeout: 120000 },
+    `npx esbuild "${tempEntry}" --bundle --format=iife --platform=browser --target=es2020 --outfile="${path.join(
+      tizenOutputPath,
+      "bundle.js"
+    )}" --minify --log-level=info`,
+    { stdio: "inherit", cwd: path.join(__dirname, ".."), timeout: 120000 }
   );
   console.log("✅ Bundle created successfully!");
 } catch (e) {
@@ -107,7 +110,7 @@ const indexHtml = `<!DOCTYPE html>
     <base href="./">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob: file:;">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="app_icon.png">
 ${cssLinks}
 </head>
 <body>

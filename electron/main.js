@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
-const isDev = !app.isPackaged;
 let mainWindow;
 
 function createWindow() {
@@ -9,6 +8,7 @@ function createWindow() {
     width: 1920,
     height: 1080,
     fullscreen: false,
+    icon: path.join(__dirname, "..", "src", "assets", "images", "app_icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -18,7 +18,7 @@ function createWindow() {
 
   // Production mode: load from built files
   mainWindow.loadFile(
-    path.join(__dirname, "..", "dist", "smart-tv", "browser", "index.html"),
+    path.join(__dirname, "..", "dist", "smart-tv", "browser", "index.html")
   );
 
   // Hide the menu bar

@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private readonly _inactivityService: InactivityService,
     private readonly _slideshowService: SlideshowService,
-    private readonly _navigatorService: NavigatorService,
+    private readonly _navigatorService: NavigatorService
   ) {}
 
   ngOnInit(): void {
