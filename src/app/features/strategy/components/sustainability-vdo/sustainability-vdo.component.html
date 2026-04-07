@@ -1,13 +1,14 @@
 <div class="vdo-wrapper">
-  <app-video-player [src]="videoSrc" [muted]="false" [loop]="false" (videoEnded)="onVideoEnded()"></app-video-player>
+  <app-video-player
+    [src]="videoSrc"
+    [muted]="false"
+    [loop]="false"
+    (videoEnded)="onVideoEnded()"
+  ></app-video-player>
   <app-navigation-button
     [isNext]="false"
     [destPath]="backPath"
   ></app-navigation-button>
-  <app-navigation-button
-    [destPath]="nextPath"
-  ></app-navigation-button>
-  <app-home-button></app-home-button>
-  <div class="vdo-content">
-  </div>
+  <app-navigation-button [destPath]="nextPath"></app-navigation-button>
+  <div class="vdo-content"></div>
 </div>
