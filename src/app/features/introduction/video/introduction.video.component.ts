@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit, AfterViewInit, Inject } from "@angular/core";
+import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AnimationEvent } from '@angular/animations';
 import { NavigatorService } from '@core/services';
 import { NavigationSource } from '@core/enums';
 import { InactivityService } from '@shared/services';
@@ -9,7 +8,6 @@ import { Subject, takeUntil } from 'rxjs';
 import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
 import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
 import { VideoPlayerComponent } from '@shared/components/video-player/video-player.component';
-import { doorLeftAnimation, doorRightAnimation } from '@shared/animations';
 
 @Component({
   selector: 'app-introduction-video',
@@ -17,9 +15,8 @@ import { doorLeftAnimation, doorRightAnimation } from '@shared/animations';
   imports: [CommonModule, NavigationButtonComponent, HomeButtonComponent, VideoPlayerComponent],
   templateUrl: './introduction.video.component.html',
   styleUrls: ['./introduction.video.component.scss'],
-  animations: [doorLeftAnimation, doorRightAnimation],
 })
-export class IntroductionVideoComponent implements OnInit, AfterViewInit, OnDestroy {
+export class IntroductionVideoComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   private _baseHref = '/';
 
@@ -32,8 +29,6 @@ export class IntroductionVideoComponent implements OnInit, AfterViewInit, OnDest
   //   keyMilestones →  next goes to StrategyComponent
   readonly rootNavigateComponent: NavigationSource;
 
-  // ── Door animation state machine ────────────────────────────────────────────
-  animPhase: 'closed' | 'open' = 'closed';
   showDoors = true;
 
   constructor(
@@ -64,10 +59,6 @@ export class IntroductionVideoComponent implements OnInit, AfterViewInit, OnDest
       .subscribe(() => {});
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.animPhase = 'open');
-  }
-
   ngOnDestroy(): void {
     this._inactivityService.stop();
     this._destroy$.next();
@@ -80,10 +71,8 @@ export class IntroductionVideoComponent implements OnInit, AfterViewInit, OnDest
 
   // ── Door animation callback ─────────────────────────────────────────────────
 
-  onDoorDone(event: AnimationEvent): void {
-    if (event.toState === 'open') {
-      this.showDoors = false;
-    }
+  onDoorDone(): void {
+    this.showDoors = false;
   }
 
   // ── Navigation ──────────────────────────────────────────────────────────────

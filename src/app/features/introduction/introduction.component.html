@@ -115,7 +115,6 @@
 <div
   *ngIf="isCircleActive"
   class="circle-overlay"
-  [@circlePullUp]="'active'"
-  (@circlePullUp.done)="onCircleDone()"
+  (animationend)="onCircleDone()"
   aria-hidden="true">
 </div>

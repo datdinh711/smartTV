@@ -22,15 +22,8 @@
 
 <!-- Stage 2 door panels — removed once the opening animation finishes -->
 <div class="doors-shell" *ngIf="showDoors" aria-hidden="true">
-  <div
-    class="door door-left"
-    [@doorLeft]="animPhase"
-    (@doorLeft.done)="onDoorDone($event)">
-  </div>
-  <div
-    class="door door-right"
-    [@doorRight]="animPhase">
-  </div>
+  <div class="door door-left" (animationend)="onDoorDone()"></div>
+  <div class="door door-right"></div>
 </div>
 
 <!-- Navigation: always accessible (position fixed, above the doors shell) -->
