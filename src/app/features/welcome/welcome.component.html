@@ -5,6 +5,26 @@
   <div class="bubble bubble--2" aria-hidden="true"></div>
   <div class="bubble bubble--3" aria-hidden="true"></div>
 
+  <!-- Language switch — top right -->
+  <div class="lang-switch" role="group" aria-label="Language selector">
+    <button
+      class="lang-btn"
+      [class.lang-btn--active]="currentLang === 'en'"
+      (click)="switchLanguage('en')"
+      type="button"
+      aria-label="Switch to English">
+      EN
+    </button>
+    <button
+      class="lang-btn"
+      [class.lang-btn--active]="currentLang === 'vi'"
+      (click)="switchLanguage('vi')"
+      type="button"
+      aria-label="Chuyển sang Tiếng Việt">
+      VI
+    </button>
+  </div>
+
   <!-- Glass card -->
   <div class="glass-card">
 
@@ -24,13 +44,13 @@
     </div>
 
     <!-- Eyebrow -->
-    <p class="eyebrow">Welcome to</p>
+    <p class="eyebrow">{{ 'WELCOME.EYEBROW' | translate }}</p>
 
     <!-- Title -->
     <h1 class="title">
       <span class="title__cp">C.P.</span>
       <span class="title__vietnam">Vietnam</span>
-      <span class="title__corp">Corporation</span>
+      <span class="title__corp">{{ 'WELCOME.CORP' | translate }}</span>
     </h1>
 
     <!-- Divider -->
@@ -41,9 +61,7 @@
     </div>
 
     <!-- Tagline -->
-    <p class="tagline">
-      Kiến tạo tương lai bền vững
-    </p>
+    <p class="tagline">{{ 'WELCOME.TAGLINE' | translate }}</p>
 
     <!-- CTA -->
     <button class="cta-btn glow-pulse" (click)="onNavigateDashboard()" type="button">
@@ -57,7 +75,7 @@
           <rect x="14" y="14" width="7" height="7" rx="1.5"/>
         </svg>
       </span>
-      <span class="cta-btn__text">Go to Dashboard</span>
+      <span class="cta-btn__text">{{ 'WELCOME.CTA' | translate }}</span>
       <span class="cta-btn__arrow" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
              stroke="currentColor" stroke-width="2.5"
