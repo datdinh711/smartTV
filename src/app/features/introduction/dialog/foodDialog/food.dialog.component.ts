@@ -1,9 +1,10 @@
 import { Component, HostBinding, Output, EventEmitter } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-food-dialog',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './food.dialog.component.html',
   styleUrls: ['./food.dialog.component.scss'],
 })

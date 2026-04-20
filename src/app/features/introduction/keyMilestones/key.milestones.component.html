@@ -1,114 +1,123 @@
-<div class="sky" aria-hidden="true">
-
-  <div class="sky__glow"></div>
-
-  <!-- Road sits at the bottom of the sky section -->
-  <svg
-    class="road-svg"
-    viewBox="0 0 1920 360"
-    preserveAspectRatio="xMidYMax meet"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-label="Key milestones timeline road"
-  >
-    <defs>
-      <linearGradient id="pole-grad" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%"   stop-color="#7a7a7a"/>
-        <stop offset="40%"  stop-color="#ddd"/>
-        <stop offset="100%" stop-color="#8a8a8a"/>
-      </linearGradient>
-      <filter id="flag-shadow" x="-10%" y="-10%" width="130%" height="130%">
-        <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000050"/>
-      </filter>
-    </defs>
-
-    <path d="M 0,304 C 220,304 380,124 600,124 C 820,124 980,304 1200,304 C 1420,304 1580,124 1920,124"
-      stroke="rgba(0,0,0,0.18)" stroke-width="96" fill="none" stroke-linecap="butt"/>
-    <path d="M 0,300 C 220,300 380,120 600,120 C 820,120 980,300 1200,300 C 1420,300 1580,120 1920,120"
-      stroke="#555" stroke-width="92" fill="none" stroke-linecap="butt"/>
-    <path d="M 0,300 C 220,300 380,120 600,120 C 820,120 980,300 1200,300 C 1420,300 1580,120 1920,120"
-      stroke="#1c1c1c" stroke-width="82" fill="none" stroke-linecap="butt"/>
-    <path d="M 0,300 C 220,300 380,120 600,120 C 820,120 980,300 1200,300 C 1420,300 1580,120 1920,120"
-      stroke="rgba(255,255,255,0.82)" stroke-width="3.5" fill="none"
-      stroke-dasharray="48 30" stroke-linecap="round"/>
-
-    <g>
-      <circle cx="126" cy="281" r="9" fill="#e53935" stroke="white" stroke-width="2.5"/>
-      <line   x1="126" y1="281" x2="126" y2="185" stroke="url(#pole-grad)" stroke-width="4.5" stroke-linecap="round"/>
-      <g transform="translate(126, 185)" filter="url(#flag-shadow)">
-        <path d="M 0,0 L 90,0 L 75,14 L 90,28 L 0,28 Z" fill="#e53935"/>
-        <text x="42" y="20" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">1993</text>
-      </g>
-    </g>
-    <g>
-      <circle cx="600" cy="120" r="9" fill="#F57F17" stroke="white" stroke-width="2.5"/>
-      <line   x1="600" y1="120" x2="600" y2="24"  stroke="url(#pole-grad)" stroke-width="4.5" stroke-linecap="round"/>
-      <g transform="translate(600, 24)" filter="url(#flag-shadow)">
-        <path d="M 0,0 L 106,0 L 91,14 L 106,28 L 0,28 Z" fill="#F57F17"/>
-        <text x="50" y="20" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="sans-serif">1994–2000</text>
-      </g>
-    </g>
-    <g>
-      <circle cx="786" cy="159" r="9" fill="#1565C0" stroke="white" stroke-width="2.5"/>
-      <line   x1="786" y1="159" x2="786" y2="63"  stroke="url(#pole-grad)" stroke-width="4.5" stroke-linecap="round"/>
-      <g transform="translate(786, 63)" filter="url(#flag-shadow)">
-        <path d="M 0,0 L 90,0 L 75,14 L 90,28 L 0,28 Z" fill="#1565C0"/>
-        <text x="42" y="20" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">2001</text>
-      </g>
-    </g>
-    <g>
-      <circle cx="987" cy="249" r="9" fill="#2E7D32" stroke="white" stroke-width="2.5"/>
-      <line   x1="987" y1="249" x2="987" y2="153" stroke="url(#pole-grad)" stroke-width="4.5" stroke-linecap="round"/>
-      <g transform="translate(987, 153)" filter="url(#flag-shadow)">
-        <path d="M 0,0 L 90,0 L 75,14 L 90,28 L 0,28 Z" fill="#2E7D32"/>
-        <text x="42" y="20" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">2006</text>
-      </g>
-    </g>
-    <g>
-      <circle cx="1420" cy="249" r="9" fill="#6A1B9A" stroke="white" stroke-width="2.5"/>
-      <line   x1="1420" y1="249" x2="1420" y2="153" stroke="url(#pole-grad)" stroke-width="4.5" stroke-linecap="round"/>
-      <g transform="translate(1420, 153)" filter="url(#flag-shadow)">
-        <path d="M 0,0 L 90,0 L 75,14 L 90,28 L 0,28 Z" fill="#6A1B9A"/>
-        <text x="42" y="20" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">2014</text>
-      </g>
-    </g>
-    <g>
-      <circle cx="1696" cy="148" r="9" fill="#00838F" stroke="white" stroke-width="2.5"/>
-      <line   x1="1696" y1="148" x2="1696" y2="52"  stroke="url(#pole-grad)" stroke-width="4.5" stroke-linecap="round"/>
-      <g transform="translate(1696, 52)" filter="url(#flag-shadow)">
-        <path d="M 0,0 L 90,0 L 75,14 L 90,28 L 0,28 Z" fill="#00838F"/>
-        <text x="42" y="20" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">2020</text>
-      </g>
-    </g>
-  </svg>
-
-  <div class="sky__sun">
-    <div class="sky__sun-rays"></div>
-    <div class="sky__sun-core"></div>
+<!-- Sky background -->
+<div class="bg-sky" aria-hidden="true">
+  <div class="bg-sky__glow"></div>
+  <div class="bg-sky__sun">
+    <div class="bg-sky__sun-rays"></div>
+    <div class="bg-sky__sun-core"></div>
   </div>
-
-  <!-- Static clouds -->
   <div class="cloud cloud--lg cloud--s1"></div>
   <div class="cloud cloud--lg cloud--s2"></div>
   <div class="cloud cloud--sm cloud--s3"></div>
-
-  <!-- Moving clouds: 2 large + 1 small -->
   <div class="cloud cloud--lg cloud--m1"></div>
   <div class="cloud cloud--lg cloud--m2"></div>
   <div class="cloud cloud--sm cloud--m3"></div>
-
 </div>
 
-<!-- Image — original bottom position -->
-<div class="milestone-wrapper">
-  <img
-    class="milestone-img"
-    [src]="asset('images/erasebg-transformed.png')"
-    alt="Key Milestones"
-  />
+<!-- Page title -->
+<header class="page-header">
+  <h1 class="page-header__title">{{ 'KEY_MILESTONES.PAGE_HEADER' | translate }}</h1>
+  <div class="page-header__divider"></div>
+</header>
+
+<!-- Wavy road SVG — fills the full viewport; viewBox matches the % positions below -->
+<svg class="tl-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none"
+     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path class="tl-road__shadow" [attr.d]="tlPath" transform="translate(0,14)"/>
+  <path class="tl-road__body"   [attr.d]="tlPath"/>
+  <path class="tl-road__dash"   [attr.d]="tlPath"/>
+</svg>
+
+<!-- ── Milestones ────────────────────────────────────────────────────────────
+     left / top percentages are (dot_x / 1920) and (dot_y / 1080) of the
+     viewBox coordinates for that point on the SVG path above.
+     Because preserveAspectRatio="none", the SVG stretches to fill the
+     viewport, so CSS percentages map exactly to the path's visual position.
+──────────────────────────────────────────────────────────────────────────── -->
+
+<!-- 1993 · left: 192/1920=10% · top: 592/1080=55% · card below -->
+<div class="ms ms--1">
+  <div class="ms__dot"></div>
+  <div class="ms__stem ms__stem--down"></div>
+  <div class="ms__card ms__card--below" (click)="openMs(1)">
+    <div class="ms__card-head">
+      <span class="ms__year">1993</span>
+    </div>
+    <p class="ms__text">{{ 'KEY_MILESTONES.MS1_CONTENT' | translate }}</p>
+  </div>
+</div>
+
+<!-- 1994–2000 · left: 538/1920=28% · top: 382/1080=35% · card above -->
+<div class="ms ms--2">
+  <div class="ms__dot"></div>
+  <div class="ms__stem ms__stem--up"></div>
+  <div class="ms__card ms__card--above" (click)="openMs(2)">
+    <div class="ms__card-head">
+      <span class="ms__year">1994 – 2000</span>
+    </div>
+    <p class="ms__text">{{ 'KEY_MILESTONES.MS2_CONTENT' | translate }}</p>
+  </div>
+</div>
+
+<!-- 2001 · left: 806/1920=42% · top: 500/1080=46% · card below -->
+<div class="ms ms--3">
+  <div class="ms__dot"></div>
+  <div class="ms__stem ms__stem--down"></div>
+  <div class="ms__card ms__card--below" (click)="openMs(3)">
+    <div class="ms__card-head">
+      <span class="ms__year">2001</span>
+    </div>
+    <p class="ms__text">{{ 'KEY_MILESTONES.MS3_CONTENT' | translate }}</p>
+  </div>
+</div>
+
+<!-- 2006 · left: 1114/1920=58% · top: 678/1080=63% · card above (path is near bottom, card goes up) -->
+<div class="ms ms--4">
+  <div class="ms__dot"></div>
+  <div class="ms__stem ms__stem--up"></div>
+  <div class="ms__card ms__card--above" (click)="openMs(4)">
+    <div class="ms__card-head">
+      <span class="ms__year">2006</span>
+    </div>
+    <p class="ms__text">{{ 'KEY_MILESTONES.MS4_CONTENT' | translate }}</p>
+  </div>
+</div>
+
+<!-- 2014 · left: 1423/1920=74% · top: 508/1080=47% · card below -->
+<div class="ms ms--5">
+  <div class="ms__dot"></div>
+  <div class="ms__stem ms__stem--down"></div>
+  <div class="ms__card ms__card--below" (click)="openMs(5)">
+    <div class="ms__card-head">
+      <span class="ms__year">2014</span>
+    </div>
+    <p class="ms__text">{{ 'KEY_MILESTONES.MS5_CONTENT' | translate }}</p>
+  </div>
+</div>
+
+<!-- 2020 · left: 1679/1920=87% · top: 382/1080=35% · card above -->
+<div class="ms ms--6">
+  <div class="ms__dot"></div>
+  <div class="ms__stem ms__stem--up"></div>
+  <div class="ms__card ms__card--above" (click)="openMs(6)">
+    <div class="ms__card-head">
+      <span class="ms__year">2020</span>
+    </div>
+    <p class="ms__text">{{ 'KEY_MILESTONES.MS6_CONTENT' | translate }}</p>
+  </div>
+</div>
+
+<!-- ── Zoom overlay ────────────────────────────────────────────────────────── -->
+<div class="ms-overlay" *ngIf="activeMs !== null" (click)="closeMs()">
+  <div class="ms-zoom ms-zoom--{{ activeMs }}" (click)="$event.stopPropagation()">
+    <button class="ms-zoom__close" (click)="closeMs()" aria-label="Close">✕</button>
+    <div class="ms-zoom__head">
+      <span class="ms-zoom__year">{{ msYears[activeMs] }}</span>
+    </div>
+    <p class="ms-zoom__text">{{ 'KEY_MILESTONES.MS' + activeMs + '_CONTENT' | translate }}</p>
+  </div>
 </div>
 
 <app-home-button></app-home-button>
+<span class="page-label">{{ 'KEY_MILESTONES.PAGE_TITLE' | translate }}</span>
 <app-navigation-button [isNext]="false" destPath="introduction/video"></app-navigation-button>
-<!-- No destPath: NavigationButtonComponent.onNavigate() is a no-op.
-     The click event bubbles to nextSlide() which routes conditionally. -->
 <app-navigation-button [isNext]="true" (click)="nextSlide()"></app-navigation-button>

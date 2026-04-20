@@ -1,9 +1,10 @@
 import { Component, HostBinding, Output, EventEmitter } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-farm-dialog',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './farm.dialog.component.html',
   styleUrls: ['./farm.dialog.component.scss'],
 })

@@ -1,4 +1,69 @@
 {
+  "KEY_MILESTONES": {
+    "PAGE_TITLE": "Về C.P. Việt Nam",
+    "PAGE_HEADER": "Hành trình phát triển bền vững",
+    "MS1_CONTENT": "Thành lập Công ty TNHH Chăn nuôi C.P. Việt Nam tại Đồng Nai, khởi đầu các ngành chế biến thức ăn công nghiệp.",
+    "MS2_CONTENT": "Hợp tác phát triển hệ thống nuôi cá, tôm, mô hình trại gia đình.",
+    "MS3_CONTENT": "Xây dựng nhà máy chế biến thực phẩm Đồng Nai, khởi đầu của ngành chế biến thực phẩm.",
+    "MS4_CONTENT": "Phát triển ngành thực phẩm chế biến và phân phối sản phẩm chăn nuôi.",
+    "MS5_CONTENT": "Phát triển hệ thống phân phối cửa hàng thịt heo CP.",
+    "MS6_CONTENT": "Khánh thành khu liên hợp chăn nuôi về chế biến thịt gà xuất khẩu tại Bình Phước."
+  },
+  "FOOD_DIALOG": {
+    "HEADER": "QUY TRÌNH KHÉP KÍN",
+    "HEADER_DESC": "Sản phẩm thực phẩm của C. P. Việt Nam được sản xuất từ hệ thống được kiểm soát chặt chẽ theo nguyên tắc chuỗi khép kín \"Thức ăn chăn nuôi - Trang trại chăn nuôi – Nhà máy chế biến thực phẩm\" (Feed-Farm-Food).",
+    "SUBHEADER": "6 Nhà máy",
+    "SEC1_TITLE": "Thực phẩm chế biến",
+    "SEC1_DESC": "Các sản phẩm thực phẩm chế biến của CPV được sản xuất theo quy trình hiện đại, đảm bảo an toàn vệ sinh thực phẩm và đáp ứng nhu cầu đa dạng của người tiêu dùng.",
+    "SEC2_TITLE": "Thực phẩm tươi",
+    "SEC2_DESC": "CPV cung cấp thực phẩm tươi sạch, được kiểm soát chặt chẽ từ khâu chăn nuôi, giết mổ đến phân phối, đảm bảo chất lượng và độ tươi ngon.",
+    "SEC3_TITLE": "Phân phối bán lẻ",
+    "SEC3_DESC": "Hệ thống bán lẻ của CPV mang đến cho người tiêu dùng sự tiện lợi, đa dạng sản phẩm và dịch vụ chăm sóc khách hàng chuyên nghiệp.",
+    "CLOSE": "Đóng"
+  },
+  "FARM_DIALOG": {
+    "HEADER": "QUY TRÌNH CHĂN NUÔI",
+    "HEADER_DESC": "Các giống vật nuôi của C.P. Việt Nam được phát triển từ nguồn gen chất lượng cao trên thế giới, được nuôi thích nghi và chọn lọc trong điều kiện Việt Nam, đáp ứng nhu cầu của thị trường trong nước.",
+    "SUBHEADER": "2,500 Trang trại",
+    "SEC1_TITLE": "Chăn nuôi gia cầm",
+    "SEC1_DESC": "Phương thức chăn nuôi chuồng kín được sử dụng phổ biến ở các nước phát triển như Nhật, Mỹ, Pháp... với những ưu điểm nổi trội như đảm bảo tối ưu các điều kiện trong chăn nuôi, đảm bảo năng suất.",
+    "SEC2_TITLE": "Nuôi trồng thủy sản",
+    "SEC2_DESC": "C.P. Việt Nam áp dụng công nghệ cao trong nhân giống thủy sản (tôm thẻ chân trắng, cá) và kiểm tra, phòng trừ dịch bệnh nghiêm ngặt nhằm cung cấp giống thủy sản chất lượng cao, sạch bệnh cho nhà nông.",
+    "SEC3_TITLE": "Chăn nuôi heo",
+    "SEC3_DESC": "Đàn heo C.P. Việt Nam là sự kết hợp hài hòa các giá trị kinh tế, mang lại lợi nhuận cao cho người chăn nuôi, đảm bảo một môi trường chăn nuôi xanh sạch và an toàn theo tiêu chuẩn quốc tế.",
+    "CLOSE": "Đóng"
+  },
+  "FEED_DIALOG": {
+    "HEADER": "QUY TRÌNH SẢN XUẤT THỨC ĂN CHĂN NUÔI",
+    "SUBHEADER": "12 Nhà máy",
+    "SEC1_TITLE": "Vùng trồng bắp nguyên liệu",
+    "SEC1_DESC": "C.P. Việt Nam hợp tác với người dân trong việc cung ứng hạt giống bắp, hướng dẫn canh tác, thu mua và sơ chế bắp.",
+    "SEC2_TITLE": "Nhà máy thức ăn chăn nuôi",
+    "SEC2_DESC": "Nguyên liệu sản xuất thức ăn chăn nuôi được kiểm soát nghiêm ngặt, áp dụng công nghệ cao trong thiết lập khẩu phần cân đối, quản lý quá trình sản xuất tự động đảm bảo ổn định về chất lượng sản phẩm.",
+    "SEC3_TITLE": "Sản phẩm thức ăn chăn nuôi",
+    "SEC3_DESC": "Thức ăn chăn nuôi của C.P. Việt Nam được sản xuất cho nhiều loại vật nuôi và nhiều giai đoạn phát triển khác nhau của vật nuôi, đảm bảo cân đối các chất dinh dưỡng, hiệu suất chuyển hoá thức ăn cao, tiết kiệm chi phí, giảm giá thành chăn nuôi.",
+    "CLOSE": "Đóng"
+  },
+  "INTRODUCTION": {
+    "PAGE_TITLE": "Về C.P. Việt Nam",
+    "MAIN_TITLE": "Công ty Nông nghiệp – Thực phẩm hàng đầu Việt Nam",
+    "SUBTITLE": "MÔ HÌNH KINH DOANH",
+    "CARD_FEED_TITLE": "Feed",
+    "CARD_FEED_SUB": "Thức ăn chăn nuôi",
+    "CARD_FARM_TITLE": "Farm",
+    "CARD_FARM_SUB": "Trang trại",
+    "CARD_FOOD_TITLE": "Food",
+    "CARD_FOOD_SUB": "Thực phẩm",
+    "WATCH_VDO": "Xem ngay video"
+  },
+  "DASHBOARD": {
+    "BTN1_TITLE": "Về C.P. Việt Nam",
+    "BTN1_SUB": "Tổng quan công ty",
+    "BTN2_TITLE": "Chiến lược phát triển bền vững",
+    "BTN2_SUB": "Vì ngày mai tốt đẹp hơn",
+    "BTN3_TITLE": "Đổi mới bền vững trong kinh doanh",
+    "BTN3_SUB": "Đổi mới vì tác động tích cực"
+  },
   "WELCOME": {
     "EYEBROW": "Chào mừng đến với",
     "TAGLINE": "Từ trang trại đến bếp nhà",

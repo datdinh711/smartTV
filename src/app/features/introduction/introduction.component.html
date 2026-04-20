@@ -4,12 +4,13 @@
   <div class="cloud cloud--tl2" aria-hidden="true"></div>
   <div class="cloud cloud--tr1" aria-hidden="true"></div>
 
+  <h1 class="page-title">{{ 'INTRODUCTION.PAGE_TITLE' | translate }}</h1>
   <app-home-button></app-home-button>
   <app-navigation-button [isNext]="false" destPath="dashboard"></app-navigation-button>
 
   <div class="intro-inner">
-    <h1 class="main-title">C.P. Vietnam Introduction</h1>
-    <h2 class="subtitle">Mô hình Feed – Farm – Food</h2>
+    <h1 class="main-title">{{ 'INTRODUCTION.MAIN_TITLE' | translate }}</h1>
+    <h2 class="subtitle">{{ 'INTRODUCTION.SUBTITLE' | translate }}</h2>
 
     <div class="cards">
 
@@ -32,8 +33,8 @@
             </svg>
           </span>
           <div class="card-body">
-            <div class="card-title">Feed</div>
-            <div class="card-sub">Giải pháp thức ăn chăn nuôi</div>
+            <div class="card-title">{{ 'INTRODUCTION.CARD_FEED_TITLE' | translate }}</div>
+            <div class="card-sub">{{ 'INTRODUCTION.CARD_FEED_SUB' | translate }}</div>
           </div>
         </div>
         <!-- hover glow strip -->
@@ -58,8 +59,8 @@
             </svg>
           </span>
           <div class="card-body">
-            <div class="card-title">Farm</div>
-            <div class="card-sub">Nông trại và quản lý chuỗi cung ứng</div>
+            <div class="card-title">{{ 'INTRODUCTION.CARD_FARM_TITLE' | translate }}</div>
+            <div class="card-sub">{{ 'INTRODUCTION.CARD_FARM_SUB' | translate }}</div>
           </div>
         </div>
         <div class="card-glow" aria-hidden="true"></div>
@@ -85,8 +86,8 @@
             </svg>
           </span>
           <div class="card-body">
-            <div class="card-title">Food</div>
-            <div class="card-sub">Sản phẩm thực phẩm an toàn</div>
+            <div class="card-title">{{ 'INTRODUCTION.CARD_FOOD_TITLE' | translate }}</div>
+            <div class="card-sub">{{ 'INTRODUCTION.CARD_FOOD_SUB' | translate }}</div>
           </div>
         </div>
         <div class="card-glow" aria-hidden="true"></div>
@@ -97,7 +98,7 @@
 
     <div class="cta">
       <button type="button" class="button__secondary glow-pulse watch-btn" (click)="onWatchVideo()">
-        Click here to watch VDO
+        {{ 'INTRODUCTION.WATCH_VDO' | translate }}
       </button>
     </div>
   </div>
