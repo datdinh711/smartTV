@@ -1,17 +1,334 @@
 :host {
+  // ── Wrapper ───────────────────────────────────────────────
   .business-wrapper {
     background: center / cover no-repeat;
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .business-content {
+    flex: 1;
+    min-height: 0;
+    padding: 28px 32px 12px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+  }
+
+  // ── Left Section ──────────────────────────────────────────
+  .left-section {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  // Title
+  .title-block {
+    text-align: center;
+
+    .main-title {
+      margin: 0;
+      font-size: clamp(1.2rem, 2.2vw, 2.2rem);
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    .sub-title {
+      margin: 4px 0 0;
+      font-size: clamp(1.4rem, 2.8vw, 2.8rem);
+      font-weight: 900;
+      color: #00c853;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      letter-spacing: 4px;
+      line-height: 1.1;
+    }
+  }
+
+  // ── Venn Diagram ──────────────────────────────────────────
+  .venn-diagram {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .business-content {
-    width: 100%;
-    margin: 0 24px;
+  .venn-row {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .circle {
+    flex-shrink: 0;
+    width: 42%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.left-circle {
+      margin-right: -10%;
+      z-index: 1;
+
+      .circle-content {
+        padding-right: 14%;
+      }
+    }
+
+    &.right-circle {
+      z-index: 1;
+
+      .circle-content {
+        padding-left: 14%;
+      }
+    }
+
+    .circle-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 65%;
+      gap: 6px;
+    }
+
+    .circle-icon {
+      width: clamp(36px, 4vw, 56px);
+      height: clamp(36px, 4vw, 56px);
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .circle-title {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      font-weight: 800;
+      color: #008c44;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    .circle-desc {
+      margin: 0;
+      font-size: clamp(1rem, 1.4vw, 1.4rem);
+      color: #008c44;
+      line-height: 1.45;
+    }
+  }
+
+  .venn-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+
+    .center-label {
+      display: block;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      color: #e53935;
+      font-size: clamp(1rem, 1.6vw, 1.6rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
+
+  // ── Pillars ───────────────────────────────────────────────
+  .pillars {
+    display: flex;
+    justify-content: space-around;
+    padding: 4px 24px 0;
+
+    .pillar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+
+      .pillar-icon {
+        width: clamp(36px, 4.5vw, 60px);
+        height: clamp(36px, 4.5vw, 60px);
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .pillar-label {
+        font-size: clamp(0.6rem, 0.9vw, 0.9rem);
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  // ── Right Panel ───────────────────────────────────────────
+  .right-panel {
+    flex-shrink: 0;
+    width: 30vw;
+    background: rgba(208, 208, 208, 0.72);
+    backdrop-filter: blur(6px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 24px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    position: relative;
+  }
+
+  .cpf-badge {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: clamp(52px, 5.5vw, 72px);
+    height: clamp(52px, 5.5vw, 72px);
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    padding: 6px;
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .brand-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+
+    .brand-leaf-icon {
+      flex-shrink: 0;
+      width: clamp(28px, 3vw, 40px);
+      height: clamp(28px, 3vw, 40px);
+    }
+
+    .brand-text {
+      .brand-name {
+        margin: 0;
+        font-size: clamp(0.95rem, 1.6vw, 1.5rem);
+        font-weight: 700;
+        font-style: italic;
+        color: #4caf50;
+        line-height: 1.2;
+      }
+
+      .brand-tag {
+        margin: 2px 0 0;
+        font-size: clamp(0.45rem, 0.65vw, 0.65rem);
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 0.5px;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  .impact-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .impact-item {
+      margin: 0;
+      text-align: left;
+      font-size: clamp(0.85rem, 1.3vw, 1.3rem);
+      font-weight: 700;
+      padding: 9px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+
+      &.plain {
+        color: rgba(255, 255, 255, 0.82);
+        background: transparent;
+      }
+
+      &.highlight-green {
+        background: #008c44;
+        color: white;
+      }
+
+      &.highlight-blue {
+        background: rgba(173, 216, 230, 0.18);
+        color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(173, 216, 230, 0.45);
+      }
+
+      &.highlight-yellow {
+        background: #c8960a;
+        color: white;
+      }
+    }
+  }
+
+  .explore-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 18px 160px;
+    background: #008c44;
+    color: white;
+    font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      background: #006635;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .bottom-bar {
+    display: flex;
+    justify-content: center;
+    padding: 0 32px 20px;
   }
 }
+

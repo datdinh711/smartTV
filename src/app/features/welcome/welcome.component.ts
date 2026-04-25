@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Component } from '@angular/core';
 import { NavigatorService } from '@core/services';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 const LANG_KEY = 'app_lang';
 
@@ -11,18 +11,14 @@ const LANG_KEY = 'app_lang';
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss',
 })
-export class WelcomeComponent implements OnInit {
-  currentLang: 'en' | 'vi' = 'en';
+export class WelcomeComponent {
+  currentLang: 'en' | 'vi';
 
   constructor(
     private readonly _navigatorService: NavigatorService,
     private readonly _translate: TranslateService
-  ) {}
-
-  ngOnInit(): void {
-    const saved = localStorage.getItem(LANG_KEY) as 'en' | 'vi' | null;
-    this.currentLang = saved ?? 'en';
-    this._translate.use(this.currentLang);
+  ) {
+    this.currentLang = (this._translate.getCurrentLang() ?? 'vi') as 'en' | 'vi';
   }
 
   switchLanguage(lang: 'en' | 'vi'): void {

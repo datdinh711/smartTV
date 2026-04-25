@@ -11,7 +11,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     ...appConfig.providers,
     provideHttpClient(),
-    provideTranslateService(),
+    provideTranslateService({ defaultLanguage: 'vi' }),
     ...provideTranslateHttpLoader({
       prefix: './assets/i18n/',
       suffix: '.json'

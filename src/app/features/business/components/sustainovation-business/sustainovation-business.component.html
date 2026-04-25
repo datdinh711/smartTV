@@ -5,12 +5,144 @@
   }"
 >
   <div class="business-content">
-    <app-navigation-button
-      [isNext]="false"
-      [destPath]="APP_ROUTE.DASHBOARD"
-    ></app-navigation-button>
-    <app-navigation-button
-      [destPath]="farmingPillarsPath"
-    ></app-navigation-button>
+
+    <!-- ── Left Section -->
+    <div class="left-section">
+
+      <div class="title-block">
+        <p class="main-title">{{ 'SUSTAINOVATION_BUSINESS.MAIN_TITLE' | translate }}</p>
+        <p class="sub-title">{{ 'SUSTAINOVATION_BUSINESS.SUB_TITLE' | translate }}</p>
+      </div>
+
+      <!-- Venn Diagram -->
+      <div class="venn-diagram">
+        <div class="venn-row">
+
+          <!-- Left Circle -->
+          <div class="circle left-circle">
+            <div class="circle-content">
+              <div class="circle-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 9-11 9 0-4 4-5.5 8.5-5.5C21 6.5 21 5 20 4.5 19 4 18 6 17 8z" fill="#4CAF50"/>
+                </svg>
+              </div>
+              <p class="circle-title">{{ 'SUSTAINOVATION_BUSINESS.SUSTAINABILITY_TITLE' | translate }}</p>
+              <p class="circle-desc">
+                {{ 'SUSTAINOVATION_BUSINESS.SUSTAINABILITY_DESC' | translate }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Circle -->
+          <div class="circle right-circle">
+            <div class="circle-content">
+              <div class="circle-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" fill="#FFC107"/>
+                </svg>
+              </div>
+              <p class="circle-title">{{ 'SUSTAINOVATION_BUSINESS.INNOVATION_TITLE' | translate }}</p>
+              <p class="circle-desc">
+                {{ 'SUSTAINOVATION_BUSINESS.INNOVATION_DESC' | translate }}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Center overlap label -->
+        <div class="venn-center">
+          <span class="center-label">{{ 'SUSTAINOVATION_BUSINESS.CENTER_LABEL' | translate }}</span>
+        </div>
+      </div>
+
+      <!-- Pillars Row -->
+      <div class="pillars">
+
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <span class="pillar-label">{{ 'SUSTAINOVATION_BUSINESS.PILLAR_PROCESS' | translate }}</span>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+              <path d="M7 2v20"/>
+              <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>
+            </svg>
+          </div>
+          <span class="pillar-label">{{ 'SUSTAINOVATION_BUSINESS.PILLAR_PRODUCT' | translate }}</span>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <span class="pillar-label">{{ 'SUSTAINOVATION_BUSINESS.PILLAR_HUMAN' | translate }}</span>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </div>
+          <span class="pillar-label">{{ 'SUSTAINOVATION_BUSINESS.PILLAR_PARTNER' | translate }}</span>
+        </div>
+
+      </div>
+
+      <div class="bottom-bar">
+        <button class="explore-btn" (click)="onExplore()">{{ 'SUSTAINOVATION_BUSINESS.EXPLORE_BTN' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- ── Right Panel -->
+    <div class="right-panel">
+
+      <div class="cpf-badge">
+        <img src="assets/images/cp_logo.webp" alt="CPF Logo" />
+      </div>
+
+      <div class="brand-section">
+        <svg class="brand-leaf-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 9-11 9 0-4 4-5.5 8.5-5.5C21 6.5 21 5 20 4.5 19 4 18 6 17 8z" fill="#4CAF50"/>
+        </svg>
+        <div class="brand-text">
+          <p class="brand-name">{{ 'SUSTAINOVATION_BUSINESS.BRAND_NAME' | translate }}</p>
+          <p class="brand-tag">{{ 'SUSTAINOVATION_BUSINESS.BRAND_TAG' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="impact-list">
+        <p class="impact-item plain">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_DRIVE' | translate }}</p>
+        <p class="impact-item highlight-green">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_SUSTAINABLE' | translate }}</p>
+        <p class="impact-item plain">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_AND_BREAKTHROUGH' | translate }}</p>
+        <p class="impact-item highlight-blue">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_INNOVATION' | translate }}</p>
+        <p class="impact-item plain">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_FOR' | translate }}</p>
+        <p class="impact-item highlight-yellow">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_FOOD_SECURITY' | translate }}</p>
+        <p class="impact-item plain">{{ 'SUSTAINOVATION_BUSINESS.IMPACT_LONG_TERM' | translate }}</p>
+      </div>
+    </div>
+
   </div>
+
 </div>
+
