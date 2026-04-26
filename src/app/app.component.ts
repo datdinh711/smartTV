@@ -2,8 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavigatorService, SlideshowService } from '@core/services';
+import { TranslateService } from '@ngx-translate/core';
 import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
+
+const LANG_KEY = 'app_lang';
+const DEFAULT_LANG = 'vi';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +23,13 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private readonly _inactivityService: InactivityService,
     private readonly _slideshowService: SlideshowService,
-    private readonly _navigatorService: NavigatorService
-  ) {}
+    private readonly _navigatorService: NavigatorService,
+    private readonly _translate: TranslateService,
+  ) {
+    const saved = localStorage.getItem(LANG_KEY) as 'en' | 'vi' | null;
+    const lang = saved ?? DEFAULT_LANG;
+    this._translate.use(lang);
+  }
 
   ngOnInit(): void {
     this._inactivityService.start(30000); // 30s không có tương tác
