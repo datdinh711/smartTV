@@ -4,13 +4,14 @@ import { NavigationEnd, RouteConfigLoadEnd, Router } from '@angular/router';
 import { APP_ROUTES } from '@core/constants';
 import { NavigatorService } from '@core/services';
 import { BUSINESS_PATH } from '@features/business/constants';
+import { TranslateModule } from '@ngx-translate/core';
 import { NavigationButtonComponent } from '@shared/components';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-farming-pillars',
   standalone: true,
-  imports: [NgClass, NavigationButtonComponent, CommonModule],
+  imports: [NgClass, NavigationButtonComponent, CommonModule, TranslateModule],
   templateUrl: './farming-pillars.component.html',
   styleUrl: './farming-pillars.component.scss',
 })
@@ -45,7 +46,7 @@ export class FarmingPillarsComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _navigatorService: NavigatorService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     // Get url when initial loading
@@ -61,6 +62,10 @@ export class FarmingPillarsComponent implements OnInit {
 
   onSelectMenuBar(id: string) {
     this._navigatorService.goToPath(`${APP_ROUTES.BUSINESS}/${id}`);
+  }
+
+  onBack() {
+    this._navigatorService.goToPath(APP_ROUTES.BUSINESS);
   }
 
   /**

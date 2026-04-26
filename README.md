@@ -119,7 +119,7 @@ npm run build
 ### Requirements
 
 1. **Java JDK 17** (required)
-   - Download: https://adoptium.net/
+   - Download: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
    - Set `JAVA_HOME` environment variable
 
 2. **Android Studio**

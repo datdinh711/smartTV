@@ -1,29 +1,62 @@
 <div class="page">
-  <div class="menu-container">
-    @for (btn of menuBar; track btn.id) {
-      <button
-        class="menu-button"
-        [ngClass]="
-          btn.id === businessId || btn.subId === businessId
-            ? 'menu-button__active'
-            : 'menu-button__inactive'
-        "
-        (click)="onSelectMenuBar(btn.id)"
-      >
-        {{ btn.name }}
+  <div class="top-bar">
+    <div class="menu-container">
+      <button class="back-btn" type="button" (click)="onBack()">
+        <img src="assets/images/ic_back_business.png" alt="Back" />
       </button>
-    }
+      @for (btn of menuBar; track btn.id) {
+        <button
+          class="menu-button"
+          [ngClass]="
+            btn.id === businessId || btn.subId === businessId
+              ? 'menu-button__active'
+              : 'menu-button__inactive'
+          "
+          (click)="onSelectMenuBar(btn.id)"
+        >
+          {{ btn.name }}
+        </button>
+      }
+    </div>
   </div>
+
   @switch (businessId) {
     @case (BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE) {
-      <ng-container
-        *ngTemplateOutlet="
-          content;
-          context: {
-            image: 'url(assets/images/biosecurity-animal-welfare.jpg)',
-          }
-        "
-      ></ng-container>
+      <div class="biosecurity-container">
+
+        <!-- Left column -->
+        <div class="bio-col bio-col--left">
+          <div class="bio-section">
+            <h3 class="bio-title">{{ 'BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
+            <ul class="bio-list">
+              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
+              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
+              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
+              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
+            </ul>
+          </div>
+          <div class="bio-image-wrap">
+            <img class="bio-image" src="assets/images/biosecurity-farm.jpg" alt="Biosecurity Farm" />
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="bio-col bio-col--right">
+          <div class="bio-image-wrap">
+            <img class="bio-image" src="assets/images/biosecurity-animal-welfare.jpg" alt="Animal Welfare" />
+          </div>
+          <div class="bio-section">
+            <h3 class="bio-title">{{ 'BIOSECURITY.WELFARE_TITLE' | translate }}</h3>
+            <ul class="bio-list">
+              <li>{{ 'BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
+              <li>{{ 'BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
+              <li>{{ 'BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
+              <li>{{ 'BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
     }
     @case (BUSINESS_PATH.CIRCULAR) {
       <ng-container
