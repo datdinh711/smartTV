@@ -1,4 +1,16 @@
 {
+  "BIOSECURITY": {
+    "BIOSECURITY_TITLE": "Đảm bảo an toàn sinh học",
+    "BIOSECURITY_ITEM_1": "Kiểm soát ra vào",
+    "BIOSECURITY_ITEM_2": "Quy trình vệ sinh, khử trùng",
+    "BIOSECURITY_ITEM_3": "Trang phục bảo hộ",
+    "BIOSECURITY_ITEM_4": "Phòng ngừa dịch bệnh",
+    "WELFARE_TITLE": "Thực hành phúc lợi động vật",
+    "WELFARE_ITEM_1": "Chuồng trại và bố trí nuôi phù hợp",
+    "WELFARE_ITEM_2": "Đảm bảo chế độ dinh dưỡng cho vật nuôi",
+    "WELFARE_ITEM_3": "Đảm bảo thông gió và kiểm soát nồng độ khí",
+    "WELFARE_ITEM_4": "Ưu tiên sức khỏe vật nuôi tại trang trại"
+  },
   "WELCOME": {
     "EYEBROW": "Chào mừng đến với",
     "TAGLINE": "Từ trang trại đến bếp nhà",

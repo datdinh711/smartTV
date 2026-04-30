@@ -1,4 +1,16 @@
 {
+  "BIOSECURITY": {
+    "BIOSECURITY_TITLE": "Ensuring Farm Biosecurity",
+    "BIOSECURITY_ITEM_1": "Access Control",
+    "BIOSECURITY_ITEM_2": "Sanitation Protocols",
+    "BIOSECURITY_ITEM_3": "Protective Clothing",
+    "BIOSECURITY_ITEM_4": "Disease Prevention",
+    "WELFARE_TITLE": "Animal Welfare Commitment",
+    "WELFARE_ITEM_1": "Proper Housing & Grouping",
+    "WELFARE_ITEM_2": "Ensure correct diet",
+    "WELFARE_ITEM_3": "Ensure correct ventilation and concentration of gases",
+    "WELFARE_ITEM_4": "Ensure pig health is prioritised on-farm"
+  },
   "WELCOME": {
     "EYEBROW": "Welcome to",
     "TAGLINE": "From farm to family",

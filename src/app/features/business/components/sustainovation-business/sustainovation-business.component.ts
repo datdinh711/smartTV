@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { APP_ROUTES } from '@core/constants';
 import { BUSINESS_PATH } from '@features/business/constants';
 import { TranslateModule } from '@ngx-translate/core';
+import { HomeButtonComponent } from "@shared/components";
 
 @Component({
   selector: 'app-sustainovation-business',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, HomeButtonComponent, HomeButtonComponent],
   templateUrl: './sustainovation-business.component.html',
   styleUrl: './sustainovation-business.component.scss',
 })
