@@ -1,43 +1,53 @@
 {
-  "BIOSECURITY": {
-    "BIOSECURITY_TITLE": "Đảm bảo an toàn sinh học",
-    "BIOSECURITY_ITEM_1": "Kiểm soát ra vào",
-    "BIOSECURITY_ITEM_2": "Quy trình vệ sinh, khử trùng",
-    "BIOSECURITY_ITEM_3": "Trang phục bảo hộ",
-    "BIOSECURITY_ITEM_4": "Phòng ngừa dịch bệnh",
-    "WELFARE_TITLE": "Thực hành phúc lợi động vật",
-    "WELFARE_ITEM_1": "Chuồng trại và bố trí nuôi phù hợp",
-    "WELFARE_ITEM_2": "Đảm bảo chế độ dinh dưỡng cho vật nuôi",
-    "WELFARE_ITEM_3": "Đảm bảo thông gió và kiểm soát nồng độ khí",
-    "WELFARE_ITEM_4": "Ưu tiên sức khỏe vật nuôi tại trang trại"
-  },
   "WELCOME": {
     "EYEBROW": "Chào mừng đến với",
     "TAGLINE": "Từ trang trại đến bếp nhà",
     "CTA": "Chạm để bắt đầu",
     "CORP": "CÔNG TY CỔ PHẦN CHĂN NUÔI"
   },
-  "SUSTAINOVATION_BUSINESS": {
-    "MAIN_TITLE": "ĐỊNH HƯỚNG ĐỔI MỚI BỀN VỮNG",
-    "SUB_TITLE": "SUSTAINOVATION",
-    "SUSTAINABILITY_TITLE": "TÍNH BỀN VỮNG",
-    "SUSTAINABILITY_DESC": "Thúc đẩy tăng trưởng kinh doanh, kiến tạo tương lai tốt hơn cho tất cả thông qua tích hợp ESG",
-    "INNOVATION_TITLE": "TÍNH ĐỔI MỚI",
-    "INNOVATION_DESC": "Nâng cao quản lý xuất sắc và phát triển bền vững thông qua đổi mới sáng tạo",
-    "CENTER_LABEL": "SUSTAINOVATION",
-    "PILLAR_PROCESS": "QUY TRÌNH",
-    "PILLAR_PRODUCT": "SẢN PHẨM",
-    "PILLAR_HUMAN": "NHÂN LỰC",
-    "PILLAR_PARTNER": "ĐỐI TÁC",
-    "EXPLORE_BTN": "Khám phá trang trại",
-    "BRAND_NAME": "Sustainovation",
-    "BRAND_TAG": "SUSTAINABILITY + INNOVATION",
-    "IMPACT_DRIVE": "THÚC ĐẨY TÁC ĐỘNG",
-    "IMPACT_SUSTAINABLE": "BỀN VỮNG",
-    "IMPACT_AND_BREAKTHROUGH": "VÀ ĐỘT PHÁ",
-    "IMPACT_INNOVATION": "ĐỔI MỚI",
-    "IMPACT_FOR": "CHO NỀN",
-    "IMPACT_FOOD_SECURITY": "AN NINH LƯƠNG THỰC",
-    "IMPACT_LONG_TERM": "LÂU DÀI"
+  "BUSINESS": {
+    "SUSTAINOVATION_BUSINESS": {
+      "MAIN_TITLE": "ĐỊNH HƯỚNG ĐỔI MỚI BỀN VỮNG",
+      "SUB_TITLE": "SUSTAINOVATION",
+      "SUSTAINABILITY_TITLE": "TÍNH BỀN VỮNG",
+      "SUSTAINABILITY_DESC": "Thúc đẩy tăng trưởng kinh doanh, kiến tạo tương lai tốt hơn cho tất cả thông qua tích hợp ESG",
+      "INNOVATION_TITLE": "TÍNH ĐỔI MỚI",
+      "INNOVATION_DESC": "Nâng cao quản lý xuất sắc và phát triển bền vững thông qua đổi mới sáng tạo",
+      "CENTER_LABEL": "SUSTAINOVATION",
+      "PILLAR_PROCESS": "QUY TRÌNH",
+      "PILLAR_PRODUCT": "SẢN PHẨM",
+      "PILLAR_HUMAN": "NHÂN LỰC",
+      "PILLAR_PARTNER": "ĐỐI TÁC",
+      "EXPLORE_BTN": "Khám phá trang trại",
+      "BRAND_NAME": "Sustainovation",
+      "BRAND_TAG": "SUSTAINABILITY + INNOVATION",
+      "IMPACT_DRIVE": "THÚC ĐẨY TÁC ĐỘNG",
+      "IMPACT_SUSTAINABLE": "BỀN VỮNG",
+      "IMPACT_AND_BREAKTHROUGH": "VÀ ĐỘT PHÁ",
+      "IMPACT_INNOVATION": "ĐỔI MỚI",
+      "IMPACT_FOR": "CHO NỀN",
+      "IMPACT_FOOD_SECURITY": "AN NINH LƯƠNG THỰC",
+      "IMPACT_LONG_TERM": "LÂU DÀI"
+    },
+    "BIOSECURITY": {
+      "BIOSECURITY_TITLE": "Đảm bảo an toàn sinh học",
+      "BIOSECURITY_ITEM_1": "Kiểm soát ra vào",
+      "BIOSECURITY_ITEM_2": "Quy trình vệ sinh, khử trùng",
+      "BIOSECURITY_ITEM_3": "Trang phục bảo hộ",
+      "BIOSECURITY_ITEM_4": "Phòng ngừa dịch bệnh",
+      "WELFARE_TITLE": "Thực hành phúc lợi động vật",
+      "WELFARE_ITEM_1": "Chuồng trại và bố trí nuôi phù hợp",
+      "WELFARE_ITEM_2": "Đảm bảo chế độ dinh dưỡng cho vật nuôi",
+      "WELFARE_ITEM_3": "Đảm bảo thông gió và kiểm soát nồng độ khí",
+      "WELFARE_ITEM_4": "Ưu tiên sức khỏe vật nuôi tại trang trại"
+    },
+    "SMART_FARM": {
+      "CARD_1_TITLE": "Hệ thống giám sát thông minh",
+      "CARD_1_DESC": "Hệ thống camera giám sát (CCTV) theo dõi toàn bộ quy trình từ trang trại đến kho nhằm đảm bảo kiểm soát và minh bạch trong quá trình vận chuyển.",
+      "CARD_2_TITLE": "Tự động hóa trong chăn nuôi",
+      "CARD_2_DESC": "Quản lý chuồng trại, thức ăn và điều kiện môi trường bằng các hệ thống tự động hóa hiện đại nhằm nâng cao hiệu quả chăn nuôi.",
+      "CARD_3_TITLE": "Công nghệ chọn giống chính xác",
+      "CARD_3_DESC": "Ứng dụng công nghệ siêu âm trong chọn giống nhằm cải thiện chất lượng đàn và nâng cao hiệu quả chăn nuôi."
+    }
   }
 }

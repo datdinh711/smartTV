@@ -98,6 +98,66 @@
       background-repeat: no-repeat;
     }
 
+    .smart-farm-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin: 0 12px 12px;
+      overflow: hidden;
+
+      .smart-farm-cards {
+        flex: 1;
+        display: flex;
+        gap: 20px;
+        overflow: hidden;
+        align-items: stretch;
+      }
+
+      .smart-card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
+
+        &__image-wrap {
+          flex: 1;
+          min-height: 0;
+          overflow: hidden;
+        }
+
+        &__image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        &__content {
+          flex: 0 0 150px;
+          padding: 20px 24px 24px;
+          background: #fff;
+          overflow: hidden;
+        }
+
+        &__title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #1a5c2e;
+          margin: 0 0 12px;
+          line-height: 1.4;
+        }
+
+        &__desc {
+          font-size: 1.05rem;
+          color: #333;
+          line-height: 1.6;
+          margin: 0;
+        }
+      }
+    }
+
     .biosecurity-container {
       flex: 1;
       display: flex;
@@ -130,9 +190,9 @@
       }
 
       .bio-title {
-        font-size: 1.1rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: #1a5c2e;
         margin: 0 0 12px;
         line-height: 1.4;
       }
