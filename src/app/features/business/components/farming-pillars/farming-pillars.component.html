@@ -5,128 +5,145 @@
         <img src="assets/images/ic_back_business.png" alt="Back" />
       </button>
       @for (btn of menuBar; track btn.id) {
-        <button
-          class="menu-button"
-          [ngClass]="
+      <button class="menu-button" [ngClass]="
             btn.id === businessId || btn.subId === businessId
               ? 'menu-button__active'
               : 'menu-button__inactive'
-          "
-          (click)="onSelectMenuBar(btn.id)"
-        >
-          {{ btn.name }}
-        </button>
+          " (click)="onSelectMenuBar(btn.id)">
+        {{ btn.name }}
+      </button>
       }
     </div>
   </div>
 
   @switch (businessId) {
-    @case (BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE) {
-      <div class="biosecurity-container">
+  @case (BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE) {
+  <div class="biosecurity-container">
+    <app-navigation-button [isNext]="false"
+      destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
+    <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
 
-        <!-- Left column -->
-        <div class="bio-col bio-col--left">
-          <div class="bio-section">
-            <h3 class="bio-title">{{ 'BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
-            <ul class="bio-list">
-              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
-              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
-              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
-              <li>{{ 'BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
-            </ul>
-          </div>
-          <div class="bio-image-wrap">
-            <img class="bio-image" src="assets/images/biosecurity-farm.jpg" alt="Biosecurity Farm" />
-          </div>
-        </div>
-
-        <!-- Right column -->
-        <div class="bio-col bio-col--right">
-          <div class="bio-image-wrap">
-            <img class="bio-image" src="assets/images/biosecurity-animal-welfare.jpg" alt="Animal Welfare" />
-          </div>
-          <div class="bio-section">
-            <h3 class="bio-title">{{ 'BIOSECURITY.WELFARE_TITLE' | translate }}</h3>
-            <ul class="bio-list">
-              <li>{{ 'BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
-              <li>{{ 'BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
-              <li>{{ 'BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
-              <li>{{ 'BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
-            </ul>
-          </div>
-        </div>
-
+    <!-- Left column -->
+    <div class="bio-col bio-col--left">
+      <div class="bio-section">
+        <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
+        <ul class="bio-list">
+          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
+          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
+          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
+          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
+        </ul>
       </div>
-    }
-    @case (BUSINESS_PATH.CIRCULAR) {
-      <ng-container
-        *ngTemplateOutlet="
+      <div class="bio-image-wrap">
+        <img class="bio-image" src="assets/images/biosecurity-farm.jpg" alt="Biosecurity Farm" />
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="bio-col bio-col--right">
+      <div class="bio-image-wrap">
+        <img class="bio-image" src="assets/images/biosecurity-animal-welfare.jpg" alt="Animal Welfare" />
+      </div>
+      <div class="bio-section">
+        <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.WELFARE_TITLE' | translate }}</h3>
+        <ul class="bio-list">
+          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
+          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
+          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
+          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  }
+  @case (BUSINESS_PATH.CIRCULAR) {
+  <ng-container *ngTemplateOutlet="
           content;
           context: {
             image: 'url(assets/images/circular-economy-management.png)',
           }
-        "
-      ></ng-container>
-    }
-    @case (BUSINESS_PATH.GREEN_FARMING) {
-      <ng-container
-        *ngTemplateOutlet="
+        "></ng-container>
+  }
+  @case (BUSINESS_PATH.GREEN_FARMING) {
+  <ng-container *ngTemplateOutlet="
           content;
           context: {
             image: 'url(assets/images/green-farm.png)',
           }
-        "
-      ></ng-container>
-    }
-    @case (BUSINESS_PATH.SMART_FARM_TECHNOLOGY) {
-      <ng-container
-        *ngTemplateOutlet="
-          content;
-          context: {
-            image: 'url(assets/images/smart-farm.jpg)',
-          }
-        "
-      ></ng-container>
-    }
-    @case (BUSINESS_PATH.TRACEABILITY) {
-      <ng-container
-        *ngTemplateOutlet="
+        "></ng-container>
+  }
+  @case (BUSINESS_PATH.SMART_FARM_TECHNOLOGY) {
+  <div class="smart-farm-container">
+    <app-navigation-button [isNext]="false"
+      destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
+    <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
+
+    <div class="smart-farm-cards">
+
+      <div class="smart-card">
+        <div class="smart-card__image-wrap">
+          <img class="smart-card__image" src="assets/images/smart-farm-tech-1.jpg" alt="Hệ thống giám sát thông minh" />
+        </div>
+        <div class="smart-card__content">
+          <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_1_TITLE' | translate }}</h3>
+          <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_1_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="smart-card">
+        <div class="smart-card__image-wrap">
+          <img class="smart-card__image" src="assets/images/smart-farm-tech-2.jpg" alt="Tự động hóa trong chăn nuôi" />
+        </div>
+        <div class="smart-card__content">
+          <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_2_TITLE' | translate }}</h3>
+          <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_2_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="smart-card">
+        <div class="smart-card__image-wrap">
+          <img class="smart-card__image" src="assets/images/smart-farm-tech-3.jpg"
+            alt="Công nghệ chọn giống chính xác" />
+        </div>
+        <div class="smart-card__content">
+          <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_3_TITLE' | translate }}</h3>
+          <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_3_DESC' | translate }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  }
+  @case (BUSINESS_PATH.TRACEABILITY) {
+  <ng-container *ngTemplateOutlet="
           content;
           context: {
             image: 'url(assets/images/traceability.png)',
           }
-        "
-      ></ng-container>
-    }
-    @case (BUSINESS_PATH.CERTIFICATION) {
-      <ng-container
-        *ngTemplateOutlet="
+        "></ng-container>
+  }
+  @case (BUSINESS_PATH.CERTIFICATION) {
+  <ng-container *ngTemplateOutlet="
           content;
           context: {
             image: 'url(assets/images/certificates.jpg)',
           }
-        "
-      ></ng-container>
-    }
+        "></ng-container>
+  }
   }
 </div>
 
 <ng-template #content let-image="image">
-  <div
-    class="content-container"
-    [ngStyle]="{
+  <div class="content-container" [ngStyle]="{
       'background-image': image,
-    }"
-  >
-    <app-navigation-button
-      [isNext]="false"
-      [destPath]="APP_ROUTES.BUSINESS"
-    ></app-navigation-button>
+    }">
+    <app-navigation-button [isNext]="false" [destPath]="APP_ROUTES.BUSINESS"></app-navigation-button>
     @if (
-      BUSINESS_PATH.CIRCULAR === businessId ||
-      BUSINESS_PATH.TRACEABILITY === businessId
+    BUSINESS_PATH.CIRCULAR === businessId ||
+    BUSINESS_PATH.TRACEABILITY === businessId
     ) {
-      <app-navigation-button [destPath]="subDestPath"></app-navigation-button>
+    <app-navigation-button [destPath]="subDestPath"></app-navigation-button>
     }
   </div>
 </ng-template>
