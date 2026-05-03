@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:mobile": "ng build && npx cap sync",
+    "generate:assets": "npx @capacitor/assets generate --android --assetPath src/assets/android-app-icons",
     "android": "npx cap open android",
     "run:android": "npm run build:mobile && npx cap run android",
     "sync": "npx cap sync",

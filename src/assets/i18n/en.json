@@ -48,6 +48,24 @@
       "CARD_2_DESC": "Managing housing, feed and environmental condition using modern automation systems to improve farming efficiency.",
       "CARD_3_TITLE": "Precision Breeding Technology",
       "CARD_3_DESC": "Using ultrasound technology for breeding selection to improve herd quality and farming efficiency."
+    },
+    "GREEN_FARMING_CIRCULAR": {
+      "PAGE_TITLE": "Green Farm Initiatives",
+      "CARD1_TITLE": "Promote Renewable Energy",
+      "CARD2_TITLE": "Wastewater Treatment System",
+      "CARD3_TITLE": "Green Farm"
+    },
+    "GREEN_FARMING_DIALOG": {
+      "DESC": "The company ensures that more than 30% of farm area is allocated to green spaces, supporting a healthier and more sustainable environment."
+    },
+    "WASTEWATER_DIALOG": {
+      "DESC": "The wastewater treatment system ensures proper treatment of farm effluents, reduces environmental impact, improves water quality, and supports sustainable and compliant farming operations."
+    },
+    "RENEWABLE_ENERGY_DIALOG": {
+      "SOLAR_TITLE": "Solar",
+      "SOLAR_DESC": "A solar energy system is implemented to conserve energy and protect the environment.",
+      "BIOGAS_TITLE": "Biogas",
+      "BIOGAS_DESC": "A biogas system is applied at pig farms to convert waste and wastewater into energy for daily operations."
     }
   }
 }
