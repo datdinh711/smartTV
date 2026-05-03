@@ -116,61 +116,167 @@ npm run build
 
 ## Running on Android TV
 
-### Requirements
+### Project Config
 
-1. **Java JDK 17** (required)
-   - Download: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-   - Set `JAVA_HOME` environment variable
+| Property         | Value                  |
+| ---------------- | ---------------------- |
+| App ID           | `com.example.smarttv`  |
+| Min SDK          | 22 (Android 5.1)       |
+| Target SDK       | 34 (Android 14)        |
+| Compile SDK      | 35 (Android 15)        |
+| Gradle           | 8.6                    |
+| Java             | 17                     |
 
-2. **Android Studio**
-   - Download: https://developer.android.com/studio
-   - Install Android SDK (API level 35)
-   - Install Android Build Tools
+---
 
-3. **Android SDK** (via Android Studio)
-   - SDK Platform: Android 15.0 (API 35)
-   - Build Tools: 35.0.0
-   - Set `ANDROID_HOME` environment variable
+### Step 1 — Install Java JDK 17
 
-4. **ADB** (Android Debug Bridge)
-   - Included in Android SDK platform-tools
-   - Add to PATH: `%ANDROID_HOME%\platform-tools`
+Download and install from: https://adoptium.net/ (Temurin JDK 17)
 
-5. **Android TV Emulator or physical device**
-   - Create AVD with TV profile in Android Studio
-   - Or enable Developer Mode on a real Android TV
-
-### Environment Variables (Windows)
+Set environment variable (Windows — System Properties → Environment Variables):
 
 ```batch
-JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.x.x
-ANDROID_HOME=C:\Users\<username>\AppData\Local\Android\Sdk
-PATH=%PATH%;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools
+JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.x.x.x-hotspot
 ```
 
-### Running Steps
-
+Verify:
 ```bash
-# Option 1: Open project in Android Studio
+java -version
+# openjdk version "17.x.x" ...
+```
+
+---
+
+### Step 2 — Install Android Studio
+
+Download the latest stable version from: https://developer.android.com/studio
+
+During installation, make sure these components are checked:
+- Android SDK
+- Android SDK Platform
+- Android Virtual Device (AVD)
+
+---
+
+### Step 3 — Install SDK Components
+
+Open **Android Studio → Settings → Languages & Frameworks → Android SDK**
+
+#### SDK Platforms tab — install:
+- ✅ Android 14.0 (API 34) — *recommended for TV emulator*
+- ✅ Android 15.0 (API 35) — *compile target*
+
+#### SDK Tools tab — install:
+- ✅ Android SDK Build-Tools **35.0.0**
+- ✅ Android SDK Platform-Tools
+- ✅ Android Emulator
+- ✅ Android Emulator hypervisor driver (HAXM or WHPX depending on your CPU)
+
+> **Note**: The old `tools/` folder is deprecated. Do **not** add `%ANDROID_HOME%\tools` to PATH.
+
+---
+
+### Step 4 — Set Environment Variables (Windows)
+
+Open **System Properties → Advanced → Environment Variables** and add:
+
+| Variable       | Value                                               |
+| -------------- | --------------------------------------------------- |
+| `JAVA_HOME`    | `C:\Program Files\Eclipse Adoptium\jdk-17.x.x.x-hotspot` |
+| `ANDROID_HOME` | `C:\Users\<username>\AppData\Local\Android\Sdk`     |
+
+Add to `Path`:
+```
+%ANDROID_HOME%\platform-tools
+%ANDROID_HOME%\cmdline-tools\latest\bin
+```
+
+Restart your terminal, then verify:
+```bash
+adb --version
+# Android Debug Bridge version 1.0.x
+```
+
+---
+
+### Step 5 — Create Android TV Emulator
+
+1. Open **Android Studio → Device Manager** (right toolbar or View → Tool Windows → Device Manager)
+2. Click **+** → **Create Virtual Device**
+3. Select category: **Television**
+4. Choose a device: **Android TV (1080p)** or **Android TV (720p)**
+5. Click **Next**
+6. Select system image:
+   - Tab **"Other Images"** (TV images are not in the default "Recommended" tab)
+   - Choose **API 34**, ABI: **x86_64**, Target: **Android 14.0 (Google APIs)**
+   - Click **Download** if not yet installed, then select it
+7. Click **Next → Finish**
+8. Start the emulator by clicking the ▶ button
+
+> **Tip**: If you have an Intel CPU, enable **Intel HAXM** for better emulator performance. For AMD/ARM, use **Windows Hypervisor Platform (WHPX)** — enable it via Windows Features.
+
+---
+
+### Step 6 — Run the App
+
+Make sure the TV emulator is running, then choose one of the options below:
+
+#### Option 1: Open in Android Studio (recommended for first run)
+```bash
 npm run android
-# Then Run from Android Studio
+# This opens the android/ folder in Android Studio
+# Press the Run ▶ button and select the TV emulator
+```
 
-# Option 2: Build and run directly (requires connected emulator/device)
+#### Option 2: Build and run directly via CLI
+```bash
 npm run run:android
+# Builds Angular, syncs Capacitor, then deploys to the running emulator
+```
 
-# Option 3: Build APK and install manually
-npm run build:apk        # Build debug APK
-npm run install:apk      # Install APK to device
-npm run launch:app       # Launch app
+#### Option 3: Build APK manually and install
+```bash
+# Build debug APK
+npm run build:apk
 
-# Or run all in one command
+# Install to running emulator/device
+npm run install:apk
+
+# Launch the app
+npm run launch:app
+
+# Or all in one
 npm run test:apk
 ```
 
+> **Windows note**: The `build:apk:debug` script uses `./gradlew` which works in Git Bash.
+> In Command Prompt or PowerShell, run manually:
+> ```bat
+> cd android
+> gradlew.bat assembleDebug
+> ```
+
+---
+
 ### APK Output
 
-- **Debug APK**: `android/app/build/outputs/apk/debug/app-debug.apk`
-- **Release APK**: `android/app/build/outputs/apk/release/app-release.apk`
+| Build Type | Path |
+| ---------- | ---- |
+| Debug      | `android/app/build/outputs/apk/debug/app-debug.apk` |
+| Release    | `android/app/build/outputs/apk/release/app-release.apk` |
+
+---
+
+### Troubleshooting
+
+| Problem | Solution |
+| ------- | -------- |
+| `JAVA_HOME` not found | Set `JAVA_HOME` and restart terminal |
+| `SDK location not found` | Open `android/local.properties`, set `sdk.dir=C:\\Users\\<username>\\AppData\\Local\\Android\\Sdk` |
+| Emulator is slow | Enable hardware acceleration (HAXM or WHPX) |
+| `adb: command not found` | Add `%ANDROID_HOME%\platform-tools` to PATH |
+| App crashes on launch | Check WebView version — TV emulator needs API 34+ for modern WebView support |
+| `./gradlew: Permission denied` | Run `git update-index --chmod=+x android/gradlew` |
 
 ---
 

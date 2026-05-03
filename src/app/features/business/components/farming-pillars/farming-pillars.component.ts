@@ -7,11 +7,14 @@ import { BUSINESS_PATH } from '@features/business/constants';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavigationButtonComponent } from '@shared/components';
 import { filter } from 'rxjs';
+import { GreenFarmingDialogComponent } from './dialogs/green-farming-dialog/green-farming-dialog.component';
+import { RenewableEnergyDialogComponent } from './dialogs/renewable-energy-dialog/renewable-energy-dialog.component';
+import { WastewaterDialogComponent } from './dialogs/wastewater-dialog/wastewater-dialog.component';
 
 @Component({
   selector: 'app-farming-pillars',
   standalone: true,
-  imports: [NgClass, NavigationButtonComponent, CommonModule, TranslateModule],
+  imports: [NgClass, NavigationButtonComponent, CommonModule, RenewableEnergyDialogComponent, WastewaterDialogComponent, GreenFarmingDialogComponent, TranslateModule],
   templateUrl: './farming-pillars.component.html',
   styleUrl: './farming-pillars.component.scss',
 })
@@ -41,7 +44,20 @@ export class FarmingPillarsComponent implements OnInit {
   BUSINESS_PATH = BUSINESS_PATH;
   APP_ROUTES = APP_ROUTES;
 
-  subDestPath: string = ''; // Destination path for sub-menu navigation based on the current businessId
+  subDestPath: string = '';
+
+  isRenewableEnergyDialogOpen = false;
+  isWastewaterDialogOpen = false;
+  isGreenFarmingDialogOpen = false;
+
+  openRenewableEnergyDialog(): void { this.isRenewableEnergyDialogOpen = true; }
+  closeRenewableEnergyDialog(): void { this.isRenewableEnergyDialogOpen = false; }
+
+  openWastewaterDialog(): void { this.isWastewaterDialogOpen = true; }
+  closeWastewaterDialog(): void { this.isWastewaterDialogOpen = false; }
+
+  openGreenFarmingDialog(): void { this.isGreenFarmingDialogOpen = true; }
+  closeGreenFarmingDialog(): void { this.isGreenFarmingDialogOpen = false; }
 
   constructor(
     private readonly _router: Router,

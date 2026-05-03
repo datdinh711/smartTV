@@ -49,7 +49,6 @@
 
         .menu-button {
           flex: 1;
-          margin: 0;
           height: 52px;
           position: relative;
           vertical-align: top;
@@ -57,8 +56,7 @@
           text-align: center;
           color: rgb(153, 153, 153);
           border-radius: 22px;
-          margin-left: 1px;
-          margin-right: 1px;
+          margin: 0 1px;
           font-weight: 500;
           font-size: 1rem;
           padding: 4px;
@@ -71,10 +69,10 @@
             transition: background 0.2s ease;
             text-decoration: none;
             cursor: pointer;
-          }
 
-          &.menu-button__inactive:hover {
-            background: #eaeaea;
+            &:hover {
+              background: #eaeaea;
+            }
           }
 
           &.menu-button__active {
@@ -89,9 +87,7 @@
 
     .content-container {
       flex: 1;
-      margin-left: 20px;
-      margin-right: 20px;
-      margin-bottom: 20px;
+      margin: 0 20px 20px;
       border-radius: 0.75rem;
       background-position: center;
       background-size: cover;
@@ -222,6 +218,423 @@
           height: 100%;
           object-fit: cover;
           display: block;
+        }
+      }
+    }
+
+    .green-farming-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 0 20px 20px;
+      overflow: visible;
+      min-height: 0;
+
+      .green-farming-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1a3a1a;
+        margin: 0;
+        text-align: center;
+      }
+
+      .green-farming-cards {
+        flex: 1;
+        display: flex;
+        gap: 24px;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 0;
+        padding: 12px 8px;
+
+        .gf-card {
+          flex: 1;
+          max-width: 560px;
+          height: 100%;
+          min-height: 280px;
+          position: relative;
+          overflow: hidden;
+          border-radius: 20px;
+          cursor: pointer;
+          background: transparent;
+          border: 1.5px solid rgba(255, 255, 255, 0.30);
+          border-bottom: 3px solid rgba(0, 160, 60, 0.70);
+          box-shadow:
+            0 0 0 2px rgba(0, 140, 68, 0.35),
+            0 10px 40px rgba(0, 0, 0, 0.28),
+            0  3px 10px rgba(0, 0, 0, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          transition:
+            transform 0.35s ease,
+            border-color 0.28s ease,
+            box-shadow 0.28s ease;
+
+          &:hover {
+            border-color: rgba(0, 210, 90, 0.50);
+            border-bottom-color: rgba(0, 210, 90, 0.95);
+            box-shadow:
+              0 20px 60px rgba(0, 0, 0, 0.45),
+              0  5px 20px rgba(0, 0, 0, 0.28),
+              0  0   0 2px rgba(0, 210, 90, 0.40),
+              inset 0 1px 0 rgba(255, 255, 255, 0.32);
+            transform: translateY(-6px);
+
+            .gf-card-bg {
+              transform: scale(1.04);
+            }
+
+            .gf-card-glow {
+              opacity: 1;
+            }
+          }
+
+          &:active {
+            transform: translateY(0) scale(0.975);
+            box-shadow:
+              0 5px 20px rgba(0, 0, 0, 0.35),
+              inset 0 2px 6px rgba(0, 0, 0, 0.18);
+          }
+
+          &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(
+              160deg,
+              rgba(0,0,0,0.06)  0%,
+              rgba(0,20,8,0.28) 45%,
+              rgba(0,20,8,0.62) 100%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(
+              138deg,
+              rgba(255,255,255,0.16) 0%,
+              rgba(255,255,255,0.04) 45%,
+              rgba(255,255,255,0.00) 100%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+          }
+
+          .gf-card-img-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            border-radius: inherit;
+            z-index: 0;
+            display: block;
+
+            .gf-card-bg {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              display: block;
+              transition: transform 0.4s ease;
+            }
+          }
+
+          .gf-card-glass {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index: 3;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.13);
+            backdrop-filter: blur(20px) saturate(170%) brightness(1.05);
+            -webkit-backdrop-filter: blur(20px) saturate(170%) brightness(1.05);
+            border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+
+            .gf-card-title {
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: #ffffff;
+              text-shadow: 0 1px 8px rgba(0,0,0,0.65);
+              margin: 0;
+              text-align: center;
+            }
+          }
+
+          .gf-card-glow {
+            position: absolute;
+            bottom: 0;
+            left: 12%; right: 12%;
+            height: 3px;
+            z-index: 5;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(0,200,80,0.85) 35%,
+              rgba(0,240,110,1.00) 50%,
+              rgba(0,200,80,0.85) 65%,
+              transparent
+            );
+            border-radius: 0 0 inherit inherit;
+            opacity: 0;
+            transition: opacity 0.28s ease;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    .gf-model-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 0 20px 20px;
+      min-height: 0;
+
+      .gf-model-header {
+        background: linear-gradient(135deg, #1a3a1a 0%, #008c44 100%);
+        border-radius: 16px;
+        padding: 20px 32px;
+        color: #fff;
+        flex-shrink: 0;
+
+        .gf-model-title {
+          font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+          font-weight: 700;
+          margin: 0 0 8px;
+        }
+
+        .gf-model-desc {
+          font-size: clamp(0.8rem, 1.2vw, 1rem);
+          line-height: 1.65;
+          margin: 0;
+          opacity: 0.92;
+          max-width: 960px;
+        }
+      }
+
+      .gf-model-body {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+        position: relative;
+
+        .gfi-bg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          z-index: 0;
+        }
+
+        .gfi-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.8);
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .gfi-svg {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        // --- Shared node styles (used inside SVG foreignObject) ---
+        .gfi-node {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          border-radius: 10px;
+          padding: 5px 13px;
+          gap: 6px;
+          min-width: 118px;
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+
+          .gfi-icon { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+
+          strong {
+            font-size: clamp(0.62rem, 0.85vw, 0.8rem);
+            font-weight: 700;
+            color: #111;
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.3;
+            text-align: center;
+          }
+          em {
+            font-size: clamp(0.52rem, 0.68vw, 0.66rem);
+            font-style: italic;
+            color: #666;
+            white-space: nowrap;
+          }
+
+          &--main {
+            background: linear-gradient(135deg, #008c44 0%, #00b050 100%);
+            box-shadow: 0 3px 14px rgba(0,140,68,0.35);
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 8px 24px;
+            strong { color: #fff; font-size: clamp(0.72rem, 1.05vw, 0.92rem); }
+            em { color: rgba(255,255,255,0.8); }
+            .gfi-icon { font-size: 1.6rem; }
+          }
+
+          &--waste {
+            background: #fff;
+            border: 1.5px solid #66bb6a;
+          }
+
+          &--separator {
+            background: #fff;
+            border: 1.5px solid #66bb6a;
+            min-width: 190px;
+          }
+
+          &--secondary {
+            background: #fff;
+            border: 1.5px solid #66bb6a;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+          }
+
+          &--biogas {
+            background: #fff;
+            border: 1.5px solid #66bb6a;
+          }
+
+          &--electricity {
+            background: #fff;
+            border: 1.5px solid #66bb6a;
+            box-shadow: 0 1px 6px rgba(249,168,37,0.25);
+          }
+        }
+
+        .gf-infographic {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 6px 16px 10px;
+          gap: 0;
+          height: 100%;
+
+          // --- Arrows ---
+          .gfi-arrow {
+            &--down {
+              width: 2px;
+              height: 15px;
+              background: #008c44;
+              margin: 0 auto;
+              position: relative;
+              flex-shrink: 0;
+
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 5px solid #008c44;
+              }
+            }
+          }
+
+          // --- Layout rows ---
+          .gfi-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            &--arrow-center {
+              .gfi-arrow--down { margin: 1px auto; }
+            }
+          }
+
+          .gfi-spacer { flex: 1; }
+
+          // --- Split bar (3-way) ---
+          .gfi-row--split-arrows {
+            width: 100%;
+            .gfi-split-line {
+              width: 75%;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+            }
+            .gfi-split-bar {
+              height: 2px;
+              background: #008c44;
+              width: 100%;
+            }
+            .gfi-split-ticks {
+              display: flex;
+              justify-content: space-between;
+              padding: 0 calc(100% / 6);
+            }
+          }
+
+          // --- 3 branches row ---
+          .gfi-row--branches {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+            padding: 0 6px;
+            flex: 1;
+          }
+
+          .gfi-branch {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+
+            &--center {
+              flex: 0 0 auto;
+              min-width: 110px;
+            }
+          }
+
+          // --- Loop-back label ---
+          .gfi-loop-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+            width: 100%;
+
+            .gfi-loop-line {
+              flex: 1;
+              height: 1px;
+              background: linear-gradient(90deg, transparent, #008c44 50%, transparent);
+              opacity: 0.45;
+            }
+
+            span {
+              font-size: clamp(0.58rem, 0.8vw, 0.72rem);
+              color: #008c44;
+              font-weight: 600;
+              white-space: nowrap;
+            }
+          }
         }
       }
     }
