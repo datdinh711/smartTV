@@ -66,6 +66,17 @@
       "SOLAR_DESC": "A solar energy system is implemented to conserve energy and protect the environment.",
       "BIOGAS_TITLE": "Biogas",
       "BIOGAS_DESC": "A biogas system is applied at pig farms to convert waste and wastewater into energy for daily operations."
+    },
+    "TRACEABILITY": {
+      "BANNER_TITLE": "Two-Level Traceability System",
+      "BANNER_SUBTITLE": "Scan the QR code on the product packaging using your smartphone to access product information instantly.",
+      "SCAN_LABEL": "Scan to Experience",
+      "INTERNAL_TITLE": "Internal Traceability System (CP Platform)",
+      "INTERNAL_DESC": "Provides comprehensive, real-time data across the entire production and supply chain for internal control and management.",
+      "CONSUMER_TITLE": "Consumer Traceability Platform (TE-FOOD)",
+      "CONSUMER_DESC": "Delivers verified and simplified product information, enabling consumers to easily access and trust product origins.",
+      "FOOTER_LINE_1": "Ensuring full transparency at every step",
+      "FOOTER_LINE_2": "From Farm to Family"
     }
   }
 }
