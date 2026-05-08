@@ -16,137 +16,145 @@
     </div>
   </div>
 
-  @switch (businessId) {
-  @case (BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE) {
-  <div class="biosecurity-container">
-    <app-navigation-button [isNext]="false"
-      destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
-    <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
+  <div class="section-container">
 
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE">
+      <div class="biosecurity-container">
+        @if (businessId === BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE) {
+        <app-navigation-button [isNext]="false"
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CERTIFICATION}}"></app-navigation-button>
+        <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
+        }
 
-    <!-- Left column -->
-    <div class="bio-col bio-col--left">
-      <div class="bio-section">
-        <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
-        <ul class="bio-list">
-          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
-          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
-          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
-          <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
-        </ul>
-      </div>
-      <div class="bio-image-wrap">
-        <img class="bio-image" src="assets/images/biosecurity-farm.jpg" alt="Biosecurity Farm" />
-      </div>
-    </div>
-
-    <!-- Right column -->
-    <div class="bio-col bio-col--right">
-      <div class="bio-image-wrap">
-        <img class="bio-image" src="assets/images/biosecurity-animal-welfare.jpg" alt="Animal Welfare" />
-      </div>
-      <div class="bio-section">
-        <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.WELFARE_TITLE' | translate }}</h3>
-        <ul class="bio-list">
-          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
-          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
-          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
-          <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-  }
-  @case (BUSINESS_PATH.CIRCULAR) {
-  <app-navigation-button [isNext]="false"
-    destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE}}"></app-navigation-button>
-  <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.GREEN_FARMING}}"></app-navigation-button>
-
-  <div class="green-farming-container">
-    <h2 class="green-farming-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.PAGE_TITLE' | translate }}</h2>
-    <div class="green-farming-cards">
-
-      <div class="gf-card" (click)="openRenewableEnergyDialog()">
-        <span class="gf-card-img-wrap">
-          <img src="assets/images/renewable-energy.jpg" alt="Năng lượng tái tạo" class="gf-card-bg" />
-        </span>
-        <div class="gf-card-glass">
-          <div class="gf-card-body">
-            <div class="gf-card-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.CARD1_TITLE' | translate }}</div>
+        <!-- Left column -->
+        <div class="bio-col bio-col--left">
+          <div class="bio-section">
+            <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
+            <ul class="bio-list">
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
+            </ul>
+          </div>
+          <div class="bio-image-wrap">
+            <img class="bio-image" src="assets/images/biosecurity-farm.jpg" alt="Biosecurity Farm" />
           </div>
         </div>
-        <div class="gf-card-glow" aria-hidden="true"></div>
-      </div>
 
-      <div class="gf-card" (click)="openWastewaterDialog()">
-        <span class="gf-card-img-wrap">
-          <img src="assets/images/wastewater-treatment.jpg" alt="Xử lý nước thải" class="gf-card-bg" />
-        </span>
-        <div class="gf-card-glass">
-          <div class="gf-card-body">
-            <div class="gf-card-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.CARD2_TITLE' | translate }}</div>
+        <!-- Right column -->
+        <div class="bio-col bio-col--right">
+          <div class="bio-image-wrap">
+            <img class="bio-image" src="assets/images/biosecurity-animal-welfare.jpg" alt="Animal Welfare" />
+          </div>
+          <div class="bio-section">
+            <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.WELFARE_TITLE' | translate }}</h3>
+            <ul class="bio-list">
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
+            </ul>
           </div>
         </div>
-        <div class="gf-card-glow" aria-hidden="true"></div>
-      </div>
 
-      <div class="gf-card" (click)="openGreenFarmingDialog()">
-        <span class="gf-card-img-wrap">
-          <img src="assets/images/green-farming.jpeg" alt="Trang trại xanh" class="gf-card-bg" />
-        </span>
-        <div class="gf-card-glass">
-          <div class="gf-card-body">
-            <div class="gf-card-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.CARD3_TITLE' | translate }}</div>
+      </div>
+    </div>
+
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.CIRCULAR">
+      @if (businessId === BUSINESS_PATH.CIRCULAR) {
+      <app-navigation-button [isNext]="false"
+        destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE}}"></app-navigation-button>
+      <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.GREEN_FARMING}}"></app-navigation-button>
+      }
+
+      <div class="green-farming-container">
+        <h2 class="green-farming-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.PAGE_TITLE' | translate }}</h2>
+        <div class="green-farming-cards">
+
+          <div class="gf-card" (click)="openRenewableEnergyDialog()">
+            <span class="gf-card-img-wrap">
+              <img src="assets/images/renewable-energy.jpg" alt="Năng lượng tái tạo" class="gf-card-bg" />
+            </span>
+            <div class="gf-card-glass">
+              <div class="gf-card-body">
+                <div class="gf-card-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.CARD1_TITLE' | translate }}</div>
+              </div>
+            </div>
+            <div class="gf-card-glow" aria-hidden="true"></div>
           </div>
+
+          <div class="gf-card" (click)="openWastewaterDialog()">
+            <span class="gf-card-img-wrap">
+              <img src="assets/images/wastewater-treatment.jpg" alt="Xử lý nước thải" class="gf-card-bg" />
+            </span>
+            <div class="gf-card-glass">
+              <div class="gf-card-body">
+                <div class="gf-card-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.CARD2_TITLE' | translate }}</div>
+              </div>
+            </div>
+            <div class="gf-card-glow" aria-hidden="true"></div>
+          </div>
+
+          <div class="gf-card" (click)="openGreenFarmingDialog()">
+            <span class="gf-card-img-wrap">
+              <img src="assets/images/green-farming.jpeg" alt="Trang trại xanh" class="gf-card-bg" />
+            </span>
+            <div class="gf-card-glass">
+              <div class="gf-card-body">
+                <div class="gf-card-title">{{ 'BUSINESS.GREEN_FARMING_CIRCULAR.CARD3_TITLE' | translate }}</div>
+              </div>
+            </div>
+            <div class="gf-card-glow" aria-hidden="true"></div>
+          </div>
+
         </div>
-        <div class="gf-card-glow" aria-hidden="true"></div>
       </div>
 
-    </div>
-  </div>
-
-  @if (isRenewableEnergyDialogOpen) {
-  <app-renewable-energy-dialog (closeEvent)="closeRenewableEnergyDialog()"></app-renewable-energy-dialog>
-  }
-  @if (isWastewaterDialogOpen) {
-  <app-wastewater-dialog (closeEvent)="closeWastewaterDialog()"></app-wastewater-dialog>
-  }
-  @if (isGreenFarmingDialogOpen) {
-  <app-green-farming-dialog (closeEvent)="closeGreenFarmingDialog()"></app-green-farming-dialog>
-  }
-  }
-  @case (BUSINESS_PATH.GREEN_FARMING) {
-  <app-navigation-button [isNext]="false"
-    destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
-  <app-navigation-button
-    destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.SMART_FARM_TECHNOLOGY}}"></app-navigation-button>
-
-  <div class="gf-model-container">
-    <div class="gf-model-header">
-      <h2 class="gf-model-title">Mô hình trang trại heo tuần hoàn</h2>
-      <p class="gf-model-desc">
-        C.P. Việt Nam áp dụng kinh tế tuần hoàn thông qua mô hình "Tuần hoàn trong chăn nuôi heo" — tối ưu hóa việc
-        xử lý chất thải để tạo ra các nguồn nguyên liệu mới, hình thành hệ thống khép kín, vừa bảo vệ môi trường
-        vừa nâng cao hiệu quả vận hành.
-      </p>
+      @if (isRenewableEnergyDialogOpen) {
+      <app-renewable-energy-dialog (closeEvent)="closeRenewableEnergyDialog()"></app-renewable-energy-dialog>
+      }
+      @if (isWastewaterDialogOpen) {
+      <app-wastewater-dialog (closeEvent)="closeWastewaterDialog()"></app-wastewater-dialog>
+      }
+      @if (isGreenFarmingDialogOpen) {
+      <app-green-farming-dialog (closeEvent)="closeGreenFarmingDialog()"></app-green-farming-dialog>
+      }
     </div>
 
-    <div class="gf-model-body">
-      <img class="gfi-bg" src="assets/images/green-farm.png" alt="" aria-hidden="true" />
-      <div class="gfi-overlay"></div>
-      <svg class="gfi-svg" viewBox="0 0 1300 580" preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arr-dn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L7,3 z" fill="#2e7d32" />
-          </marker>
-          <marker id="arr-lp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L7,3 z" fill="#2e7d32" />
-          </marker>
-        </defs>
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.GREEN_FARMING">
+      @if (businessId === BUSINESS_PATH.GREEN_FARMING) {
+      <app-navigation-button [isNext]="false"
+        destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
+      <app-navigation-button
+        destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.SMART_FARM_TECHNOLOGY}}"></app-navigation-button>
+      }
 
-        <!--
+      <div class="gf-model-container">
+        <div class="gf-model-header">
+          <h2 class="gf-model-title">Mô hình trang trại heo tuần hoàn</h2>
+          <p class="gf-model-desc">
+            C.P. Việt Nam áp dụng kinh tế tuần hoàn thông qua mô hình "Tuần hoàn trong chăn nuôi heo" — tối ưu hóa việc
+            xử lý chất thải để tạo ra các nguồn nguyên liệu mới, hình thành hệ thống khép kín, vừa bảo vệ môi trường
+            vừa nâng cao hiệu quả vận hành.
+          </p>
+        </div>
+
+        <div class="gf-model-body">
+          <img class="gfi-bg" src="assets/images/green-farm.png" alt="" aria-hidden="true" />
+          <div class="gfi-overlay"></div>
+          <svg class="gfi-svg" viewBox="0 0 1300 580" preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-dn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L7,3 z" fill="#2e7d32" />
+              </marker>
+              <marker id="arr-lp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L7,3 z" fill="#2e7d32" />
+              </marker>
+            </defs>
+
+            <!--
               ViewBox: 1300 × 580
               Center col x=500  | Separator x=340 w=320 right=660
               Left branch x=130 | node x=50  w=160 right=210
@@ -155,240 +163,285 @@
               Sub-right   x=1080| same as right stem             (gap 100px from sub-left)
             -->
 
-        <!-- ── CENTER (down) ── -->
-        <line x1="500" y1="72" x2="500" y2="98" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <line x1="500" y1="156" x2="500" y2="182" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <line x1="500" y1="248" x2="500" y2="428" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── CENTER (down) ── -->
+            <line x1="500" y1="72" x2="500" y2="98" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="500" y1="156" x2="500" y2="182" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="500" y1="248" x2="500" y2="428" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-        <!-- ── MAIN SPLIT BAR y=430: x=130..1080 ── -->
-        <line x1="130" y1="430" x2="1080" y2="430" stroke="#2e7d32" stroke-width="2" />
-        <line x1="130" y1="430" x2="130" y2="406" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <line x1="500" y1="430" x2="500" y2="452" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <line x1="1080" y1="430" x2="1080" y2="406" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── MAIN SPLIT BAR y=430: x=130..1080 ── -->
+            <line x1="130" y1="430" x2="1080" y2="430" stroke="#2e7d32" stroke-width="2" />
+            <line x1="130" y1="430" x2="130" y2="406" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="500" y1="430" x2="500" y2="452" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="1080" y1="430" x2="1080" y2="406" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-        <!-- ── LEFT BRANCH (upward, gap=22px) ── -->
-        <!-- Phân bón top=346 → Trồng rau bot=324 -->
-        <line x1="130" y1="346" x2="130" y2="324" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <!-- Trồng rau top=264 → Rau củ bot=242 -->
-        <line x1="130" y1="264" x2="130" y2="242" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── LEFT BRANCH (upward, gap=22px) ── -->
+            <!-- Phân bón top=346 → Trồng rau bot=324 -->
+            <line x1="130" y1="346" x2="130" y2="324" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Trồng rau top=264 → Rau củ bot=242 -->
+            <line x1="130" y1="264" x2="130" y2="242" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-        <!-- ── RIGHT STEM (upward, gap=22px) ── -->
-        <!-- Nước thải top=358 → Xử lý bot=336 -->
-        <line x1="1080" y1="358" x2="1080" y2="338" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <!-- Xử lý top=288 → sub-split y=266 -->
-        <line x1="1080" y1="288" x2="1080" y2="266" stroke="#2e7d32" stroke-width="2" />
+            <!-- ── RIGHT STEM (upward, gap=22px) ── -->
+            <!-- Nước thải top=358 → Xử lý bot=336 -->
+            <line x1="1080" y1="358" x2="1080" y2="338" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Xử lý top=288 → sub-split y=266 -->
+            <line x1="1080" y1="288" x2="1080" y2="266" stroke="#2e7d32" stroke-width="2" />
 
-        <!-- ── SUB-SPLIT BAR y=266: x=820..1080 ── -->
-        <line x1="820" y1="266" x2="1080" y2="266" stroke="#2e7d32" stroke-width="2" />
-        <line x1="820" y1="266" x2="820" y2="244" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <line x1="1080" y1="266" x2="1080" y2="244" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── SUB-SPLIT BAR y=266: x=820..1080 ── -->
+            <line x1="820" y1="266" x2="1080" y2="266" stroke="#2e7d32" stroke-width="2" />
+            <line x1="820" y1="266" x2="820" y2="244" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="1080" y1="266" x2="1080" y2="244" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-        <!-- ── SUB-LEFT: Nước đã xử lý → Vệ sinh (x=820, gap=22px) ── -->
-        <!-- Nước đã xử lý top=196 → Vệ sinh bot=174 -->
-        <line x1="820" y1="196" x2="820" y2="174" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── SUB-LEFT: Nước đã xử lý → Vệ sinh (x=820, gap=22px) ── -->
+            <!-- Nước đã xử lý top=196 → Vệ sinh bot=174 -->
+            <line x1="820" y1="196" x2="820" y2="174" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-        <!-- ── SUB-RIGHT: Khí sinh → Máy phát → Điện (x=1080, gap=22px) ── -->
-        <!-- Khí sinh top=196 → Máy phát bot=174 -->
-        <line x1="1080" y1="196" x2="1080" y2="174" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-        <!-- Máy phát top=126 → Điện bot=104 -->
-        <line x1="1080" y1="126" x2="1080" y2="104" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── SUB-RIGHT: Khí sinh → Máy phát → Điện (x=1080, gap=22px) ── -->
+            <!-- Khí sinh top=196 → Máy phát bot=174 -->
+            <line x1="1080" y1="196" x2="1080" y2="174" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Máy phát top=126 → Điện bot=104 -->
+            <line x1="1080" y1="126" x2="1080" y2="104" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-        <!-- ── LOOP-BACK ── -->
-        <!-- Rau củ top-center(130,182) → up → Farm left(386,40) -->
-        <line x1="130" y1="182" x2="130" y2="40" stroke="#2e7d32" stroke-width="2" />
-        <line x1="130" y1="40" x2="386" y2="40" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
-        <!-- Vệ sinh top-center(820,126) → up → Farm right(612,20) -->
-        <line x1="820" y1="126" x2="820" y2="20" stroke="#2e7d32" stroke-width="2" />
-        <line x1="820" y1="20" x2="612" y2="20" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
-        <!-- Điện top-center(1080,56) → up 8px → Farm right(612,48) -->
-        <line x1="1080" y1="56" x2="1080" y2="48" stroke="#2e7d32" stroke-width="2" />
-        <line x1="1080" y1="48" x2="612" y2="48" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
+            <!-- ── LOOP-BACK ── -->
+            <!-- Rau củ top-center(130,182) → up → Farm left(386,40) -->
+            <line x1="130" y1="182" x2="130" y2="40" stroke="#2e7d32" stroke-width="2" />
+            <line x1="130" y1="40" x2="386" y2="40" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
+            <!-- Vệ sinh top-center(820,126) → up → Farm right(612,20) -->
+            <line x1="820" y1="126" x2="820" y2="20" stroke="#2e7d32" stroke-width="2" />
+            <line x1="820" y1="20" x2="612" y2="20" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
+            <!-- Điện top-center(1080,56) → up 8px → Farm right(612,48) -->
+            <line x1="1080" y1="56" x2="1080" y2="48" stroke="#2e7d32" stroke-width="2" />
+            <line x1="1080" y1="48" x2="612" y2="48" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
 
-        <!-- ══════════ NODES ══════════ -->
+            <!-- ══════════ NODES ══════════ -->
 
-        <!-- Center column -->
-        <!-- Farm: x=388 y=8 w=224 h=64, center=500, right=612 -->
-        <foreignObject x="388" y="8" width="224" height="64">
-          <div class="gfi-node gfi-node--main" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🏠</div>
-            <strong>Trang trại heo</strong>
-          </div>
-        </foreignObject>
-        <!-- Livestock: y=100 h=56 -->
-        <foreignObject x="405" y="100" width="190" height="56">
-          <div class="gfi-node gfi-node--waste" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🐖</div>
-            <strong>Chất thải của gia súc</strong>
-          </div>
-        </foreignObject>
-        <!-- Separator: x=340 y=184 w=320 h=64, right=660 -->
-        <foreignObject x="340" y="184" width="320" height="64">
-          <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">⚙️</div>
-            <strong>Hệ thống phân loại chất thải</strong>
-          </div>
-        </foreignObject>
-        <!-- Phân chuồng -->
-        <foreignObject x="420" y="452" width="160" height="64">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">💩</div>
-            <strong>Phân chuồng</strong>
-          </div>
-        </foreignObject>
+            <!-- Center column -->
+            <!-- Farm: x=388 y=8 w=224 h=64, center=500, right=612 -->
+            <foreignObject x="388" y="8" width="224" height="64">
+              <div class="gfi-node gfi-node--main" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🏠</div>
+                <strong>Trang trại heo</strong>
+              </div>
+            </foreignObject>
+            <!-- Livestock: y=100 h=56 -->
+            <foreignObject x="405" y="100" width="190" height="56">
+              <div class="gfi-node gfi-node--waste" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🐖</div>
+                <strong>Chất thải của gia súc</strong>
+              </div>
+            </foreignObject>
+            <!-- Separator: x=340 y=184 w=320 h=64, right=660 -->
+            <foreignObject x="340" y="184" width="320" height="64">
+              <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">⚙️</div>
+                <strong>Hệ thống phân loại chất thải</strong>
+              </div>
+            </foreignObject>
+            <!-- Phân chuồng -->
+            <foreignObject x="420" y="452" width="160" height="64">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">💩</div>
+                <strong>Phân chuồng</strong>
+              </div>
+            </foreignObject>
 
-        <!-- Left branch -->
-        <!-- Phân bón: y=346 h=60 bot=406 -->
-        <foreignObject x="50" y="346" width="160" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🌿</div>
-            <strong>Phân bón hữu cơ</strong>
-          </div>
-        </foreignObject>
-        <!-- Trồng rau: y=264 h=60 bot=324 -->
-        <foreignObject x="50" y="264" width="160" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🥦</div>
-            <strong>Trồng rau hữu cơ</strong>
-          </div>
-        </foreignObject>
-        <!-- Rau củ: y=182 h=60 bot=242 cy=212 left=50 -->
-        <foreignObject x="50" y="182" width="160" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🥕</div>
-            <strong>Rau củ hữu cơ</strong>
-          </div>
-        </foreignObject>
+            <!-- Left branch -->
+            <!-- Phân bón: y=346 h=60 bot=406 -->
+            <foreignObject x="50" y="346" width="160" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🌿</div>
+                <strong>Phân bón hữu cơ</strong>
+              </div>
+            </foreignObject>
+            <!-- Trồng rau: y=264 h=60 bot=324 -->
+            <foreignObject x="50" y="264" width="160" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🥦</div>
+                <strong>Trồng rau hữu cơ</strong>
+              </div>
+            </foreignObject>
+            <!-- Rau củ: y=182 h=60 bot=242 cy=212 left=50 -->
+            <foreignObject x="50" y="182" width="160" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🥕</div>
+                <strong>Rau củ hữu cơ</strong>
+              </div>
+            </foreignObject>
 
-        <!-- Right stem -->
-        <!-- Nước thải: y=358 h=60 bot=418 -->
-        <foreignObject x="1000" y="358" width="160" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">💧</div>
-            <strong>Nước thải</strong>
-          </div>
-        </foreignObject>
-        <!-- Xử lý: y=288 h=60 bot=348 -->
-        <foreignObject x="970" y="288" width="220" height="60">
-          <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🏭</div>
-            <strong>Xử lý nước thải<br>(Sản xuất khí sinh học)</strong>
-          </div>
-        </foreignObject>
+            <!-- Right stem -->
+            <!-- Nước thải: y=358 h=60 bot=418 -->
+            <foreignObject x="1000" y="358" width="160" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">💧</div>
+                <strong>Nước thải</strong>
+              </div>
+            </foreignObject>
+            <!-- Xử lý: y=288 h=60 bot=348 -->
+            <foreignObject x="970" y="288" width="220" height="60">
+              <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🏭</div>
+                <strong>Xử lý nước thải<br>(Sản xuất khí sinh học)</strong>
+              </div>
+            </foreignObject>
 
-        <!-- Sub-left: x=740 w=160 center=820 -->
-        <!-- Nước đã xử lý: y=196 h=60 bot=256 -->
-        <foreignObject x="720" y="196" width="200" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🚿</div>
-            <strong>Nước thải được xử lý</strong>
-          </div>
-        </foreignObject>
-        <!-- Vệ sinh: y=126 h=60 bot=186 -->
-        <foreignObject x="730" y="126" width="180" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🌱</div>
-            <strong>Vệ sinh chuồng trại,<br>tưới cây</strong>
-          </div>
-        </foreignObject>
+            <!-- Sub-left: x=740 w=160 center=820 -->
+            <!-- Nước đã xử lý: y=196 h=60 bot=256 -->
+            <foreignObject x="720" y="196" width="200" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🚿</div>
+                <strong>Nước thải được xử lý</strong>
+              </div>
+            </foreignObject>
+            <!-- Vệ sinh: y=126 h=60 bot=186 -->
+            <foreignObject x="730" y="126" width="180" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🌱</div>
+                <strong>Vệ sinh chuồng trại,<br>tưới cây</strong>
+              </div>
+            </foreignObject>
 
-        <!-- Sub-right: x=1000 w=160 center=1080 -->
-        <!-- Khí sinh: y=196 h=60 bot=256 -->
-        <foreignObject x="1000" y="196" width="160" height="60">
-          <div class="gfi-node gfi-node--biogas" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">🔥</div>
-            <strong>Khí sinh học</strong>
-          </div>
-        </foreignObject>
-        <!-- Máy phát: y=126 h=60 bot=186 -->
-        <foreignObject x="1000" y="126" width="160" height="60">
-          <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">⚡</div>
-            <strong>Máy phát điện</strong>
-          </div>
-        </foreignObject>
-        <!-- Điện: y=56 h=60 bot=116 -->
-        <foreignObject x="1000" y="56" width="160" height="60">
-          <div class="gfi-node gfi-node--electricity" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="gfi-icon">💡</div>
-            <strong>Điện</strong>
-          </div>
-        </foreignObject>
+            <!-- Sub-right: x=1000 w=160 center=1080 -->
+            <!-- Khí sinh: y=196 h=60 bot=256 -->
+            <foreignObject x="1000" y="196" width="160" height="60">
+              <div class="gfi-node gfi-node--biogas" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">🔥</div>
+                <strong>Khí sinh học</strong>
+              </div>
+            </foreignObject>
+            <!-- Máy phát: y=126 h=60 bot=186 -->
+            <foreignObject x="1000" y="126" width="160" height="60">
+              <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">⚡</div>
+                <strong>Máy phát điện</strong>
+              </div>
+            </foreignObject>
+            <!-- Điện: y=56 h=60 bot=116 -->
+            <foreignObject x="1000" y="56" width="160" height="60">
+              <div class="gfi-node gfi-node--electricity" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">💡</div>
+                <strong>Điện</strong>
+              </div>
+            </foreignObject>
 
-      </svg>
+          </svg>
+        </div>
+      </div>
     </div>
-  </div>
-  }
-  @case (BUSINESS_PATH.SMART_FARM_TECHNOLOGY) {
-  <div class="smart-farm-container">
-    <app-navigation-button [isNext]="false"
-      destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
-    <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
 
-    <div class="smart-farm-cards">
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.SMART_FARM_TECHNOLOGY">
+      <div class="smart-farm-container">
+        @if (businessId === BUSINESS_PATH.SMART_FARM_TECHNOLOGY) {
+        <app-navigation-button [isNext]="false"
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.GREEN_FARMING}}"></app-navigation-button>
+        <app-navigation-button
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
+        }
 
-      <div class="smart-card">
-        <div class="smart-card__image-wrap">
-          <img class="smart-card__image" src="assets/images/smart-farm-tech-1.jpg" alt="Hệ thống giám sát thông minh" />
-        </div>
-        <div class="smart-card__content">
-          <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_1_TITLE' | translate }}</h3>
-          <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_1_DESC' | translate }}</p>
+        <div class="smart-farm-cards">
+
+          <div class="smart-card">
+            <div class="smart-card__image-wrap">
+              <img class="smart-card__image" src="assets/images/smart-farm-tech-1.jpg"
+                alt="Hệ thống giám sát thông minh" />
+            </div>
+            <div class="smart-card__content">
+              <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_1_TITLE' | translate }}</h3>
+              <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_1_DESC' | translate }}</p>
+            </div>
+          </div>
+
+          <div class="smart-card">
+            <div class="smart-card__image-wrap">
+              <img class="smart-card__image" src="assets/images/smart-farm-tech-2.jpg"
+                alt="Tự động hóa trong chăn nuôi" />
+            </div>
+            <div class="smart-card__content">
+              <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_2_TITLE' | translate }}</h3>
+              <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_2_DESC' | translate }}</p>
+            </div>
+          </div>
+
+          <div class="smart-card">
+            <div class="smart-card__image-wrap">
+              <img class="smart-card__image" src="assets/images/smart-farm-tech-3.jpg"
+                alt="Công nghệ chọn giống chính xác" />
+            </div>
+            <div class="smart-card__content">
+              <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_3_TITLE' | translate }}</h3>
+              <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_3_DESC' | translate }}</p>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <div class="smart-card">
-        <div class="smart-card__image-wrap">
-          <img class="smart-card__image" src="assets/images/smart-farm-tech-2.jpg" alt="Tự động hóa trong chăn nuôi" />
-        </div>
-        <div class="smart-card__content">
-          <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_2_TITLE' | translate }}</h3>
-          <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_2_DESC' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="smart-card">
-        <div class="smart-card__image-wrap">
-          <img class="smart-card__image" src="assets/images/smart-farm-tech-3.jpg"
-            alt="Công nghệ chọn giống chính xác" />
-        </div>
-        <div class="smart-card__content">
-          <h3 class="smart-card__title">{{ 'BUSINESS.SMART_FARM.CARD_3_TITLE' | translate }}</h3>
-          <p class="smart-card__desc">{{ 'BUSINESS.SMART_FARM.CARD_3_DESC' | translate }}</p>
-        </div>
-      </div>
-
     </div>
-  </div>
-  }
-  @case (BUSINESS_PATH.TRACEABILITY) {
-  <ng-container *ngTemplateOutlet="
-          content;
-          context: {
-            image: 'url(assets/images/traceability.png)',
-          }
-        "></ng-container>
-  }
-  @case (BUSINESS_PATH.CERTIFICATION) {
-  <ng-container *ngTemplateOutlet="
-          content;
-          context: {
-            image: 'url(assets/images/certificates.jpg)',
-          }
-        "></ng-container>
-  }
-  }
-</div>
 
-<ng-template #content let-image="image">
-  <div class="content-container" [ngStyle]="{
-      'background-image': image,
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.TRACEABILITY">
+      <div class="trace-page">
+        @if (businessId === BUSINESS_PATH.TRACEABILITY) {
+        <app-navigation-button [isNext]="false"
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.SMART_FARM_TECHNOLOGY}}"></app-navigation-button>
+        <app-navigation-button
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CERTIFICATION}}"></app-navigation-button>
+        }
+
+
+        <!-- Banner -->
+        <div class="trace-banner">
+          <h2 class="trace-banner__title">{{ 'BUSINESS.TRACEABILITY.BANNER_TITLE' | translate }}</h2>
+          <p class="trace-banner__sub">{{ 'BUSINESS.TRACEABILITY.BANNER_SUBTITLE' | translate }}</p>
+        </div>
+
+        <!-- Main content -->
+        <div class="trace-main">
+
+          <!-- Left: product image -->
+          <div class="trace-col trace-col--left">
+            <img class="trace-product-img" src="assets/images/traceability.jpg" alt="BUSINESS.Traceability Product" />
+          </div>
+
+          <!-- Middle: QR codes -->
+          <div class="trace-col trace-col--middle">
+            <p class="trace-scan-text">{{ 'BUSINESS.TRACEABILITY.SCAN_LABEL' | translate }}</p>
+            <div class="trace-qr-wrap">
+              <img class="trace-qr" src="assets/images/qr.png" alt="QR Code" />
+              <img class="trace-qr" src="assets/images/qr-1.png" alt="QR Code 1" />
+            </div>
+          </div>
+
+          <!-- Right: info panels -->
+          <div class="trace-col trace-col--right">
+            <div class="trace-info-box">
+              <h3 class="trace-info-box__title">{{ 'BUSINESS.TRACEABILITY.INTERNAL_TITLE' | translate }}</h3>
+              <p class="trace-info-box__desc">{{ 'BUSINESS.TRACEABILITY.INTERNAL_DESC' | translate }}</p>
+            </div>
+            <div class="trace-info-box">
+              <h3 class="trace-info-box__title">{{ 'BUSINESS.TRACEABILITY.CONSUMER_TITLE' | translate }}</h3>
+              <p class="trace-info-box__desc">{{ 'BUSINESS.TRACEABILITY.CONSUMER_DESC' | translate }}</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="trace-footer">
+          <p>{{ 'BUSINESS.TRACEABILITY.FOOTER_LINE_1' | translate }}</p>
+          <p>{{ 'BUSINESS.TRACEABILITY.FOOTER_LINE_2' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.CERTIFICATION">
+      <div class="content-container" [ngStyle]="{
+      'background-image': 'url(assets/images/certificates.jpg)',
     }">
-    <app-navigation-button [isNext]="false" [destPath]="APP_ROUTES.BUSINESS"></app-navigation-button>
-    @if (
-    BUSINESS_PATH.CIRCULAR === businessId ||
-    BUSINESS_PATH.TRACEABILITY === businessId
-    ) {
-    <app-navigation-button [destPath]="subDestPath"></app-navigation-button>
-    }
+        @if (businessId === BUSINESS_PATH.CERTIFICATION) {
+        <app-navigation-button [isNext]="false"
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
+        <app-navigation-button
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE}}"></app-navigation-button>
+        }
+      </div>
+    </div>
+
   </div>
-</ng-template>
+</div>
