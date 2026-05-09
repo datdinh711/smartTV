@@ -1,0 +1,18 @@
+:host {
+  all: initial;
+  position: fixed;
+  top: calc(24px + (56px - var(--label-font-size, 1rem)) / 2);
+  right: calc(48px + 56px + 12px);
+  z-index: 1000;
+  display: block;
+  pointer-events: none;
+  color: var(--label-color, #ffffff);
+  font-size: var(--label-font-size, 1rem);
+}
+
+.home-label {
+  display: inline-block;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}

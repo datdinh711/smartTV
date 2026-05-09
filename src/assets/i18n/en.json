@@ -78,5 +78,31 @@
       "FOOTER_LINE_1": "Ensuring full transparency at every step",
       "FOOTER_LINE_2": "From Farm to Family"
     }
+  },
+  "STRATEGY": {
+    "SUSTAINABILITY_STRATEGY": {
+      "KICKER": "Our Sustainability Strategy",
+      "TITLE": "Sustainability Framework",
+      "SUMMARY": "The Company’s sustainable development strategy is built upon the Sufficiency Economy Philosophy and the “Three Benefits Principle”, delivering value to the Country, People, and the Company. C.P. Vietnam is committed to strengthening food security through sustainovation.",
+      "CTA": "Watch Our Sustainability Journey",
+      "IMAGE_ALT": "Sustainability framework",
+      "FRAMEWORK_IMAGE": "assets/images/strategy/Sustainability_Framework_EN.png"
+    },
+    "SUSTAINABILITY_CPF": {
+      "BACKGROUND_IMAGE": "assets/images/strategy/Sustainability_Framework_EN.png",
+      "QUOTE": "“We craft every bite with our customers in mind - supporting personal health while protecting the planet, and helping build a resilient, sustainable community.”",
+      "CLIMATE_PREFIX": "Protecting Our",
+      "CLIMATE_MAIN": "limate",
+      "CLIMATE_TITLE": "Driving climate action through innovative solutions",
+      "CLIMATE_DESC": "that create lasting positive impacts across the entire value chain.",
+      "PEOPLE_PREFIX": "Improving Quality of Life for",
+      "PEOPLE_MAIN": "eople",
+      "PEOPLE_TITLE": "Elevating lives by fostering inclusive growth",
+      "PEOPLE_DESC": "for employees, farmers, communities, and the global population.",
+      "FOOD_PREFIX": "Creating Prosperous",
+      "FOOD_MAIN": "ood",
+      "FOOD_TITLE": "Ensuring food security through safe and healthy food innovations",
+      "FOOD_DESC": "that prioritize sustainable well-being for consumers."
+    }
   }
 }
