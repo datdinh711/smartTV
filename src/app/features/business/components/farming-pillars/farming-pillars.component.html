@@ -431,15 +431,41 @@
     </div>
 
     <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.CERTIFICATION">
-      <div class="content-container" [ngStyle]="{
-      'background-image': 'url(assets/images/certificates.jpg)',
-    }">
+      <div class="cert-page">
         @if (businessId === BUSINESS_PATH.CERTIFICATION) {
         <app-navigation-button [isNext]="false"
           destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
         <app-navigation-button
           destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.BIOSECURITY_ANIMAL_WELFARE}}"></app-navigation-button>
         }
+
+        <!-- Title -->
+        <div class="cert-header">
+          <h2 class="cert-header__title">{{ 'BUSINESS.CERTIFICATION.PAGE_TITLE' | translate }}</h2>
+        </div>
+
+        <!-- 3 columns: image + title each -->
+        <div class="cert-gallery">
+          <div class="cert-img-row">
+            <div class="cert-col__img-wrap">
+              <img class="cert-col__img" src="assets/images/certification.jpg" alt="Certificate" />
+            </div>
+            <div class="cert-col__img-wrap">
+              <img class="cert-col__img cert-col__img--trophy" src="assets/images/gold-medal.png" alt="Gold Medal" />
+            </div>
+            <div class="cert-col__img-wrap">
+              <img class="cert-col__img" src="assets/images/award.jpg" alt="Award Ceremony" />
+            </div>
+          </div>
+          <p class="cert-col__title">VNQA 2018, 2019, 2020</p>
+        </div>
+
+        <!-- Standards -->
+        <div class="cert-standards">
+          <p class="cert-std-item">✓&nbsp;&nbsp;{{ 'BUSINESS.CERTIFICATION.STD_BIOSECURITY' | translate }}</p>
+          <p class="cert-std-item">✓&nbsp;&nbsp;{{ 'BUSINESS.CERTIFICATION.STD_FOOD_SAFETY' | translate }}</p>
+          <p class="cert-std-item">✓&nbsp;&nbsp;VietGAP</p>
+        </div>
       </div>
     </div>
 
