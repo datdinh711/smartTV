@@ -1,59 +1,53 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Responsive tokens — all sizing is driven by these CSS custom properties so
-// every element scales proportionally from small screens up to 50" (≈1920px).
-// clamp(min, preferred-vw/vh, max-at-50-inch)
-// ─────────────────────────────────────────────────────────────────────────────
+// ── Host ───────────────────────────────────────────────────────────────────
 :host {
-  // Sun — reduced
-  --sun-size:      clamp(28px,  3vw,    56px);
-
-  // Large cloud body — reduced
-  --cld-lg-w:      clamp(90px,  8.5vw,  164px);
-  --cld-lg-h:      clamp(26px,  3.2vh,  46px);
-
-  // Small cloud body — reduced
-  --cld-sm-w:      clamp(60px,  5.5vw,  106px);
-  --cld-sm-h:      clamp(18px,  2.2vh,  32px);
-
-  // Minimum top spacing so clouds never crowd the very top
-  --cld-top-min:   clamp(28px,  3.8vh,  56px);
+  --sun-size:    clamp(40px,  4vw,   72px);
+  --cld-lg-w:    clamp(90px,  8.5vw, 164px);
+  --cld-lg-h:    clamp(26px,  3.2vh,  46px);
+  --cld-sm-w:    clamp(60px,  5.5vw, 106px);
+  --cld-sm-h:    clamp(18px,  2.2vh,  32px);
+  --cld-top-min: clamp(28px,  3.8vh,  56px);
+  // stem height — shared by stem element and card offset
+  --stem-h: clamp(24px, 3vh, 44px);
 
   display: block;
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background: #fff;
   overflow: hidden;
 }
 
-// ── Sky scene — top two-thirds ────────────────────────────────────────────────
-.sky {
+// ── Sky ────────────────────────────────────────────────────────────────────
+.bg-sky {
   position: absolute;
-  inset: 0 0 33.33% 0; // occupies top 66.67 %
+  inset: 0;
+  background: linear-gradient(175deg,
+    #4ea3d8  0%,
+    #79c0e8 22%,
+    #a8d8f0 48%,
+    #c2e8c8 74%,
+    #d8eed8 100%
+  );
   overflow: hidden;
+  z-index: 0;
   pointer-events: none;
-  z-index: 1;
 }
 
-// ── Sun glow — radial gradient from top-center, covers entire sky area ────────
-.sky__glow {
+.bg-sky__glow {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 90% 120% at 50% -6%,
-    rgba(255, 238, 50, 0.58)  0%,
-    rgba(255, 215, 15, 0.34) 28%,
-    rgba(255, 175,  0, 0.14) 56%,
-    transparent              76%
+    ellipse 52% 68% at 82% 8%,
+    rgba(255, 238, 50, 0.54)  0%,
+    rgba(255, 215, 15, 0.28) 32%,
+    rgba(255, 175,  0, 0.10) 62%,
+    transparent              82%
   );
-  z-index: 1;
   animation: glow-pulse 3.4s ease-in-out infinite;
 }
 
-// ── Sun wrapper ───────────────────────────────────────────────────────────────
-.sky__sun {
+.bg-sky__sun {
   position: absolute;
-  top: clamp(10px, 1.6vh, 22px);
+  top: clamp(16px, 2.2vh, 36px);
   left: 50%;
   transform: translateX(-50%);
   width: var(--sun-size);
@@ -61,11 +55,9 @@
   z-index: 3;
 }
 
-// 8-ray sunburst — rotates slowly
-.sky__sun-rays {
+.bg-sky__sun-rays {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   width: calc(var(--sun-size) * 2.8);
   height: calc(var(--sun-size) * 2.8);
   transform: translate(-50%, -50%);
@@ -77,47 +69,40 @@
   animation: sun-rotate 13s linear infinite;
 }
 
-// Bright disc
-.sky__sun-core {
+.bg-sky__sun-core {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: radial-gradient(circle, #fffde4 0%, #ffe234 44%, #ffaa00 100%);
   box-shadow:
-    0 0 calc(var(--sun-size) * 0.17)  calc(var(--sun-size) * 0.08) rgba(255, 232, 50, 1.0),
-    0 0 calc(var(--sun-size) * 0.45)  calc(var(--sun-size) * 0.18) rgba(255, 188,  0, 0.70),
-    0 0 calc(var(--sun-size) * 0.94)  calc(var(--sun-size) * 0.39) rgba(255, 148,  0, 0.34);
+    0 0 calc(var(--sun-size) * 0.17) calc(var(--sun-size) * 0.08) rgba(255, 232, 50, 1),
+    0 0 calc(var(--sun-size) * 0.45) calc(var(--sun-size) * 0.18) rgba(255, 188,  0, 0.70),
+    0 0 calc(var(--sun-size) * 0.94) calc(var(--sun-size) * 0.39) rgba(255, 148,  0, 0.34);
   animation: core-pulse 3.4s ease-in-out infinite;
   z-index: 1;
 }
 
-// ── Cloud base ────────────────────────────────────────────────────────────────
-// z-index 4 → above the sun (z-index 3) so clouds physically block it.
-// Pure white so they read as solid cloud when overlapping the sun disc.
+// ── Clouds ─────────────────────────────────────────────────────────────────
 .cloud {
   position: absolute;
   border-radius: 100px;
   background: #ffffff;
   box-shadow: 0 calc(var(--_w) * 0.03) calc(var(--_w) * 0.10) rgba(200, 210, 220, 0.22);
   z-index: 4;
+  pointer-events: none;
 
-  &::before,
-  &::after {
+  &::before, &::after {
     content: '';
     position: absolute;
     border-radius: 50%;
     background: #ffffff;
   }
-
-  // Left large bump
   &::before {
     width:  calc(var(--_w) * 0.50);
     height: calc(var(--_w) * 0.50);
     top:    calc(var(--_w) * -0.245);
     left:   calc(var(--_w) * 0.120);
   }
-
-  // Right smaller bump
   &::after {
     width:  calc(var(--_w) * 0.37);
     height: calc(var(--_w) * 0.37);
@@ -126,136 +111,413 @@
   }
 }
 
-// Large variant
-.cloud--lg {
-  --_w: var(--cld-lg-w);
-  width:  var(--cld-lg-w);
-  height: var(--cld-lg-h);
-}
+.cloud--lg { --_w: var(--cld-lg-w); width: var(--cld-lg-w); height: var(--cld-lg-h); }
+.cloud--sm { --_w: var(--cld-sm-w); width: var(--cld-sm-w); height: var(--cld-sm-h); }
 
-// Small variant
-.cloud--sm {
-  --_w: var(--cld-sm-w);
-  width:  var(--cld-sm-w);
-  height: var(--cld-sm-h);
-}
+.cloud--s1 { top: calc(var(--cld-top-min) + clamp(6px, 1vh, 14px));   left: 36vw;  opacity: 0.84; }
+.cloud--s2 { top: calc(var(--cld-top-min) + clamp(28px,4.8vh,68px));  left: 56vw;  opacity: 0.78; }
+.cloud--s3 { top: calc(var(--cld-top-min) + clamp(58px,8.5vh,124px)); left: 44vw;  opacity: 0.68; }
 
-// ── Static clouds — fixed positions, no motion ────────────────────────────────
-// Large — left side
-.cloud--s1 {
-  top:  calc(var(--cld-top-min) + clamp(8px, 1.2vh, 18px));
-  left: 4vw;
-  opacity: 0.82;
-}
-
-// Large — right side, slightly lower
-.cloud--s2 {
-  top:   calc(var(--cld-top-min) + clamp(30px, 5vh, 72px));
-  right: 5vw;
-  opacity: 0.78;
-}
-
-// Small — center, lowest of the three statics
-.cloud--s3 {
-  top:  calc(var(--cld-top-min) + clamp(60px, 9vh, 130px));
-  left: 30vw;
-  opacity: 0.70;
-}
-
-// ── Moving clouds — animate horizontally with alternate direction ─────────────
-// Large — starts left, drifts right
 .cloud--m1 {
-  top: calc(var(--cld-top-min) + clamp(14px, 2.5vh, 36px));
-  opacity: 0.86;
+  top: calc(var(--cld-top-min) + clamp(12px, 2vh, 28px));
+  opacity: 0.88;
   animation: cloud-lr 36s ease-in-out infinite alternate;
 }
-
-// Large — starts right, drifts left, offset so not in sync with m1
 .cloud--m2 {
-  top: calc(var(--cld-top-min) + clamp(50px, 8vh, 115px));
-  opacity: 0.80;
+  top: calc(var(--cld-top-min) + clamp(44px, 7.5vh, 108px));
+  opacity: 0.76;
   animation: cloud-rl 46s ease-in-out infinite alternate;
   animation-delay: -20s;
 }
-
-// Small — faster, mid-height
 .cloud--m3 {
-  top: calc(var(--cld-top-min) + clamp(80px, 12vh, 170px));
-  opacity: 0.70;
+  top: calc(var(--cld-top-min) + clamp(78px, 11.5vh, 166px));
+  opacity: 0.66;
   animation: cloud-lr 28s ease-in-out infinite alternate;
   animation-delay: -12s;
 }
 
-// ── Road SVG — pinned to bottom of sky section ───────────────────────────────
-.road-svg {
+// ── Right decorative image ─────────────────────────────────────────────────
+.right-deco {
   position: absolute;
-  bottom: clamp(10px, 2vh, 32px);
-  left:  calc(48px * var(--ui-scale, 1));
-  right: calc(48px * var(--ui-scale, 1));
-  width: auto;
-  height: auto;
-  z-index: 2; // above glow(1), below sun(3) and clouds(4)
-}
-
-// ── Image — original bottom position ────────────────────────────────────────
-.milestone-wrapper {
-  position: absolute;
+  right: 0;
   bottom: 0;
-  left: 0;
-  width: 100%;
-  box-sizing: border-box;
-  padding-bottom: clamp(24px, 4vh, 48px);
-  padding-left:   clamp(24px, 2.5vw, 48px);
-  padding-right:  clamp(24px, 2.5vw, 48px);
-  z-index: 3;
+  width: clamp(240px, 28vw, 520px);
+  height: clamp(240px, 28vw, 520px);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.22;
 }
-
-.milestone-img {
-  width: 100%;
-  height: auto;
+.right-deco__img {
+  width: 100%; height: 100%;
   object-fit: contain;
-  object-position: bottom center;
-  image-rendering: -webkit-optimize-contrast;
+  object-position: bottom right;
 }
 
-// ── Keyframes ─────────────────────────────────────────────────────────────────
-// Using vw units → travel distance scales with viewport width automatically.
+// ── Home-button label ──────────────────────────────────────────────────────
+// Sits to the left of the home button (fixed top:24px right:48px width:56px)
+.page-label {
+  position: fixed;
+  top: 24px;
+  right: calc(48px + 56px + 14px);
+  height: 56px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  font-size: clamp(0.82rem, 1.1vw, 1.15rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+// ── Page header ────────────────────────────────────────────────────────────
+.page-header {
+  position: absolute;
+  top: clamp(20px, 3.5vh, 52px);
+  left: clamp(24px, 4vw, 80px);
+  z-index: 30;
+  max-width: clamp(300px, 50vw, 860px);
+  width: fit-content;
+}
+
+.page-header__title {
+  margin: 0 0 clamp(4px, 0.6vh, 10px);
+  font-size: clamp(1.1rem, 2.4vw, 3.375rem);
+  font-weight: 800;
+  color: #1a3d2b;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.55);
+}
+
+.page-header__divider {
+  width: 100%;
+  height: clamp(3px, 0.4vh, 5px);
+  border-radius: 3px;
+  background: linear-gradient(90deg, #e53935, #F57F17);
+  margin: 0 0 clamp(4px, 0.6vh, 10px);
+}
+
+// ── SVG wavy road ──────────────────────────────────────────────────────────
+// preserveAspectRatio="none" means the path stretches with the viewport,
+// so CSS percentage positions derived from the viewBox coordinates stay aligned.
+.tl-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.tl-road__shadow {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.18);
+  stroke-width: 26;
+  stroke-linecap: round;
+}
+
+.tl-road__body {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.48);
+  stroke-width: 22;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.22));
+}
+
+.tl-road__dash {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.88);
+  stroke-width: 3.5;
+  stroke-dasharray: 52 30;
+  stroke-linecap: round;
+}
+
+// ── Milestone anchor ───────────────────────────────────────────────────────
+// A 0×0 pivot placed at the % coordinates matching the SVG path point.
+// left/top are (dot_x / 1920 × 100%) and (dot_y / 1080 × 100%).
+.ms {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 20;
+}
+
+.ms--1 { left: 10%;  top: 55%; --c: #e53935; --c-glow: rgba(229,  57,  53, 0.45); }
+.ms--2 { left: 28%;  top: 35%; --c: #F57F17; --c-glow: rgba(245, 127,  23, 0.45); }
+.ms--3 { left: 42%;  top: 46%; --c: #1565C0; --c-glow: rgba( 21, 101, 192, 0.45); }
+.ms--4 { left: 58%;  top: 63%; --c: #2E7D32; --c-glow: rgba( 46, 125,  50, 0.45); }
+.ms--5 { left: 74%;  top: 47%; --c: #6A1B9A; --c-glow: rgba(106,  27, 154, 0.45); }
+.ms--6 { left: 87%;  top: 35%; --c: #00838F; --c-glow: rgba(  0, 131, 143, 0.45); }
+
+// Milestones 3 (2001), 4 (2006), 5 (2014) intentionally have longer stems.
+.ms--3, .ms--4, .ms--5 {
+  .ms__stem    { height: clamp(48px, 6vh, 86px); }
+  .ms__card--below { top:    clamp(56px, 7vh, 100px); }
+  .ms__card--above { bottom: clamp(56px, 7vh, 100px); }
+}
+
+// ── Dot ───────────────────────────────────────────────────────────────────
+.ms__dot {
+  position: absolute;
+  left: clamp(-10px, -1.4vw, -14px);
+  top:  clamp(-10px, -1.4vw, -14px);
+  width:  clamp(20px, 2.8vw, 28px);
+  height: clamp(20px, 2.8vw, 28px);
+  border-radius: 50%;
+  background: var(--c);
+  border: clamp(2px, 0.25vw, 3.5px) solid rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 0 clamp(4px, 0.5vw, 6px) var(--c-glow),
+    0 3px 10px rgba(0, 0, 0, 0.28);
+  z-index: 22;
+  transition:
+    transform  0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+}
+
+// ── Stems ─────────────────────────────────────────────────────────────────
+.ms__stem {
+  position: absolute;
+  left: -1px;
+  width: 2px;
+  height: var(--stem-h);
+  border-radius: 1px;
+}
+
+.ms__stem--up {
+  bottom: 0;
+  background: linear-gradient(to top,   rgba(255,255,255,0.65), rgba(255,255,255,0.10));
+}
+
+.ms__stem--down {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.65), rgba(255,255,255,0.10));
+}
+
+// ── Card — styled to match introduction.component .card-glass ─────────────
+.ms__card {
+  position: absolute;
+  width: clamp(180px, 14vw, 260px);
+  // Left edge: center the card on the ms anchor
+  left: calc(clamp(180px, 14vw, 260px) / -2);
+
+  // Match introduction component glassmorphism exactly
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(20px) saturate(170%) brightness(1.05);
+  -webkit-backdrop-filter: blur(20px) saturate(170%) brightness(1.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-bottom: 3px solid var(--c);
+  border-radius: clamp(12px, 1.2vw, 20px);
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.38),
+    0  3px 10px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  padding:
+    clamp(8px, 1.1vh, 16px)
+    clamp(10px, 1.2vw, 18px);
+
+  transition:
+    transform    0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow   0.28s ease,
+    border-color 0.28s ease;
+
+  will-change: transform;
+
+  &--above {
+    // bottom of card sits above the stem top
+    bottom: calc(var(--stem-h) + clamp(6px, 0.8vh, 12px));
+  }
+  &--below {
+    // top of card sits below the stem bottom
+    top: calc(var(--stem-h) + clamp(6px, 0.8vh, 12px));
+  }
+}
+
+// Right-most card: nudge left so it stays on screen
+.ms--6 .ms__card {
+  left: auto;
+  right: clamp(-10px, -0.8vw, -4px);
+}
+
+// ── Card head ─────────────────────────────────────────────────────────────
+.ms__card-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, 0.6vw, 9px);
+  margin-bottom: clamp(5px, 0.7vh, 9px);
+}
+
+// ── Year label — mirrors .card-title from introduction ────────────────────
+.ms__year {
+  font-size: clamp(0.82rem, 1.2vw, 1.5rem);
+  font-weight: 900;
+  color: var(--c);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.30);
+}
+
+// ── Card clickable cursor ──────────────────────────────────────────────────
+.ms__card { cursor: pointer; }
+
+// ── Body text ─────────────────────────────────────────────────────────────
+.ms__text {
+  margin: 0;
+  font-size: clamp(0.62rem, 0.85vw, 1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  line-height: 1.5;
+}
+
+// ── Hover — mirrors introduction .card:hover ──────────────────────────────
+.ms:hover .ms__dot {
+  transform: scale(1.55);
+  box-shadow:
+    0 0 0 clamp(6px, 0.8vw, 10px) var(--c-glow),
+    0 0 clamp(16px, 2vw, 28px) clamp(6px, 0.8vw, 10px) var(--c-glow),
+    0 4px 14px rgba(0, 0, 0, 0.36);
+}
+
+.ms:hover .ms__card {
+  border-color: rgba(255, 255, 255, 0.50);
+  border-bottom-color: var(--c);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0  5px 20px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.ms:hover .ms__card--above { transform: translateY(clamp(-4px, -0.5vh, -8px)); }
+.ms:hover .ms__card--below { transform: translateY(clamp( 4px,  0.5vh,  8px)); }
+
+// ── Keyframes ──────────────────────────────────────────────────────────────
 @keyframes cloud-lr {
   from { transform: translateX(-20vw); }
   to   { transform: translateX(120vw); }
 }
-
 @keyframes cloud-rl {
   from { transform: translateX(120vw); }
   to   { transform: translateX(-20vw); }
 }
-
 @keyframes sun-rotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
-
 @keyframes core-pulse {
   0%, 100% {
     box-shadow:
-      0 0 calc(var(--sun-size) * 0.17)  calc(var(--sun-size) * 0.08) rgba(255, 232, 50, 1.0),
-      0 0 calc(var(--sun-size) * 0.45)  calc(var(--sun-size) * 0.18) rgba(255, 188,  0, 0.70),
-      0 0 calc(var(--sun-size) * 0.94)  calc(var(--sun-size) * 0.39) rgba(255, 148,  0, 0.34);
+      0 0 calc(var(--sun-size) * 0.17) calc(var(--sun-size) * 0.08) rgba(255, 232, 50, 1),
+      0 0 calc(var(--sun-size) * 0.45) calc(var(--sun-size) * 0.18) rgba(255, 188,  0, 0.70),
+      0 0 calc(var(--sun-size) * 0.94) calc(var(--sun-size) * 0.39) rgba(255, 148,  0, 0.34);
   }
   50% {
     box-shadow:
-      0 0 calc(var(--sun-size) * 0.11)  calc(var(--sun-size) * 0.05) rgba(255, 232, 50, 0.62),
-      0 0 calc(var(--sun-size) * 0.29)  calc(var(--sun-size) * 0.11) rgba(255, 188,  0, 0.40),
-      0 0 calc(var(--sun-size) * 0.60)  calc(var(--sun-size) * 0.25) rgba(255, 148,  0, 0.16);
+      0 0 calc(var(--sun-size) * 0.11) calc(var(--sun-size) * 0.05) rgba(255, 232, 50, 0.62),
+      0 0 calc(var(--sun-size) * 0.29) calc(var(--sun-size) * 0.11) rgba(255, 188,  0, 0.40),
+      0 0 calc(var(--sun-size) * 0.60) calc(var(--sun-size) * 0.25) rgba(255, 148,  0, 0.16);
+  }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.54; }
+}
+
+// ── Zoom overlay ───────────────────────────────────────────────────────────
+.ms-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlay-in 0.22s ease forwards;
+}
+
+.ms-zoom {
+  position: relative;
+  width: clamp(340px, 38vw, 680px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  border-bottom: 5px solid var(--c, #ffffff);
+  border-radius: clamp(16px, 1.6vw, 28px);
+  padding: clamp(28px, 3.5vh, 52px) clamp(32px, 3.5vw, 60px);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.55),
+    0  6px 22px rgba(0, 0, 0, 0.30),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.28);
+  animation: zoom-card-in 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.ms-zoom--1 { --c: #e53935; }
+.ms-zoom--2 { --c: #F57F17; }
+.ms-zoom--3 { --c: #1565C0; }
+.ms-zoom--4 { --c: #2E7D32; }
+.ms-zoom--5 { --c: #6A1B9A; }
+.ms-zoom--6 { --c: #00838F; }
+
+.ms-zoom__close {
+  position: absolute;
+  top: clamp(10px, 1.2vh, 18px);
+  right: clamp(10px, 1.2vw, 18px);
+  width: clamp(30px, 3vw, 48px);
+  height: clamp(30px, 3vw, 48px);
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.40);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.90);
+  font-size: clamp(0.8rem, 1vw, 1.25rem);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: scale(1.12);
   }
 }
 
-@keyframes glow-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.58; }
+.ms-zoom__head {
+  margin-bottom: clamp(14px, 1.8vh, 26px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
+.ms-zoom__year {
+  font-size: clamp(1.8rem, 3.2vw, 4.5rem);
+  font-weight: 900;
+  color: var(--c, #ffffff);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.ms-zoom__text {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.75rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.50);
+  line-height: 1.65;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes zoom-card-in {
+  from { opacity: 0; transform: scale(0.55); }
   to   { opacity: 1; transform: scale(1); }
 }

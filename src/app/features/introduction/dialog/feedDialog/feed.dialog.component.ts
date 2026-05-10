@@ -1,10 +1,11 @@
 
 import { Component, HostBinding, Output, EventEmitter } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-feed-dialog',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './feed.dialog.component.html',
   styleUrl: './feed.dialog.component.scss',
 })

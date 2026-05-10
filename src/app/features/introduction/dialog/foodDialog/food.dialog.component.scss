@@ -91,7 +91,15 @@
       font-size: clamp(1rem, 2.5vw + 0.3rem, calc(26px * var(--ui-scale)));
       font-weight: bold;
       color: #2c3e50;
+      margin: 0 0 clamp(0.25rem, 0.6vh, calc(8px * var(--ui-scale)));
+    }
+
+    p {
+      font-size: clamp(0.75rem, 1.2vw + 0.1rem, calc(14px * var(--ui-scale)));
+      color: #555;
+      max-width: 600px;
       margin: 0;
+      line-height: 1.5;
     }
   }
 

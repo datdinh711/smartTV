@@ -1,4 +1,69 @@
 {
+  "KEY_MILESTONES": {
+    "PAGE_TITLE": "About C.P. Vietnam",
+    "PAGE_HEADER": "Sustainability Journey",
+    "MS1_CONTENT": "Establishing C.P. Viet Nam Co., Ltd in Dong Nai; beginning industrial processing development.",
+    "MS2_CONTENT": "Developing livestock systems for fish, shrimp, and family farm models.",
+    "MS3_CONTENT": "Building Dong Nai food processing plant, marking the start of the food industry.",
+    "MS4_CONTENT": "Developing processed food industry and distributing livestock products.",
+    "MS5_CONTENT": "Developing CP Pork shop distribution system.",
+    "MS6_CONTENT": "Inaugurating the breeding and export chicken processing complex in Binh Phuoc."
+  },
+  "FOOD_DIALOG": {
+    "HEADER": "CLOSED-LOOP PROCESS",
+    "HEADER_DESC": "C.P. Vietnam's food products are developed through a tightly controlled integrated value chain following the \"Feed–Farm–Food\" business model—from animal feed and farming to food processing.",
+    "SUBHEADER": "6 Food Processing Plants",
+    "SEC1_TITLE": "Processed Food",
+    "SEC1_DESC": "C.P. Vietnam's processed food products are strictly controlled throughout the production process to ensure food safety, deliver high nutritional value, and meet the diverse needs of consumers.",
+    "SEC2_TITLE": "Fresh Food",
+    "SEC2_DESC": "C.P. Vietnam provides clean, fresh food that is carefully monitored from farming and production to distribution, ensuring both quality and freshness.",
+    "SEC3_TITLE": "Retail",
+    "SEC3_DESC": "C.P. Vietnam's retail network delivers convenient access to quality food products, along with professional customer service experiences.",
+    "CLOSE": "Close"
+  },
+  "FARM_DIALOG": {
+    "HEADER": "FARMING PROCESS",
+    "HEADER_DESC": "C.P. Vietnam's livestock breeds are established from the world's leading gene sources, adapted and selectively bred under Vietnam's conditions to produce livestock that meets the needs of the Vietnamese market.",
+    "SUBHEADER": "2,500 Farms",
+    "SEC1_TITLE": "Poultry Farming",
+    "SEC1_DESC": "The self-contained farming method, commonly used in developed countries such as Japan, the U.S., France, and so on offers outstanding advantages including ensuring optimal farming conditions, maximizing productivity,…",
+    "SEC2_TITLE": "Aquaculture",
+    "SEC2_DESC": "C.P. Vietnam applies advanced technology in breeding aquatic breeds (white-leg shrimp, fish) and conducts strict inspections and disease control to provide farmers with high-quality, disease-free aquatic breeds.",
+    "SEC3_TITLE": "Swine Farming",
+    "SEC3_DESC": "C.P. Vietnam's swine herds represent a harmonious combination of economic values, bringing high profits to farmers, while ensuring a clean, green and safe farming environment that meets international standards.",
+    "CLOSE": "Close"
+  },
+  "FEED_DIALOG": {
+    "HEADER": "FEED PRODUCTION PROCESS",
+    "SUBHEADER": "12 Feed mills",
+    "SEC1_TITLE": "Raw Material Corn Growing Areas",
+    "SEC1_DESC": "C.P. Vietnam partners with local farmers by supplying corn seeds, providing cultivation guidance, and organizing the purchasing and preliminary processing of corn.",
+    "SEC2_TITLE": "Feed Mills",
+    "SEC2_DESC": "Raw materials used in feed production are subject to strict quality control. High technologies are applied in formulating balanced feed rations, while automated production management ensures consistent and stable product quality.",
+    "SEC3_TITLE": "Animal Feed Products",
+    "SEC3_DESC": "C.P. Vietnam's animal feed is developed for a wide range of livestock species and growth stages, ensuring balanced nutrition, high feed conversion efficiency, cost optimization, and reduced production costs for farmers.",
+    "CLOSE": "Close"
+  },
+  "INTRODUCTION": {
+    "PAGE_TITLE": "About C.P. Vietnam",
+    "MAIN_TITLE": "A Leading Agro-Food Company in Vietnam",
+    "SUBTITLE": "OUR BUSINESS MODEL",
+    "CARD_FEED_TITLE": "Feed",
+    "CARD_FEED_SUB": "Nutritious Animal Feed",
+    "CARD_FARM_TITLE": "Farm",
+    "CARD_FARM_SUB": "Sustainable Farming and Breeding",
+    "CARD_FOOD_TITLE": "Food",
+    "CARD_FOOD_SUB": "Safe Food Products",
+    "WATCH_VDO": "Click here to watch VDO"
+  },
+  "DASHBOARD": {
+    "BTN1_TITLE": "About C.P. Vietnam",
+    "BTN1_SUB": "Company overview",
+    "BTN2_TITLE": "Our Sustainability Strategy",
+    "BTN2_SUB": "For a better tomorrow",
+    "BTN3_TITLE": "Sustainovation in Business",
+    "BTN3_SUB": "Innovation for impact"
+  },
   "WELCOME": {
     "EYEBROW": "Welcome to",
     "TAGLINE": "From farm to family",

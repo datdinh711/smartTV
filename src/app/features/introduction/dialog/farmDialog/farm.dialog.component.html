@@ -5,61 +5,45 @@
     <!-- Header chính ở giữa -->
     <div class="dialog-header">
       <img src="assets/images/cp_logo.webp" alt="Farm" />
-      <h2>QUY TRÌNH CHĂN NUÔI</h2>
-      <p>
-        Các giống vật nuôi của CPV được tạo lập từ nguồn gen tốt nhất của thế giới, 
-        được nuôi thích nghi và chọn lọc trong điều kiện Việt Nam để nhân giống 
-        theo nhu cầu của thị trường Việt Nam.
-      </p>
+      <h2>{{ 'FARM_DIALOG.HEADER' | translate }}</h2>
+      <p>{{ 'FARM_DIALOG.HEADER_DESC' | translate }}</p>
     </div>
 
     <!-- Subheader 2,500 Trang trại -->
     <div class="dialog-subheader">
       <img src="assets/images/farm.png" alt="Farm" />
-      <h2>2,500 Trang trại</h2>
+      <h2>{{ 'FARM_DIALOG.SUBHEADER' | translate }}</h2>
     </div>
 
     <!-- Grid 3 mục -->
     <div class="dialog-grid">
       <div class="dialog-section">
-        <img src="assets/images/chicken.png" alt="Gia cầm" />
+        <img src="assets/images/chicken.png" alt="Poultry" />
         <div class="section-content">
-          <h3>Chăn nuôi gia cầm</h3>
-          <p>
-            Phương thức chăn nuôi chuồng kín được sử dụng phổ biến ở các nước phát triển 
-            như Nhật, Mỹ, Pháp... với những ưu điểm nổi trội như đảm bảo tối ưu các điều kiện 
-            trong chăn nuôi, đảm bảo năng suất.
-          </p>
+          <h3>{{ 'FARM_DIALOG.SEC1_TITLE' | translate }}</h3>
+          <p>{{ 'FARM_DIALOG.SEC1_DESC' | translate }}</p>
         </div>
       </div>
 
       <div class="dialog-section">
-        <img src="assets/images/fish.png" alt="Thủy sản" />
+        <img src="assets/images/fish.png" alt="Aquaculture" />
         <div class="section-content">
-          <h3>Nuôi trồng thủy sản</h3>
-          <p>
-            CPV áp dụng công nghệ cao trong nhân giống thủy sản (tôm thẻ chân trắng, cá) 
-            và kiểm tra, phòng trừ dịch bệnh nghiêm ngặt nhằm cung cấp giống thủy sản 
-            chất lượng cao, sạch bệnh cho nhà nông.
-          </p>
+          <h3>{{ 'FARM_DIALOG.SEC2_TITLE' | translate }}</h3>
+          <p>{{ 'FARM_DIALOG.SEC2_DESC' | translate }}</p>
         </div>
       </div>
 
       <div class="dialog-section">
-        <img src="assets/images/pig.png" alt="Heo" />
+        <img src="assets/images/pig.png" alt="Swine" />
         <div class="section-content">
-          <h3>Chăn nuôi heo</h3>
-          <p>
-            Đàn heo CPV là sự kết hợp hài hòa các giá trị kinh tế, mang lại lợi nhuận cao 
-            cho người chăn nuôi, đảm bảo một môi trường chăn nuôi xanh sạch và an toàn 
-            theo tiêu chuẩn quốc tế.
-          </p>
+          <h3>{{ 'FARM_DIALOG.SEC3_TITLE' | translate }}</h3>
+          <p>{{ 'FARM_DIALOG.SEC3_DESC' | translate }}</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="dialog-actions">
-    <button (click)="closeDialog()">Đóng</button>
+    <button (click)="closeDialog()">{{ 'FARM_DIALOG.CLOSE' | translate }}</button>
   </div>
 </div>

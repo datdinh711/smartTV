@@ -5,54 +5,44 @@
     <!-- Header chính ở giữa -->
     <div class="dialog-header">
       <img src="assets/images/cp_logo.webp" alt="Feed" />
-      <h2>QUY TRÌNH SẢN XUẤT THỨC ĂN CHĂN NUÔI</h2>
+      <h2>{{ 'FEED_DIALOG.HEADER' | translate }}</h2>
     </div>
 
-    <!-- Subheader 21 Nhà máy -->
+    <!-- Subheader 12 Nhà máy -->
     <div class="dialog-subheader">
       <img src="assets/images/factory.png" alt="Factory" />
-      <h2>21 Nhà máy</h2>
+      <h2>{{ 'FEED_DIALOG.SUBHEADER' | translate }}</h2>
     </div>
 
     <!-- Grid 3 mục -->
     <div class="dialog-grid">
       <div class="dialog-section">
-        <img src="assets/images/factory.png" alt="Factory" />
+        <img src="assets/images/corn.png" alt="Corn" />
         <div class="section-content">
-          <h3>Nhà máy thức ăn chăn nuôi</h3>
-          <p>
-            Nhà máy thức ăn chăn nuôi của C.P. Việt Nam cung cấp các giải pháp dinh dưỡng chất lượng, 
-            phù hợp với từng lứa tuổi của vật nuôi.
-          </p>
+          <h3>{{ 'FEED_DIALOG.SEC1_TITLE' | translate }}</h3>
+          <p>{{ 'FEED_DIALOG.SEC1_DESC' | translate }}</p>
         </div>
       </div>
 
       <div class="dialog-section">
-        <img src="assets/images/corn.png" alt="Agriculture" />
+        <img src="assets/images/factory.png" alt="Factory" />
         <div class="section-content">
-          <h3>Vùng trồng bắp nguyên liệu</h3>
-          <p>
-            C.P. Việt Nam hợp tác với người dân trong việc cung ứng hạt giống bắp, hướng dẫn canh tác, 
-            thu mua và sơ chế bắp.
-          </p>
+          <h3>{{ 'FEED_DIALOG.SEC2_TITLE' | translate }}</h3>
+          <p>{{ 'FEED_DIALOG.SEC2_DESC' | translate }}</p>
         </div>
       </div>
 
       <div class="dialog-section">
         <img src="assets/images/science.png" alt="Science" />
         <div class="section-content">
-          <h3>Nguyên liệu sản xuất</h3>
-          <p>
-            Nguyên liệu sản xuất thức ăn chăn nuôi được kiểm soát nghiêm ngặt, áp dụng công nghệ cao 
-            trong thiết lập khẩu phần cân đối, quản lý quá trình sản xuất tự động đảm bảo ổn định 
-            về chất lượng sản phẩm.
-          </p>
+          <h3>{{ 'FEED_DIALOG.SEC3_TITLE' | translate }}</h3>
+          <p>{{ 'FEED_DIALOG.SEC3_DESC' | translate }}</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="dialog-actions">
-    <button (click)="closeDialog()">Đóng</button>
+    <button (click)="closeDialog()">{{ 'FEED_DIALOG.CLOSE' | translate }}</button>
   </div>
 </div>

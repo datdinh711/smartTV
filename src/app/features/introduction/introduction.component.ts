@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
 import { DOCUMENT, CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { NavigatorService } from '@core/services';
 import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,7 +14,7 @@ import { NavigationSource } from '@core/enums';
 @Component({
   selector: 'app-introduction',
   standalone: true,
-  imports: [CommonModule, FeedDialogComponent, FarmDialogComponent, FoodDialogComponent, NavigationButtonComponent, HomeButtonComponent],
+  imports: [CommonModule, TranslateModule, FeedDialogComponent, FarmDialogComponent, FoodDialogComponent, NavigationButtonComponent, HomeButtonComponent],
   templateUrl: './introduction.component.html',
   styleUrl: './introduction.component.scss',
 })
