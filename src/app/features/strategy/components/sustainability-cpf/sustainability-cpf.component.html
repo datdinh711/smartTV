@@ -1,0 +1,53 @@
+<div class="cpf-wrapper">
+  <div class="cpf-topbar">
+    <app-navigation-button [destPath]="nextPath"></app-navigation-button>
+    <app-home-button></app-home-button>
+    <app-home-label
+      [text]="'STRATEGY.SUSTAINABILITY_STRATEGY.KICKER' | translate"
+      [fontSize]="'1.5rem'"
+    ></app-home-label>
+  </div>
+
+  <div class="cpf-container">
+    <section class="cpf-left-column">
+      <div class="cpf-quote-text">
+        {{ 'STRATEGY.SUSTAINABILITY_CPF.QUOTE' | translate  }}
+      </div>
+    </section>
+
+    <section class="cpf-right-column" aria-label="Sustainability CPF priorities">
+      <article class="cpf-card cpf-card-climate">
+        <div class="cpf-card-left">
+          <p>{{ 'STRATEGY.SUSTAINABILITY_CPF.CLIMATE_PREFIX' | translate }}</p>
+          <div class="cpf-big-word"><span>C</span>{{ 'STRATEGY.SUSTAINABILITY_CPF.CLIMATE_MAIN' | translate }}</div>
+        </div>
+        <div class="cpf-card-right">
+          <h3>{{ 'STRATEGY.SUSTAINABILITY_CPF.CLIMATE_TITLE' | translate }}</h3>
+          <p>{{ 'STRATEGY.SUSTAINABILITY_CPF.CLIMATE_DESC' | translate }}</p>
+        </div>
+      </article>
+
+      <article class="cpf-card cpf-card-people">
+        <div class="cpf-card-left">
+          <p>{{ 'STRATEGY.SUSTAINABILITY_CPF.PEOPLE_PREFIX' | translate }}</p>
+          <div class="cpf-big-word"><span>P</span>{{ 'STRATEGY.SUSTAINABILITY_CPF.PEOPLE_MAIN' | translate }}</div>
+        </div>
+        <div class="cpf-card-right">
+          <h3>{{ 'STRATEGY.SUSTAINABILITY_CPF.PEOPLE_TITLE' | translate }}</h3>
+          <p>{{ 'STRATEGY.SUSTAINABILITY_CPF.PEOPLE_DESC' | translate }}</p>
+        </div>
+      </article>
+
+      <article class="cpf-card cpf-card-food">
+        <div class="cpf-card-left">
+          <p>{{ 'STRATEGY.SUSTAINABILITY_CPF.FOOD_PREFIX' | translate }}</p>
+          <div class="cpf-big-word"><span>F</span>{{ 'STRATEGY.SUSTAINABILITY_CPF.FOOD_MAIN' | translate }}</div>
+        </div>
+        <div class="cpf-card-right">
+          <h3>{{ 'STRATEGY.SUSTAINABILITY_CPF.FOOD_TITLE' | translate }}</h3>
+          <p>{{ 'STRATEGY.SUSTAINABILITY_CPF.FOOD_DESC' | translate }}</p>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>

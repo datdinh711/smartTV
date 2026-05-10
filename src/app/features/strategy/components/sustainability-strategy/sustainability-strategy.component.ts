@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { APP_ROUTES } from '@core/constants';
 import { NavigatorService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants';
-import { HomeButtonComponent, NavigationButtonComponent } from '@shared/components';
+import { TranslateModule } from '@ngx-translate/core';
+import { HomeButtonComponent, NavigationButtonComponent, HomeLabelComponent } from '@shared/components';
 import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sustainovation-business',
   standalone: true,
-  imports: [NavigationButtonComponent, HomeButtonComponent],
+  imports: [NavigationButtonComponent, HomeButtonComponent, HomeLabelComponent, TranslateModule],
   templateUrl: './sustainability-strategy.component.html',
   styleUrl: './sustainability-strategy.component.scss',
 })

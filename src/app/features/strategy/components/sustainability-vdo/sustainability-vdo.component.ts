@@ -22,7 +22,7 @@ export class SustainabilityVdoComponent implements OnInit {
   APP_ROUTE = APP_ROUTES;
   STRATEGY_ROUTE = STRATEGY_ROUTES;
 
-  backPath: string = APP_ROUTES.STRATEGY;
+  backPath: string = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_STRATEGY}`;
   nextPath: string =
     `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
 
@@ -32,17 +32,6 @@ export class SustainabilityVdoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const strategyPath = APP_ROUTES.STRATEGY;
-    const recognitionPath =
-      `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
-    const previousPath = this._navigationHistoryService.getPreviousPath();
-
-    if (previousPath === recognitionPath) {
-      this.nextPath = APP_ROUTES.BUSINESS;
-      return;
-    }
-
-    this.nextPath = recognitionPath;
   }
 
   onVideoEnded(): void {

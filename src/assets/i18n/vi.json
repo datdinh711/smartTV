@@ -78,5 +78,31 @@
       "FOOTER_LINE_1": "Đảm bảo minh bạch trong từng công đoạn",
       "FOOTER_LINE_2": "Từ trang trại đến bếp nhà"
     }
+  },
+  "STRATEGY": {
+    "SUSTAINABILITY_STRATEGY": {
+      "KICKER": "Chiến lược phát triển bền vững",
+      "TITLE": "Khung phát triển bền vững",
+      "SUMMARY": "Chiến lược phát triển bền vững của công ty được xây dựng dựa trên Triết lý Kinh tế Đủ và nguyên tắc “Ba Lợi ích”, mang lại giá trị cho đất nước, người dân và cho công ty. C.P. Việt Nam cam kết tăng cường an ninh lương thực thông qua đổi mới sáng tạo bền vững",
+      "CTA": "Xem hành trình bền vững của chúng tôi",
+      "IMAGE_ALT": "Khung phát triển bền vững",
+      "FRAMEWORK_IMAGE": "assets/images/strategy/Sustainability_Framework_VN.png"
+    },
+    "SUSTAINABILITY_CPF": {
+      "BACKGROUND_IMAGE": "assets/images/strategy/Sustainability_Framework_VN.png",
+      "QUOTE": "“Chúng tôi chăm chút cho từng sản phẩm bằng tất cả sự tận tâm dành cho khách hàng - không chỉ vì sức khỏe người tiêu dùng mà còn để bảo vệ hành tinh, đồng thời góp phần xây dựng một cộng đồng bền vững và kiên cường.”",
+      "CLIMATE_PREFIX": "Bảo vệ khí hậu",
+      "CLIMATE_MAIN": "limate",
+      "CLIMATE_TITLE": "Thúc đẩy hành động vì khí hậu thông qua các giải pháp đổi mới",
+      "CLIMATE_DESC": "nhằm mang lại những tác động tích cực lâu dài trên toàn bộ chuỗi giá trị.",
+      "PEOPLE_PREFIX": "Nâng cao chất lượng cuộc sống",
+      "PEOPLE_MAIN": "eople",
+      "PEOPLE_TITLE": "Nâng cao đời sống bằng cách thúc đẩy tăng trưởng bao trùm",
+      "PEOPLE_DESC": "cho nhân viên, nông dân, cộng đồng và người dân trên toàn thế giới.",
+      "FOOD_PREFIX": "Kiến tạo thực phẩm bền vững",
+      "FOOD_MAIN": "ood",
+      "FOOD_TITLE": "Đảm bảo an ninh lương thực thông qua những đổi mới về thực phẩm an toàn và lành mạnh",
+      "FOOD_DESC": "với ưu tiên hạnh phúc và sức khỏe lâu dài của người tiêu dùng."
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { APP_ROUTES } from '@core/constants/app-route.constant';
 import { NavigationHistoryService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants/strategy-route.constant';
@@ -16,24 +17,20 @@ export class SustainabilityRegconigtionComponent implements OnInit {
   APP_ROUTE = APP_ROUTES;
   STRATEGY_ROUTE = STRATEGY_ROUTES;
 
-  backPath: string = APP_ROUTES.STRATEGY;
-  nextPath: string =
-    `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_VDO}`;
+  backPath: string = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_STRATEGY}`;
+  nextPath: string = APP_ROUTES.BUSINESS;
 
   constructor(
-    private readonly _navigationHistoryService: NavigationHistoryService,
+    private readonly _translate: TranslateService,
   ) {}
 
-  ngOnInit(): void {
-    const strategyPath = APP_ROUTES.STRATEGY;
+  get recognitionSvgSrc(): string {
+    return this._translate.getCurrentLang() === 'en'
+      ? 'assets/svg/Reconigtion-en.svg'
+      : 'assets/svg/Reconigtion-vn.svg';
+  }
+
+  ngOnInit(): void {;
     const vdoPath = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_VDO}`;
-    const previousPath = this._navigationHistoryService.getPreviousPath();
-
-    if (previousPath === vdoPath) {
-      this.nextPath = APP_ROUTES.BUSINESS;
-      return;
-    }
-
-    this.nextPath = vdoPath;
   }
 }

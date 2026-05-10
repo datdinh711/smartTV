@@ -1,7 +1,7 @@
 
 import { Routes } from '@angular/router';
 import { StrategyComponent } from './strategy.component';
-import { SustainabilityRegconigtionComponent, SustainabilityStrategyComponent, SustainabilityVdoComponent } from './components';
+import { SustainabilityCpfComponent, SustainabilityRegconigtionComponent, SustainabilityStrategyComponent, SustainabilityVdoComponent } from './components';
 import { STRATEGY_ROUTES } from './constants';
 
 export const routes: Routes = [
@@ -11,7 +11,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SustainabilityStrategyComponent,
+        component: SustainabilityCpfComponent,
         pathMatch: 'full',
       },
       {
@@ -21,6 +21,14 @@ export const routes: Routes = [
       {
         path: STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION,
         component: SustainabilityRegconigtionComponent,
+      },
+      {
+        path: STRATEGY_ROUTES.SUSTAINABILITY_STRATEGY,
+        component: SustainabilityStrategyComponent,
+      },
+      {
+        path: STRATEGY_ROUTES.SUSTAINABILITY_CPF,
+        component: SustainabilityCpfComponent,
       }
     ],
   },

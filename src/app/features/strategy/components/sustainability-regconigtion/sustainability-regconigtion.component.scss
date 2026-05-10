@@ -15,8 +15,10 @@
     justify-content: center;
   }
 
+  .recognition-content img,
   .recognition-content svg {
     width: auto;
     height: 100%;
+    max-width: 100%;
   }
 }
