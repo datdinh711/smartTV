@@ -67,6 +67,11 @@
       "BIOGAS_TITLE": "Biogas",
       "BIOGAS_DESC": "Hệ thống khí sinh học được áp dụng tại các trang trại chăn nuôi heo để chuyển đổi chất thải và nước thải thành nguồn năng lượng tái tạo phục vụ hoạt động hàng ngày."
     },
+    "CERTIFICATION": {
+      "PAGE_TITLE": "Giải vàng chất lượng quốc gia",
+      "STD_BIOSECURITY": "An toàn dịch bệnh",
+      "STD_FOOD_SAFETY": "An toàn thực phẩm"
+    },
     "TRACEABILITY": {
       "BANNER_TITLE": "Hệ thống truy xuất nguồn gốc hai cấp độ",
       "BANNER_SUBTITLE": "Quét mã QR trên bao bì sản phẩm bằng điện thoại để truy cập thông tin sản phẩm ngay lập tức.",

@@ -67,6 +67,11 @@
       "BIOGAS_TITLE": "Biogas",
       "BIOGAS_DESC": "A biogas system is applied at pig farms to convert waste and wastewater into energy for daily operations."
     },
+    "CERTIFICATION": {
+      "PAGE_TITLE": "Vietnam Quality Award",
+      "STD_BIOSECURITY": "Biosecurity Standards",
+      "STD_FOOD_SAFETY": "Food Safety Standards"
+    },
     "TRACEABILITY": {
       "BANNER_TITLE": "Two-Level Traceability System",
       "BANNER_SUBTITLE": "Scan the QR code on the product packaging using your smartphone to access product information instantly.",
