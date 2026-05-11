@@ -15,20 +15,20 @@
 }
 
 .cpf-topbar {
-  width: min(980px, 100%);
-  margin: 0 auto 28px;
+  width: min(61.25rem, 100%);
+  margin: 0 auto 1.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .cpf-container {
   display: grid;
   width: 90%;
   margin: 0 auto;
-  grid-template-columns: minmax(300px, 1.6fr) minmax(280px, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(18.75rem, 1.6fr) minmax(17.5rem, 1fr);
+  gap: 1.75rem;
   align-items: stretch;
   flex: 1;
   min-height: 0;
@@ -37,15 +37,16 @@
 .cpf-left-column,
 .cpf-right-column {
   display: flex;
+  height: 100%;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .cpf-left-column {
   position: relative;
-  height: 90%;
+  height: 95%;
   min-height: 0;
-  padding: 34px 32px;
+  padding: 2.125rem 2rem;
   background-image: url('assets/images/strategy/Cpf.png');
   background-size: cover;
   background-position: center;
@@ -78,15 +79,16 @@
 
 .cpf-card {
   display: grid;
-  grid-template-columns: 40% 1fr;
+  grid-template-columns: minmax(12rem, 40%) 1fr;
   width: 100%;
   max-width: 100%;
-  min-height: 170px;
+  height: 25%;
+  max-height: 18rem;
   background: #ffffff;
-  border-radius: 24px;
+  border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1rem 2.25rem rgba(0, 0, 0, 0.08);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.85);
   box-sizing: border-box;
 }
 
@@ -94,7 +96,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 26px 22px;
+  padding: 2rem 1.375rem;
   color: #ffffff;
   position: relative;
   min-width: 0;
@@ -105,7 +107,7 @@
   position: absolute;
   inset: 0;
   background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 12px 12px;
+  background-size: 0.75rem 0.75rem;
   opacity: 0.35;
   pointer-events: none;
 }
@@ -114,7 +116,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   line-height: 1.4;
   position: relative;
   z-index: 1;
@@ -141,7 +143,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  padding: 24px 24px;
+  padding: 1.5rem;
   background: #fcfbfa;
 }
 
@@ -193,7 +195,7 @@
   .cpf-container {
     grid-template-columns: 1fr;
     width: 100%;
-    gap: 24px;
+    gap: 1.5rem;
   }
 
   .cpf-card {
@@ -203,21 +205,11 @@
 
   .cpf-card-left,
   .cpf-card-right {
-    padding: 20px 18px;
+    padding: 1.25rem 1.125rem;
   }
 }
 
 @media (max-width: 640px) {
-  .cpf-wrapper {
-    padding: 24px 16px 32px;
-  }
-
-  .cpf-topbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
   .cpf-quote-text {
     font-size: 1.14rem;
   }
