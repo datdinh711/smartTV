@@ -1,16 +1,303 @@
-<!-- Sky background -->
-<div class="bg-sky" aria-hidden="true">
-  <div class="bg-sky__glow"></div>
-  <div class="bg-sky__sun">
-    <div class="bg-sky__sun-rays"></div>
-    <div class="bg-sky__sun-core"></div>
-  </div>
-  <div class="cloud cloud--lg cloud--s1"></div>
-  <div class="cloud cloud--lg cloud--s2"></div>
-  <div class="cloud cloud--sm cloud--s3"></div>
-  <div class="cloud cloud--lg cloud--m1"></div>
-  <div class="cloud cloud--lg cloud--m2"></div>
-  <div class="cloud cloud--sm cloud--m3"></div>
+<!-- Nature / clean-energy background -->
+<div class="bg-nature" aria-hidden="true">
+  <div class="bg-nature__gradient"></div>
+
+  <!-- Ground horizon band -->
+  <svg class="deco deco--ground" viewBox="0 0 1920 150"
+       preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0,70 Q 240,44 480,60 Q 720,76 960,50 Q 1200,24 1440,46 Q 1680,68 1920,50
+             L 1920,150 L 0,150 Z"
+          fill="#A5D6A7" fill-opacity="0.40"/>
+    <path d="M 0,95 Q 320,70 640,88 Q 960,106 1280,80 Q 1600,54 1920,75
+             L 1920,150 L 0,150 Z"
+          fill="#81C784" fill-opacity="0.32"/>
+  </svg>
+
+  <!-- Pine silhouettes — left edge -->
+  <svg class="deco deco--trees-l" viewBox="0 0 260 360"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="208" y="272" width="9"  height="88"  rx="2" fill="#2D6A3A"/>
+    <polygon points="212,148 182,214 242,214" fill="#1B5E20"/>
+    <polygon points="212,180 178,244 246,244" fill="#1B5E20"/>
+    <polygon points="212,212 174,276 250,276" fill="#1B5E20"/>
+    <rect x="100" y="252" width="11" height="108" rx="2" fill="#2D6A3A"/>
+    <polygon points="105,98  68,182 142,182" fill="#256630"/>
+    <polygon points="105,136  64,218 146,218" fill="#256630"/>
+    <polygon points="105,172  60,254 150,254" fill="#256630"/>
+    <rect x="28"  y="265" width="10" height="95"  rx="2" fill="#1B5E20"/>
+    <polygon points="33,130   0,208  66,208" fill="#2D6A3A"/>
+    <polygon points="33,168  -4,244  70,244" fill="#2D6A3A"/>
+    <polygon points="33,202  -8,278  74,278" fill="#2D6A3A"/>
+  </svg>
+
+  <!-- Pine silhouettes — right edge (CSS mirrors left) -->
+  <svg class="deco deco--trees-r" viewBox="0 0 260 360"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="208" y="272" width="9"  height="88"  rx="2" fill="#2D6A3A"/>
+    <polygon points="212,148 182,214 242,214" fill="#1B5E20"/>
+    <polygon points="212,180 178,244 246,244" fill="#1B5E20"/>
+    <polygon points="212,212 174,276 250,276" fill="#1B5E20"/>
+    <rect x="100" y="252" width="11" height="108" rx="2" fill="#2D6A3A"/>
+    <polygon points="105,98  68,182 142,182" fill="#256630"/>
+    <polygon points="105,136  64,218 146,218" fill="#256630"/>
+    <polygon points="105,172  60,254 150,254" fill="#256630"/>
+    <rect x="28"  y="265" width="10" height="95"  rx="2" fill="#1B5E20"/>
+    <polygon points="33,130   0,208  66,208" fill="#2D6A3A"/>
+    <polygon points="33,168  -4,244  70,244" fill="#2D6A3A"/>
+    <polygon points="33,202  -8,278  74,278" fill="#2D6A3A"/>
+  </svg>
+
+  <!-- Round canopy trees — left cluster -->
+  <svg class="deco deco--trees-round-l" viewBox="0 0 200 250"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Back-right: small -->
+    <rect x="144" y="185" width="8"  height="65" rx="3" fill="#6D4C41"/>
+    <circle cx="148" cy="167" r="26" fill="#2E7D32"/>
+    <circle cx="148" cy="157" r="20" fill="#388E3C"/>
+    <!-- Center: tallest -->
+    <rect x="87"  y="170" width="10" height="80" rx="3" fill="#5D4037"/>
+    <circle cx="92"  cy="147" r="34" fill="#1B5E20"/>
+    <circle cx="92"  cy="136" r="26" fill="#2E7D32"/>
+    <circle cx="87"  cy="130" r="17" fill="#43A047"/>
+    <!-- Front-left: medium -->
+    <rect x="28"  y="178" width="9"  height="72" rx="3" fill="#6D4C41"/>
+    <circle cx="32"  cy="157" r="30" fill="#2E7D32"/>
+    <circle cx="32"  cy="147" r="23" fill="#388E3C"/>
+    <circle cx="28"  cy="140" r="15" fill="#66BB6A" fill-opacity="0.75"/>
+  </svg>
+
+  <!-- Round canopy trees — right cluster (CSS mirrors left) -->
+  <svg class="deco deco--trees-round-r" viewBox="0 0 200 250"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="144" y="185" width="8"  height="65" rx="3" fill="#6D4C41"/>
+    <circle cx="148" cy="167" r="26" fill="#2E7D32"/>
+    <circle cx="148" cy="157" r="20" fill="#388E3C"/>
+    <rect x="87"  y="170" width="10" height="80" rx="3" fill="#5D4037"/>
+    <circle cx="92"  cy="147" r="34" fill="#1B5E20"/>
+    <circle cx="92"  cy="136" r="26" fill="#2E7D32"/>
+    <circle cx="87"  cy="130" r="17" fill="#43A047"/>
+    <rect x="28"  y="178" width="9"  height="72" rx="3" fill="#6D4C41"/>
+    <circle cx="32"  cy="157" r="30" fill="#2E7D32"/>
+    <circle cx="32"  cy="147" r="23" fill="#388E3C"/>
+    <circle cx="28"  cy="140" r="15" fill="#66BB6A" fill-opacity="0.75"/>
+  </svg>
+
+  <!-- Single windmill — in the open zone between wind turbine L and the first solar panel -->
+  <svg class="deco deco--solar" viewBox="0 0 140 240"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="54,235 86,235 80,100 60,100" fill="#78909C"/>
+    <rect x="60" y="185" width="16" height="22" rx="3" fill="#607D8B"/>
+    <rect x="63" y="145" width="10" height="12" rx="2" fill="#607D8B"/>
+    <rect x="58" y="82"  width="24" height="20" rx="3" fill="#607D8B"/>
+    <polygon points="53,86 87,86 70,64" fill="#546E7A"/>
+    <circle cx="70" cy="92" r="8"   fill="#90A4AE"/>
+    <circle cx="70" cy="92" r="4"   fill="#B0BEC5"/>
+    <g transform="translate(70,92) rotate(45)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+    <g transform="translate(70,92) rotate(135)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+    <g transform="translate(70,92) rotate(225)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+    <g transform="translate(70,92) rotate(315)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+  </svg>
+
+  <!-- Single windmill — right side, symmetric to the left one -->
+  <svg class="deco deco--windmill-r" viewBox="0 0 140 240"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="54,235 86,235 80,100 60,100" fill="#78909C"/>
+    <rect x="60" y="185" width="16" height="22" rx="3" fill="#607D8B"/>
+    <rect x="63" y="145" width="10" height="12" rx="2" fill="#607D8B"/>
+    <rect x="58" y="82"  width="24" height="20" rx="3" fill="#607D8B"/>
+    <polygon points="53,86 87,86 70,64" fill="#546E7A"/>
+    <circle cx="70" cy="92" r="8"   fill="#90A4AE"/>
+    <circle cx="70" cy="92" r="4"   fill="#B0BEC5"/>
+    <g transform="translate(70,92) rotate(45)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+    <g transform="translate(70,92) rotate(135)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+    <g transform="translate(70,92) rotate(225)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+    <g transform="translate(70,92) rotate(315)">
+      <rect x="-3.5" y="-54" width="7" height="54" rx="2.5" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.6"/>
+    </g>
+  </svg>
+
+  <!-- Solar panel 1 — between windmill and biogas -->
+  <svg class="deco deco--panel-1" viewBox="0 0 110 150"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="102" height="88" rx="5"
+          fill="#0D47A1" stroke="#42A5F5" stroke-width="1.5"/>
+    <line x1="4"  y1="33" x2="106" y2="33" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="4"  y1="62" x2="106" y2="62" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="30" y1="4"  x2="30"  y2="92" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="57" y1="4"  x2="57"  y2="92" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="83" y1="4"  x2="83"  y2="92" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <rect x="49" y="92"  width="12" height="46" fill="#546E7A"/>
+    <rect x="26" y="133" width="58" height="9"  rx="3" fill="#546E7A"/>
+  </svg>
+
+  <!-- Solar panel 2 — symmetric to panel 1, between biogas and right wind turbine -->
+  <svg class="deco deco--panel-2" viewBox="0 0 110 150"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="102" height="88" rx="5"
+          fill="#0D47A1" stroke="#42A5F5" stroke-width="1.5"/>
+    <line x1="4"  y1="33" x2="106" y2="33" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="4"  y1="62" x2="106" y2="62" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="30" y1="4"  x2="30"  y2="92" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="57" y1="4"  x2="57"  y2="92" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <line x1="83" y1="4"  x2="83"  y2="92" stroke="#90CAF9" stroke-width="0.9" opacity="0.55"/>
+    <rect x="49" y="92"  width="12" height="46" fill="#546E7A"/>
+    <rect x="26" y="133" width="58" height="9"  rx="3" fill="#546E7A"/>
+  </svg>
+
+  <!-- Biogas plant — centre bottom -->
+  <svg class="deco deco--biogas" viewBox="-8 0 256 220"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="42"  y="158" width="14" height="56" rx="3" fill="#1E4A32"/>
+    <rect x="184" y="158" width="14" height="56" rx="3" fill="#1E4A32"/>
+    <rect x="20"  y="204" width="78" height="10" rx="3" fill="#1E4A32"/>
+    <rect x="142" y="204" width="78" height="10" rx="3" fill="#1E4A32"/>
+    <rect x="26"  y="98"  width="188" height="66" rx="14" fill="#2A5A3E"/>
+    <ellipse cx="26"  cy="131" rx="22" ry="33" fill="#336B4A"/>
+    <ellipse cx="214" cy="131" rx="22" ry="33" fill="#336B4A"/>
+    <ellipse cx="120" cy="98"  rx="60" ry="42" fill="#3A7A52"/>
+    <ellipse cx="108" cy="88"  rx="28" ry="16" fill="rgba(255,255,255,0.07)"/>
+    <rect x="2"   y="122" width="26" height="14" rx="4" fill="#4A6572"/>
+    <circle cx="8"   cy="129" r="7" fill="#37474F"/>
+    <rect x="212" y="122" width="26" height="14" rx="4" fill="#4A6572"/>
+    <circle cx="234" cy="129" r="7" fill="#37474F"/>
+    <path d="M113,64 C113,54 107,48 111,38 C114,31 119,35 117,43
+             C121,35 126,27 123,19 C130,29 133,41 127,52
+             C131,46 135,48 133,56 C131,64 124,70 118,69 Z"
+          fill="#4CAF50" fill-opacity="0.90"/>
+    <rect x="84"  y="112" width="72" height="36" rx="5" fill="#1A3A28"/>
+    <circle cx="103" cy="130" r="6" fill="#4CAF50" fill-opacity="0.90"/>
+    <circle cx="120" cy="130" r="6" fill="#81C784" fill-opacity="0.90"/>
+    <circle cx="137" cy="130" r="6" fill="#2E7D32" fill-opacity="0.90"/>
+  </svg>
+
+  <!-- Wind turbine — left (tall slender, clean-tech) -->
+  <svg class="deco deco--wind-l" viewBox="-12 0 84 220"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Foundation -->
+    <rect x="26" y="212" width="20" height="8"  rx="3" fill="#90A4AE"/>
+    <!-- Tower (tapered trapezoid) -->
+    <polygon points="31,210 41,210 39,72 33,72" fill="#B0BEC5"/>
+    <!-- Nacelle housing -->
+    <rect x="29" y="63" width="20" height="12" rx="3" fill="#CFD8DC"/>
+    <!-- Hub -->
+    <circle cx="36" cy="69" r="6" fill="#90A4AE"/>
+    <!-- Blade 1 (up) -->
+    <path d="M 36,63 C 37,50 40,34 37,15 C 35,26 33,42 36,63 Z"
+          fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.7"/>
+    <!-- Blade 2 (lower-left, ~240°) -->
+    <path d="M 30,72 C 18,78  3,82 -10,88 C 1,80 16,76 30,72 Z"
+          fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.7"/>
+    <!-- Blade 3 (lower-right, ~120°) -->
+    <path d="M 42,72 C 54,66 68,62  80,60 C 69,64 55,68 42,72 Z"
+          fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.7"/>
+  </svg>
+
+  <!-- Wind turbine — right (CSS mirrors left) -->
+  <svg class="deco deco--wind-r" viewBox="-12 0 84 220"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="26" y="212" width="20" height="8"  rx="3" fill="#90A4AE"/>
+    <polygon points="31,210 41,210 39,72 33,72" fill="#B0BEC5"/>
+    <rect x="29" y="63" width="20" height="12" rx="3" fill="#CFD8DC"/>
+    <circle cx="36" cy="69" r="6" fill="#90A4AE"/>
+    <path d="M 36,63 C 37,50 40,34 37,15 C 35,26 33,42 36,63 Z"
+          fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.7"/>
+    <path d="M 30,72 C 18,78  3,82 -10,88 C 1,80 16,76 30,72 Z"
+          fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.7"/>
+    <path d="M 42,72 C 54,66 68,62  80,60 C 69,64 55,68 42,72 Z"
+          fill="#ECEFF1" stroke="#B0BEC5" stroke-width="0.7"/>
+  </svg>
+
+  <!-- Hot air balloon — upper-left (primary) -->
+  <svg class="deco deco--balloon-1" viewBox="0 0 100 138"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Envelope body -->
+    <ellipse cx="50" cy="54" rx="38" ry="46" fill="#66BB6A"/>
+    <!-- Left panel (darker) -->
+    <path d="M 12,54 A 38,46 0 0 1 50,8 L 50,100 A 38,46 0 0 1 12,54 Z"
+          fill="#2E7D32"/>
+    <!-- Gloss highlight -->
+    <ellipse cx="34" cy="28" rx="13" ry="18" fill="rgba(255,255,255,0.16)"/>
+    <!-- Seam lines -->
+    <line x1="50" y1="8"  x2="50"  y2="100" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <line x1="25" y1="14" x2="18"  y2="96"  stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+    <line x1="75" y1="14" x2="82"  y2="96"  stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+    <!-- Skirt / crown -->
+    <ellipse cx="50" cy="100" rx="14" ry="6" fill="#1B5E20"/>
+    <!-- Suspension ropes -->
+    <line x1="38" y1="104" x2="30" y2="122" stroke="#4E342E" stroke-width="1.2"/>
+    <line x1="62" y1="104" x2="70" y2="122" stroke="#4E342E" stroke-width="1.2"/>
+    <line x1="44" y1="105" x2="42" y2="126" stroke="#4E342E" stroke-width="1.2"/>
+    <line x1="56" y1="105" x2="58" y2="126" stroke="#4E342E" stroke-width="1.2"/>
+    <!-- Basket rim -->
+    <rect x="30" y="120" width="40" height="5"  rx="2" fill="#4E342E"/>
+    <!-- Basket body -->
+    <rect x="33" y="123" width="34" height="15" rx="3" fill="#6D4C41"/>
+  </svg>
+
+  <!-- Hot air balloon — upper-right (secondary, lighter palette) -->
+  <svg class="deco deco--balloon-2" viewBox="0 0 100 138"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="54" rx="38" ry="46" fill="#A5D6A7"/>
+    <!-- Right panel (medium green) -->
+    <path d="M 50,8 A 38,46 0 0 1 88,54 L 50,100 A 38,46 0 0 1 50,8 Z"
+          fill="#66BB6A"/>
+    <ellipse cx="64" cy="28" rx="13" ry="18" fill="rgba(255,255,255,0.16)"/>
+    <line x1="50" y1="8"  x2="50"  y2="100" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <line x1="25" y1="14" x2="18"  y2="96"  stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+    <line x1="75" y1="14" x2="82"  y2="96"  stroke="rgba(255,255,255,0.10)" stroke-width="0.8"/>
+    <ellipse cx="50" cy="100" rx="14" ry="6" fill="#2E7D32"/>
+    <line x1="38" y1="104" x2="30" y2="122" stroke="#4E342E" stroke-width="1.2"/>
+    <line x1="62" y1="104" x2="70" y2="122" stroke="#4E342E" stroke-width="1.2"/>
+    <line x1="44" y1="105" x2="42" y2="126" stroke="#4E342E" stroke-width="1.2"/>
+    <line x1="56" y1="105" x2="58" y2="126" stroke="#4E342E" stroke-width="1.2"/>
+    <rect x="30" y="120" width="40" height="5"  rx="2" fill="#4E342E"/>
+    <rect x="33" y="123" width="34" height="15" rx="3" fill="#6D4C41"/>
+  </svg>
+
+  <!-- Quadcopter drone — top center -->
+  <svg class="deco deco--drone" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Arms -->
+    <line x1="60" y1="40" x2="18" y2="12" stroke="#546E7A" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="60" y1="40" x2="102" y2="12" stroke="#546E7A" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="60" y1="40" x2="18" y2="68" stroke="#546E7A" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="60" y1="40" x2="102" y2="68" stroke="#546E7A" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Body -->
+    <rect x="46" y="28" width="28" height="24" rx="6" fill="#78909C"/>
+    <!-- Camera pod -->
+    <rect x="53" y="52" width="14" height="9" rx="3" fill="#607D8B"/>
+    <circle cx="60" cy="57" r="3.5" fill="#37474F"/>
+    <!-- Propeller guard rings -->
+    <circle cx="18" cy="12" r="12" stroke="#90A4AE" stroke-width="2" fill="#CFD8DC" fill-opacity="0.25"/>
+    <circle cx="102" cy="12" r="12" stroke="#90A4AE" stroke-width="2" fill="#CFD8DC" fill-opacity="0.25"/>
+    <circle cx="18" cy="68" r="12" stroke="#90A4AE" stroke-width="2" fill="#CFD8DC" fill-opacity="0.25"/>
+    <circle cx="102" cy="68" r="12" stroke="#90A4AE" stroke-width="2" fill="#CFD8DC" fill-opacity="0.25"/>
+    <!-- Propeller blades -->
+    <line x1="9"   y1="12" x2="27"  y2="12" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="18"  y1="3"  x2="18"  y2="21" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="93"  y1="12" x2="111" y2="12" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="102" y1="3"  x2="102" y2="21" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="9"   y1="68" x2="27"  y2="68" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="18"  y1="59" x2="18"  y2="77" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="93"  y1="68" x2="111" y2="68" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="102" y1="59" x2="102" y2="77" stroke="#B0BEC5" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Status LEDs -->
+    <circle cx="50" cy="37" r="2.5" fill="#4CAF50" fill-opacity="0.90"/>
+    <circle cx="70" cy="37" r="2.5" fill="#4CAF50" fill-opacity="0.90"/>
+  </svg>
 </div>
 
 <!-- Page title -->
@@ -19,7 +306,7 @@
   <div class="page-header__divider"></div>
 </header>
 
-<!-- Wavy road SVG — fills the full viewport; viewBox matches the % positions below -->
+<!-- Wavy timeline SVG -->
 <svg class="tl-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none"
      xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <path class="tl-road__shadow" [attr.d]="tlPath" transform="translate(0,14)"/>
@@ -30,78 +317,64 @@
 <!-- ── Milestones ────────────────────────────────────────────────────────────
      left / top percentages are (dot_x / 1920) and (dot_y / 1080) of the
      viewBox coordinates for that point on the SVG path above.
-     Because preserveAspectRatio="none", the SVG stretches to fill the
-     viewport, so CSS percentages map exactly to the path's visual position.
 ──────────────────────────────────────────────────────────────────────────── -->
 
-<!-- 1993 · left: 192/1920=10% · top: 592/1080=55% · card below -->
+<!-- 1993 · left: 10% · top: 55% · card below -->
 <div class="ms ms--1">
   <div class="ms__dot"></div>
   <div class="ms__stem ms__stem--down"></div>
   <div class="ms__card ms__card--below" (click)="openMs(1)">
-    <div class="ms__card-head">
-      <span class="ms__year">1993</span>
-    </div>
+    <div class="ms__card-head"><span class="ms__year">1993</span></div>
     <p class="ms__text">{{ 'KEY_MILESTONES.MS1_CONTENT' | translate }}</p>
   </div>
 </div>
 
-<!-- 1994–2000 · left: 538/1920=28% · top: 382/1080=35% · card above -->
+<!-- 1994–2000 · left: 28% · top: 35% · card above -->
 <div class="ms ms--2">
   <div class="ms__dot"></div>
   <div class="ms__stem ms__stem--up"></div>
   <div class="ms__card ms__card--above" (click)="openMs(2)">
-    <div class="ms__card-head">
-      <span class="ms__year">1994 – 2000</span>
-    </div>
+    <div class="ms__card-head"><span class="ms__year">1994 – 2000</span></div>
     <p class="ms__text">{{ 'KEY_MILESTONES.MS2_CONTENT' | translate }}</p>
   </div>
 </div>
 
-<!-- 2001 · left: 806/1920=42% · top: 500/1080=46% · card below -->
+<!-- 2001 · left: 42% · top: 46% · card below -->
 <div class="ms ms--3">
   <div class="ms__dot"></div>
   <div class="ms__stem ms__stem--down"></div>
   <div class="ms__card ms__card--below" (click)="openMs(3)">
-    <div class="ms__card-head">
-      <span class="ms__year">2001</span>
-    </div>
+    <div class="ms__card-head"><span class="ms__year">2001</span></div>
     <p class="ms__text">{{ 'KEY_MILESTONES.MS3_CONTENT' | translate }}</p>
   </div>
 </div>
 
-<!-- 2006 · left: 1114/1920=58% · top: 678/1080=63% · card above (path is near bottom, card goes up) -->
+<!-- 2006 · left: 58% · top: 63% · card above -->
 <div class="ms ms--4">
   <div class="ms__dot"></div>
   <div class="ms__stem ms__stem--up"></div>
   <div class="ms__card ms__card--above" (click)="openMs(4)">
-    <div class="ms__card-head">
-      <span class="ms__year">2006</span>
-    </div>
+    <div class="ms__card-head"><span class="ms__year">2006</span></div>
     <p class="ms__text">{{ 'KEY_MILESTONES.MS4_CONTENT' | translate }}</p>
   </div>
 </div>
 
-<!-- 2014 · left: 1423/1920=74% · top: 508/1080=47% · card below -->
+<!-- 2014 · left: 74% · top: 47% · card below -->
 <div class="ms ms--5">
   <div class="ms__dot"></div>
   <div class="ms__stem ms__stem--down"></div>
   <div class="ms__card ms__card--below" (click)="openMs(5)">
-    <div class="ms__card-head">
-      <span class="ms__year">2014</span>
-    </div>
+    <div class="ms__card-head"><span class="ms__year">2014</span></div>
     <p class="ms__text">{{ 'KEY_MILESTONES.MS5_CONTENT' | translate }}</p>
   </div>
 </div>
 
-<!-- 2020 · left: 1679/1920=87% · top: 382/1080=35% · card above -->
+<!-- 2020 · left: 87% · top: 35% · card above -->
 <div class="ms ms--6">
   <div class="ms__dot"></div>
   <div class="ms__stem ms__stem--up"></div>
   <div class="ms__card ms__card--above" (click)="openMs(6)">
-    <div class="ms__card-head">
-      <span class="ms__year">2020</span>
-    </div>
+    <div class="ms__card-head"><span class="ms__year">2020</span></div>
     <p class="ms__text">{{ 'KEY_MILESTONES.MS6_CONTENT' | translate }}</p>
   </div>
 </div>

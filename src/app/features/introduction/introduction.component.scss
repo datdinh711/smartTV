@@ -20,7 +20,7 @@
           user-select: none;
   display: block;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0faf1 0%, #c8e6c9 35%, #b2dfdb 70%, #80cbc4 100%);
+  background: linear-gradient(175deg, #f0faf3 0%, #e3f5e8 30%, #d8f0de 60%, #cce8d2 82%, #bddec4 100%);
   font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -50,8 +50,8 @@
   align-items: center;
   font-size: clamp(0.82rem, 1.1vw, 1.15rem);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  color: #0d2818;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.65);
   letter-spacing: 0.04em;
   white-space: nowrap;
   pointer-events: none;
@@ -486,5 +486,5 @@
 
 /* ─── Stage-1 circle overlay colour ────────────────────── */
 .circle-overlay {
-  --circle-overlay-bg: linear-gradient(180deg, #f0faf1 0%, #c8e6c9 40%, #b2dfdb 60%, #f0faf1 100%);
+  --circle-overlay-bg: linear-gradient(180deg, #f0faf3 0%, #e3f5e8 40%, #d8f0de 60%, #f0faf3 100%);
 }
