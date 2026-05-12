@@ -72,3 +72,6 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+/src/assets/videos/Sustainability_VDO_2026_EN_sub.mp4
+/src/assets/videos/Sustainability_VDO_2026_VN_sub.mp4

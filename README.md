@@ -114,6 +114,31 @@ npm run build
 
 ---
 
+## Running in Docker
+
+### Build and run with Docker Compose
+
+Create a bind mount from the host `src/assets/videos` folder into the container so the large video files are not baked into the image.
+
+```bash
+docker compose up --build -d
+```
+
+### Run with plain Docker
+
+```bash
+docker build -t smarttv .
+docker run -d -p 9877:9877 -v "${PWD}/src/assets/videos:/usr/share/nginx/html/assets/videos:ro" smarttv
+```
+
+If you are on Windows PowerShell, use:
+
+```powershell
+docker run -d -p 9877:9877 -v "${PWD}\src\assets\videos:/usr/share/nginx/html/assets/videos:ro" smarttv
+```
+
+---
+
 ## Running on Android TV
 
 ### Project Config
