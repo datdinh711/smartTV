@@ -147,6 +147,26 @@
       "CONSUMER_DESC": "Cung cấp thông tin đã được xác thực và đơn giản hóa, giúp người tiêu dùng dễ dàng tra cứu và tin tưởng vào nguồn gốc sản phẩm. Mỗi tem truy xuất là duy nhất.",
       "FOOTER_LINE_1": "Đảm bảo minh bạch trong từng công đoạn",
       "FOOTER_LINE_2": "Từ trang trại đến bếp nhà"
+    },
+    "GREEN_FARMING": {
+      "MODEL_TITLE": "Mô hình trang trại heo tuần hoàn",
+      "MODEL_DESC": "C.P. Việt Nam áp dụng kinh tế tuần hoàn thông qua việc triển khai mô hình “Tuần hoàn trong chăn nuôi heo”. Mô hình này tối ưu hóa việc xử lý chất thải để tạo ra các nguồn nguyên liệu mới phục vụ cho các hoạt động khác trong chuỗi giá trị, hình thành một hệ thống khép kín. Nhờ đó, chúng tôi không chỉ góp phần bảo vệ môi trường mà còn nâng cao hiệu quả vận hành.",
+      "NODE_FARM": "Trang trại heo",
+      "NODE_LIVESTOCK_WASTE": "Chất thải của gia súc",
+      "NODE_SEPARATOR": "Hệ thống phân loại chất thải",
+      "NODE_FERTILIZER": "Phân bón hữu cơ",
+      "NODE_MANURE": "Phân chuồng",
+      "NODE_WASTEWATER": "Nước thải",
+      "NODE_TREATMENT_L1": "Xử lý nước thải",
+      "NODE_TREATMENT_L2": "(Sản xuất khí sinh học)",
+      "NODE_VEGETABLES_GROW": "Trồng rau hữu cơ",
+      "NODE_VEGETABLES": "Rau củ hữu cơ",
+      "NODE_TREATED_WATER": "Nước thải được xử lý",
+      "NODE_SANITATION_L1": "Vệ sinh chuồng trại,",
+      "NODE_SANITATION_L2": "tưới cây",
+      "NODE_BIOGAS": "Khí sinh học",
+      "NODE_GENERATOR": "Máy phát điện",
+      "NODE_ELECTRICITY": "Điện"
     }
   },
   "STRATEGY": {
