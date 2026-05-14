@@ -147,6 +147,26 @@
       "CONSUMER_DESC": "Delivers verified and simplified product information, enabling consumers to easily access and trust product origins.",
       "FOOTER_LINE_1": "Ensuring full transparency at every step",
       "FOOTER_LINE_2": "From Farm to Family"
+    },
+    "GREEN_FARMING": {
+      "MODEL_TITLE": "Circular Swine Farm Model",
+      "MODEL_DESC": "C.P. Vietnam applies the circular economy through the implementation of the “Swine Circular” model. This model optimizes waste treatment to generate new sources of raw materials for other activities within the value chain, forming a closed-loop system. As a result, we not only contribute to environmental protection but also enhance operational efficiency.",
+      "NODE_FARM": "Swine Farm",
+      "NODE_LIVESTOCK_WASTE": "Livestock waste from farm",
+      "NODE_SEPARATOR": "Waste separation system",
+      "NODE_FERTILIZER": "Fertilizer",
+      "NODE_MANURE": "Manure",
+      "NODE_WASTEWATER": "Wastewater",
+      "NODE_TREATMENT_L1": "Wastewater Treatment",
+      "NODE_TREATMENT_L2": "(Producing Biogas)",
+      "NODE_VEGETABLES_GROW": "Plant organic vegetable",
+      "NODE_VEGETABLES": "Organic vegetable",
+      "NODE_TREATED_WATER": "Wastewater was treated",
+      "NODE_SANITATION_L1": "Clean farm,",
+      "NODE_SANITATION_L2": "watering trees",
+      "NODE_BIOGAS": "Biogas",
+      "NODE_GENERATOR": "Generator",
+      "NODE_ELECTRICITY": "Electricity"
     }
   },
   "STRATEGY": {
