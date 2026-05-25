@@ -47,4 +47,17 @@
       <span class="btn-sub">{{ 'DASHBOARD.BTN3_SUB' | translate }}</span>
     </span>
   </button>
+
+  <!-- QR code -->
+  <div class="qr-section">
+    <qrcode
+      [qrdata]="'https://www.cp.com.vn/'"
+      [width]="qrWidth"
+      [errorCorrectionLevel]="'M'"
+      [colorDark]="'#1a1a1a'"
+      [colorLight]="'#ffffff'"
+      [margin]="2">
+    </qrcode>
+    <p class="qr-label">www.cp.com.vn</p>
+  </div>
 </div>

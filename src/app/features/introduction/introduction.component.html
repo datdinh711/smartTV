@@ -6,7 +6,6 @@
 
   <h1 class="page-title">{{ 'INTRODUCTION.PAGE_TITLE' | translate }}</h1>
   <app-home-button></app-home-button>
-  <app-navigation-button [isNext]="false" destPath="dashboard"></app-navigation-button>
 
   <div class="intro-inner">
     <h1 class="main-title">{{ 'INTRODUCTION.MAIN_TITLE' | translate }}</h1>
@@ -16,7 +15,7 @@
 
       <!-- ── Card: Feed ── -->
       <button (click)="openDialogFeed()" type="button" class="card" aria-label="Feed">
-        <span class="card-img-wrap"><img [src]="asset('images/feed.png')" alt="Feed" class="card-bg" /></span>
+        <span class="card-img-wrap"><img [src]="asset('images/dialog_feed.jpg')" alt="Feed" class="card-bg" /></span>
         <div class="card-glass">
           <!-- SVG icon badge -->
           <span class="card-icon-badge" aria-hidden="true">
@@ -44,7 +43,7 @@
 
       <!-- ── Card: Farm ── -->
       <button (click)="openDialogFarm()" type="button" class="card" aria-label="Farm">
-        <span class="card-img-wrap"><img [src]="asset('images/farm.jpg')" alt="Farm" class="card-bg" /></span>
+        <span class="card-img-wrap"><img [src]="asset('images/dialog_farm.jpg')" alt="Farm" class="card-bg" /></span>
         <div class="card-glass">
           <span class="card-icon-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +68,7 @@
 
       <!-- ── Card: Food ── -->
       <button (click)="openDialogFood()" type="button" class="card" aria-label="Food">
-        <span class="card-img-wrap"><img [src]="asset('images/food.jpg')" alt="Food" class="card-bg" /></span>
+        <span class="card-img-wrap"><img [src]="asset('images/dialog_food.webp')" alt="Food" class="card-bg" /></span>
         <div class="card-glass">
           <span class="card-icon-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"

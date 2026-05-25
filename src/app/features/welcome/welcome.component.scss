@@ -257,19 +257,12 @@
   width:  clamp(56px, 7vw, calc(88px * var(--ui-scale)));
   height: clamp(56px, 7vw, calc(88px * var(--ui-scale)));
 
-  svg {
+  img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
 }
-
-/* Override SVG colours to match green palette */
-.cp-badge svg circle:first-child { stroke: rgba(0, 160, 60, 0.50); }
-.cp-badge svg circle:last-of-type {
-  fill: rgba(0, 128, 0, 0.16);
-  stroke: rgba(0, 160, 60, 0.65);
-}
-.cp-badge svg text { fill: #008000; }
 
 /* ── Eyebrow ────────────────────────────────────────────────── */
 .eyebrow {
