@@ -26,35 +26,141 @@
         <app-navigation-button destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CIRCULAR}}"></app-navigation-button>
         }
 
-        <!-- Left column -->
-        <div class="bio-col bio-col--left">
-          <div class="bio-section">
-            <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
-            <ul class="bio-list">
-              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
-              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
-              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
-              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
+        <!-- ── Top Row: Biosecurity ── -->
+        <div class="bio-top">
+          <div class="bio-text-panel">
+            <h3 class="bio-panel-title">{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
+            <ul class="bio-panel-list">
+              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
             </ul>
           </div>
-          <div class="bio-image-wrap">
-            <img class="bio-image" src="assets/images/biosecurity-farm.jpg" alt="Biosecurity Farm" />
-          </div>
+          <div class="bio-img-wrap" [style.background-image]="'url(assets/images/biosecurity_2.jpg)'"></div>
+          <div class="bio-img-wrap" [style.background-image]="'url(assets/images/biosecurity_1.jpg)'"></div>
         </div>
 
-        <!-- Right column -->
-        <div class="bio-col bio-col--right">
-          <div class="bio-image-wrap">
-            <img class="bio-image" src="assets/images/biosecurity-animal-welfare.jpg" alt="Animal Welfare" />
-          </div>
-          <div class="bio-section">
-            <h3 class="bio-title">{{ 'BUSINESS.BIOSECURITY.WELFARE_TITLE' | translate }}</h3>
-            <ul class="bio-list">
-              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
-              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
-              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
-              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
+        <!-- ── Middle: Welfare banner ── -->
+        <div class="welfare-banner-bar">
+          <span>{{ 'BUSINESS.BIOSECURITY.WELFARE_BANNER' | translate }}</span>
+        </div>
+
+        <!-- ── Bottom: Animal Welfare ── -->
+        <div class="welfare-bottom">
+
+          <!-- Left: text list (bilingual) -->
+          <div class="welfare-text-col">
+            <ul class="welfare-list">
+              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
+              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_5' | translate }}</li>
             </ul>
+          </div>
+
+          <!-- Right: freedom icon cards -->
+          <div class="welfare-icons-col">
+            <div class="freedom-cards">
+
+              <!-- 1. Hunger & Thirst -->
+              <div class="freedom-card">
+                <div class="freedom-icon">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Feeding trough -->
+                    <rect x="2" y="8" width="20" height="2" rx="1" fill="#e67e22" />
+                    <path d="M4 10h16l-1.5 8H5.5L4 10z" fill="#e67e22" />
+                    <path d="M8 13.5 Q10 12.5 12 13.5 Q14 14.5 16 13.5" stroke="white" stroke-width="1.5" fill="none"
+                      stroke-linecap="round" />
+                    <rect x="6" y="18" width="2.5" height="4" rx="1" fill="#e67e22" />
+                    <rect x="15.5" y="18" width="2.5" height="4" rx="1" fill="#e67e22" />
+                  </svg>
+                </div>
+                <p class="freedom-label">{{ 'BUSINESS.BIOSECURITY.FREEDOM_1_LABEL' | translate }}</p>
+              </div>
+
+              <!-- 2. Discomfort -->
+              <div class="freedom-card">
+                <div class="freedom-icon">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Barn / shelter -->
+                    <rect x="2" y="10" width="20" height="12" fill="#3498db" />
+                    <path d="M1 11L12 2l11 9H1z" fill="#2980b9" />
+                    <path d="M9 22v-7a3 3 0 016 0v7" fill="#1a6fa8" />
+                    <rect x="10" y="5" width="4" height="3" rx="0.5" fill="white" opacity="0.6" />
+                  </svg>
+                </div>
+                <p class="freedom-label">{{ 'BUSINESS.BIOSECURITY.FREEDOM_2_LABEL' | translate }}</p>
+              </div>
+
+              <!-- 3. Pain, Injury, Disease -->
+              <div class="freedom-card">
+                <div class="freedom-icon">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Stethoscope (veterinary) -->
+                    <circle cx="7" cy="4" r="1.5" fill="#e74c3c" />
+                    <circle cx="13" cy="4" r="1.5" fill="#e74c3c" />
+                    <path d="M7 5.5v4a3 3 0 006 0v-4" stroke="#e74c3c" stroke-width="2" fill="none"
+                      stroke-linecap="round" />
+                    <line x1="10" y1="9.5" x2="10" y2="13" stroke="#e74c3c" stroke-width="2" stroke-linecap="round" />
+                    <path d="M10 13 Q14 15 16 18" stroke="#e74c3c" stroke-width="2" fill="none"
+                      stroke-linecap="round" />
+                    <circle cx="17" cy="19" r="2.5" stroke="#e74c3c" stroke-width="2" fill="none" />
+                    <circle cx="17" cy="19" r="1" fill="#e74c3c" />
+                  </svg>
+                </div>
+                <p class="freedom-label">{{ 'BUSINESS.BIOSECURITY.FREEDOM_3_LABEL' | translate }}</p>
+              </div>
+
+              <!-- 4. Normal Behavior -->
+              <div class="freedom-card">
+                <div class="freedom-icon">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Pig silhouette -->
+                    <ellipse cx="11" cy="13" rx="5.5" ry="4" fill="#f48fb1" />
+                    <circle cx="17" cy="10.5" r="3.5" fill="#f48fb1" />
+                    <ellipse cx="15.5" cy="7.8" rx="1.2" ry="1.7" fill="#ec407a" transform="rotate(-15 15.5 7.8)" />
+                    <ellipse cx="19.8" cy="11.5" rx="1.5" ry="1.2" fill="#ec407a" />
+                    <circle cx="19.3" cy="11.2" r="0.35" fill="#f48fb1" />
+                    <circle cx="20.3" cy="11.2" r="0.35" fill="#f48fb1" />
+                    <circle cx="17.5" cy="9.8" r="0.6" fill="white" />
+                    <circle cx="17.7" cy="9.9" r="0.3" fill="#ec407a" />
+                    <path d="M5.5 12.5 Q3.5 11 4.5 9 Q5.5 7.5 7 9" stroke="#f48fb1" stroke-width="1.5" fill="none"
+                      stroke-linecap="round" />
+                    <rect x="8" y="16.5" width="2" height="4" rx="1" fill="#ec407a" />
+                    <rect x="11.5" y="17" width="2" height="3.5" rx="1" fill="#ec407a" />
+                    <rect x="14" y="16.5" width="2" height="3.5" rx="1" fill="#ec407a" />
+                  </svg>
+                </div>
+                <p class="freedom-label">{{ 'BUSINESS.BIOSECURITY.FREEDOM_4_LABEL' | translate }}</p>
+              </div>
+
+              <!-- 5. Fear & Distress -->
+              <div class="freedom-card">
+                <div class="freedom-icon">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Peaceful pig face on shield -->
+                    <path d="M12 2L4 5.5v6c0 4.8 3.3 9.3 8 11 4.7-1.7 8-6.2 8-11v-6L12 2z" fill="#27ae60" />
+                    <path d="M12 2L4 5.5v6c0 4.8 3.3 9.3 8 11 4.7-1.7 8-6.2 8-11v-6L12 2z" fill="none" stroke="white"
+                      stroke-width="1" stroke-linejoin="round" opacity="0.65"
+                      transform="translate(12 12) scale(0.82) translate(-12 -12)" />
+                    <circle cx="12" cy="11" r="4" fill="white" opacity="0.9" />
+                    <ellipse cx="9.5" cy="8.2" rx="1.2" ry="1.5" fill="#a5d6a7" />
+                    <ellipse cx="14.5" cy="8.2" rx="1.2" ry="1.5" fill="#a5d6a7" />
+                    <ellipse cx="12" cy="12.5" rx="1.8" ry="1.2" fill="#a5d6a7" />
+                    <circle cx="11.4" cy="12.3" r="0.4" fill="#27ae60" />
+                    <circle cx="12.6" cy="12.3" r="0.4" fill="#27ae60" />
+                    <circle cx="10.5" cy="10.5" r="0.5" fill="#27ae60" />
+                    <circle cx="13.5" cy="10.5" r="0.5" fill="#27ae60" />
+                    <path d="M10.5 11.5 Q12 12.8 13.5 11.5" stroke="#27ae60" stroke-width="0.8" fill="none"
+                      stroke-linecap="round" />
+                  </svg>
+                </div>
+                <p class="freedom-label">{{ 'BUSINESS.BIOSECURITY.FREEDOM_5_LABEL' | translate }}</p>
+              </div>
+
+            </div>
           </div>
         </div>
 

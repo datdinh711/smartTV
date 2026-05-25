@@ -95,16 +95,22 @@
       "IMPACT_LONG_TERM": "LÂU DÀI"
     },
     "BIOSECURITY": {
-      "BIOSECURITY_TITLE": "Đảm bảo an toàn sinh học",
-      "BIOSECURITY_ITEM_1": "Kiểm soát ra vào",
-      "BIOSECURITY_ITEM_2": "Quy trình vệ sinh, khử trùng",
-      "BIOSECURITY_ITEM_3": "Trang phục bảo hộ",
-      "BIOSECURITY_ITEM_4": "Phòng ngừa dịch bệnh",
-      "WELFARE_TITLE": "Thực hành phúc lợi động vật",
-      "WELFARE_ITEM_1": "Chuồng trại và bố trí nuôi phù hợp",
-      "WELFARE_ITEM_2": "Đảm bảo chế độ dinh dưỡng cho vật nuôi",
-      "WELFARE_ITEM_3": "Đảm bảo thông gió và kiểm soát nồng độ khí",
-      "WELFARE_ITEM_4": "Ưu tiên sức khỏe vật nuôi tại trang trại"
+      "BIOSECURITY_TITLE": "Quản lý an toàn sinh học trang trại",
+      "BIOSECURITY_ITEM_1": "Kiểm soát ra vào: con người, heo, hàng hóa, thức ăn, động vật trung gian,…",
+      "BIOSECURITY_ITEM_2": "Nghỉ cách ly",
+      "BIOSECURITY_ITEM_3": "Vệ sinh khử trùng",
+      "BIOSECURITY_ITEM_4": "Tiêm phòng vaccine đầy đủ, kiểm soát sức khỏe đàn",
+      "WELFARE_BANNER": "Phúc lợi động vật - Tiêu chuẩn \"5 quyền tự do\"",
+      "WELFARE_ITEM_1": "Không bị đói khát",
+      "WELFARE_ITEM_2": "Không bị khó chịu",
+      "WELFARE_ITEM_3": "Không bị đau đớn, thương tật, bệnh tật",
+      "WELFARE_ITEM_4": "Tự do thể hiện tập tính tự nhiên",
+      "WELFARE_ITEM_5": "Không bị sợ hãi và khủng hoảng tinh thần",
+      "FREEDOM_1_LABEL": "Tự do khỏi đói khát",
+      "FREEDOM_2_LABEL": "Tự do khỏi khó chịu",
+      "FREEDOM_3_LABEL": "Tự do khỏi đau đớn",
+      "FREEDOM_4_LABEL": "Tự do thể hiện tập tính",
+      "FREEDOM_5_LABEL": "Tự do khỏi sợ hãi"
     },
     "SMART_FARM": {
       "CARD_1_TITLE": "Hệ thống giám sát thông minh",

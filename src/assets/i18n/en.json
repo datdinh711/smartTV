@@ -95,16 +95,22 @@
       "IMPACT_LONG_TERM": "LONG-TERM"
     },
     "BIOSECURITY": {
-      "BIOSECURITY_TITLE": "Ensuring Farm Biosecurity",
-      "BIOSECURITY_ITEM_1": "Access Control",
-      "BIOSECURITY_ITEM_2": "Sanitation Protocols",
-      "BIOSECURITY_ITEM_3": "Protective Clothing",
-      "BIOSECURITY_ITEM_4": "Disease Prevention",
-      "WELFARE_TITLE": "Animal Welfare Commitment",
-      "WELFARE_ITEM_1": "Proper Housing & Grouping",
-      "WELFARE_ITEM_2": "Ensure correct diet",
-      "WELFARE_ITEM_3": "Ensure correct ventilation and concentration of gases",
-      "WELFARE_ITEM_4": "Ensure pig health is prioritised on-farm"
+      "BIOSECURITY_TITLE": "Farm biosecurity management",
+      "BIOSECURITY_ITEM_1": "Access Control: People, pigs, goods, feed, and vectors/pests...",
+      "BIOSECURITY_ITEM_2": "Quarantine",
+      "BIOSECURITY_ITEM_3": "Cleaning and Disinfection",
+      "BIOSECURITY_ITEM_4": "Vaccination and Health status",
+      "WELFARE_BANNER": "Animal Welfare - Five Freedoms",
+      "WELFARE_ITEM_1": "Freedom from Hunger and Thirst",
+      "WELFARE_ITEM_2": "Freedom from Discomfort",
+      "WELFARE_ITEM_3": "Freedom from Pain, Injury, and Disease",
+      "WELFARE_ITEM_4": "Freedom to Express Normal Behavior",
+      "WELFARE_ITEM_5": "Freedom from Fear and Distress",
+      "FREEDOM_1_LABEL": "Freedom from Hunger & Thirst",
+      "FREEDOM_2_LABEL": "Freedom from Discomfort",
+      "FREEDOM_3_LABEL": "Freedom from Pain & Disease",
+      "FREEDOM_4_LABEL": "Freedom to Express Behavior",
+      "FREEDOM_5_LABEL": "Freedom from Fear & Distress"
     },
     "SMART_FARM": {
       "CARD_1_TITLE": "Smart Monitoring System",
