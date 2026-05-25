@@ -152,6 +152,7 @@
       "MODEL_TITLE": "Circular Swine Farm Model",
       "MODEL_DESC": "C.P. Vietnam applies the circular economy through the implementation of the “Swine Circular” model. This model optimizes waste treatment to generate new sources of raw materials for other activities within the value chain, forming a closed-loop system. As a result, we not only contribute to environmental protection but also enhance operational efficiency.",
       "NODE_FARM": "Swine Farm",
+      "NODE_SOLAR": "Solar Energy",
       "NODE_LIVESTOCK_WASTE": "Livestock waste from farm",
       "NODE_SEPARATOR": "Waste separation system",
       "NODE_FERTILIZER": "Fertilizer",

@@ -139,7 +139,7 @@
         <div class="gf-model-body">
           <img class="gfi-bg" src="assets/images/green-farm.jpg" alt="" aria-hidden="true" />
           <div class="gfi-overlay"></div>
-          <svg class="gfi-svg" viewBox="0 0 1300 560" preserveAspectRatio="xMidYMid meet"
+          <svg class="gfi-svg" viewBox="0 0 1300 680" preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
               <marker id="arr-dn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -180,111 +180,122 @@
               Phân chuồng center x=420, Nước thải center x=740
             -->
 
+            <!-- ── Solar Energy → Farm ── -->
+            <line x1="500" y1="68" x2="500" y2="98" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+
             <!-- ── CENTER (down) ── -->
-            <!-- Farm bot=68 → Livestock top=86 -->
-            <line x1="500" y1="68" x2="500" y2="86" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-            <!-- Livestock bot=146 → Separator top=164 -->
-            <line x1="500" y1="146" x2="500" y2="164" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-            <!-- Separator bot=224 → split bar y=250 -->
-            <line x1="500" y1="224" x2="500" y2="464" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Farm bot=158 → Livestock top=186 -->
+            <line x1="500" y1="158" x2="500" y2="186" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Livestock bot=246 → Separator top=274 -->
+            <line x1="500" y1="246" x2="500" y2="274" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Separator bot=334 → split bar y=574 -->
+            <line x1="500" y1="334" x2="500" y2="574" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── MAIN SPLIT BAR y=466: x=420..740 (Phân chuồng & Nước thải) ── -->
-            <line x1="420" y1="466" x2="740" y2="466" stroke="#2e7d32" stroke-width="2" />
+            <!-- ── MAIN SPLIT BAR y=576: x=420..740 (Phân chuồng & Nước thải) ── -->
+            <line x1="420" y1="576" x2="740" y2="576" stroke="#2e7d32" stroke-width="2" />
             <!-- → Phân chuồng (x=420) ↓ -->
-            <line x1="420" y1="466" x2="420" y2="488" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="420" y1="576" x2="420" y2="598" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
             <!-- → Nước thải (x=740) ↓ -->
-            <line x1="740" y1="466" x2="740" y2="488" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="740" y1="576" x2="740" y2="598" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── Phân chuồng(center=420) → horizontal left → Phân bón(center=130) then up to Phân bón bot(488) ── -->
-            <line x1="340" y1="518" x2="130" y2="518" stroke="#2e7d32" stroke-width="2" />
-            <line x1="130" y1="518" x2="130" y2="334" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── Phân chuồng(center=420) → horizontal left → Phân bón(center=130) ── -->
+            <line x1="340" y1="628" x2="130" y2="628" stroke="#2e7d32" stroke-width="2" />
+            <line x1="130" y1="628" x2="130" y2="444" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── Nước thải(center=740) → horizontal right → Xử lý(left=970) at y=518 ── -->
-            <line x1="820" y1="518" x2="970" y2="518" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── Nước thải(center=740) → horizontal right → Xử lý(left=970) at y=628 ── -->
+            <line x1="820" y1="628" x2="970" y2="628" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── LEFT CHAIN: Phân bón(y=428,top) → up → Trồng rau(y=336) → Rau củ(y=244) ── -->
-            <!-- Phân bón top=274 → Trồng rau bot=244 -->
-            <line x1="130" y1="274" x2="130" y2="244" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-            <!-- Trồng rau top=184 → Rau củ bot=154 -->
-            <line x1="130" y1="184" x2="130" y2="154" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── LEFT CHAIN: Phân bón(y=384,top) → up → Trồng rau(y=294) → Rau củ(y=204) ── -->
+            <!-- Phân bón top=384 → Trồng rau bot=354 -->
+            <line x1="130" y1="384" x2="130" y2="354" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- Trồng rau top=294 → Rau củ bot=264 -->
+            <line x1="130" y1="294" x2="130" y2="264" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── RIGHT CHAIN: Xử lý top=488 → up → sub-split bar y=416 ── -->
-            <line x1="1080" y1="488" x2="1080" y2="416" stroke="#2e7d32" stroke-width="2" />
+            <!-- ── RIGHT CHAIN: Xử lý top=598 → up → sub-split bar y=526 ── -->
+            <line x1="1080" y1="598" x2="1080" y2="526" stroke="#2e7d32" stroke-width="2" />
 
-            <!-- ── SUB-SPLIT BAR y=416: x=820..1080 ── -->
-            <line x1="820" y1="416" x2="1080" y2="416" stroke="#2e7d32" stroke-width="2" />
+            <!-- ── SUB-SPLIT BAR y=526: x=820..1080 ── -->
+            <line x1="820" y1="526" x2="1080" y2="526" stroke="#2e7d32" stroke-width="2" />
             <!-- → Nước đã xử lý (x=820) -->
-            <line x1="820" y1="416" x2="820" y2="394" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="820" y1="526" x2="820" y2="504" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
             <!-- → Khí sinh (x=1080) -->
-            <line x1="1080" y1="416" x2="1080" y2="334" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="1080" y1="526" x2="1080" y2="444" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── SUB-LEFT: Nước đã xử lý(y=334) → Vệ sinh(y=244) ── -->
-            <line x1="820" y1="334" x2="820" y2="312" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── SUB-LEFT: Nước đã xử lý(y=444) → Vệ sinh(y=354) ── -->
+            <line x1="820" y1="444" x2="820" y2="422" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
-            <!-- ── SUB-RIGHT: Khí sinh(y=274) → Máy phát(y=184) → Điện(y=94) ── -->
-            <line x1="1080" y1="274" x2="1080" y2="244" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
-            <line x1="1080" y1="184" x2="1080" y2="154" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <!-- ── SUB-RIGHT: Khí sinh(y=384) → Máy phát(y=294) → Điện(y=204) ── -->
+            <line x1="1080" y1="384" x2="1080" y2="354" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
+            <line x1="1080" y1="294" x2="1080" y2="264" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-dn)" />
 
             <!-- ── LOOP-BACK ── -->
-            <!-- Rau củ top(130,94) → up → Farm left(386,40) -->
-            <line x1="130" y1="94" x2="130" y2="40" stroke="#2e7d32" stroke-width="2" />
-            <line x1="130" y1="40" x2="386" y2="40" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
-            <!-- Điện top(1080,94) → up → Farm right(612,20) -->
-            <line x1="1080" y1="94" x2="1080" y2="20" stroke="#2e7d32" stroke-width="2" />
-            <line x1="1080" y1="20" x2="612" y2="20" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
-            <!-- Vệ sinh top(820,244) → up → Farm right(612,48) -->
-            <line x1="820" y1="244" x2="820" y2="48" stroke="#2e7d32" stroke-width="2" />
-            <line x1="820" y1="48" x2="612" y2="48" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
+            <!-- Rau củ top(130,204) → up → Farm left(388,130) -->
+            <line x1="130" y1="204" x2="130" y2="130" stroke="#2e7d32" stroke-width="2" />
+            <line x1="130" y1="130" x2="388" y2="130" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
+            <!-- Điện top(1080,204) → up → Farm right(612,110) -->
+            <line x1="1080" y1="204" x2="1080" y2="110" stroke="#2e7d32" stroke-width="2" />
+            <line x1="1080" y1="110" x2="612" y2="110" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
+            <!-- Vệ sinh top(820,354) → up → Farm right(612,138) -->
+            <line x1="820" y1="354" x2="820" y2="138" stroke="#2e7d32" stroke-width="2" />
+            <line x1="820" y1="138" x2="612" y2="138" stroke="#2e7d32" stroke-width="2" marker-end="url(#arr-lp)" />
 
             <!-- ══════════ NODES ══════════ -->
 
-            <!-- Center column -->
-            <!-- Farm: x=388 y=8 w=224 h=60 bot=68 center-x=500 right=612 -->
+            <!-- Solar Energy: x=388 y=8 w=224 h=60 bot=68 center-x=500 -->
             <foreignObject x="388" y="8" width="224" height="60">
+              <div class="gfi-node gfi-node--electricity" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="gfi-icon">☀️</div>
+                <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_SOLAR' | translate }}</strong>
+              </div>
+            </foreignObject>
+
+            <!-- Center column -->
+            <!-- Farm: x=388 y=98 w=224 h=60 bot=158 center-x=500 right=612 -->
+            <foreignObject x="388" y="98" width="224" height="60">
               <div class="gfi-node gfi-node--main" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🏠</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_FARM' | translate }}</strong>
               </div>
             </foreignObject>
-            <!-- Livestock: y=86 h=60 bot=146 -->
-            <foreignObject x="405" y="86" width="190" height="60">
+            <!-- Livestock: y=186 h=60 bot=246 -->
+            <foreignObject x="405" y="186" width="190" height="60">
               <div class="gfi-node gfi-node--waste" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🐖</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_LIVESTOCK_WASTE' | translate }}</strong>
               </div>
             </foreignObject>
-            <!-- Separator: x=340 y=164 w=320 h=60 bot=224 -->
-            <foreignObject x="340" y="164" width="320" height="60">
+            <!-- Separator: x=340 y=274 w=320 h=60 bot=334 -->
+            <foreignObject x="340" y="274" width="320" height="60">
               <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">⚙️</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_SEPARATOR' | translate }}</strong>
               </div>
             </foreignObject>
 
-            <!-- ── BOTTOM ROW y=488 ── -->
+            <!-- ── BOTTOM ROW y=598 ── -->
             <!-- Phân bón: x=50 w=160 center=130 -->
-            <foreignObject x="50" y="274" width="160" height="60">
+            <foreignObject x="50" y="384" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🌿</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_FERTILIZER' | translate }}</strong>
               </div>
             </foreignObject>
             <!-- Phân chuồng: x=340 w=160 center=420 -->
-            <foreignObject x="340" y="488" width="160" height="60">
+            <foreignObject x="340" y="598" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">💩</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_MANURE' | translate }}</strong>
               </div>
             </foreignObject>
             <!-- Nước thải: x=660 w=160 center=740 -->
-            <foreignObject x="660" y="488" width="160" height="60">
+            <foreignObject x="660" y="598" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">💧</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_WASTEWATER' | translate }}</strong>
               </div>
             </foreignObject>
             <!-- Xử lý nước thải: x=930 w=220 center=1040≈1080 -->
-            <foreignObject x="970" y="488" width="220" height="60">
+            <foreignObject x="970" y="598" width="220" height="60">
               <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🏭</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_TREATMENT_L1' | translate }}<br>{{
@@ -293,15 +304,15 @@
             </foreignObject>
 
             <!-- Left branch (going up from Phân bón) -->
-            <!-- Trồng rau: x=50 y=184 h=60 bot=244 center-x=130 -->
-            <foreignObject x="50" y="184" width="160" height="60">
+            <!-- Trồng rau: x=50 y=294 h=60 bot=354 center-x=130 -->
+            <foreignObject x="50" y="294" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🥦</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_VEGETABLES_GROW' | translate }}</strong>
               </div>
             </foreignObject>
-            <!-- Rau củ: x=50 y=94 h=60 bot=154 center-x=130 -->
-            <foreignObject x="50" y="94" width="160" height="60">
+            <!-- Rau củ: x=50 y=204 h=60 bot=264 center-x=130 -->
+            <foreignObject x="50" y="204" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🥕</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_VEGETABLES' | translate }}</strong>
@@ -309,15 +320,15 @@
             </foreignObject>
 
             <!-- Sub-left branch (x=820) -->
-            <!-- Nước đã xử lý: x=720 y=334 h=60 bot=394 center=820 -->
-            <foreignObject x="720" y="334" width="200" height="60">
+            <!-- Nước đã xử lý: x=720 y=444 h=60 bot=504 center=820 -->
+            <foreignObject x="720" y="444" width="200" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🚿</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_TREATED_WATER' | translate }}</strong>
               </div>
             </foreignObject>
-            <!-- Vệ sinh: x=730 y=244 h=60 bot=304 center=820 -->
-            <foreignObject x="730" y="244" width="180" height="60">
+            <!-- Vệ sinh: x=730 y=354 h=60 bot=414 center=820 -->
+            <foreignObject x="730" y="354" width="180" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🌱</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_SANITATION_L1' | translate }}<br>{{
@@ -326,22 +337,22 @@
             </foreignObject>
 
             <!-- Sub-right branch (x=1080) -->
-            <!-- Khí sinh: x=1000 y=274 h=60 bot=334 -->
-            <foreignObject x="1000" y="274" width="160" height="60">
+            <!-- Khí sinh: x=1000 y=384 h=60 bot=444 -->
+            <foreignObject x="1000" y="384" width="160" height="60">
               <div class="gfi-node gfi-node--biogas" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">🔥</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_BIOGAS' | translate }}</strong>
               </div>
             </foreignObject>
-            <!-- Máy phát: x=1000 y=184 h=60 bot=244 -->
-            <foreignObject x="1000" y="184" width="160" height="60">
+            <!-- Máy phát: x=1000 y=294 h=60 bot=354 -->
+            <foreignObject x="1000" y="294" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">⚡</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_GENERATOR' | translate }}</strong>
               </div>
             </foreignObject>
-            <!-- Điện: x=1000 y=94 h=60 bot=154 -->
-            <foreignObject x="1000" y="94" width="160" height="60">
+            <!-- Điện: x=1000 y=204 h=60 bot=264 -->
+            <foreignObject x="1000" y="204" width="160" height="60">
               <div class="gfi-node gfi-node--electricity" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="gfi-icon">💡</div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_ELECTRICITY' | translate }}</strong>
