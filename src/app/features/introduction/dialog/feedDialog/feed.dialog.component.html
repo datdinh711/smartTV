@@ -2,8 +2,27 @@
 
 <div class="dialog-content" (animationend)="onContentAnimationEnd($event)">
   <div class="feed-dialog">
-    <!-- Header chính ở giữa -->
+    <!-- Header -->
     <div class="dialog-header">
+      <!-- Top-left card -->
+      <div class="dialog-feature-card">
+        <span class="feature-card-img-wrap"><img src="assets/images/dialog_feed.jpg" alt="" class="feature-card-bg" /></span>
+        <div class="feature-card-glass">
+        <span class="feature-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+               stroke="#00dd66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="22" x2="12" y2="8"/>
+            <path d="M12 8 C12 8, 7 6, 7 2 C7 2, 12 3, 12 8"/>
+            <path d="M12 8 C12 8, 17 6, 17 2 C17 2, 12 3, 12 8"/>
+            <path d="M12 13 C12 13, 7 11, 7 7 C7 7, 12 8, 12 13"/>
+            <path d="M12 13 C12 13, 17 11, 17 7 C17 7, 12 8, 12 13"/>
+            <path d="M12 18 C12 18, 8 16, 8 12 C8 12, 12 13, 12 18"/>
+            <path d="M12 18 C12 18, 16 16, 16 12 C16 12, 12 13, 12 18"/>
+          </svg>
+        </span>
+        <span class="feature-card-title">{{ 'INTRODUCTION.CARD_FEED_TITLE' | translate }}</span>
+        </div>
+      </div>
       <img src="assets/images/cp_logo.webp" alt="Feed" />
       <h2>{{ 'FEED_DIALOG.HEADER' | translate }}</h2>
     </div>
@@ -23,7 +42,6 @@
           <p>{{ 'FEED_DIALOG.SEC1_DESC' | translate }}</p>
         </div>
       </div>
-
       <div class="dialog-section">
         <img src="assets/images/factory.png" alt="Factory" />
         <div class="section-content">
@@ -31,7 +49,6 @@
           <p>{{ 'FEED_DIALOG.SEC2_DESC' | translate }}</p>
         </div>
       </div>
-
       <div class="dialog-section">
         <img src="assets/images/science.png" alt="Science" />
         <div class="section-content">

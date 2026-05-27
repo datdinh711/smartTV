@@ -309,6 +309,37 @@
   }
 }
 
+/* ── QR code ────────────────────────────────────────────────── */
+.button-container {
+  position: relative;
+}
+
+.qr-section {
+  position: absolute;
+  bottom: clamp(1rem, 2.5vh, calc(2rem * var(--ui-scale)));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+
+  qrcode {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.qr-label {
+  margin: 0;
+  font-size: clamp(0.6rem, 0.8vw, calc(0.75rem * var(--ui-scale)));
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
 /* ── Short landscape screens (e.g. phone in landscape) ── */
 @media (max-height: 500px) {
   .button-container {
