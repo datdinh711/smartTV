@@ -150,6 +150,13 @@
       "FOOTER_LINE_1": "Đảm bảo minh bạch trong từng công đoạn",
       "FOOTER_LINE_2": "Từ trang trại đến bếp nhà"
     },
+    "ANIMAL_HEALTH_DIALOG": {
+      "ITEM_1_TITLE": "Đội ngũ bác sĩ thú y chuyên môn cao",
+      "ITEM_2_TITLE": "Hệ thống phòng xét nghiệm thú y hiện đại",
+      "ITEM_3_TITLE": "Phòng xét nghiệm thực phẩm đạt chứng nhận ISO 17025:2017",
+      "ITEM_4_TITLE": "Mobile Veterinary Service (Chẩn đoán và tư vấn ngay tại trại)",
+      "ITEM_5_TITLE": "Sử dụng kháng sinh có trách nhiệm"
+    },
     "GREEN_FARMING": {
       "MODEL_TITLE": "Mô hình trang trại heo tuần hoàn",
       "MODEL_DESC": "C.P. Việt Nam áp dụng kinh tế tuần hoàn thông qua việc triển khai mô hình “Tuần hoàn trong chăn nuôi heo”. Mô hình này tối ưu hóa việc xử lý chất thải để tạo ra các nguồn nguyên liệu mới phục vụ cho các hoạt động khác trong chuỗi giá trị, hình thành một hệ thống khép kín. Nhờ đó, chúng tôi không chỉ góp phần bảo vệ môi trường mà còn nâng cao hiệu quả vận hành.",

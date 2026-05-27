@@ -476,7 +476,7 @@
         <app-navigation-button [isNext]="false"
           destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.GREEN_FARMING}}"></app-navigation-button>
         <app-navigation-button
-          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT}}"></app-navigation-button>
         }
 
         <div class="smart-farm-cards">
@@ -518,11 +518,57 @@
       </div>
     </div>
 
+    <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT">
+      <div class="smart-farm-container">
+        @if (businessId === BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT) {
+        <app-navigation-button [isNext]="false"
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.SMART_FARM_TECHNOLOGY}}"></app-navigation-button>
+        <app-navigation-button
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.TRACEABILITY}}"></app-navigation-button>
+        }
+        <div class="animal-health-img-wrap">
+          <div class="animal-health-interactive">
+            <img class="animal-health-img"
+              [src]="currentLang === 'en' ? 'assets/images/animal_health_overview_eng.png' : 'assets/images/animal_health_overview_vie.png'"
+              alt="Animal Health Management Overview" />
+            <!--
+              SVG overlay – viewBox matches image intrinsic size (1927×1080).
+              preserveAspectRatio="xMidYMid meet" scales identically to the image.
+              Rect coordinates are in image-pixel space → always aligned regardless of display size.
+            -->
+            <svg class="ah-hotspot-svg" viewBox="0 0 1927 1080" preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+              <!-- 01 – Đội ngũ bác sĩ thú y chuyên môn cao -->
+              <rect class="ah-rect" x="820" y="0" width="745" height="200" rx="10" role="button" tabindex="0"
+                aria-label="Mục 01" (click)="openAnimalHealthItemDialog(1)" />
+              <!-- 02 – Hệ thống phòng xét nghiệm thú y hiện đại -->
+              <rect class="ah-rect" x="920" y="222" width="745" height="200" rx="10" role="button" tabindex="0"
+                aria-label="Mục 02" (click)="openAnimalHealthItemDialog(2)" />
+              <!-- 03 – Phòng xét nghiệm thực phẩm ISO 17025:2017 -->
+              <rect class="ah-rect" x="970" y="440" width="945" height="200" rx="10" role="button" tabindex="0"
+                aria-label="Mục 03" (click)="openAnimalHealthItemDialog(3)" />
+              <!-- 04 – Mobile Veterinary Service -->
+              <rect class="ah-rect" x="950" y="660" width="945" height="200" rx="10" role="button" tabindex="0"
+                aria-label="Mục 04" (click)="openAnimalHealthItemDialog(4)" />
+              <!-- 05 – Sử dụng kháng sinh có trách nhiệm -->
+              <rect class="ah-rect" x="800" y="890" width="745" height="180" rx="10" role="button" tabindex="0"
+                aria-label="Mục 05" (click)="openAnimalHealthItemDialog(5)" />
+            </svg>
+          </div>
+        </div>
+
+        @if (activeAnimalHealthItem !== null) {
+        <app-animal-health-item-dialog [itemId]="activeAnimalHealthItem" (closeEvent)="closeAnimalHealthItemDialog()">
+        </app-animal-health-item-dialog>
+        }
+      </div>
+    </div>
+
     <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.TRACEABILITY">
       <div class="trace-page">
         @if (businessId === BUSINESS_PATH.TRACEABILITY) {
         <app-navigation-button [isNext]="false"
-          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.SMART_FARM_TECHNOLOGY}}"></app-navigation-button>
+          destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT}}"></app-navigation-button>
         <app-navigation-button
           destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.CERTIFICATION}}"></app-navigation-button>
         }
