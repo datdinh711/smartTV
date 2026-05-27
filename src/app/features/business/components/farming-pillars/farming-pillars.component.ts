@@ -4,9 +4,10 @@ import { NavigationEnd, RouteConfigLoadEnd, Router } from '@angular/router';
 import { APP_ROUTES } from '@core/constants';
 import { NavigatorService } from '@core/services';
 import { BUSINESS_PATH } from '@features/business/constants';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavigationButtonComponent } from '@shared/components';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
+import { AnimalHealthItemDialogComponent } from './dialogs/animal-health-item-dialog/animal-health-item-dialog.component';
 import { GreenFarmingDialogComponent } from './dialogs/green-farming-dialog/green-farming-dialog.component';
 import { RenewableEnergyDialogComponent } from './dialogs/renewable-energy-dialog/renewable-energy-dialog.component';
 import { WastewaterDialogComponent } from './dialogs/wastewater-dialog/wastewater-dialog.component';
@@ -14,7 +15,7 @@ import { WastewaterDialogComponent } from './dialogs/wastewater-dialog/wastewate
 @Component({
   selector: 'app-farming-pillars',
   standalone: true,
-  imports: [NavigationButtonComponent, CommonModule, RenewableEnergyDialogComponent, WastewaterDialogComponent, GreenFarmingDialogComponent, TranslateModule],
+  imports: [NavigationButtonComponent, CommonModule, RenewableEnergyDialogComponent, WastewaterDialogComponent, GreenFarmingDialogComponent, AnimalHealthItemDialogComponent, TranslateModule],
   templateUrl: './farming-pillars.component.html',
   styleUrl: './farming-pillars.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,21 +36,28 @@ export class FarmingPillarsComponent implements OnInit, OnDestroy {
       id: BUSINESS_PATH.SMART_FARM_TECHNOLOGY,
     },
     {
+      name: 'Animal Health Management',
+      id: BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT,
+    },
+    {
       name: 'Traceability & Certification',
       id: BUSINESS_PATH.TRACEABILITY,
       subId: BUSINESS_PATH.CERTIFICATION,
     },
   ];
   businessId: string = '';
+  currentLang: 'en' | 'vi' = 'vi';
 
   BUSINESS_PATH = BUSINESS_PATH;
   APP_ROUTES = APP_ROUTES;
 
   private _preloadedImages: HTMLImageElement[] = [];
+  private _langSub?: Subscription;
 
   isRenewableEnergyDialogOpen = false;
   isWastewaterDialogOpen = false;
   isGreenFarmingDialogOpen = false;
+  activeAnimalHealthItem: number | null = null;
 
   openRenewableEnergyDialog(): void { this.isRenewableEnergyDialogOpen = true; }
   closeRenewableEnergyDialog(): void { this.isRenewableEnergyDialogOpen = false; }
@@ -60,10 +68,21 @@ export class FarmingPillarsComponent implements OnInit, OnDestroy {
   openGreenFarmingDialog(): void { this.isGreenFarmingDialogOpen = true; }
   closeGreenFarmingDialog(): void { this.isGreenFarmingDialogOpen = false; }
 
+  openAnimalHealthItemDialog(id: number): void {
+    this.activeAnimalHealthItem = id;
+    this._cdr.markForCheck();
+  }
+
+  closeAnimalHealthItemDialog(): void {
+    this.activeAnimalHealthItem = null;
+    this._cdr.markForCheck();
+  }
+
   constructor(
     private readonly _router: Router,
     private readonly _navigatorService: NavigatorService,
     private readonly _cdr: ChangeDetectorRef,
+    private readonly _translate: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -72,6 +91,12 @@ export class FarmingPillarsComponent implements OnInit, OnDestroy {
     // Get url when initial loading
     const initialUrl = this._router.url;
     this.businessId = initialUrl.split('/').pop() ?? '';
+
+    this.currentLang = (this._translate.currentLang ?? this._translate.defaultLang ?? 'vi') as 'en' | 'vi';
+    this._langSub = this._translate.onLangChange.subscribe(({ lang }) => {
+      this.currentLang = lang as 'en' | 'vi';
+      this._cdr.markForCheck();
+    });
 
     this._handleNavigationEnd();
   }
@@ -87,6 +112,7 @@ export class FarmingPillarsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._preloadedImages.forEach((img) => (img.src = ''));
     this._preloadedImages = [];
+    this._langSub?.unsubscribe();
   }
 
   private _handleNavigationEnd() {

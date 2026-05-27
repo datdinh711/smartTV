@@ -150,6 +150,13 @@
       "FOOTER_LINE_1": "Ensuring full transparency at every step",
       "FOOTER_LINE_2": "From Farm to Family"
     },
+    "ANIMAL_HEALTH_DIALOG": {
+      "ITEM_1_TITLE": "Highly Qualified Veterinary Professionals",
+      "ITEM_2_TITLE": "Modern Veterinary Diagnostic Laboratory Network",
+      "ITEM_3_TITLE": "ISO/IEC 17025:2017 Certified Food Testing Laboratories",
+      "ITEM_4_TITLE": "Mobile Veterinary Service (One-Stop Service)",
+      "ITEM_5_TITLE": "Responsible Antibiotic Use"
+    },
     "GREEN_FARMING": {
       "MODEL_TITLE": "Circular Swine Farm Model",
       "MODEL_DESC": "C.P. Vietnam applies the circular economy through the implementation of the “Swine Circular” model. This model optimizes waste treatment to generate new sources of raw materials for other activities within the value chain, forming a closed-loop system. As a result, we not only contribute to environmental protection but also enhance operational efficiency.",
