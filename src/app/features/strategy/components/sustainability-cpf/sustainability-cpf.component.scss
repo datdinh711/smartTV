@@ -191,30 +191,11 @@
   color: #8b4f1c;
 }
 
-@media (max-width: 960px) {
-  .cpf-container {
-    grid-template-columns: 1fr;
-    width: 100%;
-    gap: 1.5rem;
-  }
 
-  .cpf-card {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
+@media (max-height: 1400px) {
   .cpf-card-left,
   .cpf-card-right {
-    padding: 1.25rem 1.125rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .cpf-quote-text {
-    font-size: 1.14rem;
-  }
-
-  .cpf-card {
-    min-height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
