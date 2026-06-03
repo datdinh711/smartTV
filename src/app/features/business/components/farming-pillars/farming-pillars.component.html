@@ -389,7 +389,7 @@
             <!-- Phân chuồng: x=340 w=160 center=420 -->
             <foreignObject x="340" y="598" width="160" height="60">
               <div class="gfi-node gfi-node--secondary" xmlns="http://www.w3.org/1999/xhtml">
-                <div class="gfi-icon">💩</div>
+                <div class="gfi-icon">🐖<span style="font-size:0.55em;vertical-align:middle">💩</span></div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_MANURE' | translate }}</strong>
               </div>
             </foreignObject>
@@ -403,7 +403,23 @@
             <!-- Xử lý nước thải: x=930 w=220 center=1040≈1080 -->
             <foreignObject x="970" y="598" width="220" height="60">
               <div class="gfi-node gfi-node--separator" xmlns="http://www.w3.org/1999/xhtml">
-                <div class="gfi-icon">🏭</div>
+                <div class="gfi-icon">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="display:inline-block;vertical-align:middle">
+                    <!-- Hầm biogas: thân hình chữ nhật + mái vòm + ống khí -->
+                    <rect x="3" y="12" width="18" height="9" rx="1" fill="#78909c" />
+                    <path d="M3 12 Q3 5 12 5 Q21 5 21 12Z" fill="#90a4ae" />
+                    <!-- Ống khí trên đỉnh -->
+                    <rect x="11" y="2" width="2" height="4" rx="0.5" fill="#607d8b" />
+                    <rect x="9.5" y="2" width="5" height="1.5" rx="0.5" fill="#607d8b" />
+                    <!-- Bong bóng khí -->
+                    <circle cx="9" cy="15" r="1.2" fill="#b0bec5" opacity="0.7" />
+                    <circle cx="13" cy="16.5" r="0.8" fill="#b0bec5" opacity="0.7" />
+                    <circle cx="16" cy="14.5" r="1" fill="#b0bec5" opacity="0.7" />
+                    <!-- Cửa hầm -->
+                    <rect x="10" y="17" width="4" height="4" rx="0.5" fill="#546e7a" />
+                  </svg>
+                </div>
                 <strong>{{ 'BUSINESS.GREEN_FARMING.NODE_TREATMENT_L1' | translate }}<br>{{
                   'BUSINESS.GREEN_FARMING.NODE_TREATMENT_L2' | translate }}</strong>
               </div>
@@ -539,19 +555,19 @@
             <svg class="ah-hotspot-svg" viewBox="0 0 1927 1080" preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
               <!-- 01 – Đội ngũ bác sĩ thú y chuyên môn cao -->
-              <rect class="ah-rect" x="820" y="0" width="745" height="200" rx="10" role="button" tabindex="0"
+              <rect class="ah-rect" x="865" y="10" width="645" height="180" rx="10" role="button" tabindex="0"
                 aria-label="Mục 01" (click)="openAnimalHealthItemDialog(1)" />
               <!-- 02 – Hệ thống phòng xét nghiệm thú y hiện đại -->
-              <rect class="ah-rect" x="920" y="222" width="745" height="200" rx="10" role="button" tabindex="0"
+              <rect class="ah-rect" x="950" y="230" width="690" height="180" rx="10" role="button" tabindex="0"
                 aria-label="Mục 02" (click)="openAnimalHealthItemDialog(2)" />
               <!-- 03 – Phòng xét nghiệm thực phẩm ISO 17025:2017 -->
-              <rect class="ah-rect" x="970" y="440" width="945" height="200" rx="10" role="button" tabindex="0"
+              <rect class="ah-rect" x="1025" y="455" width="870" height="180" rx="10" role="button" tabindex="0"
                 aria-label="Mục 03" (click)="openAnimalHealthItemDialog(3)" />
               <!-- 04 – Mobile Veterinary Service -->
-              <rect class="ah-rect" x="950" y="660" width="945" height="200" rx="10" role="button" tabindex="0"
+              <rect class="ah-rect" x="950" y="675" width="930" height="180" rx="10" role="button" tabindex="0"
                 aria-label="Mục 04" (click)="openAnimalHealthItemDialog(4)" />
               <!-- 05 – Sử dụng kháng sinh có trách nhiệm -->
-              <rect class="ah-rect" x="800" y="890" width="745" height="180" rx="10" role="button" tabindex="0"
+              <rect class="ah-rect" x="870" y="890" width="620" height="180" rx="10" role="button" tabindex="0"
                 aria-label="Mục 05" (click)="openAnimalHealthItemDialog(5)" />
             </svg>
           </div>

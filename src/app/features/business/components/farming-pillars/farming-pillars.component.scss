@@ -167,18 +167,39 @@
         pointer-events: none; // only rects are clickable
 
         .ah-rect {
-          fill: transparent;
+          fill: rgba(255, 255, 255, 0.04);
+          stroke: rgba(255, 255, 255, 0.55);
+          stroke-width: 2;
+          rx: 10;
           cursor: pointer;
           pointer-events: all;
           outline: none;
+          animation: ah-pulse 2s ease-in-out infinite;
+
+          &:nth-child(2) { animation-delay: 0.4s; }
+          &:nth-child(3) { animation-delay: 0.8s; }
+          &:nth-child(4) { animation-delay: 1.2s; }
+          &:nth-child(5) { animation-delay: 1.6s; }
 
           &:hover,
           &:focus,
-          &:focus-visible,
-          &:active {
-            fill: transparent;
-            stroke: none;
+          &:focus-visible {
+            fill: rgba(255, 255, 255, 0.12);
+            stroke: rgba(255, 255, 255, 0.9);
+            stroke-width: 2.5;
+            animation: none;
             outline: none;
+          }
+        }
+
+        @keyframes ah-pulse {
+          0%, 100% {
+            stroke-opacity: 0.2;
+            fill-opacity: 0.03;
+          }
+          50% {
+            stroke-opacity: 0.85;
+            fill-opacity: 0.1;
           }
         }
       }
@@ -589,7 +610,6 @@
           line-height: 1.65;
           margin: 0;
           opacity: 0.92;
-          max-width: 960px;
         }
       }
 

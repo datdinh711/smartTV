@@ -13,13 +13,13 @@ export class SlideshowService implements OnDestroy {
   private _currentIndex = 0;
 
   private _routeSequence: SlideRoute[] = [
-    { path: `/${APP_ROUTES.WELCOME}`, durationMs: 5000 },
-    { path: `/${APP_ROUTES.DASHBOARD}`, durationMs: 5000 },
+    { path: `/${APP_ROUTES.WELCOME}`, durationMs: 10000 },
+    { path: `/${APP_ROUTES.DASHBOARD}`, durationMs: 10000 },
   ];
 
   private _running = false;
 
-  constructor(private readonly _router: Router) {}
+  constructor(private readonly _router: Router) { }
 
   start(): void {
     if (this._running) {

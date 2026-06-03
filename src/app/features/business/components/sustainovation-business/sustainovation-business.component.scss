@@ -149,17 +149,20 @@
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       color: #e53935;
-      font-size: clamp(1rem, 1.6vw, 1.6rem);
+      font-size: clamp(1.25rem, 1.1vw, 1.1rem);
       font-weight: 900;
       letter-spacing: 4px;
       text-transform: uppercase;
       white-space: nowrap;
+      filter: blur(0.6px);
+      text-shadow: 0 0 8px rgba(229, 57, 53, 0.6);
     }
   }
 
   // ── Pillars ───────────────────────────────────────────────
   .pillars {
-    width: 80%;
+    height: 12%;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 4px 24px 0;
