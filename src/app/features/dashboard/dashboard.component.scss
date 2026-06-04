@@ -69,7 +69,7 @@
 ═══════════════════════════════════════════════════════════════ */
 .button-container .button__primary {
   /* ── Size: fluid between mobile min and TV max ── */
-  width:      clamp(220px, 26vw, calc(360px * var(--ui-scale)));
+  width:      clamp(220px, 26vw, calc(380px * var(--ui-scale)));
   min-height: clamp(110px, 18vh, calc(180px * var(--ui-scale)));
   height: auto;
   padding:

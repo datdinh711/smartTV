@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log('User is active, stopping slideshow...');
         if (this._slideshowService.isRunning()) {
           this._slideshowService.stop();
-          this._navigatorService.goToDashboard();
+          this._navigatorService.goToWelcome();
         }
       });
   }
