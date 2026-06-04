@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { APP_ROUTES } from '@core/constants';
-import { NavigatorService } from '@core/services';
+import { getVideoVersionFromLanguage, NavigatorService, VideoCacheService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants/strategy-route.constant';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -15,7 +15,7 @@ import {
   templateUrl: './sustainability-vdo.component.html',
   styleUrl: './sustainability-vdo.component.scss',
 })
-export class SustainabilityVdoComponent {
+export class SustainabilityVdoComponent implements OnInit {
   farmingPillarsPath = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
 
   APP_ROUTE = APP_ROUTES;
@@ -24,16 +24,19 @@ export class SustainabilityVdoComponent {
   backPath: string = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_STRATEGY}`;
   nextPath: string =
     `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_REGCONIGTION}`;
+  videoSrc = '';
 
   constructor(
     private readonly _navigatorService: NavigatorService,
+    private readonly _videoCacheService: VideoCacheService,
     private readonly _translate: TranslateService,
   ) { }
 
-  get videoSrc(): string {
-    return this._translate.getCurrentLang() === 'en'
-      ? 'assets/videos/Sustainability_VDO_2026_EN_sub.mp4'
-      : 'assets/videos/Sustainability_VDO_2026_VN_sub.mp4';
+  async ngOnInit(): Promise<void> {
+    this.videoSrc = await this._videoCacheService.getVideoUrl(
+      'sustainability-vdo',
+      getVideoVersionFromLanguage(this._translate.currentLang),
+    );
   }
 
   onVideoEnded(): void {

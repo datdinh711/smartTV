@@ -30,8 +30,7 @@
                 "input": "src/assets",
                 "output": "/assets",
                 "ignore": [
-                  "videos/Sustainability_VDO_2026_EN_sub.mp4",
-                  "videos/Sustainability_VDO_2026_VN_sub.mp4"
+                  "videos/*.mp4"
                 ]
               }
             ],

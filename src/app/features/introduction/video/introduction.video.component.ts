@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavigatorService } from '@core/services';
+import { getVideoVersionFromLanguage, NavigatorService, VideoCacheService } from '@core/services';
 import { NavigationSource } from '@core/enums';
+import { TranslateService } from '@ngx-translate/core';
 import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
 import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
@@ -35,6 +36,8 @@ export class IntroductionVideoComponent implements OnInit, OnDestroy {
     private readonly _navigatorService: NavigatorService,
     private readonly _inactivityService: InactivityService,
     private readonly _router: Router,
+    private readonly _videoCacheService: VideoCacheService,
+    private readonly _translate: TranslateService,
     @Inject(DOCUMENT) private readonly _document: Document,
   ) {
     // getCurrentNavigation() is only valid inside the constructor.
@@ -49,10 +52,13 @@ export class IntroductionVideoComponent implements OnInit, OnDestroy {
     if (!this._baseHref.endsWith('/')) {
       this._baseHref += '/';
     }
-    this.videoPath = this.asset('videos/Cp-vdo.mp4');
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.videoPath = await this._videoCacheService.getVideoUrl(
+      'introduction',
+      getVideoVersionFromLanguage(this._translate.currentLang),
+    );
     this._inactivityService.start();
     this._inactivityService.onInactive$
       .pipe(takeUntil(this._destroy$))
