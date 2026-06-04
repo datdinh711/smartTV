@@ -17,6 +17,7 @@
       <button (click)="openDialogFeed()" type="button" class="card" aria-label="Feed">
         <span class="card-img-wrap"><img [src]="asset('images/dialog_feed.jpg')" alt="Feed" class="card-bg" /></span>
         <div class="card-glass">
+          <img [src]="asset('images/dialog_feed.jpg')" alt="" class="card-glass-bg" aria-hidden="true" />
           <!-- SVG icon badge -->
           <span class="card-icon-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +46,7 @@
       <button (click)="openDialogFarm()" type="button" class="card" aria-label="Farm">
         <span class="card-img-wrap"><img [src]="asset('images/dialog_farm.jpg')" alt="Farm" class="card-bg" /></span>
         <div class="card-glass">
+          <img [src]="asset('images/dialog_farm.jpg')" alt="" class="card-glass-bg" aria-hidden="true" />
           <span class="card-icon-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                  stroke="#00dd66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -68,8 +70,9 @@
 
       <!-- ── Card: Food ── -->
       <button (click)="openDialogFood()" type="button" class="card" aria-label="Food">
-        <span class="card-img-wrap"><img [src]="asset('images/dialog_food.webp')" alt="Food" class="card-bg" /></span>
+        <span class="card-img-wrap"><img [src]="asset('images/dialog_food.webp')" alt="Food" class="card-bg card-bg--right" /></span>
         <div class="card-glass">
+          <img [src]="asset('images/dialog_food.webp')" alt="" class="card-glass-bg card-glass-bg--right" aria-hidden="true" />
           <span class="card-icon-badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                  stroke="#00dd66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -102,7 +105,7 @@
     </div>
   </div>
 
-  <app-navigation-button [isNext]="true" (click)="nextSlide()"></app-navigation-button>
+
 </div>
 
 <!--

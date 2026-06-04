@@ -2,12 +2,12 @@
   "KEY_MILESTONES": {
     "PAGE_TITLE": "About C.P. Vietnam",
     "PAGE_HEADER": "Development Journey",
-    "MS1_CONTENT": "Establishing C.P. Viet Nam Co., Ltd in Dong Nai; beginning industrial processing development.",
-    "MS2_CONTENT": "Developing livestock systems for fish, shrimp, and family farm models.",
-    "MS3_CONTENT": "Building Dong Nai food processing plant, marking the start of the food industry.",
-    "MS4_CONTENT": "Developing processed food industry and distributing livestock products.",
-    "MS5_CONTENT": "Developing CP Pork shop distribution system.",
-    "MS6_CONTENT": "Inaugurating the breeding and export chicken processing complex in Binh Phuoc."
+    "MS1_CONTENT": "Establishing C.P. Viet Nam Co., Ltd in Dong Nai; beginning industrial processing development",
+    "MS2_CONTENT": "Developing livestock systems for fish, shrimp, and family farm models",
+    "MS3_CONTENT": "Building Dong Nai food processing plant, marking the start of the food industry",
+    "MS4_CONTENT": "Developing processed food industry and distributing livestock products",
+    "MS5_CONTENT": "Developing CP Pork shop distribution system",
+    "MS6_CONTENT": "Inaugurating the breeding and export chicken processing complex in Binh Phuoc"
   },
   "FOOD_DIALOG": {
     "HEADER": "CLOSED-LOOP PROCESS",
@@ -66,6 +66,7 @@
   },
   "WELCOME": {
     "EYEBROW": "Welcome to",
+    "VIETNAM": "VIETNAM",
     "TAGLINE": "From farm to family",
     "CTA": "Touch to begin",
     "CORP": "Corporation"

@@ -180,12 +180,13 @@
   will-change: transform;
 }
 
-/* Image clipping wrapper */
+/* Image clipping wrapper — stops at card-glass top edge */
 .card-img-wrap {
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0;
+  bottom: calc(clamp(0.6rem, 1.5vh, 1.4rem) * 2 + clamp(34px, 3.6vw, 72px));
   overflow: hidden;
-  border-radius: inherit;
+  border-radius: clamp(14px, 1.4vw, 28px) clamp(14px, 1.4vw, 28px) 0 0;
   z-index: 0;
   display: block;
 }
@@ -199,6 +200,7 @@
   transition: transform 0.4s ease;
 }
 .card:hover .card-bg { transform: scale(1.04); }
+.card-bg--right { object-position: right center; }
 
 /* Dark gradient scrim */
 .card::before {
@@ -287,6 +289,7 @@
   position: absolute;
   bottom: 0; left: 0; right: 0;
   z-index: 3;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -296,13 +299,38 @@
     clamp(0.6rem, 1.5vh, 1.4rem)
     clamp(0.75rem, 1.6vw, 1.75rem);
 
+}
+
+.card-glass-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: 0;
+  border-radius: 0 0 clamp(14px, 1.4vw, 28px) clamp(14px, 1.4vw, 28px);
+}
+.card-glass-bg--right { object-position: right bottom; }
+
+.card-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   background: rgba(255, 255, 255, 0.13);
   backdrop-filter: blur(20px) saturate(170%) brightness(1.05);
   -webkit-backdrop-filter: blur(20px) saturate(170%) brightness(1.05);
   border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+  pointer-events: none;
 }
 
 /* Icon badge */
+.card-icon-badge,
+.card-body {
+  position: relative;
+  z-index: 2;
+}
+
 .card-icon-badge {
   /* 34 px → 72 px across viewport */
   width:  clamp(34px, 3.6vw, 72px);
