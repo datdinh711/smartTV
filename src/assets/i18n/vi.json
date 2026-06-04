@@ -2,12 +2,12 @@
   "KEY_MILESTONES": {
     "PAGE_TITLE": "Về C.P. Việt Nam",
     "PAGE_HEADER": "Hành trình phát triển",
-    "MS1_CONTENT": "Thành lập Công ty TNHH Chăn nuôi C.P. Việt Nam tại Đồng Nai, khởi đầu các ngành chế biến thức ăn công nghiệp.",
-    "MS2_CONTENT": "Hợp tác phát triển hệ thống nuôi cá, tôm, mô hình trại gia đình.",
-    "MS3_CONTENT": "Xây dựng nhà máy chế biến thực phẩm Đồng Nai, khởi đầu của ngành chế biến thực phẩm.",
-    "MS4_CONTENT": "Phát triển ngành thực phẩm chế biến và phân phối sản phẩm chăn nuôi.",
-    "MS5_CONTENT": "Phát triển hệ thống phân phối cửa hàng thịt heo CP.",
-    "MS6_CONTENT": "Khánh thành khu liên hợp chăn nuôi về chế biến thịt gà xuất khẩu tại Bình Phước."
+    "MS1_CONTENT": "Thành lập Công ty TNHH Chăn nuôi C.P. Việt Nam tại Đồng Nai, khởi đầu các ngành chế biến thức ăn công nghiệp",
+    "MS2_CONTENT": "Hợp tác phát triển hệ thống nuôi cá, tôm, mô hình trại gia đình",
+    "MS3_CONTENT": "Xây dựng nhà máy chế biến thực phẩm Đồng Nai, khởi đầu của ngành chế biến thực phẩm",
+    "MS4_CONTENT": "Phát triển ngành thực phẩm chế biến và phân phối sản phẩm chăn nuôi",
+    "MS5_CONTENT": "Phát triển hệ thống phân phối cửa hàng thịt heo CP",
+    "MS6_CONTENT": "Khánh thành khu liên hợp chăn nuôi về chế biến thịt gà xuất khẩu tại Bình Phước"
   },
   "FOOD_DIALOG": {
     "HEADER": "QUY TRÌNH KHÉP KÍN",
@@ -66,6 +66,7 @@
   },
   "WELCOME": {
     "EYEBROW": "Chào mừng đến với",
+    "VIETNAM": "VIỆT NAM",
     "TAGLINE": "Từ trang trại đến bếp nhà",
     "CTA": "Chạm để bắt đầu",
     "CORP": "CÔNG TY CỔ PHẦN CHĂN NUÔI"

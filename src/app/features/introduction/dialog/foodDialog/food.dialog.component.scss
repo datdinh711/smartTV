@@ -88,7 +88,8 @@
 
     & > img {
       width:  clamp(40px, 6vw, calc(70px * var(--ui-scale)));
-      height: clamp(40px, 6vw, calc(70px * var(--ui-scale)));
+      height: auto;
+      object-fit: contain;
       margin-bottom: clamp(0.3rem, 0.8vh, calc(8px * var(--ui-scale)));
     }
 

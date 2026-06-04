@@ -41,9 +41,15 @@
 
     <!-- Title -->
     <h1 class="title">
-      <span class="title__cp">C.P.</span>
-      <span class="title__vietnam">Vietnam</span>
-      <span class="title__corp">{{ 'WELCOME.CORP' | translate }}</span>
+      @if (currentLang === 'vi') {
+        <span class="title__corp">{{ 'WELCOME.CORP' | translate }}</span>
+        <span class="title__cp">C.P.</span>
+        <span class="title__vietnam">{{ 'WELCOME.VIETNAM' | translate }}</span>
+      } @else {
+        <span class="title__cp">C.P.</span>
+        <span class="title__vietnam">{{ 'WELCOME.VIETNAM' | translate }}</span>
+        <span class="title__corp">{{ 'WELCOME.CORP' | translate }}</span>
+      }
     </h1>
 
     <!-- Divider -->
