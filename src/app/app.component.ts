@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
-  getVideoVersionFromLanguage,
   NavigatorService,
   SlideshowService,
   VideoCacheService,
@@ -38,9 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._videoCacheService.prefetchVideos(
-      getVideoVersionFromLanguage(this._translate.currentLang),
-    );
+    this._videoCacheService.prefetchVideos();
     this._inactivityService.start(30000); // 30s không có tương tác
 
     this._inactivityService.onInactive$
