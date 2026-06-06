@@ -33,14 +33,36 @@ export class VideoCacheService {
       return await this._getVideoFileUrl(fallbackFileName);
     } catch (error) {
       console.error(`Could not load fallback video "${fallbackFileName}". Falling back to streaming URL.`, error);
+      // Stream now, download in background so next load uses the cache
+      this._scheduleBackgroundDownload(preferredFileName);
       return this._remoteUrl(preferredFileName);
     }
   }
 
-  prefetchVideos(version: VideoVersion, names: readonly VideoName[] = VIDEO_NAMES): void {
-    names.forEach((name) => {
-      void this.getVideoUrl(name, version);
+  prefetchVideos(names: readonly VideoName[] = VIDEO_NAMES): void {
+    VIDEO_VERSIONS.forEach((version) => {
+      names.forEach((name) => {
+        void this.getVideoUrl(name, version);
+      });
     });
+  }
+
+  private _scheduleBackgroundDownload(fileName: VideoFileName): void {
+    // Remove any stale/rejected promise so a fresh attempt is made
+    this._loadPromises.delete(fileName);
+
+    const promise = this._resolveVideoFileUrl(fileName);
+    this._loadPromises.set(fileName, promise);
+
+    promise.then(
+      () => console.log(`[VideoCacheService] Background download complete: ${fileName}`),
+      (err) => {
+        console.warn(`[VideoCacheService] Background download failed: ${fileName}`, err);
+        if (this._loadPromises.get(fileName) === promise) {
+          this._loadPromises.delete(fileName);
+        }
+      },
+    );
   }
 
   private _getVideoFileUrl(fileName: VideoFileName): Promise<string> {
@@ -52,6 +74,13 @@ export class VideoCacheService {
     const loadPromise = this._resolveVideoFileUrl(fileName);
     this._loadPromises.set(fileName, loadPromise);
 
+    // Remove rejected promises so future calls can retry instead of failing immediately
+    loadPromise.catch(() => {
+      if (this._loadPromises.get(fileName) === loadPromise) {
+        this._loadPromises.delete(fileName);
+      }
+    });
+
     return loadPromise;
   }
 
@@ -61,29 +90,38 @@ export class VideoCacheService {
       return objectUrl;
     }
 
-    const cacheKey = this._remoteUrl(fileName);
     const bundledAssetUrl = await this._findBundledAssetUrl(fileName);
     if (bundledAssetUrl) {
       return bundledAssetUrl;
     }
 
-    if (!('caches' in window)) {
-      return cacheKey;
+    const cacheKey = this._remoteUrl(fileName);
+
+    if ('caches' in window) {
+      const cache = await caches.open(CACHE_NAME);
+      const cachedResponse = await cache.match(cacheKey);
+
+      if (cachedResponse) {
+        return this._createObjectUrl(fileName, await cachedResponse.blob());
+      }
     }
 
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(cacheKey);
-
-    if (cachedResponse) {
-      return this._createObjectUrl(fileName, await cachedResponse.blob());
-    }
-
+    // Always attempt download regardless of Cache API availability —
+    // creates an in-memory object URL when Cache API is absent (e.g. Tizen)
     const response = await this._downloadVideo(fileName);
     if (!response.ok) {
       throw new Error(`Video download failed with status ${response.status}`);
     }
 
-    await cache.put(cacheKey, response.clone());
+    if ('caches' in window) {
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(cacheKey, response.clone());
+      } catch (cacheErr) {
+        console.warn(`[VideoCacheService] Failed to persist "${fileName}" to cache:`, cacheErr);
+      }
+    }
+
     return this._createObjectUrl(fileName, await response.blob());
   }
 
