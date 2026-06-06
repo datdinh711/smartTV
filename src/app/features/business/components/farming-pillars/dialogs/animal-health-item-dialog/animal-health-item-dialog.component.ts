@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, HostBinding, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { getVideoVersionFromLanguage, VideoCacheService } from '@core/services';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { VideoPlayerComponent } from '@shared/components';
 
@@ -21,7 +22,10 @@ export interface AnimalHealthItem {
     styleUrls: ['./animal-health-item-dialog.component.scss'],
 })
 export class AnimalHealthItemDialogComponent implements OnChanges {
-    constructor(private readonly _translate: TranslateService) { }
+    constructor(
+        private readonly _translate: TranslateService,
+        private readonly _videoCacheService: VideoCacheService,
+    ) { }
     @HostBinding('class.is-closing') isClosing = false;
 
     @Input() itemId: number = 1;
@@ -92,7 +96,7 @@ export class AnimalHealthItemDialogComponent implements OnChanges {
             title: 'BUSINESS.ANIMAL_HEALTH_DIALOG.ITEM_5_TITLE',
             description: 'Placeholder mô tả cho mục 5.',
             details: [],
-            video: 'assets/videos/Cp-vdo.mp4',
+            video: 'animal-health',
         },
     ];
 
@@ -106,11 +110,22 @@ export class AnimalHealthItemDialogComponent implements OnChanges {
     }
 
     currentImageIndex = 0;
+    currentVideoSrc = '';
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['itemId']) {
             this.currentImageIndex = 0;
+            void this._syncCurrentVideoSrc();
         }
+    }
+
+    private async _syncCurrentVideoSrc(): Promise<void> {
+        this.currentVideoSrc = this.currentItem?.video
+            ? await this._videoCacheService.getVideoUrl(
+                'animal-health',
+                getVideoVersionFromLanguage(this._translate.currentLang),
+            )
+            : '';
     }
 
     prevImage(): void {

@@ -44,7 +44,7 @@
         </div>
         } @else if (currentItem.video) {
         <div class="ah-video-wrap">
-            <app-video-player [src]="currentItem.video!" [muted]="false" [loop]="false"></app-video-player>
+            <app-video-player [src]="currentVideoSrc" [muted]="false" [loop]="false"></app-video-player>
         </div>
         } @else {
         <ul class="detail-list">

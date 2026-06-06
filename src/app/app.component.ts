@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavigatorService, SlideshowService } from '@core/services';
+import {
+  getVideoVersionFromLanguage,
+  NavigatorService,
+  SlideshowService,
+  VideoCacheService,
+} from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
@@ -24,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _inactivityService: InactivityService,
     private readonly _slideshowService: SlideshowService,
     private readonly _navigatorService: NavigatorService,
+    private readonly _videoCacheService: VideoCacheService,
     private readonly _translate: TranslateService,
   ) {
     const saved = localStorage.getItem(LANG_KEY) as 'en' | 'vi' | null;
@@ -32,6 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._videoCacheService.prefetchVideos(
+      getVideoVersionFromLanguage(this._translate.currentLang),
+    );
     this._inactivityService.start(30000); // 30s không có tương tác
 
     this._inactivityService.onInactive$

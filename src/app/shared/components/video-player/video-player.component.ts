@@ -23,7 +23,12 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
   @Input() poster: string = '';
   @Input() loop: boolean = true;
   @Input() muted: boolean = true;
+  @Input() loadingText: string = 'Loading...';
+  @Input() errorText: string = 'Failed to load video. Please check your internet connection.';
   @Output() videoEnded = new EventEmitter<void>();
+
+  isLoading = true;
+  hasError = false;
 
   @ViewChild('videoElement')
   private readonly _videoElement?: ElementRef<HTMLVideoElement>;
@@ -34,6 +39,8 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['src'] && !changes['src'].firstChange) {
+      this.isLoading = true;
+      this.hasError = false;
       this._resetVideoElement();
       this._syncAndPlay();
     }
@@ -44,6 +51,8 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
   }
 
   onCanPlay(): void {
+    this.isLoading = false;
+    this.hasError = false;
     this._syncAndPlay();
   }
 
@@ -51,10 +60,15 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
     this.videoEnded.emit();
   }
 
+  onError(): void {
+    this.isLoading = false;
+    this.hasError = true;
+  }
+
   private _syncAndPlay(): void {
     const video = this._videoElement?.nativeElement;
 
-    if (!video) {
+    if (!video || !this.src || this.hasError) {
       return;
     }
 
