@@ -100,9 +100,11 @@
     p {
       font-size: clamp(0.75rem, 1.2vw + 0.1rem, calc(14px * var(--ui-scale)));
       color: #555;
-      max-width: 600px;
+      max-width: 100%;
       margin: 0;
       line-height: 1.5;
+      white-space: pre-line;
+      padding-inline: clamp(0px, 4vw, calc(48px * var(--ui-scale)));
     }
 
     .dialog-feature-card {

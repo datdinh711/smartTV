@@ -3,11 +3,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NavigatorService } from '@core/services';
+import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, TranslateModule, QRCodeModule],
+  imports: [CommonModule, TranslateModule, QRCodeModule, HomeButtonComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
