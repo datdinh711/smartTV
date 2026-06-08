@@ -200,7 +200,6 @@
   transition: transform 0.4s ease;
 }
 .card:hover .card-bg { transform: scale(1.04); }
-.card-bg--right { object-position: right center; }
 
 /* Dark gradient scrim */
 .card::before {

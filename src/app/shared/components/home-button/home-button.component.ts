@@ -11,10 +11,16 @@ import { NavigatorService } from '@core/services';
 export class HomeButtonComponent {
   @Input() label: string = 'Home';
   @Input() destPath: string = '';
+  @Input() toWelcome: boolean = false;
 
   constructor(private readonly _navigatorService: NavigatorService) {}
 
   onNavigate(): void {
+    if (this.toWelcome) {
+      this._navigatorService.goToWelcome();
+      return;
+    }
+
     if (this.destPath) {
       this._navigatorService.goToPath(this.destPath);
       return;

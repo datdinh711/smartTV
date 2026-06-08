@@ -68,10 +68,10 @@
    GLASSMORPHISM BUTTON CARDS
 ═══════════════════════════════════════════════════════════════ */
 .button-container .button__primary {
-  /* ── Size: fluid between mobile min and TV max ── */
-  width:      clamp(220px, 26vw, calc(380px * var(--ui-scale)));
-  min-height: clamp(110px, 18vh, calc(180px * var(--ui-scale)));
-  height: auto;
+  /* ── Size: all three buttons share equal width and height ── */
+  flex: 1;
+  min-width: 0;
+  height: clamp(150px, 24vh, calc(240px * var(--ui-scale)));
   padding:
     clamp(1.25rem, 3.5vh,  calc(2.2rem  * var(--ui-scale)))
     clamp(1.1rem,  2.8vw,  calc(2rem    * var(--ui-scale)));
@@ -226,6 +226,7 @@
     font-weight: 700;
     color: #ffffff;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
+    white-space: nowrap;
   }
 
   .btn-sub {
@@ -234,6 +235,7 @@
     color: rgba(160, 255, 190, 0.88);
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.50);
     letter-spacing: 0.05em;
+    white-space: nowrap;
   }
 }
 
@@ -252,8 +254,9 @@
   }
 
   .button-container .button__primary {
+    flex: unset;
     width: clamp(280px, 72vw, 480px);
-    min-height: clamp(80px, 12vh, 130px);
+    height: clamp(80px, 12vh, 130px);
     /* horizontal layout on tablet: icon left, text right */
     flex-direction: row;
     justify-content: flex-start;
@@ -273,8 +276,10 @@
   }
 
   .button-container .button__primary {
+    flex: unset;
+    min-width: unset;
     width: 100%;
-    min-height: 68px;
+    height: 68px;
     flex-direction: row;
     justify-content: flex-start;
     padding: 0.9rem 1.1rem;
