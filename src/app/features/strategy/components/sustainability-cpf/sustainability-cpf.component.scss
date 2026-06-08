@@ -69,7 +69,7 @@
   line-height: 1.6;
   color: #45453e;
   font-weight: 500;
-  max-width: 42rem;
+  max-width: 70rem;
 }
 
 .cpf-right-column {
@@ -79,7 +79,7 @@
 
 .cpf-card {
   display: grid;
-  grid-template-columns: minmax(12rem, 40%) 1fr;
+  grid-template-columns: minmax(12rem, 42%) 1fr;
   width: 100%;
   max-width: 100%;
   height: 25%;
@@ -96,7 +96,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem 1.375rem;
+  padding-left: 1.375rem;
   color: #ffffff;
   position: relative;
   min-width: 0;
@@ -148,14 +148,14 @@
 }
 
 .cpf-card-right h3 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.4;
   color: #222;
 }
 
 .cpf-card-right p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #000000;
   line-height: 1.75;
   text-align: left;
