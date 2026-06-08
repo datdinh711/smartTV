@@ -11,3 +11,103 @@
   height: 100%;
   overflow: hidden;
 }
+
+.video-bootstrap-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgb(0 0 0 / 0.88);
+}
+
+.video-bootstrap-dialog {
+  width: min(720px, 100%);
+  padding: 32px;
+  color: #fff;
+  background: #151515;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.42);
+}
+
+.video-bootstrap-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.video-bootstrap-status {
+  margin-top: 12px;
+  color: rgb(255 255 255 / 0.78);
+  font-size: 18px;
+}
+
+.video-bootstrap-progress {
+  height: 14px;
+  margin-top: 28px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.16);
+  border-radius: 999px;
+}
+
+.video-bootstrap-progress__bar {
+  height: 100%;
+  background: #4ade80;
+  transition: width 240ms ease;
+}
+
+.video-bootstrap-percent {
+  margin-top: 10px;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 16px;
+  text-align: right;
+}
+
+.video-bootstrap-error {
+  margin-top: 24px;
+  padding: 16px;
+  background: rgb(255 255 255 / 0.08);
+  border-radius: 8px;
+}
+
+.video-bootstrap-error__title {
+  margin-bottom: 10px;
+  color: #fecaca;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.video-bootstrap-error__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  color: rgb(255 255 255 / 0.86);
+  font-size: 16px;
+}
+
+.video-bootstrap-error__row + .video-bootstrap-error__row {
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.video-bootstrap-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.video-bootstrap-dialog button {
+  min-width: 108px;
+  padding: 10px 16px;
+  color: #111;
+  font-size: 16px;
+  font-weight: 700;
+  background: #fff;
+  border: 0;
+  border-radius: 6px;
+}
