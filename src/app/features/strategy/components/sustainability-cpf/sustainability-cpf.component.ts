@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { APP_ROUTES } from '@core/constants/app-route.constant';
 import { STRATEGY_ROUTES } from '@features/strategy/constants/strategy-route.constant';
 import { TranslateModule } from '@ngx-translate/core';
-import { HomeButtonComponent, HomeLabelComponent, NavigationButtonComponent } from '@shared/components';
+import { HomeButtonComponent, NavigationButtonComponent } from '@shared/components';
 
 
 @Component({
   selector: 'app-sustainability-cpf',
   standalone: true,
-  imports: [NavigationButtonComponent, HomeButtonComponent, HomeLabelComponent, TranslateModule],
+  imports: [NavigationButtonComponent, HomeButtonComponent, TranslateModule],
   templateUrl: './sustainability-cpf.component.html',
   styleUrls: ['./sustainability-cpf.component.scss']
 })
