@@ -15,8 +15,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: clamp(70px, 7vw, 90px);
+    height: clamp(70px, 7vw, 90px);
     padding: 0;
     border: 0;
     border-radius: 50%;
@@ -25,8 +25,8 @@
 
     svg {
       display: block;
-      width: 24px;
-      height: 24px;
+      width: clamp(30px, 3vw, 40px);
+      height: clamp(30px, 3vw, 40px);
       fill: currentColor;
       color: #fff;
     }

@@ -31,10 +31,10 @@
           <div class="bio-text-panel">
             <h3 class="bio-panel-title">{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_TITLE' | translate }}</h3>
             <ul class="bio-panel-list">
-              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_1' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_2' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_3' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.BIOSECURITY_ITEM_4' | translate }}</li>
             </ul>
           </div>
           <div class="bio-img-wrap" [style.background-image]="'url(assets/images/biosecurity_2.jpg)'"></div>
@@ -52,11 +52,11 @@
           <!-- Left: text list (bilingual) -->
           <div class="welfare-text-col">
             <ul class="welfare-list">
-              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
-              <li>- {{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_5' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_1' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_2' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_3' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_4' | translate }}</li>
+              <li>{{ 'BUSINESS.BIOSECURITY.WELFARE_ITEM_5' | translate }}</li>
             </ul>
           </div>
 
@@ -499,7 +499,7 @@
 
           <div class="smart-card">
             <div class="smart-card__image-wrap">
-              <img class="smart-card__image" src="assets/images/smart-farm-tech-1.jpg"
+              <img class="smart-card__image" src="assets/images/smart-farm-tech-1.webp"
                 alt="Hệ thống giám sát thông minh" />
             </div>
             <div class="smart-card__content">
@@ -510,7 +510,7 @@
 
           <div class="smart-card">
             <div class="smart-card__image-wrap">
-              <img class="smart-card__image" src="assets/images/smart-farm-tech-2.jpg"
+              <img class="smart-card__image" src="assets/images/smart-farm-tech-2.webp"
                 alt="Tự động hóa trong chăn nuôi" />
             </div>
             <div class="smart-card__content">
@@ -521,7 +521,7 @@
 
           <div class="smart-card">
             <div class="smart-card__image-wrap">
-              <img class="smart-card__image" src="assets/images/smart-farm-tech-3.jpg"
+              <img class="smart-card__image" src="assets/images/smart-farm-tech-3.webp"
                 alt="Công nghệ chọn giống chính xác" />
             </div>
             <div class="smart-card__content">
@@ -535,7 +535,7 @@
     </div>
 
     <div class="section-panel" [class.section-panel--hidden]="businessId !== BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT">
-      <div class="smart-farm-container">
+      <div class="animal-health-container">
         @if (businessId === BUSINESS_PATH.ANIMAL_HEALTH_MANAGEMENT) {
         <app-navigation-button [isNext]="false"
           destPath="{{APP_ROUTES.BUSINESS}}/{{BUSINESS_PATH.SMART_FARM_TECHNOLOGY}}"></app-navigation-button>
@@ -547,11 +547,7 @@
             <img class="animal-health-img"
               [src]="currentLang === 'en' ? 'assets/images/animal_health_overview_eng.png' : 'assets/images/animal_health_overview_vie.png'"
               alt="Animal Health Management Overview" />
-            <!--
-              SVG overlay – viewBox matches image intrinsic size (1927×1080).
-              preserveAspectRatio="xMidYMid meet" scales identically to the image.
-              Rect coordinates are in image-pixel space → always aligned regardless of display size.
-            -->
+            @if(currentLang === 'vi') {
             <svg class="ah-hotspot-svg" viewBox="0 0 1927 1080" preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
               <!-- 01 – Đội ngũ bác sĩ thú y chuyên môn cao -->
@@ -570,6 +566,26 @@
               <rect class="ah-rect" x="870" y="890" width="620" height="180" rx="10" role="button" tabindex="0"
                 aria-label="Mục 05" (click)="openAnimalHealthItemDialog(5)" />
             </svg>
+            } @else {
+            <svg class="ah-hotspot-svg" viewBox="0 0 1927 1080" preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+              <!-- 01 – Đội ngũ bác sĩ thú y chuyên môn cao -->
+              <rect class="ah-rect" x="865" y="10" width="715" height="180" rx="10" role="button" tabindex="0"
+                aria-label="Mục 01" (click)="openAnimalHealthItemDialog(1)" />
+              <!-- 02 – Hệ thống phòng xét nghiệm thú y hiện đại -->
+              <rect class="ah-rect" x="950" y="230" width="780" height="180" rx="10" role="button" tabindex="0"
+                aria-label="Mục 02" (click)="openAnimalHealthItemDialog(2)" />
+              <!-- 03 – Phòng xét nghiệm thực phẩm ISO 17025:2017 -->
+              <rect class="ah-rect" x="1030" y="455" width="860" height="180" rx="10" role="button" tabindex="0"
+                aria-label="Mục 03" (click)="openAnimalHealthItemDialog(3)" />
+              <!-- 04 – Mobile Veterinary Service -->
+              <rect class="ah-rect" x="950" y="675" width="740" height="180" rx="10" role="button" tabindex="0"
+                aria-label="Mục 04" (click)="openAnimalHealthItemDialog(4)" />
+              <!-- 05 – Sử dụng kháng sinh có trách nhiệm -->
+              <rect class="ah-rect" x="865" y="890" width="625" height="180" rx="10" role="button" tabindex="0"
+                aria-label="Mục 05" (click)="openAnimalHealthItemDialog(5)" />
+            </svg>
+            }
           </div>
         </div>
 
@@ -667,13 +683,12 @@
             </div>
           </div>
           <p class="cert-col__title">VNQA 2018, 2019, 2020</p>
-        </div>
-
-        <!-- Standards -->
-        <div class="cert-standards">
-          <p class="cert-std-item">✓&nbsp;&nbsp;{{ 'BUSINESS.CERTIFICATION.STD_BIOSECURITY' | translate }}</p>
-          <p class="cert-std-item">✓&nbsp;&nbsp;{{ 'BUSINESS.CERTIFICATION.STD_FOOD_SAFETY' | translate }}</p>
-          <p class="cert-std-item">✓&nbsp;&nbsp;VietGAP</p>
+          <!-- Standards -->
+          <div class="cert-standards">
+            <p class="cert-std-item">✓&nbsp;&nbsp;{{ 'BUSINESS.CERTIFICATION.STD_BIOSECURITY' | translate }}</p>
+            <p class="cert-std-item">✓&nbsp;&nbsp;{{ 'BUSINESS.CERTIFICATION.STD_FOOD_SAFETY' | translate }}</p>
+            <p class="cert-std-item">✓&nbsp;&nbsp;VietGAP</p>
+          </div>
         </div>
       </div>
     </div>

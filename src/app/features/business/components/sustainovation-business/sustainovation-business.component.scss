@@ -78,14 +78,12 @@
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.38);
     border: 1.5px solid rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &.left-circle {
       margin-right: -10%;
-      z-index: 1;
 
       .circle-content {
         padding-right: 14%;
@@ -93,8 +91,6 @@
     }
 
     &.right-circle {
-      z-index: 1;
-
       .circle-content {
         padding-left: 14%;
       }
@@ -105,7 +101,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      width: 65%;
+      width: 75%;
       gap: 6px;
     }
 
@@ -121,7 +117,7 @@
 
     .circle-title {
       margin: 0;
-      font-size: clamp(1.2rem, 2vw, 2rem);
+      font-size: clamp(1.4rem, 2.8vw, 2.8rem);
       font-weight: 800;
       color: #008c44;
       letter-spacing: 1px;
@@ -130,7 +126,7 @@
 
     .circle-desc {
       margin: 0;
-      font-size: clamp(1rem, 1.4vw, 1.4rem);
+      font-size: clamp(1.15rem, 1.8vw, 1.8rem);
       color: #008c44;
       line-height: 1.45;
     }
@@ -149,7 +145,7 @@
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       color: #e53935;
-      font-size: clamp(1.25rem, 1.1vw, 1.1rem);
+      font-size: clamp(1.8rem, 2.2vw, 2.2rem);
       font-weight: 900;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -184,7 +180,7 @@
       }
 
       .pillar-label {
-        font-size: clamp(0.6rem, 0.9vw, 0.9rem);
+        font-size: clamp(0.8rem, 1.4vw, 1.4rem);
         font-weight: 700;
         color: white;
         text-align: center;
@@ -212,7 +208,7 @@
   }
 
   .cpf-badge {
-    position: absolute;
+    position: absolute; 
     top: -14px;
     right: -14px;
     width: clamp(52px, 5.5vw, 72px);
@@ -250,17 +246,16 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 32px;
 
     .impact-item {
       margin: 0;
       text-align: left;
-      font-size: clamp(0.85rem, 1.3vw, 1.3rem);
+      font-size: clamp(1.4rem, 2.2vw, 2.2rem);
       font-weight: 700;
-      padding: 9px 14px;
+      padding: 8px 16px;
       border-radius: 6px;
       letter-spacing: 0.5px;
-      line-height: 1.2;
 
       &.plain {
         color: rgba(255, 255, 255, 0.82);
@@ -270,22 +265,19 @@
       &.highlight-green {
         background: #008c44;
         color: white;
-        font-size: clamp(1.05rem, 1.65vw, 1.65rem);
-        padding: 11px 14px;
+        font-size: clamp(1.2rem, 2.2vw, 2.2rem);
       }
 
       &.highlight-blue {
         background: #1565C0;
         color: white;
-        font-size: clamp(1.05rem, 1.65vw, 1.65rem);
-        padding: 11px 14px;
+        font-size: clamp(1.2rem, 2.2vw, 2.2rem);
       }
 
       &.highlight-yellow {
         background: #c8960a;
         color: white;
-        font-size: clamp(1.05rem, 1.65vw, 1.65rem);
-        padding: 11px 14px;
+        font-size: clamp(1.2rem, 2.2vw, 2.2rem);
       }
     }
   }
@@ -301,11 +293,10 @@
 
   .explore-btn {
     display: block;
-    margin-top: 20px;
-    padding: 18px 160px;
+    padding: 38px 280px;
     background: #00a854;
     color: white;
-    font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+    font-size: clamp(1.6rem, 2.8vw, 2.8rem);
     font-weight: 700;
     letter-spacing: 1px;
     border: 2px solid rgba(255, 255, 255, 0.5);
