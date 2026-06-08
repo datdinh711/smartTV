@@ -7,7 +7,7 @@ import { NavigationSource } from '@core/enums';
   providedIn: 'root',
 })
 export class NavigatorService {
-  constructor(private readonly _router: Router) {}
+  constructor(private readonly _router: Router) { }
 
   goToWelcome() {
     this._router.navigate([`/${APP_ROUTES.WELCOME}`]);
@@ -36,7 +36,7 @@ export class NavigatorService {
   goToPath(path: string) {
     this._router.navigate([`./${path}`]);
   }
-  
+
   goToIntroductionVideo() {
     this._router.navigate([`/${APP_ROUTES.INTRODUCTION}/video`]);
   }
