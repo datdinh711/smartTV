@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Capacitor, CapacitorHttp } from '@capacitor/core';
 
 const CACHE_NAME = 'smart-tv-video-cache-v1';
+const SKIPPED_VIDEO_CACHE_KEY = 'smart-tv-skipped-video-cache-v1';
 const VIDEO_BASE_URL = 'https://storage.hndsinh.cv/video';
 const VIDEO_NAMES = ['introduction', 'animal-health', 'sustainability-vdo'] as const;
 const VIDEO_VERSIONS = ['vn', 'en'] as const;
 
 export type VideoName = (typeof VIDEO_NAMES)[number];
 export type VideoVersion = (typeof VIDEO_VERSIONS)[number];
-type VideoFileName = `${VideoName}-${VideoVersion}`;
+export type VideoFileName = `${VideoName}-${VideoVersion}`;
 
 export function getVideoVersionFromLanguage(lang: string | null | undefined): VideoVersion {
   return lang === 'en' ? 'en' : 'vn';
@@ -45,6 +46,76 @@ export class VideoCacheService {
         void this.getVideoUrl(name, version);
       });
     });
+  }
+
+  getRequiredVideoFiles(): VideoFileName[] {
+    return VIDEO_NAMES.flatMap((name) =>
+      VIDEO_VERSIONS.map((version) => this._fileName(name, version)),
+    );
+  }
+
+  async getMissingRequiredVideoFiles(): Promise<VideoFileName[]> {
+    const missingFiles: VideoFileName[] = [];
+
+    for (const fileName of this.getRequiredVideoFiles()) {
+      if (this.isVideoSkipped(fileName)) {
+        continue;
+      }
+
+      if (!(await this.hasVideoFile(fileName))) {
+        missingFiles.push(fileName);
+      }
+    }
+
+    return missingFiles;
+  }
+
+  async hasVideoFile(fileName: VideoFileName): Promise<boolean> {
+    if (this._objectUrls.has(fileName)) {
+      return true;
+    }
+
+    if (await this._findBundledAssetUrl(fileName)) {
+      return true;
+    }
+
+    if (!('caches' in window)) {
+      return false;
+    }
+
+    const cache = await caches.open(CACHE_NAME);
+    const cachedResponse = await cache.match(this._remoteUrl(fileName));
+
+    return !!cachedResponse;
+  }
+
+  async downloadVideoFile(fileName: VideoFileName): Promise<void> {
+    this._loadPromises.delete(fileName);
+    await this._getVideoFileUrl(fileName);
+  }
+
+  isVideoSkipped(fileName: VideoFileName): boolean {
+    return this._getSkippedVideoFiles().includes(fileName);
+  }
+
+  markVideoSkipped(fileName: VideoFileName): void {
+    const skippedFiles = new Set(this._getSkippedVideoFiles());
+    skippedFiles.add(fileName);
+    localStorage.setItem(SKIPPED_VIDEO_CACHE_KEY, JSON.stringify([...skippedFiles]));
+  }
+
+  private _getSkippedVideoFiles(): VideoFileName[] {
+    try {
+      const rawValue = localStorage.getItem(SKIPPED_VIDEO_CACHE_KEY);
+      const parsedValue = rawValue ? JSON.parse(rawValue) : [];
+      const requiredFiles = new Set(this.getRequiredVideoFiles());
+
+      return Array.isArray(parsedValue)
+        ? parsedValue.filter((value): value is VideoFileName => requiredFiles.has(value))
+        : [];
+    } catch {
+      return [];
+    }
   }
 
   private _scheduleBackgroundDownload(fileName: VideoFileName): void {
