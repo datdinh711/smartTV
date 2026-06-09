@@ -1,0 +1,23 @@
+<div class="video-download-container" *ngIf="getProgressList().length > 0">
+    <h3 class="download-title">Video Download Progress</h3>
+
+    <div class="download-list">
+        <div *ngFor="let progress of getProgressList()" class="download-item"
+            [ngClass]="getStatusClass(progress.status)">
+            <div class="video-info">
+                <span class="video-name">{{ progress.fileName }}</span>
+                <span class="video-status">{{ getStatusText(progress) }}</span>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar-background">
+                    <div class="progress-bar-fill" [style.width.%]="progress.progress"></div>
+                </div>
+            </div>
+
+            <div class="video-size" *ngIf="progress.total > 0">
+                {{ (progress.loaded / 1024 / 1024).toFixed(1) }} MB / {{ (progress.total / 1024 / 1024).toFixed(1) }} MB
+            </div>
+        </div>
+    </div>
+</div>

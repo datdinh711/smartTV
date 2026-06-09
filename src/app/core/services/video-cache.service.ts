@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Capacitor, CapacitorHttp } from '@capacitor/core';
+import { Capacitor } from '@capacitor/core';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const CACHE_NAME = 'smart-tv-video-cache-v1';
 const SKIPPED_VIDEO_CACHE_KEY = 'smart-tv-skipped-video-cache-v1';
@@ -11,6 +13,14 @@ export type VideoName = (typeof VIDEO_NAMES)[number];
 export type VideoVersion = (typeof VIDEO_VERSIONS)[number];
 export type VideoFileName = `${VideoName}-${VideoVersion}`;
 
+export interface DownloadProgress {
+  fileName: VideoFileName;
+  progress: number; // 0-100
+  loaded: number; // bytes
+  total: number; // bytes
+  status: 'pending' | 'downloading' | 'completed' | 'failed';
+}
+
 export function getVideoVersionFromLanguage(lang: string | null | undefined): VideoVersion {
   return lang === 'en' ? 'en' : 'vn';
 }
@@ -19,6 +29,15 @@ export function getVideoVersionFromLanguage(lang: string | null | undefined): Vi
 export class VideoCacheService {
   private readonly _objectUrls = new Map<VideoFileName, string>();
   private readonly _loadPromises = new Map<VideoFileName, Promise<string>>();
+  private readonly _downloadQueue: VideoFileName[] = [];
+  private _isDownloading = false;
+
+  // Videos to skip downloading
+  private readonly _skippedDownloadNames = new Set<VideoFileName>(['introduction-en', 'animal-health-en']);
+
+  // Progress tracking
+  private readonly _downloadProgress = new Map<VideoFileName, DownloadProgress>();
+  private readonly _progressSubject = new BehaviorSubject<Map<VideoFileName, DownloadProgress>>(new Map());
 
   async getVideoUrl(name: VideoName, version: VideoVersion): Promise<string> {
     const preferredFileName = this._fileName(name, version);
@@ -46,6 +65,10 @@ export class VideoCacheService {
         void this.getVideoUrl(name, version);
       });
     });
+  }
+
+  getDownloadProgress$(): Observable<Map<VideoFileName, DownloadProgress>> {
+    return this._progressSubject.asObservable();
   }
 
   getRequiredVideoFiles(): VideoFileName[] {
@@ -79,19 +102,52 @@ export class VideoCacheService {
       return true;
     }
 
-    if (!('caches' in window)) {
-      return false;
+    // Check Cache API
+    if ('caches' in window) {
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(this._remoteUrl(fileName));
+        if (cachedResponse) {
+          return true;
+        }
+      } catch (err) {
+        console.warn(`[VideoCacheService] Cache API error for ${fileName}:`, err);
+      }
     }
 
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(this._remoteUrl(fileName));
+    // Check Filesystem (mobile)
+    if (this._isNativePlatform()) {
+      try {
+        const exists = await this._hasFileInFilesystem(fileName);
+        if (exists) {
+          return true;
+        }
+      } catch (err) {
+        console.warn(`[VideoCacheService] Filesystem check error for ${fileName}:`, err);
+      }
+    }
 
-    return !!cachedResponse;
+    return false;
   }
 
   async downloadVideoFile(fileName: VideoFileName): Promise<void> {
+    // Skip downloading for specific videos
+    if (this._skippedDownloadNames.has(fileName)) {
+      console.log(`[VideoCacheService] Skipping download for: ${fileName}`);
+      return;
+    }
+
     this._loadPromises.delete(fileName);
-    await this._getVideoFileUrl(fileName);
+
+    // Initialize progress
+    this._updateProgress(fileName, 0, 0, 'pending');
+
+    // Add to queue for sequential download
+    if (!this._downloadQueue.includes(fileName)) {
+      this._downloadQueue.push(fileName);
+    }
+
+    await this._processDownloadQueue();
   }
 
   isVideoSkipped(fileName: VideoFileName): boolean {
@@ -136,6 +192,33 @@ export class VideoCacheService {
     );
   }
 
+  private async _processDownloadQueue(): Promise<void> {
+    if (this._isDownloading) {
+      return;
+    }
+
+    this._isDownloading = true;
+
+    while (this._downloadQueue.length > 0) {
+      const fileName = this._downloadQueue.shift();
+      if (!fileName) {
+        break;
+      }
+
+      try {
+        console.log(`[VideoCacheService] Starting sequential download: ${fileName}`);
+        this._updateProgress(fileName, 0, 0, 'downloading');
+        await this._getVideoFileUrl(fileName);
+        console.log(`[VideoCacheService] Sequential download completed: ${fileName}`);
+      } catch (error) {
+        console.error(`[VideoCacheService] Sequential download failed: ${fileName}`, error);
+        this._updateProgress(fileName, 0, 0, 'failed');
+      }
+    }
+
+    this._isDownloading = false;
+  }
+
   private _getVideoFileUrl(fileName: VideoFileName): Promise<string> {
     const existingPromise = this._loadPromises.get(fileName);
     if (existingPromise) {
@@ -166,34 +249,74 @@ export class VideoCacheService {
       return bundledAssetUrl;
     }
 
+    // Native platform: serve via native URI — no large blob in JS memory
+    if (this._isNativePlatform()) {
+      // Check if already on disk
+      const cachedUrl = await this._getNativePlaybackUrl(fileName);
+      if (cachedUrl) {
+        console.log(`[VideoCacheService] Found in Filesystem: ${fileName}`);
+        this._objectUrls.set(fileName, cachedUrl);
+        return cachedUrl;
+      }
+
+      if (this._skippedDownloadNames.has(fileName)) {
+        throw new Error(`Video "${fileName}" is marked for skip download. Using streaming URL instead.`);
+      }
+
+      // Download directly to disk via Filesystem.downloadFile
+      await this._downloadToFilesystem(fileName);
+
+      const downloadedUrl = await this._getNativePlaybackUrl(fileName);
+      if (!downloadedUrl) {
+        throw new Error(`Failed to resolve video URL after download: ${fileName}`);
+      }
+      this._objectUrls.set(fileName, downloadedUrl);
+      return downloadedUrl;
+    }
+
     const cacheKey = this._remoteUrl(fileName);
 
+    // Try Cache API (web)
     if ('caches' in window) {
-      const cache = await caches.open(CACHE_NAME);
-      const cachedResponse = await cache.match(cacheKey);
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(cacheKey);
 
-      if (cachedResponse) {
-        return this._createObjectUrl(fileName, await cachedResponse.blob());
+        if (cachedResponse) {
+          console.log(`[VideoCacheService] Found in Cache API: ${fileName}`);
+          return this._createObjectUrl(fileName, await cachedResponse.blob());
+        }
+      } catch (cacheErr) {
+        console.warn(`[VideoCacheService] Cache API error: ${cacheErr}`);
       }
     }
 
-    // Always attempt download regardless of Cache API availability —
-    // creates an in-memory object URL when Cache API is absent (e.g. Tizen)
-    const response = await this._downloadVideo(fileName);
+    // Skip downloading for specific videos - throw error to use streaming fallback
+    if (this._skippedDownloadNames.has(fileName)) {
+      throw new Error(`Video "${fileName}" is marked for skip download. Using streaming URL instead.`);
+    }
+
+    // Web: download with progress tracking
+    const response = await this._downloadVideoWithProgress(this._remoteUrl(fileName), fileName);
     if (!response.ok) {
       throw new Error(`Video download failed with status ${response.status}`);
     }
 
+    const blob = await response.blob();
+    console.log(`[VideoCacheService] Downloaded blob: ${fileName}, size: ${blob.size} bytes`);
+
+    // Save to Cache API (web)
     if ('caches' in window) {
       try {
         const cache = await caches.open(CACHE_NAME);
-        await cache.put(cacheKey, response.clone());
+        await cache.put(cacheKey, new Response(blob.slice(), { headers: { 'Content-Type': 'video/mp4' } }));
+        console.log(`[VideoCacheService] Saved to Cache API: ${fileName}`);
       } catch (cacheErr) {
-        console.warn(`[VideoCacheService] Failed to persist "${fileName}" to cache:`, cacheErr);
+        console.warn(`[VideoCacheService] Failed to save to Cache API: ${cacheErr}`);
       }
     }
 
-    return this._createObjectUrl(fileName, await response.blob());
+    return this._createObjectUrl(fileName, blob);
   }
 
   private async _findBundledAssetUrl(fileName: VideoFileName): Promise<string | null> {
@@ -211,56 +334,232 @@ export class VideoCacheService {
     }
   }
 
-  private async _downloadVideo(fileName: VideoFileName): Promise<Response> {
-    const url = this._remoteUrl(fileName);
-
-    if (Capacitor.isNativePlatform()) {
-      return this._downloadVideoWithNativeHttp(url);
-    }
-
-    return fetch(url, { cache: 'no-store' });
-  }
-
-  private async _downloadVideoWithNativeHttp(url: string): Promise<Response> {
-    const response = await CapacitorHttp.get({
-      url,
-      responseType: 'blob',
-      connectTimeout: 30000,
-      readTimeout: 120000,
-    });
-    const contentType = response.headers['content-type'] ?? 'video/mp4';
-    const blob = this._base64ToBlob(response.data, contentType);
-
-    return new Response(blob, {
-      status: response.status,
-      headers: {
-        'Content-Type': contentType,
-      },
-    });
-  }
-
-  private _base64ToBlob(base64: string, contentType: string): Blob {
-    const byteCharacters = atob(base64);
-    const byteArrays: Uint8Array[] = [];
-    const sliceSize = 1024;
-
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
-
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
+  private _isNativePlatform(): boolean {
+    try {
+      // Check if Capacitor is available and platform is native
+      if (!Capacitor || !Capacitor.isNativePlatform()) {
+        return false;
       }
 
-      byteArrays.push(new Uint8Array(byteNumbers));
+      // Also check if Filesystem plugin is available
+      if (!Filesystem) {
+        console.warn('[VideoCacheService] Filesystem plugin not available');
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      console.warn('[VideoCacheService] Error checking native platform:', err);
+      return false;
+    }
+  }
+
+  private async _downloadVideoWithProgress(url: string, fileName: VideoFileName): Promise<Response> {
+    const response = await fetch(url, { cache: 'no-store' });
+
+    if (!response.body) {
+      return response;
     }
 
-    return new Blob(byteArrays, { type: contentType });
+    const total = parseInt(response.headers.get('content-length') || '0', 10);
+    const reader = response.body.getReader();
+    let loaded = 0;
+
+    const chunks: Uint8Array[] = [];
+
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        chunks.push(value);
+        loaded += value.length;
+
+        // Update progress
+        this._updateProgress(fileName, loaded, total);
+      }
+    } finally {
+      reader.releaseLock();
+    }
+
+    // Mark as completed
+    this._updateProgress(fileName, loaded, total, 'completed');
+
+    const blob = new Blob(chunks as BlobPart[], { type: 'video/mp4' });
+    return new Response(blob, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  }
+
+  private _updateProgress(
+    fileName: VideoFileName,
+    loaded: number,
+    total: number,
+    status: 'pending' | 'downloading' | 'completed' | 'failed' = 'downloading',
+  ): void {
+    const progress: DownloadProgress = {
+      fileName,
+      progress: total > 0 ? Math.round((loaded / total) * 100) : 0,
+      loaded,
+      total,
+      status,
+    };
+
+    this._downloadProgress.set(fileName, progress);
+    this._progressSubject.next(new Map(this._downloadProgress));
+  }
+
+  /**
+   * Returns a web-accessible URL for a video stored in the native filesystem.
+   * Uses Filesystem.getUri + Capacitor.convertFileSrc so the WebView streams
+   * the file directly from disk — no large blob ever enters JS memory.
+   */
+  private async _getNativePlaybackUrl(fileName: VideoFileName): Promise<string | null> {
+    try {
+      if (!Filesystem?.getUri) return null;
+      // stat() throws if the file does not exist
+      await Filesystem.stat({ path: `videos/${fileName}.mp4`, directory: Directory.Data });
+      const result = await Filesystem.getUri({ path: `videos/${fileName}.mp4`, directory: Directory.Data });
+      return Capacitor.convertFileSrc(result.uri);
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Downloads a video to the device filesystem.
+   * Primary: Filesystem.downloadFile (native HTTP, no JS memory).
+   * Fallback: fetch() via WebView (Chromium SSL) + chunked appendFile (no OOM).
+   */
+  private async _downloadToFilesystem(fileName: VideoFileName): Promise<void> {
+    const url = this._remoteUrl(fileName);
+    console.log(`[VideoCacheService] Downloading to filesystem: ${url}`);
+    this._updateProgress(fileName, 0, 0, 'downloading');
+
+    // Primary: native download — file goes straight from network to disk
+    const progressHandle = await Filesystem.addListener('progress', (event) => {
+      if (event.url === url) {
+        this._updateProgress(fileName, event.bytes, event.contentLength);
+      }
+    });
+    try {
+      await Filesystem.downloadFile({
+        url,
+        path: `videos/${fileName}.mp4`,
+        directory: Directory.Data,
+        recursive: true,
+        progress: true,
+      });
+      this._updateProgress(fileName, 1, 1, 'completed');
+      console.log(`[VideoCacheService] ✅ Downloaded to filesystem (native): ${fileName}`);
+      return;
+    } catch (nativeErr) {
+      console.warn(`[VideoCacheService] Native download failed, falling back to fetch: ${nativeErr}`);
+      this._updateProgress(fileName, 0, 0, 'downloading');
+    } finally {
+      await progressHandle.remove();
+    }
+
+    // Fallback: WebView fetch (Chromium SSL) → write in 768 KB chunks → no OOM
+    await this._downloadToFilesystemViaFetch(fileName, url);
+  }
+
+  /**
+   * Streams the video via fetch() and writes it to the filesystem in 768 KB
+   * chunks using writeFile + appendFile. Each chunk is ≤1 MB in memory.
+   * 768 KB = 3 × 256 × 1024, so each chunk base64-encodes without padding.
+   */
+  private async _downloadToFilesystemViaFetch(fileName: VideoFileName, url: string): Promise<void> {
+    const CHUNK_SIZE = 3 * 256 * 1024; // 768 KB
+
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok || !response.body) {
+      throw new Error(`Fetch failed with status ${response.status}`);
+    }
+
+    const total = parseInt(response.headers.get('content-length') || '0', 10);
+    const reader = response.body.getReader();
+    let isFirstChunk = true;
+    let buffer = new Uint8Array(0);
+    let loaded = 0;
+
+    // Remove any partial file from a previous failed attempt
+    try { await Filesystem.deleteFile({ path: `videos/${fileName}.mp4`, directory: Directory.Data }); } catch { /* ok if absent */ }
+
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (value) {
+          const combined = new Uint8Array(buffer.length + value.length);
+          combined.set(buffer, 0);
+          combined.set(value, buffer.length);
+          buffer = combined;
+        }
+
+        // On done flush everything; otherwise only flush complete CHUNK_SIZE pieces
+        const flushSize = done
+          ? buffer.length
+          : Math.floor(buffer.length / CHUNK_SIZE) * CHUNK_SIZE;
+
+        if (flushSize > 0) {
+          const chunk = buffer.slice(0, flushSize);
+          buffer = buffer.slice(flushSize);
+          await this._writeChunkToFile(fileName, chunk, isFirstChunk);
+          loaded += chunk.length;
+          isFirstChunk = false;
+          this._updateProgress(fileName, loaded, total);
+        }
+
+        if (done) break;
+      }
+
+      this._updateProgress(fileName, total || loaded, total || loaded, 'completed');
+      console.log(`[VideoCacheService] ✅ Downloaded to filesystem (fetch): ${fileName}`);
+    } catch (err) {
+      // Clean up partial file so the next launch re-downloads cleanly
+      try { await Filesystem.deleteFile({ path: `videos/${fileName}.mp4`, directory: Directory.Data }); } catch { /* ok */ }
+      throw err;
+    } finally {
+      reader.releaseLock();
+    }
+  }
+
+  private async _writeChunkToFile(fileName: VideoFileName, chunk: Uint8Array, isFirst: boolean): Promise<void> {
+    let binary = '';
+    for (let i = 0; i < chunk.length; i++) {
+      binary += String.fromCharCode(chunk[i]);
+    }
+    const base64 = btoa(binary);
+    const path = `videos/${fileName}.mp4`;
+
+    if (isFirst) {
+      await Filesystem.writeFile({ path, data: base64, directory: Directory.Data, recursive: true });
+    } else {
+      await Filesystem.appendFile({ path, data: base64, directory: Directory.Data });
+    }
+  }
+
+  private async _hasFileInFilesystem(fileName: VideoFileName): Promise<boolean> {
+    try {
+      if (!Filesystem?.stat) return false;
+      await Filesystem.stat({ path: `videos/${fileName}.mp4`, directory: Directory.Data });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   private _createObjectUrl(fileName: VideoFileName, blob: Blob): string {
+    console.log(`[VideoCacheService] Creating object URL for ${fileName}, blob size: ${blob.size} bytes, type: ${blob.type}`);
     const objectUrl = URL.createObjectURL(blob);
     this._objectUrls.set(fileName, objectUrl);
+    console.log(`[VideoCacheService] Created object URL: ${objectUrl}`);
 
     return objectUrl;
   }

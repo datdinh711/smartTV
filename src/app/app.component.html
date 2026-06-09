@@ -1,36 +1,38 @@
 <div class="app-shell">
   @if (isVideoBootstrapComplete) {
-    <div class="route-container">
-      <router-outlet #outlet="outlet"></router-outlet>
-    </div>
+  <div class="route-container">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
   } @else {
-    <div class="video-bootstrap-overlay">
-      <div class="video-bootstrap-dialog">
-        <div class="video-bootstrap-title">Preparing videos</div>
-        <div class="video-bootstrap-status">{{ videoBootstrapStatusText }}</div>
+  <div class="video-bootstrap-overlay">
+    <div class="video-bootstrap-dialog">
+      <div class="video-bootstrap-title">Preparing videos</div>
+      <div class="video-bootstrap-status">{{ videoBootstrapStatusText }}</div>
 
-        <div class="video-bootstrap-progress" aria-hidden="true">
-          <div class="video-bootstrap-progress__bar" [style.width.%]="videoBootstrapProgress"></div>
+      <div class="video-bootstrap-progress" aria-hidden="true">
+        <div class="video-bootstrap-progress__bar" [style.width.%]="videoBootstrapProgress"></div>
+      </div>
+      <div class="video-bootstrap-percent">{{ videoBootstrapProgress }}%</div>
+
+      <app-video-download-progress></app-video-download-progress>
+
+      @if (videoBootstrapFailedFiles.length > 0) {
+      <div class="video-bootstrap-error">
+        <div class="video-bootstrap-error__title">Download failed</div>
+        @for (fileName of videoBootstrapFailedFiles; track fileName) {
+        <div class="video-bootstrap-error__row">
+          <span>{{ fileName }}</span>
+          <button type="button" (click)="skipFailedVideo(fileName)">Skip</button>
         </div>
-        <div class="video-bootstrap-percent">{{ videoBootstrapProgress }}%</div>
-
-        @if (videoBootstrapFailedFiles.length > 0) {
-          <div class="video-bootstrap-error">
-            <div class="video-bootstrap-error__title">Download failed</div>
-            @for (fileName of videoBootstrapFailedFiles; track fileName) {
-              <div class="video-bootstrap-error__row">
-                <span>{{ fileName }}</span>
-                <button type="button" (click)="skipFailedVideo(fileName)">Skip</button>
-              </div>
-            }
-          </div>
-
-          <div class="video-bootstrap-actions">
-            <button type="button" (click)="retryFailedVideos()">Retry</button>
-            <button type="button" (click)="skipAllFailedVideos()">Skip all</button>
-          </div>
         }
       </div>
+
+      <div class="video-bootstrap-actions">
+        <button type="button" (click)="retryFailedVideos()">Retry</button>
+        <button type="button" (click)="skipAllFailedVideos()">Skip all</button>
+      </div>
+      }
     </div>
+  </div>
   }
 </div>
