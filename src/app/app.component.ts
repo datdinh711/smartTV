@@ -8,6 +8,7 @@ import {
   VideoFileName,
 } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
+import { VideoDownloadProgressComponent } from '@shared/components/video-download-progress/video-download-progress.component';
 import { InactivityService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -17,7 +18,7 @@ const DEFAULT_LANG = 'vi';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, VideoDownloadProgressComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _slideshowService: SlideshowService,
     private readonly _navigatorService: NavigatorService,
     private readonly _videoCacheService: VideoCacheService,
-    private readonly _translate: TranslateService,
+    private readonly _translate: TranslateService
   ) {
     const saved = localStorage.getItem(LANG_KEY) as 'en' | 'vi' | null;
     const lang = saved ?? DEFAULT_LANG;
@@ -99,34 +100,52 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private async _bootstrapVideoCache(): Promise<void> {
-    this.isCheckingVideoCache = true;
-    this.isDownloadingVideoCache = false;
+    try {
+      this.isCheckingVideoCache = true;
+      this.isDownloadingVideoCache = false;
 
-    const missingFiles = await this._videoCacheService.getMissingRequiredVideoFiles();
+      const missingFiles = await this._videoCacheService.getMissingRequiredVideoFiles();
 
-    if (missingFiles.length === 0) {
+      if (missingFiles.length === 0) {
+        this._completeVideoBootstrap();
+        return;
+      }
+
+      await this._downloadMissingVideoFiles(missingFiles);
+    } catch (error) {
+      console.error('[AppComponent] Error during video cache bootstrap:', error);
+      // Continue with app initialization even if video cache fails
       this._completeVideoBootstrap();
-      return;
     }
-
-    await this._downloadMissingVideoFiles(missingFiles);
   }
 
   private async _downloadMissingVideoFiles(files: VideoFileName[]): Promise<void> {
     this.isCheckingVideoCache = false;
     this.isDownloadingVideoCache = true;
-    this.videoBootstrapTotal = files.length;
+    this.videoBootstrapTotal = this._videoCacheService.getRequiredVideoFiles().length;
     this.videoBootstrapCompleted = 0;
 
+    // Subscribe to download progress to track completed files
+    this._videoCacheService
+      .getDownloadProgress$()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((progressMap) => {
+        // Count completed files
+        let completed = 0;
+        progressMap.forEach((progress) => {
+          if (progress.status === 'completed' || progress.status === 'failed') {
+            completed += 1;
+          }
+        });
+        this.videoBootstrapCompleted = completed;
+      });
+
+    // Queue all downloads
     const results = await Promise.allSettled(
-      files.map(async (fileName) => {
-        await this._videoCacheService.downloadVideoFile(fileName);
-        this.videoBootstrapCompleted += 1;
-      }),
+      files.map((fileName) => this._videoCacheService.downloadVideoFile(fileName)),
     );
 
     this.videoBootstrapFailedFiles = files.filter((_, index) => results[index].status === 'rejected');
-    this.videoBootstrapCompleted = files.length - this.videoBootstrapFailedFiles.length;
     this.isDownloadingVideoCache = false;
 
     if (this.videoBootstrapFailedFiles.length === 0) {
@@ -142,11 +161,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private _startAppServices(): void {
+    this._navigatorService.goToWelcome();
     this._inactivityService.start(30000);
 
     this._inactivityService.onInactive$
       .pipe(takeUntil(this._destroy$))
       .subscribe(() => {
+        if (this.isDownloadingVideoCache || this.isCheckingVideoCache) {
+          console.log('User is inactive but video download in progress, skipping slideshow...');
+          return;
+        }
         console.log('User is inactive, starting slideshow...');
         this._slideshowService.start();
       });
