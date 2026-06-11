@@ -612,29 +612,32 @@
           <p class="trace-banner__sub">{{ 'BUSINESS.TRACEABILITY.BANNER_SUBTITLE' | translate }}</p>
         </div>
 
-        <!-- Main content -->
-        <div class="trace-main">
+        <!-- Body: 3 columns -->
+        <div class="trace-body">
 
-          <!-- Left: product image -->
-          <div class="trace-col trace-col--left">
-            <img class="trace-product-img" src="assets/images/traceability.jpg" alt="BUSINESS.Traceability Product" />
-          </div>
-
-          <!-- Middle: QR codes -->
-          <div class="trace-col trace-col--middle">
-            <p class="trace-scan-text">{{ 'BUSINESS.TRACEABILITY.SCAN_LABEL' | translate }}</p>
-            <div class="trace-qr-wrap">
-              <div>
-                <img class="trace-qr" src="assets/images/qr.jpg" alt="QR Code" />
-              </div>
-              <div>
-                <img class="trace-qr" src="assets/images/qr-1.jpg" alt="QR Code 1" />
-              </div>
+          <!-- Col 1: product image + phone screenshots -->
+          <div class="trace-col trace-col--media">
+            <div class="trace-product-wrap">
+              <img class="trace-product-img" src="assets/images/traceability.jpg" alt="Traceability Product" />
+            </div>
+            <div class="trace-phones">
+              <img class="trace-phone-img" src="assets/images/qr_example.jpg" alt="ICP App" />
+              <!-- <img class="trace-phone-img" src="assets/images/te-food.jpg" alt="TE Food App" /> -->
             </div>
           </div>
 
-          <!-- Right: info panels -->
-          <div class="trace-col trace-col--right">
+          <!-- Col 2: QR codes -->
+          <div class="trace-col trace-col--qr">
+            <div class="trace-qr-item">
+              <img class="trace-qr" src="assets/images/qr.jpg" alt="QR Code iTrace" />
+            </div>
+            <div class="trace-qr-item">
+              <img class="trace-qr" src="assets/images/qr-1.jpg" alt="QR Code TE-FOOD" />
+            </div>
+          </div>
+
+          <!-- Col 3: Info boxes -->
+          <div class="trace-col trace-col--info">
             <div class="trace-info-box">
               <h3 class="trace-info-box__title">{{ 'BUSINESS.TRACEABILITY.INTERNAL_TITLE' | translate }}</h3>
               <p class="trace-info-box__desc">{{ 'BUSINESS.TRACEABILITY.INTERNAL_DESC' | translate }}</p>
@@ -650,7 +653,6 @@
         <!-- Footer -->
         <div class="trace-footer">
           <p>{{ 'BUSINESS.TRACEABILITY.FOOTER_LINE_1' | translate }}</p>
-          <p>{{ 'BUSINESS.TRACEABILITY.FOOTER_LINE_2' | translate }}</p>
         </div>
       </div>
     </div>
