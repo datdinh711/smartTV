@@ -9,7 +9,7 @@ import {
 } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { VideoDownloadProgressComponent } from '@shared/components/video-download-progress/video-download-progress.component';
-import { InactivityService } from '@shared/services';
+import { InactivityService, VideoPlayingService } from '@shared/services';
 import { Subject, takeUntil } from 'rxjs';
 
 const LANG_KEY = 'app_lang';
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly _slideshowService: SlideshowService,
     private readonly _navigatorService: NavigatorService,
     private readonly _videoCacheService: VideoCacheService,
+    private readonly _videoPlayingService: VideoPlayingService,
     private readonly _translate: TranslateService
   ) {
     const saved = localStorage.getItem(LANG_KEY) as 'en' | 'vi' | null;
@@ -169,6 +170,10 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         if (this.isDownloadingVideoCache || this.isCheckingVideoCache) {
           console.log('User is inactive but video download in progress, skipping slideshow...');
+          return;
+        }
+        if (this._videoPlayingService.isVideoPlaying()) {
+          console.log('User is inactive but video is playing, skipping slideshow...');
           return;
         }
         console.log('User is inactive, starting slideshow...');
