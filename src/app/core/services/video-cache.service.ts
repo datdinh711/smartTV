@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -38,6 +38,8 @@ export class VideoCacheService {
   // Progress tracking
   private readonly _downloadProgress = new Map<VideoFileName, DownloadProgress>();
   private readonly _progressSubject = new BehaviorSubject<Map<VideoFileName, DownloadProgress>>(new Map());
+
+  constructor(private readonly _ngZone: NgZone) { }
 
   async getVideoUrl(name: VideoName, version: VideoVersion): Promise<string> {
     const preferredFileName = this._fileName(name, version);
@@ -82,6 +84,10 @@ export class VideoCacheService {
 
     for (const fileName of this.getRequiredVideoFiles()) {
       if (this.isVideoSkipped(fileName)) {
+        continue;
+      }
+
+      if (this._skippedDownloadNames.has(fileName)) {
         continue;
       }
 
@@ -411,7 +417,11 @@ export class VideoCacheService {
     };
 
     this._downloadProgress.set(fileName, progress);
-    this._progressSubject.next(new Map(this._downloadProgress));
+    // Run inside NgZone so Angular's change detection fires even when called
+    // from Capacitor native callbacks that execute outside NgZone.
+    this._ngZone.run(() => {
+      this._progressSubject.next(new Map(this._downloadProgress));
+    });
   }
 
   /**
@@ -531,9 +541,14 @@ export class VideoCacheService {
   }
 
   private async _writeChunkToFile(fileName: VideoFileName, chunk: Uint8Array, isFirst: boolean): Promise<void> {
+    // Build binary string in 32 KB batches to avoid O(n²) string concat and stack overflow
+    const SPREAD_LIMIT = 32768;
     let binary = '';
-    for (let i = 0; i < chunk.length; i++) {
-      binary += String.fromCharCode(chunk[i]);
+    for (let offset = 0; offset < chunk.length; offset += SPREAD_LIMIT) {
+      binary += String.fromCharCode.apply(
+        null,
+        chunk.subarray(offset, offset + SPREAD_LIMIT) as unknown as number[],
+      );
     }
     const base64 = btoa(binary);
     const path = `videos/${fileName}.mp4`;
