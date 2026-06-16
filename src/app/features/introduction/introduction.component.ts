@@ -1,15 +1,14 @@
-import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
-import { DOCUMENT, CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { NavigatorService } from '@core/services';
-import { InactivityService } from '@shared/services';
-import { Subject, takeUntil } from 'rxjs';
-import { FeedDialogComponent } from './dialog/feedDialog/feed.dialog.component';
-import { FarmDialogComponent } from './dialog/farmDialog/farm.dialog.component';
-import { FoodDialogComponent } from './dialog/foodDialog/food.dialog.component';
-import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
-import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject } from "@angular/core";
 import { NavigationSource } from '@core/enums';
+import { NavigatorService } from '@core/services';
+import { TranslateModule } from '@ngx-translate/core';
+import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
+import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
+import { Subject } from 'rxjs';
+import { FarmDialogComponent } from './dialog/farmDialog/farm.dialog.component';
+import { FeedDialogComponent } from './dialog/feedDialog/feed.dialog.component';
+import { FoodDialogComponent } from './dialog/foodDialog/food.dialog.component';
 
 @Component({
   selector: 'app-introduction',
@@ -19,7 +18,7 @@ import { NavigationSource } from '@core/enums';
   styleUrl: './introduction.component.scss',
 })
 
-export class IntroductionComponent implements OnInit, OnDestroy {
+export class IntroductionComponent {
 
   private _destroy$ = new Subject<void>();
   private _baseHref = '/';
@@ -32,7 +31,7 @@ export class IntroductionComponent implements OnInit, OnDestroy {
   isCircleActive = false;
   constructor(
     private readonly _navigatorService: NavigatorService,
-    private readonly _inactivityService: InactivityService,
+    //private readonly _inactivityService: InactivityService,
     @Inject(DOCUMENT) private readonly _document: Document,
   ) {
     const baseEl = this._document.getElementsByTagName('base')[0];
@@ -41,21 +40,6 @@ export class IntroductionComponent implements OnInit, OnDestroy {
     if (!this._baseHref.endsWith('/')) {
       this._baseHref += '/';
     }
-  }
-
-  ngOnInit(): void {
-    this._inactivityService.start();
-    this._inactivityService.onInactive$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(() => {
-        
-      });
-  }
-
-  ngOnDestroy(): void {
-    this._inactivityService.stop();
-    this._destroy$.next();
-    this._destroy$.complete();
   }
 
   onNavigateDashboard(): void {
@@ -89,7 +73,7 @@ export class IntroductionComponent implements OnInit, OnDestroy {
 
   openDialogFood() {
     this.isDialogFoodOpen =
-     true;
+      true;
   }
 
   openDialogFarm() {

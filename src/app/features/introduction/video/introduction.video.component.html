@@ -18,7 +18,7 @@
 -->
 
 <!-- Video: always rendered so it can buffer behind the closed doors -->
-<app-video-player [src]="videoPath" [muted]="false" [loop]="false"></app-video-player>
+<app-video-player [src]="videoPath" [muted]="false" [loop]="false" (videoEnded)="onVideoEnded()"></app-video-player>
 
 <!-- Stage 2 door panels — removed once the opening animation finishes -->
 <div class="doors-shell" *ngIf="showDoors" aria-hidden="true">

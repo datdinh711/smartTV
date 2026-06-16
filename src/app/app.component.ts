@@ -123,7 +123,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private async _downloadMissingVideoFiles(files: VideoFileName[]): Promise<void> {
     this.isCheckingVideoCache = false;
     this.isDownloadingVideoCache = true;
-    this.videoBootstrapTotal = this._videoCacheService.getRequiredVideoFiles().length;
+    this.videoBootstrapTotal = files.length;
     this.videoBootstrapCompleted = 0;
 
     // Subscribe to download progress to track completed files
@@ -183,10 +183,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this._inactivityService.onActive$
       .pipe(takeUntil(this._destroy$))
       .subscribe(() => {
-        console.log('User is active, stopping slideshow...');
         if (this._slideshowService.isRunning()) {
+          console.log('User is active, stopping slideshow...');
           this._slideshowService.stop();
-          this._navigatorService.goToWelcome();
         }
       });
   }

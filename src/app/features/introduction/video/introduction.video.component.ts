@@ -1,14 +1,13 @@
-import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
-import { getVideoVersionFromLanguage, NavigatorService, VideoCacheService } from '@core/services';
 import { NavigationSource } from '@core/enums';
+import { getVideoVersionFromLanguage, NavigatorService, VideoCacheService } from '@core/services';
 import { TranslateService } from '@ngx-translate/core';
-import { InactivityService } from '@shared/services';
-import { Subject, takeUntil } from 'rxjs';
-import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
 import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
+import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
 import { VideoPlayerComponent } from '@shared/components/video-player/video-player.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-introduction-video',
@@ -17,7 +16,7 @@ import { VideoPlayerComponent } from '@shared/components/video-player/video-play
   templateUrl: './introduction.video.component.html',
   styleUrls: ['./introduction.video.component.scss'],
 })
-export class IntroductionVideoComponent implements OnInit, OnDestroy {
+export class IntroductionVideoComponent implements OnInit {
   private _destroy$ = new Subject<void>();
   private _baseHref = '/';
 
@@ -34,7 +33,7 @@ export class IntroductionVideoComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly _navigatorService: NavigatorService,
-    private readonly _inactivityService: InactivityService,
+    //private readonly _inactivityService: InactivityService,
     private readonly _router: Router,
     private readonly _videoCacheService: VideoCacheService,
     private readonly _translate: TranslateService,
@@ -59,17 +58,12 @@ export class IntroductionVideoComponent implements OnInit, OnDestroy {
       'introduction',
       getVideoVersionFromLanguage(this._translate.currentLang),
     );
-    this._inactivityService.start();
-    this._inactivityService.onInactive$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(() => {});
   }
 
-  ngOnDestroy(): void {
-    this._inactivityService.stop();
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
+  // ngOnDestroy(): void {
+  //   this._destroy$.next();
+  //   this._destroy$.complete();
+  // }
 
   asset(path: string): string {
     return `${this._baseHref}assets/${path}`.replace(/([^:]?)\/\/+/, '$1/');
@@ -95,5 +89,15 @@ export class IntroductionVideoComponent implements OnInit, OnDestroy {
 
   previousSlide(): void {
     this._navigatorService.goToDashboard();
+  }
+
+  onVideoEnded(): void {
+    if (this.rootNavigateComponent === NavigationSource.introduction) {
+      // Came from Introduction → go to KeyMilestones, tagging video as source
+      this._navigatorService.goToKeyMilestonesFrom(NavigationSource.video);
+    } else {
+      // Came from KeyMilestones → go to Strategy
+      this._navigatorService.goToStrategy();
+    }
   }
 }

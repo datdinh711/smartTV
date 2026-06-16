@@ -33,7 +33,7 @@ export class InactivityService implements OnDestroy {
   readonly onActive$: Observable<void> = this._activeSubject.asObservable();
   private _timeoutMs = 60000;
 
-  constructor(private readonly _ngZone: NgZone) {}
+  constructor(private readonly _ngZone: NgZone) { }
 
   /**
    * Start monitoring user inactivity. Calling again will reset the timer.
@@ -70,6 +70,7 @@ export class InactivityService implements OnDestroy {
   }
 
   private _onActivity = (): void => {
+    console.log("activivty");
     this._ngZone.run(() => this._activeSubject.next());
     this._resetTimer();
   };
@@ -78,7 +79,15 @@ export class InactivityService implements OnDestroy {
     this._clearTimer();
 
     this._inactivityTimer = setTimeout(() => {
-      this._ngZone.run(() => this._inactiveSubject.next());
+      this._ngZone.run(() => {
+        this._inactiveSubject.next();
+        // Auto-reschedule so consumers that skip (e.g. video playing) will
+        // receive another emission after the same interval without needing
+        // user interaction to restart the timer.
+        if (this._listening) {
+          this._resetTimer();
+        }
+      });
     }, this._timeoutMs);
   }
 

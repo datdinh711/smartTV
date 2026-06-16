@@ -10,6 +10,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { VideoPlayingService } from '@shared/services';
 
 @Component({
   selector: 'app-video-player',
@@ -29,9 +30,12 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
 
   isLoading = true;
   hasError = false;
+  private _isPlaying = false;
 
   @ViewChild('videoElement')
   private readonly _videoElement?: ElementRef<HTMLVideoElement>;
+
+  constructor(private readonly _videoPlayingService: VideoPlayingService) { }
 
   ngAfterViewInit(): void {
     this._syncAndPlay();
@@ -57,10 +61,16 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
   }
 
   onEnded(): void {
+    this._setPlaying(false);
     this.videoEnded.emit();
   }
 
+  onPause(): void {
+    // this._setPlaying(false);
+  }
+
   onError(): void {
+    this._setPlaying(false);
     this.isLoading = false;
     this.hasError = true;
   }
@@ -77,7 +87,9 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
 
     const playPromise = video.play();
     if (playPromise) {
-      playPromise.catch(() => {
+      playPromise.then(() => {
+        this._setPlaying(true);
+      }).catch(() => {
         // Autoplay can still be blocked on some platforms until the kiosk shell allows it.
       });
     }
@@ -90,6 +102,7 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
       return;
     }
 
+    this._setPlaying(false);
     video.pause();
     video.removeAttribute('src');
     video.load();
@@ -102,8 +115,19 @@ export class VideoPlayerComponent implements AfterViewInit, OnChanges, OnDestroy
       return;
     }
 
+    this._setPlaying(false);
     video.pause();
     video.currentTime = 0;
     video.load();
+  }
+
+  private _setPlaying(playing: boolean): void {
+    if (playing === this._isPlaying) return;
+    this._isPlaying = playing;
+    if (playing) {
+      this._videoPlayingService.markPlaying();
+    } else {
+      this._videoPlayingService.markStopped();
+    }
   }
 }
