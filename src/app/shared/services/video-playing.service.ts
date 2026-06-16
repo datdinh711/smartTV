@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class VideoPlayingService {
-  /**
-   * Check if any video element on the page is currently playing
-   */
-  isVideoPlaying(): boolean {
-    const videos = Array.from(document.querySelectorAll('video'));
-    for (const video of videos) {
-      if (!video.paused) {
-        return true;
-      }
+  private _playingCount = 0;
+  private readonly _stoppedSubject = new Subject<void>();
+
+  readonly onVideoStopped$: Observable<void> = this._stoppedSubject.asObservable();
+
+  markPlaying(): void {
+    this._playingCount++;
+  }
+
+  markStopped(): void {
+    const prev = this._playingCount;
+    this._playingCount = Math.max(0, this._playingCount - 1);
+    if (prev > 0 && this._playingCount === 0) {
+      this._stoppedSubject.next();
     }
-    return false;
+  }
+
+  isVideoPlaying(): boolean {
+    return this._playingCount > 0;
   }
 }

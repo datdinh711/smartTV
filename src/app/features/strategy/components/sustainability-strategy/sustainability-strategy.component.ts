@@ -4,8 +4,7 @@ import { NavigatorService } from '@core/services';
 import { STRATEGY_ROUTES } from '@features/strategy/constants';
 import { TranslateModule } from '@ngx-translate/core';
 import { HomeButtonComponent, NavigationButtonComponent } from '@shared/components';
-import { InactivityService } from '@shared/services';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-sustainovation-business',
@@ -17,26 +16,26 @@ import { Subject, takeUntil } from 'rxjs';
 export class SustainabilityStrategyComponent {
   APP_ROUTE = APP_ROUTES;
   STRATEGY_ROUTE = STRATEGY_ROUTES;
-  
+
   private _destroy$ = new Subject<void>();
   constructor(
     private readonly _navigatorService: NavigatorService,
-    private readonly _inactivityService: InactivityService,
-  ) {}
+    //private readonly _inactivityService: InactivityService,
+  ) { }
 
   ngOnInit(): void {
-    this._inactivityService.start();
-    this._inactivityService.onInactive$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(() => {
-        
-      });
+    // this._inactivityService.start();
+    // this._inactivityService.onInactive$
+    //   .pipe(takeUntil(this._destroy$))
+    //   .subscribe(() => {
+
+    //   });
   }
 
   ngOnDestroy(): void {
-    this._inactivityService.stop();
-    this._destroy$.next();
-    this._destroy$.complete();
+    // this._inactivityService.stop();
+    // this._destroy$.next();
+    // this._destroy$.complete();
   }
 
   onNavigateVdo(): void {

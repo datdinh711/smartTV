@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit, Inject, HostListener } from "@angular/core";
 import { DOCUMENT, NgIf } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, HostListener, Inject } from "@angular/core";
 import { Router } from '@angular/router';
-import { NavigatorService } from '@core/services';
 import { NavigationSource } from '@core/enums';
-import { InactivityService } from '@shared/services';
-import { Subject, takeUntil } from 'rxjs';
-import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
+import { NavigatorService } from '@core/services';
+import { TranslateModule } from '@ngx-translate/core';
 import { HomeButtonComponent } from '@shared/components/home-button/home-button.component';
+import { NavigationButtonComponent } from '@shared/components/navigation-button/navigation-button.component';
+import { InactivityService } from '@shared/services';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-strategy',
@@ -16,7 +16,7 @@ import { HomeButtonComponent } from '@shared/components/home-button/home-button.
   templateUrl: './key.milestones.component.html',
   styleUrl: './key.milestones.component.scss',
 })
-export class KeyMilestonesComponent implements OnInit, OnDestroy {
+export class KeyMilestonesComponent {
   private _destroy$ = new Subject<void>();
   private _baseHref = '/';
 
@@ -72,19 +72,6 @@ export class KeyMilestonesComponent implements OnInit, OnDestroy {
 
   closeMs(): void {
     this.activeMs = null;
-  }
-
-  ngOnInit(): void {
-    this._inactivityService.start();
-    this._inactivityService.onInactive$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(() => {});
-  }
-
-  ngOnDestroy(): void {
-    this._inactivityService.stop();
-    this._destroy$.next();
-    this._destroy$.complete();
   }
 
   asset(path: string): string {
