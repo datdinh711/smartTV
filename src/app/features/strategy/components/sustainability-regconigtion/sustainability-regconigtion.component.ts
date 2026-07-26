@@ -18,7 +18,6 @@ export class SustainabilityRegconigtionComponent implements OnInit {
   STRATEGY_ROUTE = STRATEGY_ROUTES;
 
   backPath: string = `${APP_ROUTES.STRATEGY}/${STRATEGY_ROUTES.SUSTAINABILITY_STRATEGY}`;
-  nextPath: string = APP_ROUTES.BUSINESS;
 
   constructor(
     private readonly _translate: TranslateService,

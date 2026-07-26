@@ -30,11 +30,6 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/strategy/strategy.routes').then((r) => r.routes),
       },
-      {
-        path: APP_ROUTES.BUSINESS,
-        loadChildren: () =>
-          import('./features/business/business.routes').then((r) => r.routes),
-      },
     ],
   },
 ];

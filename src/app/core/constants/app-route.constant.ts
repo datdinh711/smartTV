@@ -4,5 +4,4 @@ export const APP_ROUTES = {
   SLIDESHOW: 'slideshow',
   INTRODUCTION: 'introduction',
   STRATEGY: 'strategy',
-  BUSINESS: 'business',
 };

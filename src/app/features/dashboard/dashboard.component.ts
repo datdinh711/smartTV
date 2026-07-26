@@ -40,8 +40,4 @@ export class DashboardComponent implements OnInit {
   onNavigateStrategy() {
     this._navigatorService.goToStrategy();
   }
-
-  onNavigateBusiness() {
-    this._navigatorService.goToBusiness();
-  }
 }

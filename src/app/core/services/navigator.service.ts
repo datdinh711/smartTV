@@ -25,10 +25,6 @@ export class NavigatorService {
     this._router.navigate([`./${APP_ROUTES.STRATEGY}`]);
   }
 
-  goToBusiness() {
-    this._router.navigate([`./${APP_ROUTES.BUSINESS}`]);
-  }
-
   goToSlideShow() {
     this._router.navigate([`./${APP_ROUTES.SLIDESHOW}`]);
   }

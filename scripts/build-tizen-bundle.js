@@ -57,6 +57,14 @@ if (fs.existsSync(assetsPath)) {
   copyDir(assetsPath, path.join(tizenOutputPath, "assets"));
 }
 
+// Angular rewrites url() references found in component styles (background-image
+// in .scss files) to point at a separate "media" output folder — copy it too,
+// otherwise every CSS background-image 404s under file://.
+const mediaPath = path.join(distPath, "media");
+if (fs.existsSync(mediaPath)) {
+  copyDir(mediaPath, path.join(tizenOutputPath, "media"));
+}
+
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
   for (const file of fs.readdirSync(src)) {
@@ -71,8 +79,6 @@ function copyDir(src, dest) {
 }
 
 // Step 3: Bundle JS with esbuild
-// esbuild follows static imports from main.js automatically.
-// We only need polyfills + main as entry points.
 const jsFiles = fs.readdirSync(distPath).filter((f) => f.endsWith(".js"));
 const mainFile = jsFiles.find((f) => f.startsWith("main"));
 const polyfillsFile = jsFiles.find((f) => f.startsWith("polyfills"));
@@ -94,7 +100,9 @@ try {
   console.error("❌ esbuild failed:", e.message);
   process.exit(1);
 } finally {
-  fs.unlinkSync(tempEntry);
+  if (fs.existsSync(tempEntry)) {
+    fs.unlinkSync(tempEntry);
+  }
 }
 
 // Step 4: Generate index.html
@@ -153,8 +161,62 @@ ${cssLinks}
 
 fs.writeFileSync(path.join(tizenOutputPath, "index.html"), indexHtml);
 
+// =========================================================================
+// =========================================================================
+// 🚀 STEP 5: TIZEN PACKAGE AUTOMATION (Khắc phục lỗi Cannot provide package function)
+// =========================================================================
+console.log("\n🚀 Step 5: Packaging into Tizen TPK...");
+
+// 5.1 Tạo config.xml chuẩn Tizen Web App
+const configXml = `<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="org.tizen.smartTV" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="org.tizen.smartTV.smartTV" package="org.tizen.smartTV" required_version="3.0"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+    <icon src="app_icon.png"/>
+    <name>smartTV</name>
+</widget>`;
+fs.writeFileSync(path.join(tizenOutputPath, "config.xml"), configXml);
+
+// 5.2 Tạo file .project chuẩn (BẮT BUỘC ĐỂ TIZEN CLI NHẬN DIỆN WEB PROJECT)
+const projectXml = `<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>smartTV</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.tizen.web.project.TizenWebBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.tizen.web.project.TizenWebNature</nature>
+	</natures>
+</projectDescription>`;
+fs.writeFileSync(path.join(tizenOutputPath, ".project"), projectXml);
+
+// 5.3 Tạo file .tizenproject
+fs.writeFileSync(path.join(tizenOutputPath, ".tizenproject"), "/* Tizen Project Settings */");
+
+// 5.4 Gọi lệnh đóng gói TPK
+const tizenCliPath = `"D:\\tizen-studio\\tools\\ide\\bin\\tizen.bat"`;
+const certName = "samsumcertificate";
+
+try {
+  execSync(`${tizenCliPath} package -t tpk -s ${certName} -- .`, {
+    stdio: "inherit",
+    cwd: tizenOutputPath
+  });
+  console.log("\n🎉 BUILD TPK SUCCESSFUL!");
+} catch (e) {
+  console.error("❌ Tizen Packaging failed:", e.message);
+}
+
 // Summary
-console.log("✅ Tizen build ready at:", tizenOutputPath);
+console.log("\n✅ Tizen build ready at:", tizenOutputPath);
 console.log("📋 Files:");
 fs.readdirSync(tizenOutputPath).forEach((f) => {
   const stat = fs.statSync(path.join(tizenOutputPath, f));
@@ -163,4 +225,3 @@ fs.readdirSync(tizenOutputPath).forEach((f) => {
     : (stat.size / 1024).toFixed(1) + " KB";
   console.log("  -", f, "(" + size + ")");
 });
-console.log("👉 Copy all files to VS2022 TizenApp2/res/www/");
