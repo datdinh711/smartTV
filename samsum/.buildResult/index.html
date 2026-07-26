@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SmartTV</title>
+    <base href="./">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob: file:;">
+    <link rel="icon" type="image/png" href="app_icon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <app-root></app-root>
+
+    <script>
+        // Fix file:// protocol: History API throws SecurityError because origin is 'null'.
+        if (window.location.protocol === 'file:') {
+            var origPushState = History.prototype.pushState;
+            var origReplaceState = History.prototype.replaceState;
+            History.prototype.pushState = function(state, title, url) {
+                try { origPushState.call(this, state, title, url); } catch(e) {}
+            };
+            History.prototype.replaceState = function(state, title, url) {
+                try { origReplaceState.call(this, state, title, url); } catch(e) {}
+            };
+        }
+
+        // Mock Capacitor for Ionic
+        window.Capacitor = {
+            isNativePlatform: function() { return false; },
+            isPluginAvailable: function() { return false; },
+            getPlatform: function() { return 'web'; },
+            convertFileSrc: function(url) { return url; },
+            Plugins: {}
+        };
+        window.Ionic = window.Ionic || {};
+        window.Ionic.mode = 'md';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.dispatchEvent(new Event('deviceready'));
+            }, 100);
+        });
+    </script>
+
+    <script src="bundle.js"></script>
+</body>
+</html>
